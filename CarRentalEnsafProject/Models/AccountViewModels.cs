@@ -12,7 +12,7 @@ namespace CarRentalEnsafProject.Models
 
     public class ExternalLoginListViewModel
     {
-        public string ReturnUrl { get; set; }
+        public string ReturnUrl { set; get;  }
     }
 
     public class SendCodeViewModel
