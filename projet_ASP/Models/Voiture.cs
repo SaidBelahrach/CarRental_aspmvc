@@ -13,8 +13,8 @@ namespace projet_ASP.Models
         [Key]
         [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
         [Display(Name = "matricule")]
-        //  [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int matricule { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]  
+        public string matricule { get; set; }
 
         [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
         [Display(Name = "marque")]
@@ -23,7 +23,7 @@ namespace projet_ASP.Models
         
         [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
         [Display(Name = "modèl")]
-        public string modèl { get; set; }
+        public string model { get; set; }
         
         [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
         [Display(Name = "couleur")]
@@ -37,9 +37,10 @@ namespace projet_ASP.Models
         [Display(Name = "km")]
         public Decimal km { get; set; }
 
-
-
-
+        [ForeignKey("Proprietaire")]
+        public int idProprietaire { get; set; }
+        public Proprietaire proprietaire  { get; set; }
+ 
     }
 }
 /* + Matricule
