@@ -40,11 +40,9 @@ namespace projet_ASP.Models
 
         public int idProprietaire { get; set; }
         [ForeignKey("idProprietaire")]
-        public virtual Proprietaire proprietaire  { get; set; }
+        public virtual Proprietaire proprietaire  { get; set; } 
 
-       //   public Contrat contrats { get; set; }
-
-        public ICollection<Contrat> contrats { get; set; }
+        public ICollection<Reservation> reservations { get; set; }
     }
 }
 /* + Matricule

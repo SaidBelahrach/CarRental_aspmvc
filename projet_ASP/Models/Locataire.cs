@@ -21,22 +21,27 @@ namespace projet_ASP.Models
         public string nomComplet { get; set; }
 
 
-        [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
+/*        [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
         [Display(Name = "téléphone")]
-        public string tel { get; set; }
+        public string tel { get; set; }*/
 
         [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
         [Display(Name = "Adresse")]
         public string adresse { get; set; }
 
-        [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
+/*        [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
         [Display(Name = "Email")]
         [EmailAddress]
-        public string email { get; set; }
+        public string email { get; set; }*/
          
-        public ICollection<Contrat> contrats { get; set; }
+        public ICollection<Reservation> reservations { get; set; }
 
-        //public virtual ICollection<Voiture> Voitures;
-        //public virtual ICollection<Contrat> contrats;
+        //public virtual ICollection<Voiture> Voitures; 
+
+
+
+        public string ApplicationUserID { get; set; }
+        [ForeignKey("ApplicationUserID")]
+        public virtual ApplicationUser ApplicationUser { get; set; }
     }
 }

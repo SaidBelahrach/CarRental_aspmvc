@@ -174,18 +174,21 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202101292343151_dbContext_v1.cs" />
-    <Compile Include="Migrations\202101292343151_dbContext_v1.designer.cs">
-      <DependentUpon>202101292343151_dbContext_v1.cs</DependentUpon>
+    <Compile Include="Migrations\202101291425547_InitialCreate.cs" />
+    <Compile Include="Migrations\202101291425547_InitialCreate.designer.cs">
+      <DependentUpon>202101291425547_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202101300010116_dbContext_v2.cs" />
-    <Compile Include="Migrations\202101300010116_dbContext_v2.designer.cs">
-      <DependentUpon>202101300010116_dbContext_v2.cs</DependentUpon>
+    <Compile Include="Migrations\202101301521478_users_from_appUser.cs" />
+    <Compile Include="Migrations\202101301521478_users_from_appUser.designer.cs">
+      <DependentUpon>202101301521478_users_from_appUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101301539297_added_appUser_to_myusers.cs" />
+    <Compile Include="Migrations\202101301539297_added_appUser_to_myusers.designer.cs">
+      <DependentUpon>202101301539297_added_appUser_to_myusers.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Contrat.cs" />
-    <Compile Include="Models\dbContext.cs" />
+    <Compile Include="Models\Reservation.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Locataire.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -269,11 +272,14 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202101292343151_dbContext_v1.resx">
-      <DependentUpon>202101292343151_dbContext_v1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202101291425547_InitialCreate.resx">
+      <DependentUpon>202101291425547_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202101300010116_dbContext_v2.resx">
-      <DependentUpon>202101300010116_dbContext_v2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202101301521478_users_from_appUser.resx">
+      <DependentUpon>202101301521478_users_from_appUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101301539297_added_appUser_to_myusers.resx">
+      <DependentUpon>202101301539297_added_appUser_to_myusers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

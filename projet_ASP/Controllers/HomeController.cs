@@ -25,14 +25,13 @@ namespace projet_ASP.Controllers
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
-            dbContext db = new dbContext();
+            var db = new ApplicationDbContext();
             Proprietaire p = new Proprietaire()
-            {
-               email="said@sa.fe",
+            { 
                adresse="des",
                idProprietaire=1,
-               nomComplet="Said Belahrach",
-               tel="00000"
+               nomComplet="Said Belahrach", 
+               ApplicationUserID= "892b2686-05a5-4e29-a11d-dd71eea99385"
             };
             
             Voiture v = new Voiture()
@@ -45,12 +44,13 @@ namespace projet_ASP.Controllers
                 model = "8s8",
                 idProprietaire=1
                
-            };
+            };/**/
             //db.Proprietaires.Add(p);
-           // db.Voitures.Add(v);
-       //     db.SaveChanges();
+            //db.Voitures.Add(v);
+            //db.SaveChanges();
             // List<Voiture> v = db.Voitures.ToList();
             return View(v);
+           // return Content(db.Proprietaires.FirstOrDefault().ApplicationUser.Email);
         }
     }
 }

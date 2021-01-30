@@ -5,14 +5,15 @@
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<projet_ASP.Models.dbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<projet_ASP.Models.ApplicationDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
+            ContextKey = "projet_ASP.Models.ApplicationDbContext";
         }
 
-        protected override void Seed(projet_ASP.Models.dbContext context)
+        protected override void Seed(projet_ASP.Models.ApplicationDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 

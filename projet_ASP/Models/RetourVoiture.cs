@@ -24,6 +24,6 @@ namespace projet_ASP.Models
         [Display(Name = "Etat de voiture après retour")] //est il endomagé ou non
         public string etat { get; set; }
 
-        public ICollection<Contrat> contrats { get; set; }
+        public ICollection<Reservation> reservations { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -16,6 +17,8 @@ namespace projet_ASP.Models
             // Add custom user claims here
             return userIdentity;
         }
+        public ICollection<Locataire> locataires { get; set; }
+        public ICollection<Proprietaire> proprietaires { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -24,6 +27,11 @@ namespace projet_ASP.Models
             : base("project_db", throwIfV1Schema: false)
         {
         }
+        public virtual DbSet<Voiture> Voitures { get; set; }
+        public virtual DbSet<Proprietaire> Proprietaires { get; set; }
+        public virtual DbSet<Locataire> Locataires { get; set; }
+        public virtual DbSet<Reservation> reservations { get; set; }
+        public virtual DbSet<RetourVoiture> RetourVoitures { get; set; }
 
         public static ApplicationDbContext Create()
         {
