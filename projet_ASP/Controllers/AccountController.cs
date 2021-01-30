@@ -155,13 +155,41 @@ namespace projet_ASP.Controllers
                                                  Email = model.Email, 
                                                  profileType=model.profileType ,
                                                  nomComplet=model.nomComplet ,
-                                                 adresse=model.adresse ,  
+                                                 adresse=model.adresse ,
+                                                 PhoneNumber=model.tel,
+                                                  
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
+                ApplicationDbContext db = new ApplicationDbContext();
+                if (model.profileType.Equals("Proprietaire"))
+                {
+                    Proprietaire p = new Proprietaire()
+                    {
+                        ApplicationUserID = user.Id,
+
+                    };
+                    db.Proprietaires.Add(p);
+                }
+                else
+                {
+                    Locataire locataire = new Locataire()
+                    {
+                        ApplicationUserID = user.Id, 
+                    };
+                    db.Locataires.Add(locataire);
+                }
+               
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+                    try
+                    {
+                        db.SaveChanges();
+                    }
+                    catch (Exception e)
+                    {
+                        throw e;
+                    }
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);

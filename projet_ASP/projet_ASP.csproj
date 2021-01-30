@@ -194,6 +194,10 @@
     <Compile Include="Migrations\202101301636421_modified_app_user_class1.designer.cs">
       <DependentUpon>202101301636421_modified_app_user_class1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202101301744171_register_info_updated.cs" />
+    <Compile Include="Migrations\202101301744171_register_info_updated.designer.cs">
+      <DependentUpon>202101301744171_register_info_updated.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Reservation.cs" />
@@ -294,6 +298,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202101301636421_modified_app_user_class1.resx">
       <DependentUpon>202101301636421_modified_app_user_class1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101301744171_register_info_updated.resx">
+      <DependentUpon>202101301744171_register_info_updated.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

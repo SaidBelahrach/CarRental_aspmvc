@@ -17,19 +17,19 @@ namespace projet_ASP.Models
        // [DatabaseGenerated(DatabaseGeneratedOption.Identity)]  
         public int idProprietaire { get; set; }
 
-        [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
+      /*  [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
         [Display(Name = "Nom complet")]
-        public string nomComplet { get; set; }
+        public string nomComplet { get; set; }*/
 
 
  /*       [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
         [Display(Name = "téléphone")]
         public string tel { get; set; }*/
 
-        [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
+/*        [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
         [Display(Name = "Adresse")]
         public string adresse { get; set; }
-
+*/
 /*        [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
         [Display(Name = "Email")]
         [EmailAddress]

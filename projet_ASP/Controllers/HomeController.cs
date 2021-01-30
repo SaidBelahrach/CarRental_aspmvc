@@ -27,10 +27,8 @@ namespace projet_ASP.Controllers
             ViewBag.Message = "Your contact page.";
             var db = new ApplicationDbContext();
             Proprietaire p = new Proprietaire()
-            { 
-               adresse="des",
-               idProprietaire=1,
-               nomComplet="Said Belahrach", 
+            {  
+               idProprietaire=1, 
                ApplicationUserID= "892b2686-05a5-4e29-a11d-dd71eea99385"
             };
             

@@ -23,6 +23,13 @@
             @Html.TextBoxFor(m => m.adresse, "", new { @class = "form-control" })
         </div>
     </div>
+    
+    <div class="form-group">
+        @Html.LabelFor(m => m.tel, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.tel, "", new { @class = "form-control" })
+        </div>
+    </div>
     <div class="form-group">
         @Html.LabelFor(m => m.profileType , new { @class = "col-md-2 control-label" })
         <div class="col-md-10">

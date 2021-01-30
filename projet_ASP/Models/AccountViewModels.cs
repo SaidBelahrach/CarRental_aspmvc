@@ -92,6 +92,10 @@ namespace projet_ASP.Models
         [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
         [Display(Name = "Type de profile")]
         public string profileType { get; set; }
+
+        [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
+        [Display(Name = "téléphone")]
+        public string tel { get; set; }
     }
 
     public class ResetPasswordViewModel
