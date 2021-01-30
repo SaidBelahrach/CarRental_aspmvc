@@ -8,12 +8,13 @@ using System.Xml.Linq;
 
 namespace projet_ASP.Models
 {
+    [Table("proprietaires")]
     public class Proprietaire
     {
-        [Column("ID")]      //ces 3 sont obligatoire
+      //  [Column("ID")]      //ces 3 sont obligatoire
         [Key]
         [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)] 
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)] //auto increment
+       // [DatabaseGenerated(DatabaseGeneratedOption.Identity)]  
         public int idProprietaire { get; set; }
 
         [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
@@ -34,6 +35,6 @@ namespace projet_ASP.Models
         [EmailAddress]
         public string email { get; set; }
 
-        public  List<Voiture> Voitures; //un proprietaire peut avoir plusieurs voitures
+        public ICollection<Voiture> Voitures { get; set; } //un proprietaire peut avoir plusieurs voitures
     }
 }

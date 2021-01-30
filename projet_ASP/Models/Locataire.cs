@@ -7,6 +7,7 @@ using System.Web;
 
 namespace projet_ASP.Models
 {
+    [Table("locataires")]
     public class Locataire
     {
         [Column("ID")]      //ces 3 sont obligatoire
@@ -32,7 +33,10 @@ namespace projet_ASP.Models
         [Display(Name = "Email")]
         [EmailAddress]
         public string email { get; set; }
+         
+        public ICollection<Contrat> contrats { get; set; }
 
-        public List<Voiture> Voitures; //un locataire peut louer plusieurs voitures
+        //public virtual ICollection<Voiture> Voitures;
+        //public virtual ICollection<Contrat> contrats;
     }
 }

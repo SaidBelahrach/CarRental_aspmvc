@@ -7,13 +7,14 @@ using System.ComponentModel.DataAnnotations;
 
 namespace projet_ASP.Models
 {
+    //[Table("voitures")]
     public class Voiture
     {
         [Column("ID")]      //ces 3 sont obligatoire
         [Key]
         [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
-        [Display(Name = "matricule")]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]  
+     //   [Display(Name = "matricule")]
+        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]  
         public string matricule { get; set; }
 
         [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
@@ -37,10 +38,13 @@ namespace projet_ASP.Models
         [Display(Name = "km")]
         public Decimal km { get; set; }
 
-        [ForeignKey("Proprietaire")]
         public int idProprietaire { get; set; }
-        public Proprietaire proprietaire  { get; set; }
- 
+        [ForeignKey("idProprietaire")]
+        public virtual Proprietaire proprietaire  { get; set; }
+
+       //   public Contrat contrats { get; set; }
+
+        public ICollection<Contrat> contrats { get; set; }
     }
 }
 /* + Matricule

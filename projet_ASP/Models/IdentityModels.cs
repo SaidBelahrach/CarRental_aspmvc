@@ -21,7 +21,7 @@ namespace projet_ASP.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("project_db", throwIfV1Schema: false)
         {
         }
 

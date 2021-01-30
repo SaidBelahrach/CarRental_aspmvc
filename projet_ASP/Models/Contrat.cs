@@ -7,6 +7,7 @@ using System.Web;
 
 namespace projet_ASP.Models
 {
+   // [Table("contrats")]
     public class Contrat
     {
         [Column("ID")]      //ces 3 sont obligatoires
@@ -38,13 +39,15 @@ namespace projet_ASP.Models
         public Decimal cout { get; set; }
 
 
-        [ForeignKey("Voiture")]
-        public int matricul { get; set; }
+        public string matricule { get; set; }
+        [ForeignKey("matricule")]
         Voiture voiture { get; set; }
 
 
-        [ForeignKey("Locataire")]
+        
         public int idLocataire { get; set; }
+        [ForeignKey("idLocataire")]
         Locataire locataire { get; set; }
+         
     }
 }
