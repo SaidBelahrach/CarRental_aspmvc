@@ -79,6 +79,19 @@ namespace projet_ASP.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
+        [Display(Name = "Nom complet")]
+        public string nomComplet { get; set; }
+
+
+        [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
+        [Display(Name = "Adresse")]
+        public string adresse { get; set; }
+
+        [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
+        [Display(Name = "Type de profile")]
+        public string profileType { get; set; }
     }
 
     public class ResetPasswordViewModel

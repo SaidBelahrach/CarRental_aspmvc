@@ -186,6 +186,14 @@
     <Compile Include="Migrations\202101301539297_added_appUser_to_myusers.designer.cs">
       <DependentUpon>202101301539297_added_appUser_to_myusers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202101301634063_modified_app_user_class.cs" />
+    <Compile Include="Migrations\202101301634063_modified_app_user_class.designer.cs">
+      <DependentUpon>202101301634063_modified_app_user_class.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101301636421_modified_app_user_class1.cs" />
+    <Compile Include="Migrations\202101301636421_modified_app_user_class1.designer.cs">
+      <DependentUpon>202101301636421_modified_app_user_class1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Reservation.cs" />
@@ -280,6 +288,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202101301539297_added_appUser_to_myusers.resx">
       <DependentUpon>202101301539297_added_appUser_to_myusers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101301634063_modified_app_user_class.resx">
+      <DependentUpon>202101301634063_modified_app_user_class.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101301636421_modified_app_user_class1.resx">
+      <DependentUpon>202101301636421_modified_app_user_class1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -151,7 +151,12 @@ namespace projet_ASP.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.nomComplet,
+                                                 Email = model.Email, 
+                                                 profileType=model.profileType ,
+                                                 nomComplet=model.nomComplet ,
+                                                 adresse=model.adresse ,  
+                };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
