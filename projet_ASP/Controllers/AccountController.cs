@@ -1,14 +1,13 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using projet_ASP.Models;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.Mvc;
 
 namespace projet_ASP.Controllers
 {
@@ -22,7 +21,7 @@ namespace projet_ASP.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -34,9 +33,9 @@ namespace projet_ASP.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -120,7 +119,7 @@ namespace projet_ASP.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -151,13 +150,15 @@ namespace projet_ASP.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.nomComplet,
-                                                 Email = model.Email, 
-                                                 profileType=model.profileType ,
-                                                 nomComplet=model.nomComplet ,
-                                                 adresse=model.adresse ,
-                                                 PhoneNumber=model.tel,
-                                                  
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email, //model.nomComplet,
+                    Email = model.Email,
+                    profileType = model.profileType,
+                    nomComplet = model.nomComplet,
+                    adresse = model.adresse,
+                    PhoneNumber = model.tel,
+
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 ApplicationDbContext db = new ApplicationDbContext();
@@ -168,20 +169,24 @@ namespace projet_ASP.Controllers
                         ApplicationUserID = user.Id,
 
                     };
-                    db.Proprietaires.Add(p);
+                    db.Proprietaires.Add(p);  
+                   // RoleManager<IdentityRole> roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
+               
                 }
                 else
                 {
                     Locataire locataire = new Locataire()
                     {
-                        ApplicationUserID = user.Id, 
+                        ApplicationUserID = user.Id,
                     };
                     db.Locataires.Add(locataire);
                 }
-               
+
                 if (result.Succeeded)
-                {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                { 
+                    var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
+                    userManager.AddToRole(user.Id, model.profileType);
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                     try
                     {
                         db.SaveChanges();

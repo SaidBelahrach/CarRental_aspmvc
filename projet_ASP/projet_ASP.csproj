@@ -171,6 +171,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\VoituresController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -190,13 +191,21 @@
     <Compile Include="Migrations\202101301634063_modified_app_user_class.designer.cs">
       <DependentUpon>202101301634063_modified_app_user_class.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202101301636421_modified_app_user_class1.cs" />
-    <Compile Include="Migrations\202101301636421_modified_app_user_class1.designer.cs">
-      <DependentUpon>202101301636421_modified_app_user_class1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\202101301744171_register_info_updated.cs" />
     <Compile Include="Migrations\202101301744171_register_info_updated.designer.cs">
       <DependentUpon>202101301744171_register_info_updated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101301950071_editited_voiture_tab.cs" />
+    <Compile Include="Migrations\202101301950071_editited_voiture_tab.designer.cs">
+      <DependentUpon>202101301950071_editited_voiture_tab.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101301956026_editited_voiture_tab1.cs" />
+    <Compile Include="Migrations\202101301956026_editited_voiture_tab1.designer.cs">
+      <DependentUpon>202101301956026_editited_voiture_tab1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101312046389_test_meslo7i.cs" />
+    <Compile Include="Migrations\202101312046389_test_meslo7i.designer.cs">
+      <DependentUpon>202101312046389_test_meslo7i.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -215,6 +224,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\car.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -266,6 +276,13 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Voitures\Create.cshtml" />
+    <Content Include="Views\Voitures\Delete.cshtml" />
+    <Content Include="Views\Voitures\Details.cshtml" />
+    <Content Include="Views\Voitures\Edit.cshtml" />
+    <Content Include="Views\Voitures\Index.cshtml" />
+    <Content Include="Views\Shared\_CarCard.cshtml" />
+    <Content Include="Views\Shared\_Profile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -296,11 +313,17 @@
     <EmbeddedResource Include="Migrations\202101301634063_modified_app_user_class.resx">
       <DependentUpon>202101301634063_modified_app_user_class.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202101301636421_modified_app_user_class1.resx">
-      <DependentUpon>202101301636421_modified_app_user_class1.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202101301744171_register_info_updated.resx">
       <DependentUpon>202101301744171_register_info_updated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101301950071_editited_voiture_tab.resx">
+      <DependentUpon>202101301950071_editited_voiture_tab.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101301956026_editited_voiture_tab1.resx">
+      <DependentUpon>202101301956026_editited_voiture_tab1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101312046389_test_meslo7i.resx">
+      <DependentUpon>202101312046389_test_meslo7i.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
