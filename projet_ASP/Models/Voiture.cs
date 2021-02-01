@@ -7,6 +7,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace projet_ASP.Models
 {
+
     public class Voiture
     {
         [Column("ID")]      //ces 3 sont obligatoire

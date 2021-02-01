@@ -12,12 +12,14 @@ using projet_ASP.Models;
 
 namespace projet_ASP.Controllers
 {
+
+
     [Authorize]
     public class AccountController : Controller
     {
+
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-
         public AccountController()
         {
         }
