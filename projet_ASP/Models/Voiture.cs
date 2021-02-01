@@ -21,7 +21,7 @@ namespace projet_ASP.Models
 
 
         [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
-        [Display(Name = "modèl")]
+        [Display(Name = "modèle")]
         public string model { get; set; }
 
         [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
@@ -35,6 +35,14 @@ namespace projet_ASP.Models
         // [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
         [Display(Name = "km")]
         public Decimal km { get; set; }
+
+        [Display(Name = "Disponibilité")]
+        public Boolean disponible { get; set; }
+
+
+        [Display(Name = "Image de voiture")]
+        public string imagePath { get; set; } //https://www.aurigma.com/upload-suite/developers/aspnet-mvc/how-to-upload-files-in-aspnet-mvc
+         
 
         public int idProprietaire { get; set; }
         [ForeignKey("idProprietaire")]
