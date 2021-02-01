@@ -28,6 +28,14 @@ namespace projet_ASP.Models
         [Display(Name = "couleur")]
         public string couleur { get; set; }
 
+
+        [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
+        [Display(Name = "Nombre de places")]
+        public int nbPlaces { get; set; }
+
+        [Display(Name = "Disponibilité")]
+        public Boolean automatique { get; set; }
+
         [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
         [Display(Name = "coutParJour")]
         public Decimal coutParJour { get; set; }
