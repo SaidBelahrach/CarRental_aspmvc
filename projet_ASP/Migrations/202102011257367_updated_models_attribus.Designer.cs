@@ -7,13 +7,13 @@ namespace projet_ASP.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class test_meslo7i : IMigrationMetadata
+    public sealed partial class updated_models_attribus : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(test_meslo7i));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(updated_models_attribus));
         
         string IMigrationMetadata.Id
         {
-            get { return "202101312046389_test_meslo7i"; }
+            get { return "202102011257367_updated_models_attribus"; }
         }
         
         string IMigrationMetadata.Source

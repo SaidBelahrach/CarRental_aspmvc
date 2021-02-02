@@ -14,6 +14,9 @@ namespace projet_ASP.Models
         [Display(Name = "ID propriétaire")]
         public int idProprietaire { get; set; }
 
+         
+        [Display(Name = "ID propriétaire")]
+        public string type { get; set; } //agence ou particulier
         /*  [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
           [Display(Name = "Nom complet")]
           public string nomComplet { get; set; }*/

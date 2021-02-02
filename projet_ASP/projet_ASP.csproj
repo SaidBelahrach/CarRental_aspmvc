@@ -203,9 +203,13 @@
     <Compile Include="Migrations\202101301956026_editited_voiture_tab1.designer.cs">
       <DependentUpon>202101301956026_editited_voiture_tab1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202101312046389_test_meslo7i.cs" />
-    <Compile Include="Migrations\202101312046389_test_meslo7i.designer.cs">
-      <DependentUpon>202101312046389_test_meslo7i.cs</DependentUpon>
+    <Compile Include="Migrations\202102011221591_updated_car_class.cs" />
+    <Compile Include="Migrations\202102011221591_updated_car_class.designer.cs">
+      <DependentUpon>202102011221591_updated_car_class.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202102011257367_updated_models_attribus.cs" />
+    <Compile Include="Migrations\202102011257367_updated_models_attribus.designer.cs">
+      <DependentUpon>202102011257367_updated_models_attribus.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -323,8 +327,11 @@
     <EmbeddedResource Include="Migrations\202101301956026_editited_voiture_tab1.resx">
       <DependentUpon>202101301956026_editited_voiture_tab1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202101312046389_test_meslo7i.resx">
-      <DependentUpon>202101312046389_test_meslo7i.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202102011221591_updated_car_class.resx">
+      <DependentUpon>202102011221591_updated_car_class.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102011257367_updated_models_attribus.resx">
+      <DependentUpon>202102011257367_updated_models_attribus.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

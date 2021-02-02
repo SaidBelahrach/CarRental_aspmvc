@@ -13,8 +13,8 @@ namespace projet_ASP.Models
         public int idContrat { get; set; }
 
         [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
-        [Display(Name = "Date de location")]
-        public DateTime dateLocation { get; set; }
+        [Display(Name = "Date de reservation")]
+        public DateTime dateReservation { get; set; }
 
         [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
         [Display(Name = "Date début")]

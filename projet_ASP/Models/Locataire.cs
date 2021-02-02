@@ -13,6 +13,11 @@ namespace projet_ASP.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)] //auto increment
         public int idLocataire { get; set; }
 
+        
+        [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)] 
+        [Display(Name = "Numéro de permis")]
+        public int Npermis { get; set; }
+
         /* [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
          [Display(Name = "Nom complet")]
          public string nomComplet { get; set; }
