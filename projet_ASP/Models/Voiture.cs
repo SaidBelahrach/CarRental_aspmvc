@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace projet_ASP.Models
 {
-    //[Table("voitures")]
+    //[Table("voitures")] 
     public class Voiture
     {
         [Column("ID")]      //ces 3 sont obligatoire
