@@ -2,10 +2,10 @@
 
 @{
     ViewBag.Title = "Edit";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Edit</h2>
+
 
 @using (Html.BeginForm())
 {
@@ -42,6 +42,24 @@
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.nbPlaces, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.nbPlaces, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.nbPlaces, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.automatique, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.automatique)
+                    @Html.ValidationMessageFor(model => model.automatique, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
             @Html.LabelFor(model => model.coutParJour, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.coutParJour, new { htmlAttributes = new { @class = "form-control" } })
@@ -50,10 +68,20 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.km, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.disponible, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.km, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.km, "", new { @class = "text-danger" })
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.disponible)
+                    @Html.ValidationMessageFor(model => model.disponible, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.imagePath, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.imagePath, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.imagePath, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -76,3 +104,7 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

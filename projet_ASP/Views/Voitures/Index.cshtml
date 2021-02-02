@@ -2,7 +2,6 @@
 
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Index</h2>
@@ -10,10 +9,10 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-@*<table class="table">
+<table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.proprietaire.ApplicationUserID)
+            @Html.DisplayNameFor(model => model.proprietaire.type)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.marque)
@@ -25,88 +24,58 @@
             @Html.DisplayNameFor(model => model.couleur)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.nbPlaces)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.automatique)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.coutParJour)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.km)
+            @Html.DisplayNameFor(model => model.disponible)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.imagePath)
         </th>
         <th></th>
-    </tr>*@
-<div class=" " style="display:flex;flex-wrap:wrap">
-    @foreach (var item in Model)
-    {
-        @Html.Partial("_CarCard", item);
-        @*  @Html.Partial("_CarCard",item);
-                    @Html.Partial("_CarCard",item);
-                    @Html.Partial("_CarCard",item);
-                    @Html.Partial("_CarCard",item);
-                   <div class="card table-bordered p-2" style="width: 18rem;padding:5px;margin:5px;">
-                        <img class="card-img-top" src="~/Content/item-07.jpg" width="100%" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">@Html.DisplayFor(modelItem => item.model)</h5>
-                            <p class="card-text">Prix par jour: @Html.DisplayFor(modelItem => item.coutParJour)</p>
-                            <p class="card-text">Couleur: @Html.DisplayFor(modelItem => item.couleur)</p>
-                            <p class="card-text">Marque :@Html.DisplayFor(modelItem => item.marque)</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                    <div class="card table-bordered p-2" style="width: 18rem;padding:5px;margin:5px;">
-                        <img class="card-img-top" src="~/Content/item-07.jpg" width="100%" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">@Html.DisplayFor(modelItem => item.model)</h5>
-                            <p class="card-text">Prix par jour: @Html.DisplayFor(modelItem => item.coutParJour)</p>
-                            <p class="card-text">Couleur: @Html.DisplayFor(modelItem => item.couleur)</p>
-                            <p class="card-text">Marque :@Html.DisplayFor(modelItem => item.marque)</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div><div class="card table-bordered p-2" style="width: 18rem;padding:5px;margin:5px;">
-                <img class="card-img-top" src="~/Content/item-07.jpg" width="100%" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">@Html.DisplayFor(modelItem => item.model)</h5>
-                    <p class="card-text">Prix par jour: @Html.DisplayFor(modelItem => item.coutParJour)</p>
-                    <p class="card-text">Couleur: @Html.DisplayFor(modelItem => item.couleur)</p>
-                    <p class="card-text">Marque :@Html.DisplayFor(modelItem => item.marque)</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div><div class="card table-bordered p-2" style="width: 18rem;padding:5px;margin:5px;">
-                <img class="card-img-top" src="~/Content/item-07.jpg" width="100%" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">@Html.DisplayFor(modelItem => item.model)</h5>
-                    <p class="card-text">Prix par jour: @Html.DisplayFor(modelItem => item.coutParJour)</p>
-                    <p class="card-text">Couleur: @Html.DisplayFor(modelItem => item.couleur)</p>
-                    <p class="card-text">Marque :@Html.DisplayFor(modelItem => item.marque)</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>*@
-        @*<tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.proprietaire.ApplicationUserID)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.marque)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.model)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.couleur)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.coutParJour)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.km)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id=item.matricule }) |
-                    @Html.ActionLink("Details", "Details", new { id=item.matricule }) |
-                    @Html.ActionLink("Delete", "Delete", new { id=item.matricule })
-                </td>
-            </tr>*@
-    }
+    </tr>
 
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.proprietaire.type)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.marque)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.model)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.couleur)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nbPlaces)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.automatique)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.coutParJour)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.disponible)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.imagePath)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.matricule }) |
+            @Html.ActionLink("Details", "Details", new { id=item.matricule }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.matricule })
+        </td>
+    </tr>
+}
 
-</div>
-@*
 </table>
-*@
