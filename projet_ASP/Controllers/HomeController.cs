@@ -54,8 +54,7 @@ namespace projet_ASP.Controllers
             {
                 couleur = "e",
                 coutParJour = 7,
-                marque = "e",
-                km = 88,
+                marque = "e", 
                 matricule = "rrde",
                 model = "8s8",
                 idProprietaire = 1

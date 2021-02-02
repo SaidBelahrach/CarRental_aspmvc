@@ -11,21 +11,21 @@ namespace projet_ASP.Models
         [Column("ID")]      //ces 3 sont obligatoire
         [Key]
         [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
-        [Display(Name = "matricule")]
+        [Display(Name = "Matricule")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string matricule { get; set; }
 
         [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
-        [Display(Name = "marque")]
+        [Display(Name = "Marque")]
         public string marque { get; set; }
 
 
         [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
-        [Display(Name = "modèle")]
+        [Display(Name = "Modèle")]
         public string model { get; set; }
 
         [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
-        [Display(Name = "couleur")]
+        [Display(Name = "Couleur")]
         public string couleur { get; set; }
 
 
@@ -33,16 +33,12 @@ namespace projet_ASP.Models
         [Display(Name = "Nombre de places")]
         public int nbPlaces { get; set; }
 
-        [Display(Name = "Disponibilité")]
+        [Display(Name = "Type")]
         public Boolean automatique { get; set; }
 
         [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
-        [Display(Name = "coutParJour")]
+        [Display(Name = "Cout par jour")]
         public Decimal coutParJour { get; set; }
-
-        // [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
-        [Display(Name = "km")]
-        public Decimal km { get; set; }
 
         [Display(Name = "Disponibilité")]
         public Boolean disponible { get; set; }
