@@ -56,8 +56,10 @@ namespace projet_ASP.Models
         [ForeignKey("idProprietaire")]
         public virtual Proprietaire proprietaire { get; set; }
 
+
         public ICollection<Reservation> reservations { get; set; }
     }
+
 }
 /*  
  
