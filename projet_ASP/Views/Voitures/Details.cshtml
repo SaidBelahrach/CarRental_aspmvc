@@ -1,0 +1,67 @@
+﻿@model projet_ASP.Models.Voiture
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Voiture</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.proprietaire.ApplicationUserID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.proprietaire.ApplicationUserID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.marque)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.marque)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.model)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.model)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.couleur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.couleur)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.coutParJour)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.coutParJour)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.km)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.km)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.matricule }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
