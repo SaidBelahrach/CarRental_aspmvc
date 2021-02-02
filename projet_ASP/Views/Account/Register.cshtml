@@ -9,8 +9,9 @@
 {
     @Html.AntiForgeryToken()
     <h4>Create a new account.</h4>
+  @*  <span class="badge badge-pill badge-warning ">11</span>*@
     <hr />
-    @Html.ValidationSummary("", new { @class = "text-danger" })
+    @Html.ValidationSummary("", new { @class = "text-danger alert-danger rounded" })
     <div class="form-group">
         @Html.LabelFor(m => m.nomComplet, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
