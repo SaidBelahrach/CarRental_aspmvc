@@ -11,7 +11,8 @@
     <p>
         @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
     </p>
-}
+} 
+
 @foreach (var item in Model)
 {
     byte[] byteData = item.image;
