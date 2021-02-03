@@ -8,11 +8,16 @@ namespace projet_ASP.Models
     //[Table("voitures")] 
     public class Voiture
     {
-        [Column("ID")]      //ces 3 sont obligatoire
+        //[Column("ID")]      //ces 3 sont obligatoire
         [Key]
         [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
-        [Display(Name = "Matricule")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Display(Name = "idVoiture")]
+        public int idVoiture { get; set; }
+
+
+        [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
+        [Display(Name = "Matricule")]
         public string matricule { get; set; }
 
         [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
@@ -44,7 +49,7 @@ namespace projet_ASP.Models
         public Boolean disponible { get; set; }
 
         [Display(Name = "Image de voiture")]
-        public byte[] imagePath { get; set; } //https://www.aurigma.com/upload-suite/developers/aspnet-mvc/how-to-upload-files-in-aspnet-mvc
+        public byte[] image { get; set; } //https://www.aurigma.com/upload-suite/developers/aspnet-mvc/how-to-upload-files-in-aspnet-mvc
                                               //https://stackoverflow.com/questions/26347705/saving-images-to-database-with-asp-net-mvc-4-entity-framework
 
         public int idProprietaire { get; set; }

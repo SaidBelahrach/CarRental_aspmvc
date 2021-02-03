@@ -7,7 +7,7 @@ namespace projet_ASP.Models
     [Table("locataires")]
     public class Locataire
     {
-        [Column("ID")]      //ces 3 sont obligatoire
+       // [Column("ID")]      //ces 3 sont obligatoire
         [Key]
         [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)] //auto increment

@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Index</h2>
@@ -35,9 +36,9 @@
         <th>
             @Html.DisplayNameFor(model => model.disponible)
         </th>
-        <th>
+      @*  <th>
             @Html.DisplayNameFor(model => model.imagePath)
-        </th>
+        </th>*@
         <th></th>
     </tr>
 
@@ -67,9 +68,9 @@
         <td>
             @Html.DisplayFor(modelItem => item.disponible)
         </td>
-        <td>
+      @*  <td>
             @Html.DisplayFor(modelItem => item.imagePath)
-        </td>
+        </td>*@
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.matricule }) |
             @Html.ActionLink("Details", "Details", new { id=item.matricule }) |

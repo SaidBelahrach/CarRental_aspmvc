@@ -8,7 +8,7 @@ namespace projet_ASP.Models
     [Table("retoursVoitures")]
     public class RetourVoiture
     {
-        [Column("ID")]
+    //    [Column("ID")]
         [Key]
         [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

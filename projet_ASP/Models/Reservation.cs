@@ -6,7 +6,7 @@ namespace projet_ASP.Models
 {
     public class Reservation
     {
-        [Column("ID")]      //ces 3 sont obligatoires
+        //[Column("ID")]      //ces 3 sont obligatoires
         [Key]
         [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -35,8 +35,8 @@ namespace projet_ASP.Models
         public Decimal cout { get; set; }
 
 
-        public string matricule { get; set; }
-        [ForeignKey("matricule")]
+        public int idVoiture { get; set; }
+        [ForeignKey("idVoiture")]
         Voiture voiture { get; set; }
 
 

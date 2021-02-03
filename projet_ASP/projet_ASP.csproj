@@ -214,6 +214,26 @@
     <Compile Include="Migrations\202102022055443_updated_car_model_removed_km.designer.cs">
       <DependentUpon>202102022055443_updated_car_model_removed_km.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202102030157129_updated_car_model_img_bytes.cs" />
+    <Compile Include="Migrations\202102030157129_updated_car_model_img_bytes.Designer.cs">
+      <DependentUpon>202102030157129_updated_car_model_img_bytes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202102030204279_updated_car_model_img_b.cs" />
+    <Compile Include="Migrations\202102030204279_updated_car_model_img_b.Designer.cs">
+      <DependentUpon>202102030204279_updated_car_model_img_b.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202102030238211_updated_car_model_id_err.cs" />
+    <Compile Include="Migrations\202102030238211_updated_car_model_id_err.Designer.cs">
+      <DependentUpon>202102030238211_updated_car_model_id_err.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202102030239356_updated_models.cs" />
+    <Compile Include="Migrations\202102030239356_updated_models.Designer.cs">
+      <DependentUpon>202102030239356_updated_models.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202102030254050_fixed_error_car_model.cs" />
+    <Compile Include="Migrations\202102030254050_fixed_error_car_model.Designer.cs">
+      <DependentUpon>202102030254050_fixed_error_car_model.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Reservation.cs" />
@@ -287,14 +307,15 @@
     <Content Include="Views\Shared\_CarCard.cshtml" />
     <Content Include="Views\Shared\_Profile.cshtml" />
     <Content Include="Views\Shared\CarCard2.cshtml" />
+    <Content Include="Views\Voitures\Create2.cshtml" />
+    <Content Include="Views\Shared\_CarCard.cshtml" />
+    <Content Include="Views\Shared\_Profile.cshtml" />
+    <Content Include="Views\Shared\dont_use_this_one.cshtml" />
     <Content Include="Views\Voitures\Create.cshtml" />
     <Content Include="Views\Voitures\Delete.cshtml" />
     <Content Include="Views\Voitures\Details.cshtml" />
     <Content Include="Views\Voitures\Edit.cshtml" />
     <Content Include="Views\Voitures\Index.cshtml" />
-    <Content Include="Views\Shared\_CarCard.cshtml" />
-    <Content Include="Views\Shared\_Profile.cshtml" />
-    <Content Include="Views\Shared\dont_use_this_one.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -342,6 +363,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202102022055443_updated_car_model_removed_km.resx">
       <DependentUpon>202102022055443_updated_car_model_removed_km.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102030157129_updated_car_model_img_bytes.resx">
+      <DependentUpon>202102030157129_updated_car_model_img_bytes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102030204279_updated_car_model_img_b.resx">
+      <DependentUpon>202102030204279_updated_car_model_img_b.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102030238211_updated_car_model_id_err.resx">
+      <DependentUpon>202102030238211_updated_car_model_id_err.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102030239356_updated_models.resx">
+      <DependentUpon>202102030239356_updated_models.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102030254050_fixed_error_car_model.resx">
+      <DependentUpon>202102030254050_fixed_error_car_model.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

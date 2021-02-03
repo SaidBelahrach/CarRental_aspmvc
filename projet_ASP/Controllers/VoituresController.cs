@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -28,7 +29,7 @@ namespace projet_ASP.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Voiture voiture = db.Voitures.Find(id);
+            Voiture voiture = db.Voitures.Where(v => v.matricule.Equals(id)).FirstOrDefault();
             if (voiture == null)
             {
                 return HttpNotFound();
@@ -44,39 +45,45 @@ namespace projet_ASP.Controllers
         }
 
         // POST: Voitures/Create
-        // Afin de déjouer les attaques par survalidation, activez les propriétés spécifiques auxquelles vous voulez établir une liaison. Pour 
-        // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
-        /*        [HttpPost]
-                [ValidateAntiForgeryToken]
-                public ActionResult Create([Bind(Include = "matricule,marque,model,couleur,nbPlaces,automatique,coutParJour,disponible,imagePath,idProprietaire")] Voiture voiture)
-                {
-                    if (ModelState.IsValid)
-                    {
-                        db.Voitures.Add(voiture);
-                        db.SaveChanges();
-                        return RedirectToAction("Index");
-                    }
-
-                    ViewBag.idProprietaire = new SelectList(db.Proprietaires, "idProprietaire", "type", voiture.idProprietaire);
-                    return View(voiture);
-                }*/
-
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "matricule,marque,model,couleur,nbPlaces,automatique,coutParJour,disponible")] Voiture voiture, HttpPostedFileBase image)
+        public ActionResult Create(FormCollection data, HttpPostedFileBase file)
         {
-            if (ModelState.IsValid)
+           /* 
+            var fileName = Path.GetFileName(file.FileName);
+            // store the file inside ~/App_Data/uploads folder
+            var path = Path.Combine(Server.MapPath("~/App_Data"), fileName);
+            file.SaveAs(path);*/
+            //  return Content("innnnnn "+ data["marque"]+" -  "+ data["couleur"] + " -  " + data["model"] + " -  " + data["nbPlaces"] + " -  " + data["matricule"] + " -  " + data["coutParJour"]);
+            Voiture v = new Voiture()
             {
-                voiture.imagePath = new byte[image.ContentLength];
-                image.InputStream.Read(voiture.imagePath, 0, image.ContentLength);
-                voiture.idProprietaire = 1;
-                db.Voitures.Add(voiture);
+                matricule=data["matricule"],
+                marque = data["marque"],
+                automatique =data["automatique"]== "auto" ? true:false,
+                couleur =  data["couleur"],
+                model =  data["model"], 
+                nbPlaces = Convert.ToInt32( data["nbPlaces"]),
+                idProprietaire =db.Proprietaires.FirstOrDefault().idProprietaire, 
+                disponible =true,
+                coutParJour =  Convert.ToDecimal( data["coutParJour"] ),
+            };
+            v.image = new byte[file.ContentLength];
+            file.InputStream.Read(v.image, 0, file.ContentLength);
+      /*           db.Voitures.Add(v);
+
+            
+
+            db.SaveChanges();
+          */
+          if (ModelState.IsValid)
+            {
+                db.Voitures.Add(v);
                 db.SaveChanges();
                 return RedirectToAction("Index");
-            }
-
-            ViewBag.idProprietaire = new SelectList(db.Proprietaires, "idProprietaire", "type", voiture.idProprietaire);
-            return View(voiture);
+            } 
+            return View();
         }
 
         // GET: Voitures/Edit/5
@@ -86,7 +93,7 @@ namespace projet_ASP.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Voiture voiture = db.Voitures.Find(id);
+            Voiture voiture = db.Voitures.Where(v=>v.matricule.Equals(id)).FirstOrDefault();
             if (voiture == null)
             {
                 return HttpNotFound();
@@ -96,8 +103,8 @@ namespace projet_ASP.Controllers
         }
 
         // POST: Voitures/Edit/5
-        // Afin de déjouer les attaques par survalidation, activez les propriétés spécifiques auxquelles vous voulez établir une liaison. Pour 
-        // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "matricule,marque,model,couleur,nbPlaces,automatique,coutParJour,disponible,imagePath,idProprietaire")] Voiture voiture)
@@ -119,7 +126,7 @@ namespace projet_ASP.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Voiture voiture = db.Voitures.Find(id);
+            Voiture voiture = db.Voitures.Where(v => v.matricule.Equals(id)).FirstOrDefault();
             if (voiture == null)
             {
                 return HttpNotFound();
@@ -132,7 +139,7 @@ namespace projet_ASP.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            Voiture voiture = db.Voitures.Find(id);
+            Voiture voiture = db.Voitures.Where(v => v.matricule.Equals(id)).FirstOrDefault();
             db.Voitures.Remove(voiture);
             db.SaveChanges();
             return RedirectToAction("Index");
