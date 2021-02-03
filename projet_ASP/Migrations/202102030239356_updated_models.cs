@@ -1,8 +1,7 @@
 namespace projet_ASP.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class updated_models : DbMigration
     {
         public override void Up()
@@ -12,7 +11,7 @@ namespace projet_ASP.Migrations
             RenameColumn(table: "dbo.Reservations", name: "ID", newName: "idContrat");
             RenameColumn(table: "dbo.retoursVoitures", name: "ID", newName: "idRetour");
         }
-        
+
         public override void Down()
         {
             RenameColumn(table: "dbo.retoursVoitures", name: "idRetour", newName: "ID");

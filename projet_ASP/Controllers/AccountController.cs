@@ -3,7 +3,6 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using projet_ASP.Models;
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -171,7 +170,7 @@ namespace projet_ASP.Controllers
                         ApplicationUserID = user.Id,
 
                     };
-                    db.Proprietaires.Add(p);   
+                    db.Proprietaires.Add(p);
                 }
                 else
                 {
@@ -180,13 +179,13 @@ namespace projet_ASP.Controllers
                         ApplicationUserID = user.Id,
                     };
                     db.Locataires.Add(locataire);
-                } 
+                }
                 if (result.Succeeded)
-                { 
+                {
                     var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
                     userManager.AddToRole(user.Id, model.profileType);
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false); 
-                    db.SaveChanges(); 
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    db.SaveChanges();
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -196,7 +195,7 @@ namespace projet_ASP.Controllers
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
-            } 
+            }
             // If we got this far, something failed, redisplay form
             return View(model);
         }

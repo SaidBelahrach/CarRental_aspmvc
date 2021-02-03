@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using projet_ASP.Models;
-using System.Linq;
+﻿using projet_ASP.Models;
 using System.Web.Mvc;
 
 namespace projet_ASP.Controllers
@@ -12,22 +9,22 @@ namespace projet_ASP.Controllers
         {
 
 
-               /* ApplicationDbContext db = new ApplicationDbContext();
-            ApplicationSignInManager _signInManager;
-            RoleManager<IdentityRole> roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
-            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
-            userManager.AddToRole(db.Users.FirstOrDefault().Id, "Locataire"); 
-             if (!roleManager.RoleExists("Locataire"))
-                 {
-                     var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                     role.Name = "Locataire";
-                     roleManager.Create(role);
-                     return Content("created");
-                 }
-                 else
-                 {
-                     return Content("already");
-                 }*/
+            /* ApplicationDbContext db = new ApplicationDbContext();
+         ApplicationSignInManager _signInManager;
+         RoleManager<IdentityRole> roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
+         var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
+         userManager.AddToRole(db.Users.FirstOrDefault().Id, "Locataire"); 
+          if (!roleManager.RoleExists("Locataire"))
+              {
+                  var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                  role.Name = "Locataire";
+                  roleManager.Create(role);
+                  return Content("created");
+              }
+              else
+              {
+                  return Content("already");
+              }*/
             return View();
         }
 
@@ -54,7 +51,7 @@ namespace projet_ASP.Controllers
             {
                 couleur = "e",
                 coutParJour = 7,
-                marque = "e", 
+                marque = "e",
                 matricule = "rrde",
                 model = "8s8",
                 idProprietaire = 1

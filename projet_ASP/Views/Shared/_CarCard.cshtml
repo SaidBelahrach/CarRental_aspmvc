@@ -1,6 +1,6 @@
-﻿
+﻿@model projet_ASP.Models.Voiture
 @{
-    ViewBag.Title = "CarCard2";
+    ViewBag.Title = "CarCard2"; 
 }
 @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">*@
 
@@ -16,23 +16,23 @@
             </div>
         </div>
         <div class="general">
-            <h3 class="mt-2">Voiture de lux</h3>
-            <span class="prix-label text-success">200DH/jr</span>
+            <h3 class="mt-2">@Model.marque</h3>
+            <span class="prix-label text-success">@Model.coutParJour DH/jr</span>
             <div class="card-icon-container " style="">
                 <label class="datails-item">
                     <span class="fas fa-map-marker icon  "></span>          @* https://fontawesome.com/v4.7.0  search here*@
-                    <span>
-                        My Abdallah Km 5 Route d'Imouzzer, Fès BP 72.
-                    </span>
+                <span>
+                    @Model.proprietaire.ApplicationUser.adresse
+                </span>
                 </label>
                 <label class="datails-item ">
                     <span class="fas fa-adjust icon  "></span>
-                    <span>Rouge</span>
+                    <span>@Model.couleur</span>
                 </label>
                 <label class="datails-item">
                     <span class="fas fa-users  icon  "></span> @*fa fa-wheelchair*@
-                            <span>5 Places</span>
-                        </label>
+                     <span>@Model.nbPlaces Places</span>
+                </label>
                         <label class="datails-item">
                             <span class="fas fa-car icon  "></span>
                             <span>Automatique</span>
