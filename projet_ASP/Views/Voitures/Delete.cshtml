@@ -2,7 +2,6 @@
 
 @{
     ViewBag.Title = "Delete";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Delete</h2>
@@ -13,11 +12,11 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.proprietaire.ApplicationUserID)
+            @Html.DisplayNameFor(model => model.proprietaire.type)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.proprietaire.ApplicationUserID)
+            @Html.DisplayFor(model => model.proprietaire.type)
         </dd>
 
         <dt>
@@ -45,6 +44,22 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.nbPlaces)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nbPlaces)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.automatique)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.automatique)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.coutParJour)
         </dt>
 
@@ -53,11 +68,19 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.km)
+            @Html.DisplayNameFor(model => model.disponible)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.km)
+            @Html.DisplayFor(model => model.disponible)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imagePath)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imagePath)
         </dd>
 
     </dl>

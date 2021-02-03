@@ -1,22 +1,24 @@
-﻿using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using projet_ASP.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
+using projet_ASP.Models;
 
 namespace projet_ASP.Controllers
 {
     public class VoituresController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext(); 
+        private ApplicationDbContext db = new ApplicationDbContext();
+
         // GET: Voitures
         public ActionResult Index()
         {
-            var voitures = db.Voitures.Include(v => v.proprietaire); 
+            var voitures = db.Voitures.Include(v => v.proprietaire);
             return View(voitures.ToList());
-              // return Content("userid "+ db.Users.FirstOrDefault().Id + " ,role " + db.Roles.FirstOrDefault().Name);
         }
 
         // GET: Voitures/Details/5
@@ -37,25 +39,43 @@ namespace projet_ASP.Controllers
         // GET: Voitures/Create
         public ActionResult Create()
         {
-            ViewBag.idProprietaire = new SelectList(db.Proprietaires, "idProprietaire", "ApplicationUserID");
+            ViewBag.idProprietaire = new SelectList(db.Proprietaires, "idProprietaire", "type");
             return View();
         }
 
         // POST: Voitures/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // Afin de déjouer les attaques par survalidation, activez les propriétés spécifiques auxquelles vous voulez établir une liaison. Pour 
+        // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
+        /*        [HttpPost]
+                [ValidateAntiForgeryToken]
+                public ActionResult Create([Bind(Include = "matricule,marque,model,couleur,nbPlaces,automatique,coutParJour,disponible,imagePath,idProprietaire")] Voiture voiture)
+                {
+                    if (ModelState.IsValid)
+                    {
+                        db.Voitures.Add(voiture);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+
+                    ViewBag.idProprietaire = new SelectList(db.Proprietaires, "idProprietaire", "type", voiture.idProprietaire);
+                    return View(voiture);
+                }*/
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "matricule,marque,model,couleur,coutParJour,km,idProprietaire")] Voiture voiture)
+        public ActionResult Create([Bind(Include = "matricule,marque,model,couleur,nbPlaces,automatique,coutParJour,disponible")] Voiture voiture, HttpPostedFileBase image)
         {
             if (ModelState.IsValid)
             {
+                voiture.imagePath = new byte[image.ContentLength];
+                image.InputStream.Read(voiture.imagePath, 0, image.ContentLength);
+                voiture.idProprietaire = 1;
                 db.Voitures.Add(voiture);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.idProprietaire = new SelectList(db.Proprietaires, "idProprietaire", "ApplicationUserID", voiture.idProprietaire);
+            ViewBag.idProprietaire = new SelectList(db.Proprietaires, "idProprietaire", "type", voiture.idProprietaire);
             return View(voiture);
         }
 
@@ -71,16 +91,16 @@ namespace projet_ASP.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.idProprietaire = new SelectList(db.Proprietaires, "idProprietaire", "ApplicationUserID", voiture.idProprietaire);
+            ViewBag.idProprietaire = new SelectList(db.Proprietaires, "idProprietaire", "type", voiture.idProprietaire);
             return View(voiture);
         }
 
         // POST: Voitures/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // Afin de déjouer les attaques par survalidation, activez les propriétés spécifiques auxquelles vous voulez établir une liaison. Pour 
+        // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "matricule,marque,model,couleur,coutParJour,km,idProprietaire")] Voiture voiture)
+        public ActionResult Edit([Bind(Include = "matricule,marque,model,couleur,nbPlaces,automatique,coutParJour,disponible,imagePath,idProprietaire")] Voiture voiture)
         {
             if (ModelState.IsValid)
             {
@@ -88,7 +108,7 @@ namespace projet_ASP.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.idProprietaire = new SelectList(db.Proprietaires, "idProprietaire", "ApplicationUserID", voiture.idProprietaire);
+            ViewBag.idProprietaire = new SelectList(db.Proprietaires, "idProprietaire", "type", voiture.idProprietaire);
             return View(voiture);
         }
 
