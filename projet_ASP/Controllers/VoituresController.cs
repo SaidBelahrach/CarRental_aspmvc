@@ -72,9 +72,7 @@ namespace projet_ASP.Controllers
             v.image = new byte[file.ContentLength];
             file.InputStream.Read(v.image, 0, file.ContentLength);
       /*           db.Voitures.Add(v);
-
             
-
             db.SaveChanges();
           */
           if (ModelState.IsValid)
