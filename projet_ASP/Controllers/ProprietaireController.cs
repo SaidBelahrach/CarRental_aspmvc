@@ -8,14 +8,14 @@ using Microsoft.AspNet.Identity;
 
 namespace projet_ASP.Controllers
 {
-    public class PropriétaireController : Controller
+    public class ProprietaireController : Controller
     {
         // GET: Propriétaire
         public ActionResult Index()
         {
             String userId = User.Identity.GetUserId();
             ApplicationDbContext db = new ApplicationDbContext();
-            var prop = db.Proprietaires.Where(item => item.ApplicationUserID == userId).FirstOrDefault(); 
+            var prop = db.Proprietaires.Where(item => item.ApplicationUserID == userId).FirstOrDefault();
             return View(prop);
         }
 
@@ -24,6 +24,24 @@ namespace projet_ASP.Controllers
         {
             return View();
         }
+
+  
+
+        public JsonResult updatePhoto()
+        {
+            HttpPostedFileBase file = Request.Files[0];
+            String userId = User.Identity.GetUserId();
+            ApplicationDbContext db = new ApplicationDbContext();
+            var prop = db.Users.Where(item => item.Id == userId).FirstOrDefault();
+            prop.imageBytes = new byte[file.ContentLength];
+            file.InputStream.Read(prop.imageBytes, 0, file.ContentLength);
+            db.SaveChanges();
+            return Json("Uploaded " + Request.Files.Count + " files");
+        }
+    
+
+
+
 
         // GET: Propriétaire/Create
         public ActionResult Create()
