@@ -26,7 +26,7 @@ namespace projet_ASP.Models
         public string profileType { get; set; }
 
         [Display(Name = "Image de Profile")]
-        public string imagePath { get; set; }
+        public byte[] imageBytes { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

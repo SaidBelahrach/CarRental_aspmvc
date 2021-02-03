@@ -43,42 +43,50 @@
     @foreach (var item in Model)
     {
         @*<tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.matricule)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.marque)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.model)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.couleur)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.nbPlaces)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.automatique)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.coutParJour)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.disponible)
-            </td>
-          
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.matricule }) |
-                @Html.ActionLink("Details", "Details", new { id = item.matricule }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.matricule })
-            </td>
-        </tr>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.matricule)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.marque)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.model)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.couleur)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nbPlaces)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.automatique)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.coutParJour)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.disponible)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.matricule }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.matricule }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.matricule })
+                </td>
+            </tr>*@
     }
 
 </table>
 
 @foreach (var item in Model)
 {
-    @Html.Partial("_CarCard",item);
+    byte[] byteData = item.image;
+
+    //Convert byte arry to base64string
+    string imreBase64Data = Convert.ToBase64String(byteData);
+    string imgDataURL = string.Format("data:image/png;base64,{0}", imreBase64Data); //https://www.c-sharpcorner.com/article/mvc-display-image-from-byte-array/
+                                                                                    //Passing image data in viewbag to view
+    ViewBag.img = imgDataURL;
+    @Html.Partial("_CarCard", item );
+ 
 }
