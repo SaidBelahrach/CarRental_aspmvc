@@ -9,6 +9,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 
 namespace projet_ASP.Controllers
 {
@@ -74,6 +75,10 @@ namespace projet_ASP.Controllers
              var path = Path.Combine(Server.MapPath("~/App_Data"), fileName);
              file.SaveAs(path);*/
             //  return Content("innnnnn "+ data["marque"]+" -  "+ data["couleur"] + " -  " + data["model"] + " -  " + data["nbPlaces"] + " -  " + data["matricule"] + " -  " + data["coutParJour"]);
+
+            String userId = User.Identity.GetUserId();
+            ApplicationDbContext db = new ApplicationDbContext();
+            var prop = db.Proprietaires.Where(item => item.ApplicationUserID == userId).FirstOrDefault();
             Voiture v = new Voiture()
             {
                 matricule = data["matricule"],
@@ -82,7 +87,7 @@ namespace projet_ASP.Controllers
                 couleur = data["couleur"],
                 model = data["model"],
                 nbPlaces = Convert.ToInt32(data["nbPlaces"]),
-                idProprietaire =3005,// db.Proprietaires.FirstOrDefault().idProprietaire,
+                idProprietaire =prop.idProprietaire,// db.Proprietaires.FirstOrDefault().idProprietaire,
                 disponible = true,
                 coutParJour = data["coutParJour"],
             };

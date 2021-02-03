@@ -28,7 +28,7 @@
                     }
                     @if (User.IsInRole("Proprietaire"))
                     {
-                        <li>@Html.ActionLink("Proprietaire", "Index", "Voitures")</li>
+                        <li>@Html.ActionLink("Proprietaire", "Index", "Proprietaire")</li>
                         <li>@Html.ActionLink("Mes Voitures", "VoituresProprietaire", "Voitures")</li>
                     }
                 </ul>
