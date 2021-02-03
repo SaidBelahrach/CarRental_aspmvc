@@ -96,7 +96,7 @@
         <div class="col-md-10">
             @* @Html.TextBoxFor(model => model.imagePath, new { type = "file" , htmlAttributes = new { @class = "form-control" } })*@
 
-            <input type="file" name="file" id="file" accept="image/*" />
+              <input type="file" name="file" class="file " accept="image/*" enctype = "multipart/form-data" />
             @Html.ValidationMessageFor(model => model.image, "", new { @class = "text-danger" })
         </div>
     </div>

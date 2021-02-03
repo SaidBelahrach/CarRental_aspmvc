@@ -1,8 +1,7 @@
 namespace projet_ASP.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class fixed_error_car_model : DbMigration
     {
         public override void Up()
@@ -18,7 +17,7 @@ namespace projet_ASP.Migrations
             CreateIndex("dbo.Reservations", "idVoiture");
             AddForeignKey("dbo.Reservations", "idVoiture", "dbo.Voitures", "idVoiture", cascadeDelete: true);
         }
-        
+
         public override void Down()
         {
             DropForeignKey("dbo.Reservations", "idVoiture", "dbo.Voitures");

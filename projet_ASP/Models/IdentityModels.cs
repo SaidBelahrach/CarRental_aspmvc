@@ -24,7 +24,7 @@ namespace projet_ASP.Models
         [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
         [Display(Name = "Type de profile")]
         public string profileType { get; set; }
-         
+
         [Display(Name = "Image de Profile")]
         public string imagePath { get; set; }
 

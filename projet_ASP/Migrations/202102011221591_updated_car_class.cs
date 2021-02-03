@@ -1,8 +1,7 @@
 ﻿namespace projet_ASP.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class updated_car_class : DbMigration
     {
         public override void Up()
@@ -13,7 +12,7 @@
             AddColumn("dbo.Reservations", "dateReservation", c => c.DateTime(nullable: false));
             DropColumn("dbo.Reservations", "dateLocation");
         }
-        
+
         public override void Down()
         {
             AddColumn("dbo.Reservations", "dateLocation", c => c.DateTime(nullable: false));

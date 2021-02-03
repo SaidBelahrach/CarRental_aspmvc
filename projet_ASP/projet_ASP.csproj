@@ -306,10 +306,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_CarCard.cshtml" />
     <Content Include="Views\Shared\_Profile.cshtml" />
-    <Content Include="Views\Shared\CarCard2.cshtml" />
     <Content Include="Views\Voitures\Create2.cshtml" />
-    <Content Include="Views\Shared\_CarCard.cshtml" />
-    <Content Include="Views\Shared\_Profile.cshtml" />
     <Content Include="Views\Shared\dont_use_this_one.cshtml" />
     <Content Include="Views\Voitures\Create.cshtml" />
     <Content Include="Views\Voitures\Delete.cshtml" />
