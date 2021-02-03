@@ -1,6 +1,7 @@
 ﻿@model projet_ASP.Models.Voiture
+@using Microsoft.AspNet.Identity;
 @{
-    ViewBag.Title = "CarCard2"; 
+    ViewBag.Title = "CarCard2";
 }
 @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">*@
 
@@ -14,6 +15,8 @@
             <div style="" class="card-img">
                 <img style="" class="img-responsive" src="@ViewData["img"]" width="" height="100%" />
             </div>
+            @* window.open("http://www.your-site.com/images/picture.jpg"*@
+
         </div>
         <div class="general">
             <h3 class="mt-2">@Model.marque</h3>
@@ -31,32 +34,46 @@
                 </label>
                 <label class="datails-item">
                     <span class="fas fa-users  icon  "></span> @*fa fa-wheelchair*@
-                     <span>@Model.nbPlaces Places</span>
+                    <span>@Model.nbPlaces Places</span>
                 </label>
                 <label class="datails-item">
                     <span class="fas fa-car icon  "></span>
                     <span>  @(Model.automatique? "Automatique":"Manuelle" )</span>
                 </label>
 
-             </div> 
-                   <div class="card-description">
-                        <p>
-                        </p>
-                    </div>
-                    <hr style="width:100%;position:absolute;bottom:15px;left:0px;color:#f1f1f1;"/>
-                    <div class="card-fotter"> 
-                        <button type="button" class=" button_custom  btn btn-primary px-4 py-1">Réserver</button>
-                    </div>
-                    <div class="proprietaire-profil">
-                        <img class=" img-rounded" src="~/Content/user.png" width="30px" height="30px" /> @*@string.Format("data:image/png;base64,{0}", Convert.ToBase64String(@Model.proprietaire.ApplicationUser.imagePath))*@
-                        @Model.proprietaire.ApplicationUser.nomComplet
-                    </div>
-                </div>
             </div>
+            <div class="card-description">
+                <p>
+                </p>
+            </div>
+            <hr style="width:100%;position:absolute;bottom:15px;left:0px;color:#f1f1f1;" />
+            @if (User.IsInRole("Proprietaire") && User.Identity.GetUserId().Equals(Model.proprietaire.ApplicationUserID))
+            {
+                <div class="card-fotter">
+                    <button type="button" class=" button_custom  btn btn-info px-4 py-1" onclick="window.location='@Url.Action("Edit", "Voitures", new { id = Model.idVoiture })'">Modifier</button>
+                </div>
+                <div class="card-fotter">
+                    <button type="button" class=" button_custom btn-delete btn btn-danger px-2 py-1" onclick="window.location='@Url.Action("Delete", "Voitures", new { id = Model.idVoiture })'">Supprimer</button>
+                </div>
+            }
+            else
+            {
+                <div class="card-fotter">
+                    <button type="button" class=" button_custom  btn btn-primary px-4 py-1">Réserver</button>
+                </div>
+                <a href="@Url.Action("Index", "Manage", new { id = Model.idProprietaire })" class="proprietaire-profil text-info" title="Proprietaire" style="text-decoration:none;">
+                    <img class=" img-circle" src="@ViewData["ProfileImg"]" width="30px" height="30px" onclick="@Url.Action("Index", "Manage")" />
 
+                    <span style="position: absolute; top: 8px; left: 33px;font-size:13px; ">  @Model.proprietaire.ApplicationUser.nomComplet </span>
+                    <span style=" font-size:8px;color:gray;position:absolute;top:27px;left:35px;z-index:1111;"> Particulier</span>
+                </a>
+            }
         </div>
+    </div>
 
-        <style>
+</div>
+
+<style>
 
         @*    * {
                 padding: 0;
@@ -160,11 +177,13 @@
                     right: 5px;
                     }
 
-
-                    .button_custom:focus{
-                    border:0px;
-                    outline:0px;
+                    .btn-delete {
+                        right: 100px;
                     }
+            .button_custom:focus {
+                border: 0px;
+                outline: 0px;
+            }
                     .card-description {
                     font-size: 1.1rem;
                     width: 80%;
@@ -275,6 +294,6 @@
                     }
 
 
-                    </style>
+</style>
 
 

@@ -238,6 +238,14 @@
     <Compile Include="Migrations\202102031222555_add_img_to_appUser_model.Designer.cs">
       <DependentUpon>202102031222555_add_img_to_appUser_model.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202102031958131_car_model_to_coutparjr_as_double.cs" />
+    <Compile Include="Migrations\202102031958131_car_model_to_coutparjr_as_double.Designer.cs">
+      <DependentUpon>202102031958131_car_model_to_coutparjr_as_double.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202102032003106_car_model_to_coutparjr_as_string.cs" />
+    <Compile Include="Migrations\202102032003106_car_model_to_coutparjr_as_string.Designer.cs">
+      <DependentUpon>202102032003106_car_model_to_coutparjr_as_string.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Reservation.cs" />
@@ -256,6 +264,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\car.png" />
+    <Content Include="Content\profile_img.png" />
     <Content Include="Content\user.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -317,6 +326,7 @@
     <Content Include="Views\Voitures\Details.cshtml" />
     <Content Include="Views\Voitures\Edit.cshtml" />
     <Content Include="Views\Voitures\Index.cshtml" />
+    <Content Include="Views\Voitures\VoituresProprietaire.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -382,6 +392,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202102031222555_add_img_to_appUser_model.resx">
       <DependentUpon>202102031222555_add_img_to_appUser_model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102031958131_car_model_to_coutparjr_as_double.resx">
+      <DependentUpon>202102031958131_car_model_to_coutparjr_as_double.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102032003106_car_model_to_coutparjr_as_string.resx">
+      <DependentUpon>202102032003106_car_model_to_coutparjr_as_string.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -151,6 +151,7 @@ namespace projet_ASP.Controllers
         {
             if (ModelState.IsValid)
             {
+                string imgPath = Server.MapPath("~/Content/profile_img.png"); //img par defaut
                 var user = new ApplicationUser
                 {
                     UserName = model.Email, //model.nomComplet,
@@ -159,8 +160,9 @@ namespace projet_ASP.Controllers
                     nomComplet = model.nomComplet,
                     adresse = model.adresse,
                     PhoneNumber = model.tel,
-
-                };
+                    imageBytes= System.IO.File.ReadAllBytes(imgPath),
+                        
+                };              
                 var result = await UserManager.CreateAsync(user, model.Password);
                 ApplicationDbContext db = new ApplicationDbContext();
                 if (model.profileType.Equals("Proprietaire"))
@@ -168,7 +170,7 @@ namespace projet_ASP.Controllers
                     Proprietaire p = new Proprietaire()
                     {
                         ApplicationUserID = user.Id,
-
+                        type="Particulier",
                     };
                     db.Proprietaires.Add(p);
                 }

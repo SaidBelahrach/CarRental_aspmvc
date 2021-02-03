@@ -43,7 +43,7 @@ namespace projet_ASP.Models
 
         [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
         [Display(Name = "Cout par jour")]
-        public Decimal coutParJour { get; set; }
+        public String coutParJour { get; set; }
 
         [Display(Name = "Disponibilité")]
         public Boolean disponible { get; set; }

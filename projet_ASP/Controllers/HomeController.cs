@@ -50,7 +50,7 @@ namespace projet_ASP.Controllers
             Voiture v = new Voiture()
             {
                 couleur = "e",
-                coutParJour = 7,
+                coutParJour = "7",
                 marque = "e",
                 matricule = "rrde",
                 model = "8s8",

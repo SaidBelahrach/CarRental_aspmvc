@@ -6,32 +6,31 @@
     <title>@ViewBag.Title </title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-          rel="stylesheet">
+ 
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
+                    <span class="  icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("CarRental", "Index", "Voitures", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Home", "Index", "Voitures")</li>
                     @if (User.IsInRole("Locataire"))
                     {
                         <li>@Html.ActionLink("Locataire", "About", "Home")</li>
                     }
                     @if (User.IsInRole("Proprietaire"))
                     {
-                        <li>@Html.ActionLink("Proprietaire", "About", "Home")</li>
+                        <li>@Html.ActionLink("Proprietaire", "Index", "Voitures")</li>
+                        <li>@Html.ActionLink("Mes Voitures", "VoituresProprietaire", "Voitures")</li>
                     }
-                    <li>@Html.ActionLink("Voitures", "Index", "Voitures")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
