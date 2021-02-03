@@ -2,8 +2,7 @@
 @{
     ViewBag.Title = "CarCard2";
 }
-
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <div class="center">
 
     <div class="card">
@@ -14,14 +13,30 @@
         </div>
         <div class="general">
             <h3 class="mt-2">Voiture de lux</h3>
-            <span class="prix-label badge badge-warning  text-success rounded-circle px-3 py-3"    >200DH/jr</span>
-            <div class="card-icon-container">
-                <p>Doors 1 &nbsp;</p><p>Manuel &nbsp;</p><p>Climatiseur &nbsp;</p>
+            <span class="prix-label text-success"    >200DH/jr</span>
+            <div class="card-icon-container ">
+                <label>
+                    <span class="fa fa-map-marker icon  "></span>          @*https://material.io/resources/icons/?icon=online_prediction&style=baseline*@
+                <span>
+                    My Abdallah Km 5 Route d'Imouzzer, Fès BP 72.
+                </span>
+                </label>
+                <label>
+                    <span class="fa fa-adjust icon  "></span>          @*https://material.io/resources/icons/?icon=online_prediction&style=baseline*@
+                    <span>adresse</span>
+                </label>
+                <label>
+                    <span class="fa fa-map-marker icon  "></span>          @*https://material.io/resources/icons/?icon=online_prediction&style=baseline*@
+                    <span>adresse</span>
+                </label>
+                <label>
+                    <span class="fa fa-map-marker icon  "></span>          @*https://material.io/resources/icons/?icon=online_prediction&style=baseline*@
+                    <span>adresse</span>
+                </label>
             </div>
             <div class="card-description">
                 <p>
                     This car is costing you just MAD1,293.24 – a real bargain…
-                     
                 </p>
             </div>
             <div class="card-fotter">
@@ -43,11 +58,11 @@
         font-family: Abel, Arial, Verdana, sans-serif;
     }*@
 
-    .center {
-      @*  position: absolute;
-        top: 50%;
-        left: 50%;
-        -webkit-transform: translate(-50%, -50%);*@
+    .card-icon-container {
+       display:flex;
+      justify-content:space-between;
+      width:70%;
+      flex-wrap:wrap;
     }
 
     .card {
@@ -93,9 +108,9 @@
 
     .prix-label {
         position: absolute;
-        font-size: 1.5rem;
-        top: 5px;
-        right: 5px; 
+        font-size: 2.5rem;
+        top: 8px;
+        right: 8px; 
 
         align-content: center;
         display: flex;
@@ -114,8 +129,8 @@
 
     .button_custom {
         position: absolute;
-        bottom: 5px;
-        right: 5px; 
+        bottom: 8px;
+        right: 8px; 
     }
 
 

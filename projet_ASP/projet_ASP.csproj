@@ -233,6 +233,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\car.png" />
+    <Content Include="Content\user.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -291,7 +292,7 @@
     <Content Include="Views\Voitures\Index.cshtml" />
     <Content Include="Views\Shared\_CarCard.cshtml" />
     <Content Include="Views\Shared\_Profile.cshtml" />
-    <Content Include="Views\Shared\CarCard2.cshtml" />
+    <Content Include="Views\Shared\dont_use_this_one.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
