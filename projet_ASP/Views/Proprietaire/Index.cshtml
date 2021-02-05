@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<div class="container">
+<div class="container-fluid">
     <div class="main-body">
         <!-- other design https://www.bootdey.com/snippets/view/about-me or https://bootsnipp.com/snippets/K0ZmK -->
         <div class="row gutters-sm justify-content-center">
@@ -13,11 +13,11 @@
                     <div class="card-body">
                         <div class="row justify-content-center">
                             <div class="col">
-                                <img id="imgProfile"  src="@(string.Format("data:image/png;base64,{0}", Convert.ToBase64String(Model.ApplicationUser.imageBytes)))" alt="Admin" class="rounded-circle d-block ml-auto mr-auto" width="150px">
+                                <img id="imgProfile"  src="@(string.Format("data:image/png;base64,{0}", Convert.ToBase64String(Model.ApplicationUser.imageBytes)))" alt="Admin" class="d-block ml-auto mr-auto" width="150px">
                             </div>
-                            <div class="col text-center"> <h4>Mohammed MED</h4></div>
+                            <div class="col text-center"> <h4 id="mainName">@Model.ApplicationUser.nomComplet</h4></div>
                             <div class="col m-0 p-0">
-                                <p class="text-center mb-0"> <label for="files" class="btn text-center" style="font-size:0.8rem;">Select Image</label></p>
+                                <p class="text-center mb-0"> <label for="files" class="btn text-center" style="font-size:0.8rem;">Séléctionner Image</label></p>
                                 <p class="p-0 mb-0"><input  accept="image/*" id="files" class="p-0" style="visibility:hidden;" type="file"></p>
                             </div>
                         </div>
@@ -56,7 +56,7 @@
                                 <h6 class="mb-0">Nom Complet </h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                @Model.ApplicationUser.nomComplet
+                               <input type="text" id="nameInput"  readonly value="@Model.ApplicationUser.nomComplet" class="form-control" />
                             </div>
                         </div>
                         <hr>
@@ -65,7 +65,7 @@
                                 <h6 class="mb-0">Email</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                @Model.ApplicationUser.Email
+                                <input type="text" id="emailInput" readonly value="@Model.ApplicationUser.Email" class="form-control" />
                             </div>
                         </div>
                         <hr>
@@ -74,7 +74,7 @@
                                 <h6 class="mb-0">Téléphone</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                @Model.ApplicationUser.PhoneNumber
+                                <input type="text" id="teleInput"  readonly value=" @Model.ApplicationUser.PhoneNumber" class="form-control" />
                             </div>
                         </div>
                         <hr>
@@ -83,8 +83,13 @@
                                 <h6 class="mb-0">Address</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                @Model.ApplicationUser.adresse
+                                <input type="text" id="adressInput" value="@Model.ApplicationUser.adresse"  readonly class="form-control" />
                             </div>
+                        </div>
+                        <hr>
+                        <div class="row mr-auto" style="float:right;">
+                            <a class="btn btn-primary" id="btnModifer">Modifier</a>
+                            <a class="btn btn-primary d-none" id="btnSave">Enregistrer</a>
                         </div>
                     </div>
                 </div>
@@ -92,54 +97,14 @@
                     <div class="col-sm-6 mb-3">
                         <div class="card h-100">
                             <div class="card-body">
-                                <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">assignment</i>Project Status</h6>
-                                <small>Web Design</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <small>Website Markup</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 72%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <small>One Page</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 89%" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <small>Mobile Template</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <small>Backend API</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
+                           
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-6 mb-3">
                         <div class="card h-100">
                             <div class="card-body">
-                                <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">assignment</i>Project Status</h6>
-                                <small>Web Design</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <small>Website Markup</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 72%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <small>One Page</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 89%" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <small>Mobile Template</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <small>Backend API</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
+                          
                             </div>
                         </div>
                     </div>
@@ -220,7 +185,7 @@
     $("#files").change(function () {
         if (this.files[0] != null) {
             var formdata = new FormData();
-         
+
             formdata.append(this.files[0].name, this.files[0]);
             var xhr = new XMLHttpRequest();
             xhr.open('POST', '../Proprietaire/updatePhoto');
@@ -235,8 +200,63 @@
                     }
                 }
             }
-           
+
         }
 
     });
+
+
+    $("#btnModifer").click(function () {
+  
+
+        $("#nameInput").attr('readonly', false);
+        $("#emailInput").attr('readonly', false);
+        $("#teleInput").attr('readonly', false);
+        $("#adressInput").attr('readonly', false);
+        $("#btnSave").removeClass("d-none");
+        $("#btnModifer").attr("disabled", true);
+    
+    });
+
+    $("#btnSave").click(function () {
+
+        $("#nameInput").attr('readonly', true);
+        $("#emailInput").attr('readonly', true);
+        $("#teleInput").attr('readonly', true);
+        $("#adressInput").attr('readonly', true);
+ 
+
+        var profile = {
+            nomComplet: $("#nameInput").val(),
+            Email: $("#emailInput").val(),
+            PhoneNumber: $("#teleInput").val(),
+            adresse: $("#adressInput").val()
+        };
+
+
+        $.ajax({
+            url: "../Proprietaire/update",
+            type: 'POST',
+            cache: false,
+            contentType: "application/json;charset=utf-8",
+            processData: false,
+            data: JSON.stringify(profile),
+            success: function (response) {
+                $("#adress").html($("#adressInput").val());
+                $("#name").html($("#nameInput").val());
+                $("#tele").html($("#teleInput").val());
+                $("#email").html($("#emailInput").val());
+                $("#mainName").html($("#nameInput").val()); 
+                
+            },
+            error: function (data) {
+                alert("Serveur ne répond pas !");
+            }
+        });
+        $("#btnModifer").attr("disabled", false);
+        $("#btnSave").addClass("d-none"); 
+    });
+
+
+
 </script>
