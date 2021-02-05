@@ -99,7 +99,7 @@
                             <div class="card-body" style="min-height:100px;">
                                 <div>
 
-                                    @foreach (var item in Model.ApplicationUser.proprietaires.FirstOrDefault().Voitures)
+                                    @foreach (var item in Model.ApplicationUser.proprietaires.FirstOrDefault().Voitures)//every appUser has one proprietaire profile that s way i called the first one
                                     {
                                         byte[] byteData = item.image;
 

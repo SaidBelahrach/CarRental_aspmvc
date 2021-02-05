@@ -49,8 +49,8 @@ namespace projet_ASP.Controllers
         }
 
 
-       
-        public JsonResult update(ProfileUpdate profile) 
+
+        public JsonResult update(ProfileUpdate profile)
         {
             String userId = User.Identity.GetUserId();
             ApplicationDbContext db = new ApplicationDbContext();
@@ -60,9 +60,9 @@ namespace projet_ASP.Controllers
             prop.PhoneNumber = profile.PhoneNumber;
             prop.nomComplet = profile.nomComplet;
             db.SaveChanges();
-            return  Json("Profile updated");
+            return Json("Profile updated");
         }
-    
+
 
 
 

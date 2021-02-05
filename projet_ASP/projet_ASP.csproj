@@ -331,7 +331,6 @@
     <Content Include="Views\Voitures\Index.cshtml" />
     <Content Include="Views\Proprietaire\Index.cshtml" />
     <Content Include="Views\Voitures\VoituresProprietaire.cshtml" />
-    <Content Include="Views\Shared\_userCars.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
