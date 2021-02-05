@@ -38,6 +38,30 @@ namespace projet_ASP.Controllers
             db.SaveChanges();
             return Json("Uploaded " + Request.Files.Count + " files");
         }
+
+
+        public class ProfileUpdate
+        {
+            public string nomComplet { get; set; }
+            public string Email { get; set; }
+            public string adresse { get; set; }
+            public string PhoneNumber { get; set; }
+        }
+
+
+       
+        public JsonResult update(ProfileUpdate profile) 
+        {
+            String userId = User.Identity.GetUserId();
+            ApplicationDbContext db = new ApplicationDbContext();
+            var prop = db.Users.Where(item => item.Id == userId).FirstOrDefault();
+            prop.Email = profile.Email;
+            prop.adresse = profile.adresse;
+            prop.PhoneNumber = profile.PhoneNumber;
+            prop.nomComplet = profile.nomComplet;
+            db.SaveChanges();
+            return  Json("Profile updated");
+        }
     
 
 
