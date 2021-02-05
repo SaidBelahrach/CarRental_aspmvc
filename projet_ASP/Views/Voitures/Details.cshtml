@@ -6,7 +6,7 @@
 }
 
 <h2>Details</h2>
-<div class=" t p-2" style="display:flex;flex-wrap:wrap;justify-content:space-between;box-shadow:0px 0px 4px rgba(0,0,0,0.125);">
+<div class=" t p-2" style="display:flex;flex-wrap:wrap;justify-content:space-between;">
     <table class="table-responsive" style=" width:280px;">
         <tr style="display:none;">
 
@@ -74,11 +74,11 @@
             </td>
         </tr>
         <tr>
-            <td class="  pt-4 ">
+            <td class="  ">
                 @Html.LabelFor(model => model.coutParJour, new { @class = "control-label " }):
             </td>
 
-            <td class="text-success pt-4 " style="font-size:22px;">
+            <td class="text-success  " style=" ">
                 @Html.DisplayFor(model => model.coutParJour)DH/jour
             </td>
         </tr>
@@ -86,21 +86,25 @@
 
     <div style="
         max-width: 250px;
-        display: flex;
-        align-items: center;
-    ">
+        display: block;
+        align-items: center; ">
+        <div class="text-success border border-warning px-1 rounded "  style="font-size:22px;max-width:120px;"> 
+                @Html.DisplayFor(model => model.coutParJour, new { @style = " ", @class = "text-white" })DH/jour 
+        </div>
         <img class="img-responsive" src="@(string.Format("data:image/png;base64,{0}", Convert.ToBase64String(Model.image)))" />
     </div>
 </div>  
-<div>
+<div  class="  mb-4 p-2">
     <form class=" filterbydate " id="filterbydate" style=" z-index:1444; ">
-        <div class="">
-            <label class="">
-                Start:
-            </label>
-            <input type="datetime-local" name="startdate" class="form-control startdate" style="font-size:11px; " />
+        <div class="d-flex mt-2">
+            @Html.Label("Date de debut: ", new {@style="width:110px", @class = "text-left pt-2 pr-2" })
+            <input type="datetime-local" name="startdate" class="form-control startdate py-0" style="font-size:11px;width:165px; " />
         </div>
-        End: <input type="datetime-local" name="enddate" class="form-control enddate" style="font-size:11px; " />
+        <div class="d-flex mt-2">
+            @Html.Label("Date de retour: ", new { @style = "width:110px", @class = "text-left pt-2 pr-2" })      
+            <input type="datetime-local" name="enddate" class="form-control enddate" style="font-size:11px; width:165px;" />
+
+        </div>
     </form>
 </div>
 
@@ -108,91 +112,11 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-actions no-color mt-2">
+    <div class="form-actions no-color mt-4">
         @Html.ActionLink("Cancel", "Index", null, new { @style = "width:100px;", @class = "btn btn-default p" })
         <input type="submit" value="Reserver" class="btn btn-success " style="width:100px;" />
     </div>
 
 }
-
-<!--<div>
-    <h4>Voiture</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.proprietaire.type)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.proprietaire.type)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.marque)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.marque)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.model)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.model)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.couleur)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.couleur)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.nbPlaces)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.nbPlaces)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.automatique)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.automatique)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.coutParJour)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.coutParJour)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.disponible)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.disponible,new { @class = "text-success" })
-        </dd>-->
-@*   <dt>
-        @Html.DisplayNameFor(model => model.imagePath)
-    </dt>
-
-    <dd>
-        @Html.DisplayFor(model => model.imagePath)
-    </dd>*@
-
-<!--</dl>
-</div>-->
-    <p>
-        @*  @Html.ActionLink("Edit", "Edit", new { id = Model.matricule }) |
-@Html.ActionLink("Back to List", "Index")*@
-    </p>
+ 
+ 

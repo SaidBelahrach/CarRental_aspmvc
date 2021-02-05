@@ -40,7 +40,6 @@ namespace projet_ASP.Models
         Voiture voiture { get; set; }
 
 
-
         public int idLocataire { get; set; }
         [ForeignKey("idLocataire")]
         Locataire locataire { get; set; }
