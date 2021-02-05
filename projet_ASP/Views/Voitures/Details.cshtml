@@ -6,8 +6,116 @@
 }
 
 <h2>Details</h2>
+<div class=" t p-2" style="display:flex;flex-wrap:wrap;justify-content:space-between;box-shadow:0px 0px 4px rgba(0,0,0,0.125);">
+    <table class="table-responsive" style=" width:280px;">
+        <tr style="display:none;">
 
+            <td>
+                @Html.LabelFor(model => model.idProprietaire, new { @class = " " }):
+            </td>
+
+            <td>
+                @Html.DisplayFor(model => model.idProprietaire)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.marque, new { @class = " " }):
+            </td>
+
+            <td>
+                @Html.DisplayFor(model => model.marque)
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.model, new { @class = " " }):
+            </td>
+
+            <td>
+                @Html.DisplayFor(model => model.model)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.couleur, new { @class = " text-left" }):
+            </td>
+
+            <td>
+                @Html.DisplayFor(model => model.couleur)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.nbPlaces, new { @class = "text-left" }):
+            </td>
+
+            <td>
+                @Html.DisplayFor(model => model.nbPlaces)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.automatique, new { @class = " " }):
+            </td>
+
+            <td>
+                @(Model.automatique? "Automatique":"Manuelle")
+                </t>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.disponible, new { @class = " " }):
+            </td>
+
+            <td>
+                @(Model.disponible ? "Disponible":"Réservé")
+            </td>
+        </tr>
+        <tr>
+            <td class="  pt-4 ">
+                @Html.LabelFor(model => model.coutParJour, new { @class = "control-label " }):
+            </td>
+
+            <td class="text-success pt-4 " style="font-size:22px;">
+                @Html.DisplayFor(model => model.coutParJour)DH/jour
+            </td>
+        </tr>
+    </table>
+
+    <div style="
+        max-width: 250px;
+        display: flex;
+        align-items: center;
+    ">
+        <img class="img-responsive" src="@(string.Format("data:image/png;base64,{0}", Convert.ToBase64String(Model.image)))" />
+    </div>
+</div>  
 <div>
+    <form class=" filterbydate " id="filterbydate" style=" z-index:1444; ">
+        <div class="">
+            <label class="">
+                Start:
+            </label>
+            <input type="datetime-local" name="startdate" class="form-control startdate" style="font-size:11px; " />
+        </div>
+        End: <input type="datetime-local" name="enddate" class="form-control enddate" style="font-size:11px; " />
+    </form>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color mt-2">
+        @Html.ActionLink("Cancel", "Index", null, new { @style = "width:100px;", @class = "btn btn-default p" })
+        <input type="submit" value="Reserver" class="btn btn-success " style="width:100px;" />
+    </div>
+
+}
+
+<!--<div>
     <h4>Voiture</h4>
     <hr />
     <dl class="dl-horizontal">
@@ -72,20 +180,19 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.disponible)
-        </dd>
+            @Html.DisplayFor(model => model.disponible,new { @class = "text-success" })
+        </dd>-->
+@*   <dt>
+        @Html.DisplayNameFor(model => model.imagePath)
+    </dt>
 
-     @*   <dt>
-            @Html.DisplayNameFor(model => model.imagePath)
-        </dt>
+    <dd>
+        @Html.DisplayFor(model => model.imagePath)
+    </dd>*@
 
-        <dd>
-            @Html.DisplayFor(model => model.imagePath)
-        </dd>*@
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.matricule }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<!--</dl>
+</div>-->
+    <p>
+        @*  @Html.ActionLink("Edit", "Edit", new { id = Model.matricule }) |
+@Html.ActionLink("Back to List", "Index")*@
+    </p>

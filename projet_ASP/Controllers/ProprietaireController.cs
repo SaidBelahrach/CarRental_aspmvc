@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.AspNet.Identity;
+using projet_ASP.Models;
+using System;
 using System.Linq;
 using System.Web;
-using projet_ASP.Models;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
 
 namespace projet_ASP.Controllers
 {
@@ -25,7 +24,7 @@ namespace projet_ASP.Controllers
             return View();
         }
 
-  
+
 
         public JsonResult updatePhoto()
         {
@@ -38,11 +37,6 @@ namespace projet_ASP.Controllers
             db.SaveChanges();
             return Json("Uploaded " + Request.Files.Count + " files");
         }
-    
-
-
-
-
         // GET: Propriétaire/Create
         public ActionResult Create()
         {

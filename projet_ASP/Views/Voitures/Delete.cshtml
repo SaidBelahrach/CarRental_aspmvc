@@ -7,91 +7,100 @@
 
 <h2>Delete</h2>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Voiture</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.proprietaire.type)
-        </dt>
+<h3>Are you sure you want to delete this?</h3> 
+<div class=" " style="display:flex;flex-wrap:wrap;justify-content:space-between"> 
+    <table class="table-responsive table-striped  table-hover" style=" width:280px;">
+        <tr style="display:none;">
 
-        <dd>
-            @Html.DisplayFor(model => model.proprietaire.type)
-        </dd>
+            <td>
+                @Html.LabelFor(model => model.idProprietaire, new { @class = " " }):
+            </td>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.marque)
-        </dt>
+            <td>
+                @Html.DisplayFor(model => model.idProprietaire)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.marque, new { @class = " " }):
+            </td>
 
-        <dd>
-            @Html.DisplayFor(model => model.marque)
-        </dd>
+            <td>
+                @Html.DisplayFor(model => model.marque)
+            </td>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.model)
-        </dt>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.model, new { @class = " " }):
+            </td>
 
-        <dd>
-            @Html.DisplayFor(model => model.model)
-        </dd>
+            <td>
+                @Html.DisplayFor(model => model.model)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.couleur, new { @class = " text-left" }):
+            </td>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.couleur)
-        </dt>
+            <td>
+                @Html.DisplayFor(model => model.couleur)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.nbPlaces, new { @class = "text-left" }):
+            </td>
 
-        <dd>
-            @Html.DisplayFor(model => model.couleur)
-        </dd>
+            <td>
+                @Html.DisplayFor(model => model.nbPlaces)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.automatique, new { @class = " " }):
+            </td>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.nbPlaces)
-        </dt>
+            <td>
+                @(Model.automatique? "Automatique":"Manuelle")
+                </t>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.coutParJour, new { @class = "control-label " }):
+            </td>
 
-        <dd>
-            @Html.DisplayFor(model => model.nbPlaces)
-        </dd>
+            <td>
+                @Html.DisplayFor(model => model.coutParJour)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.disponible, new { @class = " " }):
+            </td>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.automatique)
-        </dt>
+            <td>
+                @(Model.disponible ? "Disponible":"Réservé")
+            </td>
+        </tr>
+    </table>
 
-        <dd>
-            @Html.DisplayFor(model => model.automatique)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.coutParJour)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.coutParJour)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.disponible)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.disponible)
-        </dd>
-
-      @*  <dt>
-            @Html.DisplayNameFor(model => model.imagePath)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.imagePath)
-        </dd>*@
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
-    }
+    <div style="      
+        max-width: 250px; 
+        display: flex; 
+        align-items: center;
+    ">
+        <img class="img-responsive" src="@(string.Format("data:image/png;base64,{0}", Convert.ToBase64String(Model.image)))" />
+    </div>
 </div>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color mt-2"  >
+        @Html.ActionLink("Cancel", "Index", null, new { @style = "width:100px;", @class = "btn btn-default p" })
+        <input type="submit" value="Delete" class="btn btn-danger " style="width:100px;" />
+    </div>
+}
+ 

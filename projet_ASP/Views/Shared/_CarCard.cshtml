@@ -5,18 +5,13 @@
 }
 @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">*@
 
-<script src='https://kit.fontawesome.com/a076d05399.js'></script>
 
-@*<link href="https://fonts.googleapis.com/icon?family=Material+Icons"*@
-<div class="center">
-
+@*<link href="https://fonts.googleapis.com/icon?family=Material+Icons"*@ 
     <div class="card">
         <div class="user-card ">
             <div style="" class="card-img">
                 <img style="" class="img-responsive" src="@ViewData["img"]" width="" height="100%" />
-            </div>
-            @* window.open("http://www.your-site.com/images/picture.jpg"*@
-
+            </div>  
         </div>
         <div class="general">
             <h3 class="mt-2">@Model.marque</h3>
@@ -33,7 +28,7 @@
                     <span>@Model.couleur</span>
                 </label>
                 <label class="datails-item">
-                    <span class="fas fa-users  icon  "></span> @*fa fa-wheelchair*@
+                    <span class="fas fa-users  icon  "></span>  
                     <span>@Model.nbPlaces Places</span>
                 </label>
                 <label class="datails-item">
@@ -57,20 +52,18 @@
                 </div>
             }
             else
-            {
+            {//   @Html.ActionLink("Edit", "Edit", new { id = Model.matricule }) |
                 <div class="card-fotter">
-                    <button type="button" class=" button_custom  btn btn-primary px-4 py-1">Réserver</button>
+                    <button type="button" class=" button_custom  btn btn-primary px-4 py-1"onclick="window.location='@Url.Action("Details", "Voitures", new { id = Model.idVoiture })'">Réserver</button>
                 </div>
-                <a href="@Url.Action("Index", "Manage", new { id = Model.idProprietaire })" class="proprietaire-profil text-info" title="Proprietaire" style="text-decoration:none;">
+                <a href="@Url.Action("Index", "Proprietaire", new { id = Model.idProprietaire })" class="proprietaire-profil text-info" title="Proprietaire" style="text-decoration:none;">
                     <img class=" img-circle" src="@ViewData["ProfileImg"]" width="30px" height="30px" onclick="@Url.Action("Index", "Manage")" />
 
                     <span style="position: absolute; top: 8px; left: 33px;font-size:13px; ">  @Model.proprietaire.ApplicationUser.nomComplet </span>
                     <span style=" font-size:8px;color:gray;position:absolute;top:27px;left:35px;z-index:1111;"> Particulier</span>
                 </a>
             }
-        </div>
-    </div>
-
+        </div> 
 </div>
 
 <style>
@@ -98,7 +91,7 @@
                     }
 
                     .card  {
-                    min-width: 460px;
+                    min-width:320px;
                     max-width: 730px;
                     height: 150px;
                     min-height: 150px;

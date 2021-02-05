@@ -25,7 +25,7 @@ namespace projet_ASP.Controllers
               {
                   return Content("already");
               }*/
-            return View();
+            return RedirectToAction("Index", "Voitures");
         }
 
 

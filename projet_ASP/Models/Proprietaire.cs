@@ -40,6 +40,6 @@ namespace projet_ASP.Models
         public string ApplicationUserID { get; set; }
         [ForeignKey("ApplicationUserID")]
         public virtual ApplicationUser ApplicationUser { get; set; }
-        
+
     }
 }

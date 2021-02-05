@@ -9,24 +9,40 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
 
 namespace projet_ASP.Controllers
 {
-    
+
     public class VoituresController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext(); 
+        private ApplicationDbContext db = new ApplicationDbContext();
         // GET: Voitures
         public ActionResult Index()
         {
             string userid = User.Identity.GetUserId();
-            List<Voiture> voitures = db.Voitures.Include(v => v.proprietaire).ToList(); 
-          /*  if (User.IsInRole("Proprietaire"))
-            {
-                voitures.Clear();
-                voitures.AddRange(db.Voitures.Where(v => v.proprietaire.ApplicationUserID.Equals(userid)).ToList());
-            } */
+            List<Voiture> voitures = db.Voitures.Include(v => v.proprietaire).ToList();
+            /*  if (User.IsInRole("Proprietaire"))
+              {
+                  voitures.Clear();
+                  voitures.AddRange(db.Voitures.Where(v => v.proprietaire.ApplicationUserID.Equals(userid)).ToList());
+              } */
+            return View(voitures);
+        }
+        [HttpPost]
+        public ActionResult Index(string key)
+        {
+            string userid = User.Identity.GetUserId();
+            key = key.Trim();
+            if (key.Length == 0) return View(db.Voitures.ToList());
+            List<Voiture> voitures = db.Voitures.Where(v => v.marque.ToLower().Contains(key.ToLower()) ||
+                                                          v.model.ToLower().Contains(key.ToLower()) ||
+                                                          v.couleur.ToLower().Contains(key.ToLower()) ||
+                                                          v.coutParJour.ToLower().Contains(key.ToLower()) ||
+                                                          v.proprietaire.ApplicationUser.nomComplet.ToLower().Contains(key.ToLower()) ||
+                                                          v.proprietaire.ApplicationUser.adresse.ToLower().Contains(key.ToLower()) ||
+                                                          v.proprietaire.ApplicationUser.PhoneNumber.ToLower().Contains(key.ToLower())
+                                                       )
+                                                .ToList();
             return View(voitures);
         }
         //les voitures de propritaire actuel
@@ -35,7 +51,7 @@ namespace projet_ASP.Controllers
             if (User.IsInRole("Proprietaire"))
             {
                 string userid = User.Identity.GetUserId();
-                List<Voiture> voitures = db.Voitures.Where(v => v.proprietaire.ApplicationUserID.Equals(userid)).ToList(); 
+                List<Voiture> voitures = db.Voitures.Where(v => v.proprietaire.ApplicationUserID.Equals(userid)).ToList();
                 return View(voitures);
             }
             return RedirectToAction("Index");
@@ -61,7 +77,7 @@ namespace projet_ASP.Controllers
         {
             ViewBag.idProprietaire = new SelectList(db.Proprietaires, "idProprietaire", "type");
             return View();
-        } 
+        }
         // POST: Voitures/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -87,12 +103,12 @@ namespace projet_ASP.Controllers
                 couleur = data["couleur"],
                 model = data["model"],
                 nbPlaces = Convert.ToInt32(data["nbPlaces"]),
-                idProprietaire =prop.idProprietaire,// db.Proprietaires.FirstOrDefault().idProprietaire,
+                idProprietaire = prop.idProprietaire,// db.Proprietaires.FirstOrDefault().idProprietaire,
                 disponible = true,
                 coutParJour = data["coutParJour"],
             };
             v.image = new byte[file.ContentLength];
-            file.InputStream.Read(v.image, 0, file.ContentLength); 
+            file.InputStream.Read(v.image, 0, file.ContentLength);
             if (ModelState.IsValid)
             {
                 db.Voitures.Add(v);
@@ -121,17 +137,18 @@ namespace projet_ASP.Controllers
         // POST: Voitures/Edit/id 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit( Voiture voiture, HttpPostedFileBase file)
+        public ActionResult Edit(Voiture voiture, HttpPostedFileBase file)
         {
             Voiture oldcar = db.Voitures.Where(v => v.idVoiture.Equals(voiture.idVoiture)).FirstOrDefault();
             if (file != null)
             {
                 voiture.image = new byte[file.ContentLength];
                 file.InputStream.Read(voiture.image, 0, file.ContentLength);
-            }else voiture.image = oldcar.image;
+            }
+            else voiture.image = oldcar.image;
             if (ModelState.IsValid)
-            { 
-                db.Voitures.AddOrUpdate(voiture); 
+            {
+                db.Voitures.AddOrUpdate(voiture);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -164,6 +181,17 @@ namespace projet_ASP.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        //GET /api/cars 
+        public ActionResult searchCars(string key)
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            var cars = db.Voitures.ToList<Voiture>();
+            db.SaveChanges();
+            //  return Content("fic "+key);
+            return Json(cars, JsonRequestBehavior.AllowGet);
+        }
+
+
 
         protected override void Dispose(bool disposing)
         {

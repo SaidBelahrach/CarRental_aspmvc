@@ -264,7 +264,9 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap_new.css" />
     <Content Include="Content\car.png" />
+    <Content Include="Content\no-result.svg" />
     <Content Include="Content\profile_img.png" />
     <Content Include="Content\user.png" />
     <Content Include="favicon.ico" />

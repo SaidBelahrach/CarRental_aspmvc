@@ -4,31 +4,216 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div id="voitures_page ">
 
-<h2>Voitures</h2>
-@if (User.IsInRole("Proprietaire"))
-{
-    <p>
-        @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
-    </p>
-}
-@foreach (var item in Model)
-{
-    byte[] byteData = item.image;
+    <div class="container-fluid  bg-light filter-bar" style="  ">
+        <div>
+            <input type="submit" value="Afficher par date" class="btn btn-outline-primary px-1 py-2 filter-btn" id="filter-btn" style="outline:none;">
 
-    //Convert byte arry to base64string
-    string imreBase64Data = Convert.ToBase64String(byteData);
-    string imgDataURL = string.Format("data:image/png;base64,{0}", imreBase64Data); //https://www.c-sharpcorner.com/article/mvc-display-image-from-byte-array/
-                                                                                    //Passing image data in viewbag to view
-    ViewBag.img = imgDataURL;
+            <form class="card border py-2 px-4 filterbydate bg-light" id="filterbydate" style="width:250px; margin:10px auto;position:absolute;top:35px;z-index:1444;display:none;"> 
+                Start: <input type="datetime-local" name="startdate" class="form-control startdate" style="font-size:11px; " />
+                End: <input type="datetime-local" name="enddate" class="form-control enddate" style="font-size:11px; " />
+                <input type="submit" value="filter" id="filter" class="btn btn-outline-primary py-1 px-4 mt-2" style="outline:none;">
+            </form>
+        </div>
 
-    byte[] byteData2 = item.proprietaire.ApplicationUser.imageBytes;
+        <form action="../Voitures/Index" method="post" class="input-group d-flex searchform" style="position:absolute;right:5px;" name="searchform">
+            @* @Html.BeginForm("Index", "Voitures", FormMethod.Get){*@
+            @* <form action="../Voitures/Index" method="get">*@
 
-    //Convert byte arry to base64string
-    string imreBase64Data2 = Convert.ToBase64String(byteData2);
-    string imgDataURL2 = string.Format("data:image/png;base64,{0}", imreBase64Data2);
-    ViewData["ProfileImg"] = string.Format("data:image/png;base64,{0}", imreBase64Data2);
+            <div class="form-outline">
+                <input id="search-input" required type="search" placeholder=" Search anything" name="key" id="form1 key" style="width:0px;" class="form-control rounded p-0 search-input" />
+                @* <label class="form-label" for="form1">Search</label>*@
+            </div>
+            <button type="submit" id="SearchBtn"  class="btn btn-primary ml-1 SearchBtn" style="outline:none;">
+                <i class="fas fa-search"></i>
+            </button>
+            @* </form>*@
+        </form>
+    </div>
+    @if (User.IsInRole("Proprietaire"))
+    {
+        <p>
+            @* @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })*@
+        </p>
+    }
+    @foreach (var item in Model)
+    {
+        byte[] byteData = item.image;
 
-    @Html.Partial("_CarCard", item);
+        //Convert byte arry to base64string
+        string imreBase64Data = Convert.ToBase64String(byteData);
+        string imgDataURL = string.Format("data:image/png;base64,{0}", imreBase64Data); //https://www.c-sharpcorner.com/article/mvc-display-image-from-byte-array/
+                                                                                        //Passing image data in viewbag to view
+        ViewBag.img = imgDataURL;
 
-}
+        byte[] byteData2 = item.proprietaire.ApplicationUser.imageBytes;
+
+        //Convert byte arry to base64string
+        string imreBase64Data2 = Convert.ToBase64String(byteData2);
+        string imgDataURL2 = string.Format("data:image/png;base64,{0}", imreBase64Data2);
+        ViewData["ProfileImg"] = string.Format("data:image/png;base64,{0}", imreBase64Data2);
+
+        @Html.Partial("_CarCard", item);
+
+    }
+    @if (Model.ToArray().Length < 1)
+    {
+        <div class="h3" style="text-align:center;">Ups!... no results found</div>
+        <img class="filter-bar p-0" style="margin-top:-65px;" src="~/Content/no-result.svg" />
+    }
+</div>
+<style>
+    .form-outline .form-control ~ .form-label {
+        position: absolute;
+        top: 0;
+        left: .75rem;
+        padding-top: .37rem;
+        pointer-events: none;
+        -webkit-transform-origin: 0 0;
+        transform-origin: 0 0;
+        -webkit-transition: all .2s ease;
+        transition: all .2s ease-out;
+        color: rgba(0,0,0,.6);
+        margin-bottom: 0;
+    }
+
+    .filter-bar {
+        min-height: 43px;
+        margin: 10px auto;
+        min-width: 320px;
+        max-width: 730px;
+        padding: 5px;
+        position: relative;
+        display: flex;
+    }
+
+    #search-input {
+        width: 0px;
+        padding: 0px;
+        transition: width .35s;
+    }
+</style>
+
+<script>
+   /* $(document).ready(function () {
+        $("#dt1").datepicker({
+            dateFormat: "dd-M-yy",
+            minDate: 0,
+            onSelect: function () {
+                var dt2 = $('#dt2');
+                var startDate = $(this).datepicker('getDate');
+                //add 30 days to selected date
+                startDate.setDate(startDate.getDate() + 30);
+                var minDate = $(this).datepicker('getDate');
+                //minDate of dt2 datepicker = dt1 selected day
+                dt2.datepicker('setDate', minDate);
+                //sets dt2 maxDate to the last day of 30 days window
+                dt2.datepicker('option', 'maxDate', startDate);
+                //first day which can be selected in dt2 is selected date in dt1
+                dt2.datepicker('option', 'minDate', minDate);
+                //same for dt1
+                $(this).datepicker('option', 'minDate', minDate);
+            }
+        });
+        $('#dt2').datepicker({
+            dateFormat: "dd-M-yy"
+        });
+    });*/
+</script>
+
+
+<script> 
+    const searchButton = document.getElementById('SearchBtn');
+    const searchInput = document.getElementById('search-input');
+    var disp_flag = false;
+    searchButton.addEventListener('mouseenter', () => { 
+        searchInput.style.width = "150px";
+        searchInput.focus();
+        //  disp_flag = !disp_flag;
+        // searchInput.style.display = disp_flag? "inline":"none";
+    });
+    $('body').on('click', function (e) {
+        if (!$(e.target).hasClass('search-input') && !$(e.target).hasClass('SearchBtn')) {
+            searchInput.style.width = "0px";
+            searchInput.blur();
+        }
+    }); 
+
+    searchButton.addEventListener('click', () => {
+        event.preventDefault();
+        searchInput.style.width = "150px";
+        searchInput.focus();
+        console.log(searchInput.value);
+        if (searchInput.value.length>0)
+        document.forms["searchform"].submit();
+        
+    });
+
+    const filterButton = document.getElementById('filter-btn');
+    const filtercontainer = document.getElementById('filterbydate');
+    const filter = document.getElementById('filter');
+    var showFilter = false;
+    filterButton.addEventListener('click', () => { 
+      @*  searchInput.style.width = "0px";
+        searchInput.blur();*@
+        showFilter = !showFilter;
+        filtercontainer.style.display = showFilter ? "block" : "none";
+    });
+    filter.addEventListener('click', () => {
+        filtercontainer.style.display = "none";
+        showFilter = !showFilter;
+    }); 
+    $('body').on('click', function (e) { 
+        if (!$(e.target).hasClass('filterbydate') && !$(e.target).hasClass('filter-btn') && !$(e.target).hasClass('startdate') && !$(e.target).hasClass('enddate')) {
+            filtercontainer.style.display = "none";
+            showFilter = false;
+           
+        }
+   @*     if (!$(e.target).hasClass('search-input') && !$(e.target).hasClass('SearchBtn')) {
+            searchInput.style.width = "0px";
+            searchInput.blur();
+        }*@
+        
+    }); 
+ 
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    /*/  $("#search-input").change(function () {
+          //var formdata = new FormData();
+
+          //formdata.append(this.files[0].name, this.files[0]);
+          var xhr = new XMLHttpRequest();
+          xhr.open('GET', '../Voitures/searchCars?key=p', true);
+         xhr.send();
+          //var file = this.files[0];
+          xhr.onreadystatechange = function () {
+              if (xhr.readyState == 4 && xhr.status == 200) {
+                  console.log(xhr.response);
+              }
+          }
+
+
+      });*/
+</script>
+<script>
+    /* $(document).ready(function () {
+           $("#search-input").change(function () {
+               // var SearchBy = $("#SearchBy").val();
+               var SearchValue = $("#search-input").val();
+               // var SetData = $("#DataSearching");
+               // SetData.html("");
+               $.ajax({
+                   type: "post",
+                   url: "../Voitures/searchCars?key=" + SearchValue,
+                   contentType: "json",
+                   success: function (result) {
+                       console.log(result);
+
+                   }
+               });
+           });
+     });  */
+</script>
