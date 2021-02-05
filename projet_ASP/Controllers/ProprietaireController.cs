@@ -15,6 +15,7 @@ namespace projet_ASP.Controllers
             String userId = User.Identity.GetUserId();
             ApplicationDbContext db = new ApplicationDbContext();
             var prop = db.Proprietaires.Where(item => item.ApplicationUserID == userId).FirstOrDefault();
+            ViewData["cars"] = db.Voitures.ToList();
             return View(prop);
         }
 

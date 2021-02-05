@@ -1,4 +1,4 @@
-﻿@model projet_ASP.Models.Proprietaire
+﻿@model projet_ASP.Models.Proprietaire 
 
 @{
     ViewBag.Title = "Index";
@@ -23,7 +23,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card mt-3">
+                <div class="card mt-3" >
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                             <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe mr-2 icon-inline"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>Website</h6>
@@ -94,20 +94,43 @@
                     </div>
                 </div>
                 <div class="row gutters-sm">
-                    <div class="col-sm-6 mb-3">
-                        <div class="card h-100">
-                            <div class="card-body">
-                           
+                    <div class="col-sm-12 mb-3">
+                        <div class="card" style="min-height:500px;overflow:auto;">
+                            <div class="card-body" style="min-height:100px;">
+                                <div>
+
+                                    @foreach (var item in Model.ApplicationUser.proprietaires.FirstOrDefault().Voitures)
+                                    {
+                                        byte[] byteData = item.image;
+
+                                        //Convert byte arry to base64string
+                                        string imreBase64Data = Convert.ToBase64String(byteData);
+                                        string imgDataURL = string.Format("data:image/png;base64,{0}", imreBase64Data); //https://www.c-sharpcorner.com/article/mvc-display-image-from-byte-array/
+                                                                                                                        //Passing image data in viewbag to view
+                                        ViewBag.img = imgDataURL;
+
+                                        byte[] byteData2 = item.proprietaire.ApplicationUser.imageBytes;
+
+                                        //Convert byte arry to base64string
+                                        string imreBase64Data2 = Convert.ToBase64String(byteData2);
+                                        string imgDataURL2 = string.Format("data:image/png;base64,{0}", imreBase64Data2);
+                                        ViewData["ProfileImg"] = string.Format("data:image/png;base64,{0}", imreBase64Data2);
+
+                                        @Html.Partial("_CarCard", item);
+
+                                    }
+
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6 mb-3">
+                    @*<div class="col-sm-6 mb-3">
                         <div class="card h-100">
                             <div class="card-body">
-                          
+                                
                             </div>
                         </div>
-                    </div>
+                    </div>*@
                 </div>
             </div>
         </div>
