@@ -29,7 +29,7 @@
                     <li>@Html.ActionLink("Home", "Index", "Voitures")</li>
                     @if (User.IsInRole("Locataire"))
                     {
-                        <li>@Html.ActionLink("Locataire", "About", "Home")</li>
+                        <li>@Html.ActionLink("Locataire", "Index", "Locataire")</li>
                         <li>@Html.ActionLink("Reservations", "Index", "Reservations")</li>
                     }
                     @if (User.IsInRole("Proprietaire"))

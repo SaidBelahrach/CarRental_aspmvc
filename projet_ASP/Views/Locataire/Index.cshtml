@@ -1,0 +1,248 @@
+﻿@model projet_ASP.Models.Locataire
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div class="container-fluid">
+    <div class="main-body">
+        <!-- other design https://www.bootdey.com/snippets/view/about-me or https://bootsnipp.com/snippets/K0ZmK -->
+        <div class="row gutters-sm justify-content-center">
+            <div class="col-md-3 mb-3 p-0">
+                <div class="card1">
+                    <div class="card-body">
+                        <div class="row justify-content-center">
+                            <div class="col">
+                                <img id="imgProfile" src="@(string.Format("data:image/png;base64,{0}", Convert.ToBase64String(Model.ApplicationUser.imageBytes)))" alt="Admin" class="d-block ml-auto mr-auto rounded-circle" width="150px">
+                            </div>
+                            <div class="col text-center"> <h4 id="mainName">@Model.ApplicationUser.nomComplet</h4></div>
+                            <div class="col m-0 p-0">
+                                <p class="text-center mb-0"> <label for="files" class="btn text-center" style="font-size:0.8rem;">Séléctionner Image</label></p>
+                                <p class="p-0 mb-0"><input accept="image/*" id="files" class="p-0" style="visibility:hidden;" type="file"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card1 mt-3">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                            <h6 class="mb-0">-Nombre d'allocation :</h6>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card1 mb-3">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Nom </h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <input type="text" id="nameInput" readonly value="@Model.ApplicationUser.nomComplet" class="form-control" />
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Email</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <input type="text" id="emailInput" readonly value="@Model.ApplicationUser.Email" class="form-control" />
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Téléphone</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <input type="text" id="teleInput" readonly value=" @Model.ApplicationUser.PhoneNumber" class="form-control" />
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Address</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <input type="text" id="adressInput" value="@Model.ApplicationUser.adresse" readonly class="form-control" />
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row mr-auto" style="float:right;">
+                            <a class="btn btn-primary" id="btnModifer">Modifier</a>
+                            <a class="btn btn-primary d-none" id="btnSave">Enregistrer</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row gutters-sm">
+                    <div class="col-sm-12 mb-3">
+                        <div class="card1" style="overflow:auto;">
+                            <div class="card-body" style="min-height:100px;">
+                                <div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+
+    body {
+        margin-top: 20px;
+        color: #1a202c;
+        text-align: left;
+        background-color: #e2e8f0;
+    }
+
+    .main-body {
+        padding: 15px;
+    }
+
+    .card1 {
+        box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06);
+    }
+
+    .card1 {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: #fff;
+        background-clip: border-box;
+        border: 0 solid rgba(0,0,0,.125);
+        border-radius: .25rem;
+    }
+
+    .card-body {
+        flex: 1 1 auto;
+        min-height: 1px;
+        padding: 1rem;
+    }
+
+    .gutters-sm {
+        margin-right: -8px;
+        margin-left: -8px;
+    }
+
+        .gutters-sm > .col, .gutters-sm > [class*=col-] {
+            padding-right: 8px;
+            padding-left: 8px;
+        }
+
+    .mb-3, .my-3 {
+        margin-bottom: 1rem !important;
+    }
+
+    .bg-gray-300 {
+        background-color: #e2e8f0;
+    }
+
+    .h-100 {
+        height: 100% !important;
+    }
+
+    .shadow-none {
+        box-shadow: none !important;
+    }
+
+    .form-control:read-only {
+        border: 0;
+        background-color: white;
+        outline: 0;
+        outline-color: white;
+    }
+</style>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script>
+    $("#files").change(function () {
+        if (this.files[0] != null) {
+            var formdata = new FormData();
+
+            formdata.append(this.files[0].name, this.files[0]);
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '../Locataire/updatePhoto');
+            xhr.send(formdata);
+            var file = this.files[0];
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var output = document.getElementById('imgProfile');
+                    output.src = URL.createObjectURL(file);
+                    output.onload = function () {
+                        URL.revokeObjectURL(output.src)
+                    }
+                }
+            }
+
+        }
+
+    });
+
+
+
+
+    $("#btnModifer").click(function () {
+
+
+        $("#nameInput").attr('readonly', false);
+        $("#emailInput").attr('readonly', false);
+        $("#teleInput").attr('readonly', false);
+        $("#adressInput").attr('readonly', false);
+        $("#btnSave").removeClass("d-none");
+        $("#btnModifer").attr("disabled", true);
+
+    });
+
+    $("#btnSave").click(function () {
+
+        $("#nameInput").attr('readonly', true);
+        $("#emailInput").attr('readonly', true);
+        $("#teleInput").attr('readonly', true);
+        $("#adressInput").attr('readonly', true);
+
+
+        var profile = {
+            nomComplet: $("#nameInput").val(),
+            Email: $("#emailInput").val(),
+            PhoneNumber: $("#teleInput").val(),
+            adresse: $("#adressInput").val()
+        };
+
+
+        $.ajax({
+            url: "../Proprietaire/update",
+            type: 'POST',
+            cache: false,
+            contentType: "application/json;charset=utf-8",
+            processData: false,
+            data: JSON.stringify(profile),
+            success: function (response) {
+                $("#adress").html($("#adressInput").val());
+                $("#name").html($("#nameInput").val());
+                $("#tele").html($("#teleInput").val());
+                $("#email").html($("#emailInput").val());
+                $("#mainName").html($("#nameInput").val());
+
+            },
+            error: function (data) {
+                alert("Serveur ne répond pas !");
+            }
+        });
+        $("#btnModifer").attr("disabled", false);
+        $("#btnSave").addClass("d-none");
+    });
+
+</script>
