@@ -4,6 +4,8 @@ using System;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
+using System.Data.Entity.Migrations;
 
 namespace projet_ASP.Controllers
 {
@@ -14,8 +16,9 @@ namespace projet_ASP.Controllers
         {
             String userId = User.Identity.GetUserId();
             ApplicationDbContext db = new ApplicationDbContext();
-            var prop = db.Proprietaires.Where(item => item.ApplicationUserID == userId).FirstOrDefault();
-            ViewData["cars"] = db.Voitures.ToList();
+            var prop = db.Proprietaires.Include(e=>e.Voitures).Where(item => item.ApplicationUserID == userId).FirstOrDefault();
+            //  ViewData["cars"] = db.Voitures.ToList();
+            if (prop == null) return RedirectToAction("Index", "Manage");
             return View(prop);
         }
 

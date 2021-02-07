@@ -37,12 +37,12 @@ namespace projet_ASP.Models
 
         public int idVoiture { get; set; }
         [ForeignKey("idVoiture")]
-        Voiture voiture { get; set; }
+        public virtual Voiture voiture { get; set; }
 
 
         public int idLocataire { get; set; }
         [ForeignKey("idLocataire")]
-        Locataire locataire { get; set; }
+        public virtual Locataire locataire { get; set; }
 
     }
 }

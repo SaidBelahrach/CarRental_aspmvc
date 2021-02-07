@@ -30,12 +30,15 @@
                     @if (User.IsInRole("Locataire"))
                     {
                         <li>@Html.ActionLink("Locataire", "About", "Home")</li>
+                        <li>@Html.ActionLink("Reservations", "Index", "Reservations")</li>
                     }
                     @if (User.IsInRole("Proprietaire"))
                     {
                         <li>@Html.ActionLink("Proprietaire", "Index", "Proprietaire")</li>
                         <li>@Html.ActionLink("Mes Voitures", "VoituresProprietaire", "Voitures")</li>
+                        <li>@Html.ActionLink("Reservations", "Index", "Reservations")</li>
                     }
+
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

@@ -58,19 +58,52 @@ namespace projet_ASP.Controllers
         }
 
         // GET: Voitures/Details/5
+       // [Authorize(Roles = "Locataire")]
         public ActionResult Details(string id)
-        {
+        { 
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index"); //Content("page not found ");
             }
-            Voiture voiture = db.Voitures.Where(v => v.idVoiture.ToString().Equals(id)).FirstOrDefault();
+            Voiture voiture = db.Voitures.Include(r=>r.reservations).Where(v => v.idVoiture.ToString().Equals(id)).FirstOrDefault();
             if (voiture == null)
             {
                 return HttpNotFound();
             }
             return View(voiture);
         }
+        [Authorize]
+        public JsonResult reserver_voiture(string carId, string userID, string debut, string fin)
+        {
+            if (carId == null)
+            {
+                return Json("car not found");
+            }
+            Voiture voiture = db.Voitures.Where(v => v.idVoiture.ToString().Equals(carId)).FirstOrDefault();
+            Locataire locataire = db.Locataires.Where(v => v.ApplicationUserID.ToString().Equals(userID)).FirstOrDefault();
+            if (voiture == null || locataire == null)
+            {
+                return Json("user or car not found");//RedirectToAction("Details", "Voitures", new { id = carId });
+            } 
+            DateTime date_debut = DateTime.Parse(debut);
+            DateTime date_fin = DateTime.Parse(fin);
+            Reservation reservation = new Reservation()
+            {
+                cout = Convert.ToInt32(voiture.coutParJour) * Convert.ToInt32(date_fin.Subtract(date_debut).TotalDays),//*nbjours
+                dateReservation = DateTime.Now,
+                idLocataire = locataire.idLocataire,
+                idVoiture = voiture.idVoiture,
+                typeDePaiement = "visa",
+                dateDebut = date_debut,
+                dateFin = date_fin,
+            };
+            db.reservations.Add(reservation);
+            voiture.disponible = false;
+            db.Voitures.AddOrUpdate(voiture);
+            db.SaveChanges();
+            return Json("OK"); 
+        }
+ 
         [Authorize(Roles = "Proprietaire")]
         // GET: Voitures/Create
         public ActionResult Create()
@@ -106,6 +139,7 @@ namespace projet_ASP.Controllers
                 idProprietaire = prop.idProprietaire,// db.Proprietaires.FirstOrDefault().idProprietaire,
                 disponible = true,
                 coutParJour = data["coutParJour"],
+                
             };
             v.image = new byte[file.ContentLength];
             file.InputStream.Read(v.image, 0, file.ContentLength);

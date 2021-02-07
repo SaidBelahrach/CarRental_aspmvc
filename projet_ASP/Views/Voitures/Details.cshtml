@@ -1,11 +1,19 @@
 ﻿@model projet_ASP.Models.Voiture
-
+@using Microsoft.AspNet.Identity;
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Details</h2>
+@if (User.IsInRole("Locataire"))
+{
+    <h2>Réserver voiture</h2>
+}
+else
+{
+    <h2>Détails de voiture</h2>
+}
+<hr />
+@*<h5 class="alert alert-danger">@ViewBag.msg   </h5>*@
 <div class=" t p-2" style="display:flex;flex-wrap:wrap;justify-content:space-between;">
     <table class="table-responsive" style=" width:280px;">
         <tr style="display:none;">
@@ -61,7 +69,7 @@
             </td>
 
             <td>
-                @(Model.automatique? "Automatique":"Manuelle")
+                @(Model.automatique ? "Automatique" : "Manuelle")
                 </t>
         </tr>
         <tr>
@@ -70,7 +78,7 @@
             </td>
 
             <td>
-                @(Model.disponible ? "Disponible":"Réservé")
+                @(Model.disponible ? "Disponible" : "Réservé")
             </td>
         </tr>
         <tr>
@@ -88,35 +96,137 @@
         max-width: 250px;
         display: block;
         align-items: center; ">
-        <div class="text-success border border-warning px-1 rounded "  style="font-size:22px;max-width:120px;"> 
-                @Html.DisplayFor(model => model.coutParJour, new { @style = " ", @class = "text-white" })DH/jour 
+        <div class="text-success border border-warning px-1 rounded " style="font-size:22px;max-width:120px;">
+            @Html.DisplayFor(model => model.coutParJour, new { @style = " ", @class = "text-white" })DH/jour
         </div>
         <img class="img-responsive" src="@(string.Format("data:image/png;base64,{0}", Convert.ToBase64String(Model.image)))" />
     </div>
-</div>  
-<div  class="  mb-4 p-2">
-    <form class=" filterbydate " id="filterbydate" style=" z-index:1444; ">
-        <div class="d-flex mt-2">
-            @Html.Label("Date de debut: ", new {@style="width:110px", @class = "text-left pt-2 pr-2" })
-            <input type="datetime-local" name="startdate" class="form-control startdate py-0" style="font-size:11px;width:165px; " />
-        </div>
-        <div class="d-flex mt-2">
-            @Html.Label("Date de retour: ", new { @style = "width:110px", @class = "text-left pt-2 pr-2" })      
-            <input type="datetime-local" name="enddate" class="form-control enddate" style="font-size:11px; width:165px;" />
-
-        </div>
-    </form>
 </div>
-
-@using (Html.BeginForm())
+@if (User.IsInRole("Locataire"))
 {
-    @Html.AntiForgeryToken()
-
-    <div class="form-actions no-color mt-4">
-        @Html.ActionLink("Cancel", "Index", null, new { @style = "width:100px;", @class = "btn btn-default p" })
-        <input type="submit" value="Reserver" class="btn btn-success " style="width:100px;" />
+    <div class="  mb-4 p-2">
+        <form class=" filterbydate" onsubmit="myFunction()" name="filterbydate" id="filterbydate" style=" z-index:1444; ">
+            <div class="d-flex mt-2">
+                @Html.Label("Date de debut: ", new { @style = "width:110px", @class = "text-left pt-2 pr-2" })
+                <input type="date" required min="@(Model.reservations.Count > 0 ? Model.reservations.OrderByDescending(d => d.dateFin).FirstOrDefault().dateFin.AddDays(1).ToString("yyyy-MM-dd") : DateTime.Now.ToString())" name="startdate" class="form-control startdate py-0" style="font-size:11px;width:165px; " />
+            </div>
+            <div class="d-flex mt-2">
+                @Html.Label("Date de retour: ", new { @style = "width:110px", @class = "text-left pt-2 pr-2" })
+                <input type="date" min="@(Model.reservations.Count > 0 ? Model.reservations.OrderByDescending(d => d.dateFin).FirstOrDefault().dateFin.AddDays(2).ToString("yyyy-MM-dd") : DateTime.Now.ToString())"
+                       required name="enddate" class="form-control enddate"
+                       style="font-size:11px; width:165px;" />
+            </div>
+            <div class="form-actions no-color mt-4 align-content-center">
+                @Html.ActionLink("Cancel", "Index", null, new { @style = "width:100px;", @class = "btn btn-default p" })
+                <input type="submit" value="Reserver" class="btn btn-success " id="btn-reserver" style="width:100px;" />
+            </div>
+            @*https://css-tricks.com/prefilling-date-input/*@
+        </form>
     </div>
-
 }
- 
- 
+
+@*@using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+    }*@
+<div class="reserver-progress  ">
+    <span class="fas fa-times  text-danger " style="position:absolute;top:10px;right:10px;font-size:20px;color:red;display:none;"
+          onclick="closeProg() "></span>
+    <div style="width:100%;margin:80px auto;">
+
+        <i class="fas fa-check-square mt-2 done-icon text-success" style="font-size:64px;display:none;"></i>
+        <i class="fas fas fa-exclamation-triangle mt-0 text-danger" style="font-size:62px;display:none;"></i>
+        <i class="fas fa-spinner fa-spin fa-pulse loading-icon text-success" style="font-size:62px"></i>
+    </div>
+    <span class=" text-success verifica-msg text-center" style="font-size:22px;padding-top:4px;margin:5px auto;">Verification de paiement....</span>
+</div>
+<style>
+    .reserver-progress {
+        background: white;
+        position: absolute;
+        left: 0px;
+        right: 0px;
+        top: 180px;
+        margin-left: auto;
+        margin-right: auto;
+        min-width: 360px;
+        max-width: 600px;
+        height: 300px;
+        padding-left: 10px;
+        box-shadow: 0px 02px 15px rgba(10,0,0,0.2);
+        border-radius: 4px;
+        text-align: center;
+        @* align-content: center;
+         display: flex;*@
+        align-items: center;
+          display: none;
+    }
+</style>
+
+<script>
+    var btn = document.getElementById("btn-reserver");
+    var progress = document.getElementsByClassName("reserver-progress ")[0];
+    var enddate = document.getElementsByClassName("enddate")[0];
+    var startdate = document.getElementsByClassName("startdate")[0];
+    var loadingIcon = document.getElementsByClassName("loading-icon")[0];
+    var doneIcon = document.getElementsByClassName("done-icon")[0];
+    var faildeIcon = document.getElementsByClassName("fa-exclamation-triangle")[0];
+    var verificamsg = document.getElementsByClassName("verifica-msg")[0];
+    var close = document.getElementsByClassName("fa-times")[0];
+
+    document.forms["filterbydate"].onsubmit = ()=>{
+        var debut = Number(Date.parse(startdate.value));
+        var fin = Number(Date.parse(enddate.value));
+        var diff = fin - debut;
+        if (diff < 0) {
+            event.preventDefault();
+            alert("Date incorrecte!")
+            return;
+        }
+        progress.style.display = "block";
+        event.preventDefault();
+        setTimeout(() => {
+            setTimeout(() => {
+                $.ajax({
+                // "../Proprietaire/update",
+                    url: "/Voitures/reserver_voiture?carId=" + "@Model.idVoiture" + "&userID=" +"@User.Identity.GetUserId()&debut=" + startdate.value+"&fin="+enddate.value,
+                    type: 'POST',
+                    cache: false,
+                    contentType: "application/json;charset=utf-8",
+                    processData: false,
+                    data: JSON.stringify("test"),
+                    success: function (response) {
+                        close.style.display = "inline";
+                        if (response == "OK") {
+                            loadingIcon.style.display = "none";
+                            doneIcon.style.display = "inline";
+                            verificamsg.innerHTML = "Succes!";
+                        } else {
+                            faildeIcon.style.display = "inline";
+                            verificamsg.innerHTML = "Echoué!";
+                            verificamsg.classList.remove("text-success");
+                            verificamsg.classList.add("text-danger");
+                            loadingIcon.style.display = "none";
+                        }
+                    },
+                    error: function (err) {
+                        alert("Serveur ne répond pas !");
+                        loadingIcon.style.display = "none";
+                        // doneIcon.style.display = "inline";
+                        verificamsg.innerHTML = "Echoué!";
+                        console.log("errorrrr ",err);
+                    }
+                });
+            //  window.location.href = "/Voitures/reserver?carId=" + "@Model.idVoiture" + "&userID=" +"@User.Identity.GetUserId()&debut=" + startdate.value+"&fin="+enddate.value;
+
+            }, 200);
+        }, 1000);
+    }
+    function closeProg() {
+        window.location.href = "/Voitures/Details?id=@Model.idVoiture";
+
+    }
+
+
+</script>

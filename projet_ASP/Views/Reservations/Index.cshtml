@@ -1,0 +1,115 @@
+﻿@model IEnumerable<projet_ASP.Models.Reservation>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-hover table-striped thead-dark">
+    <thead class="thead-dark">
+        <th>
+            @Html.DisplayNameFor(model => model.dateReservation)
+        </th>
+        <th> 
+                @Html.DisplayName("Voiture") 
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cout)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dateDebut)
+        </th>
+        <th class="px-0">
+            @Html.DisplayNameFor(model => model.dateFin)
+        </th>
+     @*   <th>
+            @Html.DisplayNameFor(model => model.typeDePaiement)
+        </th>*@
+        <th>Action</th>
+    </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dateReservation)
+                </td>
+                <td > 
+                    <a href='/Voitures/Details?id=@item.idVoiture' class="text-primary" style="text-decoration:none;">
+                        @Html.DisplayFor(modelItem => item.voiture.marque)
+                    </a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cout)
+                </td>
+                <td>
+                    @item.dateDebut.ToShortDateString()
+                </td>
+                <td>
+                    @item.dateFin.ToShortDateString()
+                </td>
+                @*  <td>
+            @Html.DisplayFor(modelItem => item.typeDePaiement)
+        </td>*@
+                <td  style = "text-decoration:none;">
+                    @*  @Html.ActionLink(" ", "Edit", new { id = item.idContrat }, new { @class = "fas fa-edit text-primary pr-3" }) *@
+                    @Html.ActionLink(" ", "Delete", new { id = item.idContrat }, new { @class = "fas fa-trash text-danger pr-3" })
+
+                    @Html.ActionLink(" ", "Details", new { id = item.idContrat }, new { @class = "fas fa-info-circle text-warning" })
+                </td>
+            </tr>
+            }
+        </tbody>
+</table>
+<style>
+
+    .table-hover .table-active:hover > td,
+    .table-hover .table-active:hover > th {
+        background-color: rgba(0, 0, 0, 0.075);
+    }
+
+    .table .thead-dark th {
+        color: #fff;
+        background-color: #212529;
+        border-color: #32383e;
+        font-family:Calibri;
+    }
+
+    .table .thead-light th {
+        color: #495057;
+        background-color: #e9ecef;
+        border-color: #dee2e6; 
+    }
+
+    .table-dark {
+        color: #fff;
+        background-color: #212529;
+    }
+
+        .table-dark th,
+        .table-dark td,
+        .table-dark thead th {
+            border-color: #32383e;
+        }
+
+        .table-dark.table-bordered {
+            border: 0;
+        }
+
+        .table-dark.table-striped tbody tr:nth-of-type(odd) {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .table-dark.table-hover tbody tr:hover {
+            background-color: rgba(255, 255, 255, 0.075);
+        }
+    td,th {
+        text-align: center;
+       text-decoration:none;
+    } 
+</style>
