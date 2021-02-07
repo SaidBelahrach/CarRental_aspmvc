@@ -17,10 +17,15 @@ namespace projet_ASP.Controllers
             String userId = User.Identity.GetUserId();
             ApplicationDbContext db = new ApplicationDbContext();
             var prop = db.Proprietaires.Include(e=>e.Voitures).Where(item => item.ApplicationUserID == userId).FirstOrDefault();
-            //  ViewData["cars"] = db.Voitures.ToList();
+            int reservation = db.reservations.Where(item =>item.voiture.idProprietaire == prop.idProprietaire).ToList().Count;
+            ViewData["nbCars"] = prop.Voitures.Count;
+            ViewData["nbReservation"] = reservation;
             if (prop == null) return RedirectToAction("Index", "Manage");
             return View(prop);
         }
+
+
+
 
         // GET: Propriétaire/Details/5
         public ActionResult Details(int id)

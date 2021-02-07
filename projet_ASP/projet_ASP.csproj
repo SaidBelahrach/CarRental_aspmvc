@@ -169,6 +169,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LocatairesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProprietaireController.cs" />
     <Compile Include="Controllers\ReservationsController.cs" />
@@ -341,6 +342,11 @@
     <Content Include="Views\Reservations\Details.cshtml" />
     <Content Include="Views\Reservations\Edit.cshtml" />
     <Content Include="Views\Reservations\Index.cshtml" />
+    <Content Include="Views\Locataires\Create.cshtml" />
+    <Content Include="Views\Locataires\Delete.cshtml" />
+    <Content Include="Views\Locataires\Details.cshtml" />
+    <Content Include="Views\Locataires\Edit.cshtml" />
+    <Content Include="Views\Locataires\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
