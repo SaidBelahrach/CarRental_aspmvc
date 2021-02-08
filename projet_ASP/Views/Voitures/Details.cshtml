@@ -108,11 +108,11 @@ else
         <form class=" filterbydate" onsubmit="myFunction()" name="filterbydate" id="filterbydate" style=" z-index:1444; ">
             <div class="d-flex mt-2">
                 @Html.Label("Date de debut: ", new { @style = "width:110px", @class = "text-left pt-2 pr-2" })
-                <input type="date" required min="@(Model.reservations.Count > 0 ? Model.reservations.OrderByDescending(d => d.dateFin).FirstOrDefault().dateFin.AddDays(1).ToString("yyyy-MM-dd") : DateTime.Now.ToString())" name="startdate" class="form-control startdate py-0" style="font-size:11px;width:165px; " />
+                <input type="date" required min="@(Model.reservations.Count > 0 ? Model.reservations.OrderByDescending(d => d.dateFin).FirstOrDefault().dateFin.AddDays(1).ToString("yyyy-MM-dd") : DateTime.Now.ToString("yyyy-MM-dd"))" name="startdate" class="form-control startdate py-0" style="font-size:11px;width:165px; " />
             </div>
             <div class="d-flex mt-2">
                 @Html.Label("Date de retour: ", new { @style = "width:110px", @class = "text-left pt-2 pr-2" })
-                <input type="date" min="@(Model.reservations.Count > 0 ? Model.reservations.OrderByDescending(d => d.dateFin).FirstOrDefault().dateFin.AddDays(2).ToString("yyyy-MM-dd") : DateTime.Now.ToString())"
+                <input type="date" min="@(Model.reservations.Count > 0 ? Model.reservations.OrderByDescending(d => d.dateFin).FirstOrDefault().dateFin.AddDays(2).ToString("yyyy-MM-dd") : DateTime.Now.ToString("yyyy-MM-dd"))"
                        required name="enddate" class="form-control enddate"
                        style="font-size:11px; width:165px;" />
             </div>

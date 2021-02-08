@@ -1,4 +1,5 @@
 ﻿@model projet_ASP.Models.Locataire
+@using Microsoft.AspNet.Identity;
 
 @{
     ViewBag.Title = "Index";
@@ -72,10 +73,14 @@
                             </div>
                         </div>
                         <hr>
-                        <div class="row mr-auto" style="float:right;">
-                            <a class="btn btn-primary" id="btnModifer">Modifier</a>
-                            <a class="btn btn-primary d-none" id="btnSave">Enregistrer</a>
-                        </div>
+
+                        @if (User.Identity.GetUserId() == Model.ApplicationUserID)
+                        {
+                            <div class="row mr-auto" style="float:right;">
+                                <a class="btn btn-primary" id="btnModifer">Modifier</a>
+                                <a class="btn btn-primary d-none" id="btnSave">Enregistrer</a>
+                            </div>
+                        }
                     </div>
                 </div>
                 <div class="row gutters-sm">

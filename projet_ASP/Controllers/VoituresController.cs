@@ -147,7 +147,7 @@ namespace projet_ASP.Controllers
             {
                 db.Voitures.Add(v);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("VoituresProprietaire");
             }
             return View();
         }
@@ -184,7 +184,7 @@ namespace projet_ASP.Controllers
             {
                 db.Voitures.AddOrUpdate(voiture);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("VoituresProprietaire");
             }
             ViewBag.idProprietaire = new SelectList(db.Proprietaires, "idProprietaire", "type", voiture.idProprietaire);
             return View(voiture);

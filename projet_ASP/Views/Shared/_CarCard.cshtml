@@ -28,7 +28,7 @@
                     <span>@Model.couleur</span>
                 </label>
                 <label class="datails-item">
-                    <span class="fas fa-users  icon  "></span>  
+                    <span class="fas fa-users  icon  "></span>
                     <span>@Model.nbPlaces Places</span>
                 </label>
                 <label class="datails-item">
@@ -53,17 +53,23 @@
             }
             else
             {//   @Html.ActionLink("Edit", "Edit", new { id = Model.matricule }) |
-                <div class="card-fotter">
-                    <button type="button" class=" button_custom  btn btn-primary px-4 py-1"onclick="window.location='@Url.Action("Details", "Voitures", new { id = Model.idVoiture })'">Réserver</button>
-                </div>
-                <a href="@Url.Action("Index", "Proprietaire", new { id = Model.idProprietaire })" class="proprietaire-profil text-info" title="Proprietaire" style="text-decoration:none;">
-                    <img class=" img-circle" src="@ViewData["ProfileImg"]" width="30px" height="30px" onclick="@Url.Action("Index", "Manage")" />
+               @* <div class="card-fotter">
+                    <button type="button" class=" button_custom  btn btn-primary px-4 py-1" onclick="window.location='@Url.Action("Details", "Voitures", new { id = Model.idVoiture })'">Réserver</button>
+                </div>*@
+                <a href="@Url.Action("Index", "Proprietaire", new { id = Model.proprietaire.ApplicationUserID })" class="proprietaire-profil text-info" title="Proprietaire" style="text-decoration:none;">
+                    <img class=" img-circle" src="@ViewData["ProfileImg"]" width="30px" height="30px" @*onclick="@Url.Action("Index", "Manage")" *@ />
 
                     <span style="position: absolute; top: 8px; left: 33px;font-size:13px; ">  @Model.proprietaire.ApplicationUser.nomComplet </span>
                     <span style=" font-size:8px;color:gray;position:absolute;top:27px;left:35px;z-index:1111;"> Particulier</span>
                 </a>
             }
-        </div> 
+            @if (User.IsInRole("Locataire"))
+            {
+                <div class="card-fotter">
+                    <button type="button" class=" button_custom  btn btn-primary px-4 py-1" onclick="window.location='@Url.Action("Details", "Voitures", new { id = Model.idVoiture })'">Réserver</button>
+                </div>
+            }
+            </div> 
 </div>
 
 <style>

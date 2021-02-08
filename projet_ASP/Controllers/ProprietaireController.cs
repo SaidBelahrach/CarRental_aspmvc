@@ -12,9 +12,9 @@ namespace projet_ASP.Controllers
     public class ProprietaireController : Controller
     {
         // GET: Propriétaire
-        public ActionResult Index()
+        public ActionResult Index(string id="")
         {
-            String userId = User.Identity.GetUserId();
+            String userId =id==""? User.Identity.GetUserId():id;
             ApplicationDbContext db = new ApplicationDbContext();
             var prop = db.Proprietaires.Include(e=>e.Voitures).Where(item => item.ApplicationUserID == userId).FirstOrDefault();
             int reservation = db.reservations.Where(item =>item.voiture.idProprietaire == prop.idProprietaire).ToList().Count;
@@ -22,19 +22,14 @@ namespace projet_ASP.Controllers
             ViewData["nbReservation"] = reservation;
             if (prop == null) return RedirectToAction("Index", "Manage");
             return View(prop);
-        }
-
-
-
+        } 
 
         // GET: Propriétaire/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
-
-
-
+         
         public JsonResult updatePhoto()
         {
             HttpPostedFileBase file = Request.Files[0];

@@ -14,10 +14,9 @@ namespace projet_ASP.Controllers
     public class LocataireController : Controller
     {
         // GET: Locataire
-        public ActionResult Index()
+        public ActionResult Index(string id = "")
         {
-
-            String userId = User.Identity.GetUserId();
+            String userId = id == "" ? User.Identity.GetUserId() : id; 
             ApplicationDbContext db = new ApplicationDbContext();
             var prop = db.Locataires.Include(e => e.reservations).Where(item => item.ApplicationUserID == userId).FirstOrDefault();
            // int reservation = db.reservations.Where(item => item.idLocataire == prop.idLocataire).ToList().Count;
