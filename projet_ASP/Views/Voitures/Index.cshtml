@@ -8,22 +8,22 @@
 
     <div class="container-fluid  bg-light filter-bar" style="  ">
         <div>
-          
+
             <button type="submit" class="btn btn-outline-primary ignore px-4 py-2 filter-btn" id="filter-btn" style="outline:none;">  <i class="fas ignore filter-btn fa-filter pr-2"></i>Filtrer </button>
-            @using (Html.BeginForm("filter", "Voitures", FormMethod.Post,new {name="filter-form",@class= "ignore" }))
+            @using (Html.BeginForm("filter", "Voitures", FormMethod.Post, new { name = "filter-form", @class = "ignore", @id = "filterFormId" }))
             {
                 <div @*action="filter" method="post"*@ class="card border ignore py-2 px-4 filterbydate bg-light" id="filterbydate" style="min-height:260px;width:250px; margin:10px auto;position:absolute;top:35px;z-index:1444;display:none;">
                     Cout par jour (DH):<div style="display:flex;" class="ignore">
-                            <input type="number" name="min" placeholder="min" class="form-control mr-3 ignore" style="width:135px;" />  
-                            <input type="number" name="max" placeholder="max" class="form-control ignore" style="width:135px;"/> 
-                         </div>
+                        <input type="number" name="min" placeholder="min" class="form-control mr-3 ignore" style="width:135px;" />
+                        <input type="number" name="max" placeholder="max" class="form-control ignore" style="width:135px;" />
+                    </div>
                     Ville: <input type="text" name="Ville" class="form-control Ville ignore" style="font-size:11px; " />
-                    Start: <input type="datetime-local"  name="startdate" class="form-control startdate ignore" style="font-size:11px; " />
-                    End: <input type="datetime-local"  name="enddate" class="form-control enddate ignore" style="font-size:11px; " />
+                    Start: <input type="datetime-local" name="startdate" id="startdate" class="form-control startdate ignore" style="font-size:11px; " />
+                    End: <input type="datetime-local" name="enddate" id="enddate" class="form-control enddate ignore" style="font-size:11px; " />
                     <input type="submit" value="filter" id="filter" class="btn btn-outline-primary ignore py-1 px-4 mt-2 filter" style="outline:none;">
                 </div>
             }
-        </div> 
+        </div>
         <form action="../Voitures/Index" method="post" class="input-group d-flex searchform" style="position:absolute;right:5px;" name="searchform">
             @* @Html.BeginForm("Index", "Voitures", FormMethod.Get){*@
             @* <form action="../Voitures/Index" method="get">*@
@@ -32,7 +32,7 @@
                 <input id="search-input" required type="search" placeholder=" Search anything" name="key" id="form1 key" style="width:0px;" class="form-control rounded p-0 search-input" />
                 @* <label class="form-label" for="form1">Search</label>*@
             </div>
-            <button type="submit" id="SearchBtn"  class="btn btn-primary ml-1 SearchBtn" style="outline:none;">
+            <button type="submit" id="SearchBtn" class="btn btn-primary ml-1 SearchBtn" style="outline:none;">
                 <i class="fas fa-search"></i>
             </button>
             @* </form>*@
@@ -44,8 +44,10 @@
             @* @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })*@
         </p>
     }
+ 
     @foreach (var item in Model)
     {
+
         byte[] byteData = item.image;
 
         //Convert byte arry to base64string
@@ -155,6 +157,14 @@
         }*@
         
     }); 
+
+    $('#filterFormId').submit(function (e) {
+        if (!($('#enddate').val() == '' && $('#startdate').val() == '')) {
+            e.preventDefault();
+            alert("remplire les deux date !");
+        }
+    });
+
  
 </script>
 

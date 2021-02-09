@@ -2,6 +2,7 @@
 using projet_ASP.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
@@ -41,36 +42,72 @@ namespace projet_ASP.Controllers
             return View(voitures);
         }
 
+        public bool DateGt(DateTime a, DateTime b)
+        {
+            int result = DateTime.Compare(a, b);
+            if (result < 0)
+                return false;
+            else if (result == 0)
+                return true;
+            else
+                return true;
+        }
+
        
         [HttpPost]
         public ActionResult filter(FormCollection data)
         {
+        
+            bool debutTest = false, finTest = false;
             if(data["startdate"]==null && data["enddate"] ==null) RedirectToAction("Index");
             DateTime debut = (data["startdate"]!=null&& data["startdate"]!="")? DateTime.Parse(data["startdate"]): DateTime.Now;
+            debutTest = (data["startdate"]!=null&& data["startdate"]!="")? true: false;
             DateTime fin = (data["enddate"] !=null&& data["enddate"] !="")? DateTime.Parse(data["enddate"]): DateTime.Now.AddYears(5);
-          //  DateTime fin = DateTime.Parse(data["enddate"]);
+            finTest = (data["enddate"] !=null&& data["enddate"] !="") ? true : false;
             string ville = data["Ville"]==null? "": data["Ville"];
             int min=0;//= data["min"] == null ? 0 : Convert.ToInt32(data["min"]);
             int max=20000;// = data["max"] == null ? 90000 : Convert.ToInt32(data["max"]);
             if (data["min"] != null && data["min"] != "" ) min = Convert.ToInt32(data["min"]);
-            if (data["max"] != null && data["max"] != "")  max = Convert.ToInt32(data["max"]);
-
-            List<Voiture> voi=new List<Voiture>();
-            foreach (var v in db.Voitures.ToList())
+            if (data["max"] != null && data["max"] != "") max = Convert.ToInt32(data["max"]);
+            Console.WriteLine("min " + min + "max " + max);
+;            List<Voiture> voi=new List<Voiture>();
+            List<Reservation> searchResv = new List<Reservation>();
+            foreach (var r in db.reservations.ToList())
+            {
+                if (r.dateDebut.Date >= debut.Date && r.dateFin.Date <= fin.Date) searchResv.Add(r); 
+            }
+            List<int> idVoituresNonDispo = searchResv.Select(a => a.idVoiture).ToList();
+      /*      foreach (var v in db.Voitures.ToList())
             {
                 if (((Convert.ToInt32(v.coutParJour) <= max && Convert.ToInt32(v.coutParJour) >= min) && v.proprietaire.ApplicationUser.adresse.ToLower().Contains(ville.ToLower()))
-                       &&(v.disponible == true /*|| v.reservations.Where(r => r.dateDebut < debut).Count()==0*/))
+                       &&(v.disponible == true *//*|| v.reservations.Where(r => r.dateDebut < debut).Count()==0*//*))
                     voi.Add(v);
+            } */
+            if(!finTest && !debutTest)
+            {
+                foreach (var v in db.Voitures.ToList())
+                {
+                    if (((Convert.ToInt32(v.coutParJour) <= max && Convert.ToInt32(v.coutParJour) >= min)) && v.proprietaire.ApplicationUser.adresse.ToLower().Contains(ville.ToLower()) && v.disponible)
+                        voi.Add(v);
+                }
+
             }
-          /*  List<Voiture> voi  = db.Voitures
-                                            .Where(v =>((Convert.ToInt32(v.coutParJour)<max && Convert.ToInt32(v.coutParJour)>min )&&v.proprietaire.ApplicationUser.adresse.Contains(ville) )&&
-                                                        (v.disponible == true || v.reservations.Where(r=>r.dateDebut<=debut && r.dateFin>=fin).Count()>0 ) )
-                                            .ToList<Voiture>();
-          */
-            var fi = db.reservations.Where(r => r.dateFin < DateTime.Now).ToList();
-            var d = fi.Where(r => debut < r.dateDebut && fin > r.dateFin).ToList();
-            int n = fi.Count;
-            //voitures = db.Voitures.ToList();
+            else
+            {
+                foreach (var v in db.Voitures.ToList())
+                {
+                    if (((Convert.ToInt32(v.coutParJour) <= max && Convert.ToInt32(v.coutParJour) >= min)) && !idVoituresNonDispo.Contains(v.idVoiture)
+                        && v.proprietaire.ApplicationUser.adresse.ToLower().Contains(ville.ToLower()) && v.disponible)
+                        voi.Add(v);
+                }
+            }
+
+            /*  List<Voiture> voi  = db.Voitures
+                                              .Where(v =>((Convert.ToInt32(v.coutParJour)<max && Convert.ToInt32(v.coutParJour)>min )&&v.proprietaire.ApplicationUser.adresse.Contains(ville) )&&
+                                                          (v.disponible == true || v.reservations.Where(r=>r.dateDebut<=debut && r.dateFin>=fin).Count()>0 ) )
+                                              .ToList<Voiture>();
+            */
+         
             return View("Index",  voi );
         }
         //les voitures de propritaire actuel
