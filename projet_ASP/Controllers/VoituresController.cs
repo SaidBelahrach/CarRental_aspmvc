@@ -2,7 +2,6 @@
 using projet_ASP.Models;
 using System;
 using System.Collections.Generic;
-using System.Collections;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
@@ -21,9 +20,9 @@ namespace projet_ASP.Controllers
         public ActionResult Index()
         {
             string userid = User.Identity.GetUserId();
-            List<Voiture> voitures = db.Voitures.Include(v => v.proprietaire).Include(r=>r.reservations).ToList(); 
+            List<Voiture> voitures = db.Voitures.Include(v => v.proprietaire).Include(r => r.reservations).ToList();
             return View(voitures);
-        }   
+        }
         [HttpPost]
         public ActionResult Index(string key)
         {
@@ -56,33 +55,33 @@ namespace projet_ASP.Controllers
         public ActionResult filter(FormCollection data)
         {
             bool debutTest = false, finTest = false;
-            if(data["startdate"]==null && data["enddate"] ==null) RedirectToAction("Index");
-            DateTime debut = (data["startdate"]!=null&& data["startdate"]!="")? DateTime.Parse(data["startdate"]): DateTime.Now;
-            debutTest = (data["startdate"]!=null&& data["startdate"]!="")? true: false;
-            DateTime fin = (data["enddate"] !=null&& data["enddate"] !="")? DateTime.Parse(data["enddate"]): DateTime.Now.AddYears(5);
-            finTest = (data["enddate"] !=null&& data["enddate"] !="") ? true : false;
-            string ville = data["Ville"]==null? "": data["Ville"];
-            int min=0;//= data["min"] == null ? 0 : Convert.ToInt32(data["min"]);
-            int max=20000;// = data["max"] == null ? 90000 : Convert.ToInt32(data["max"]);
-            if (data["min"] != null && data["min"] != "" ) min = Convert.ToInt32(data["min"]);
-            if (data["max"] != null && data["max"] != "")  max = Convert.ToInt32(data["max"]);
-        //    Console.WriteLine("min " + min + "max " + max);
-;           List<Voiture> voi=new List<Voiture>();
+            if (data["startdate"] == null && data["enddate"] == null) RedirectToAction("Index");
+            DateTime debut = (data["startdate"] != null && data["startdate"] != "") ? DateTime.Parse(data["startdate"]) : DateTime.Now;
+            debutTest = (data["startdate"] != null && data["startdate"] != "") ? true : false;
+            DateTime fin = (data["enddate"] != null && data["enddate"] != "") ? DateTime.Parse(data["enddate"]) : DateTime.Now.AddYears(5);
+            finTest = (data["enddate"] != null && data["enddate"] != "") ? true : false;
+            string ville = data["Ville"] == null ? "" : data["Ville"];
+            int min = 0;//= data["min"] == null ? 0 : Convert.ToInt32(data["min"]);
+            int max = 20000;// = data["max"] == null ? 90000 : Convert.ToInt32(data["max"]);
+            if (data["min"] != null && data["min"] != "") min = Convert.ToInt32(data["min"]);
+            if (data["max"] != null && data["max"] != "") max = Convert.ToInt32(data["max"]);
+            //    Console.WriteLine("min " + min + "max " + max);
+            ; List<Voiture> voi = new List<Voiture>();
             List<Reservation> searchResv = new List<Reservation>();
-            foreach (var r in db.reservations.OrderByDescending(f=>f.dateDebut).ToList())
+            foreach (var r in db.reservations.OrderByDescending(f => f.dateDebut).ToList())
             {
-               if ( DateTime.Compare(r.dateDebut, debut) <=0 && DateTime.Compare(r.dateFin, fin) >= 0 ) 
-                    searchResv.Add(r);continue;//intervall inclus dans un reserva 
-               //  if ( (r.dateDebut.Date <= debut.Date && r.dateFin.Date >= fin.Date)) searchResv.Add(r); 
+                if (DateTime.Compare(r.dateDebut, debut) <= 0 && DateTime.Compare(r.dateFin, fin) >= 0)
+                    searchResv.Add(r); continue;//intervall inclus dans un reserva 
+                                                //  if ( (r.dateDebut.Date <= debut.Date && r.dateFin.Date >= fin.Date)) searchResv.Add(r); 
             }
             List<int> idVoituresNonDispo = searchResv.Select(a => a.idVoiture).ToList();
-      /*      foreach (var v in db.Voitures.ToList())
-            {
-                if (((Convert.ToInt32(v.coutParJour) <= max && Convert.ToInt32(v.coutParJour) >= min) && v.proprietaire.ApplicationUser.adresse.ToLower().Contains(ville.ToLower()))
-                       &&(v.disponible == true *//*|| v.reservations.Where(r => r.dateDebut < debut).Count()==0*//*))
-                    voi.Add(v);
-            } */
-            if(!finTest && !debutTest)
+            /*      foreach (var v in db.Voitures.ToList())
+                  {
+                      if (((Convert.ToInt32(v.coutParJour) <= max && Convert.ToInt32(v.coutParJour) >= min) && v.proprietaire.ApplicationUser.adresse.ToLower().Contains(ville.ToLower()))
+                             &&(v.disponible == true *//*|| v.reservations.Where(r => r.dateDebut < debut).Count()==0*//*))
+                          voi.Add(v);
+                  } */
+            if (!finTest && !debutTest)
             {
                 foreach (var v in db.Voitures.ToList())
                 {
@@ -95,7 +94,7 @@ namespace projet_ASP.Controllers
                 foreach (var v in db.Voitures.ToList())
                 {
                     if (((Convert.ToInt32(v.coutParJour) <= max && Convert.ToInt32(v.coutParJour) >= min)) && !idVoituresNonDispo.Contains(v.idVoiture)
-                        && v.proprietaire.ApplicationUser.adresse.ToLower().Contains(ville.ToLower()) )
+                        && v.proprietaire.ApplicationUser.adresse.ToLower().Contains(ville.ToLower()))
                         voi.Add(v);
                 }
             }
@@ -104,7 +103,7 @@ namespace projet_ASP.Controllers
                                                           (v.disponible == true || v.reservations.Where(r=>r.dateDebut<=debut && r.dateFin>=fin).Count()>0 ) )
                                               .ToList<Voiture>();
             */
-            return View("Index",  voi );
+            return View("Index", voi);
         }
         //les voitures de propritaire actuel
         public ActionResult VoituresProprietaire()
@@ -119,14 +118,14 @@ namespace projet_ASP.Controllers
         }
 
         // GET: Voitures/Details/5
-       // [Authorize(Roles = "Locataire")]
+        // [Authorize(Roles = "Locataire")]
         public ActionResult Details(string id)
-        { 
+        {
             if (id == null)
             {
                 return RedirectToAction("Index"); //Content("page not found ");
             }
-            Voiture voiture = db.Voitures.Include(r=>r.reservations).Where(v => v.idVoiture.ToString().Equals(id)).FirstOrDefault();
+            Voiture voiture = db.Voitures.Include(r => r.reservations).Where(v => v.idVoiture.ToString().Equals(id)).FirstOrDefault();
             if (voiture == null)
             {
                 return HttpNotFound();
@@ -145,7 +144,7 @@ namespace projet_ASP.Controllers
             if (voiture == null || locataire == null)
             {
                 return Json("user or car not found");//RedirectToAction("Details", "Voitures", new { id = carId });
-            } 
+            }
             DateTime date_debut = DateTime.Parse(debut);
             DateTime date_fin = DateTime.Parse(fin);
             Reservation reservation = new Reservation()
@@ -162,9 +161,9 @@ namespace projet_ASP.Controllers
             voiture.disponible = false;
             db.Voitures.AddOrUpdate(voiture);
             db.SaveChanges();
-            return Json("OK"); 
+            return Json("OK");
         }
- 
+
         [Authorize(Roles = "Proprietaire")]
         // GET: Voitures/Create
         public ActionResult Create()
@@ -200,7 +199,7 @@ namespace projet_ASP.Controllers
                 idProprietaire = prop.idProprietaire,// db.Proprietaires.FirstOrDefault().idProprietaire,
                 disponible = true,
                 coutParJour = data["coutParJour"],
-                
+
             };
             v.image = new byte[file.ContentLength];
             file.InputStream.Read(v.image, 0, file.ContentLength);

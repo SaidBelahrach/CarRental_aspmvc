@@ -6,27 +6,27 @@
     <title>@ViewBag.Title </title>
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-    <link href="https://fonts.googleapis.com/css?family=Coda|Open+Sans" rel="stylesheet">
+
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+@*    <link href="https://fonts.googleapis.com/css?family=Coda|Open+Sans" rel="stylesheet">*@
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/smoothness/jquery-ui.css">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
-            <div class="navbar-header"> 
+            <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                         <span class="  icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-
                   @Html.ActionLink(" CarRental", "Index", "Voitures", new { area = "" }, new { @class = "navbar-brand fas fa-car-side  text-white navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Home", "Index", "Voitures")</li>
                     @if (User.IsInRole("Locataire"))
                     {
                         <li>@Html.ActionLink("Locataire", "Index", "Locataire")</li>
@@ -37,6 +37,13 @@
                         <li>@Html.ActionLink("Proprietaire", "Index", "Proprietaire")</li>
                         <li>@Html.ActionLink("Mes Voitures", "VoituresProprietaire", "Voitures")</li>
                         <li>@Html.ActionLink("Reservations", "Index", "Reservations")</li>
+                    }
+                    @if (User.IsInRole("Admin"))//oujil
+                    {
+                        <li>@Html.ActionLink("Statistiques", "Index", "Proprietaire")</li>
+                        <li>@Html.ActionLink("Proprietaires", "Index", "Proprietaire")</li>
+                        <li>@Html.ActionLink("Locataires", "VoituresProprietaire", "Voitures")</li>
+                     @*   <li>@Html.ActionLink("Réclamations", "Index", "Reservations")</li>*@
                     }
                 </ul>
                 @Html.Partial("_LoginPartial")
@@ -50,7 +57,7 @@
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
     </div>
-  @Scripts.Render("~/bundles/jquery") 
+  @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
 
     @RenderSection("scripts", required: false)

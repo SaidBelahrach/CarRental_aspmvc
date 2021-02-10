@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -23,7 +22,7 @@ namespace projet_ASP.Models
         [Display(Name = "Etat de voiture après retour")] //est il endomagé ou non
         public string etat { get; set; }
 
-      //  [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
+        //  [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
         [Display(Name = "Pinalisé")]
         [DefaultValue(false)]
         public Boolean pinalise { get; set; }
