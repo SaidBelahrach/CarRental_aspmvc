@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using projet_ASP.Models;
+using System;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using projet_ASP.Models;
 
 namespace projet_ASP.Controllers
 {
-    [Authorize(Roles ="Proprietaire")]
+    [Authorize(Roles = "Proprietaire")]
     public class RetourVoituresController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -41,7 +38,7 @@ namespace projet_ASP.Controllers
         public ActionResult Create(string idContrat)
         {
             Session["idContrat"] = idContrat;
-            if (idContrat == "" || idContrat == null) return RedirectToAction("Index","Reservations");
+            if (idContrat == "" || idContrat == null) return RedirectToAction("Index", "Reservations");
             return View();
         }
 
@@ -50,14 +47,14 @@ namespace projet_ASP.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(  RetourVoiture retourVoiture)
+        public ActionResult Create(RetourVoiture retourVoiture)
         {
-          //  retourVoiture.amende = retourVoiture.pinalise ? retourVoiture.amende : 0;
+            //  retourVoiture.amende = retourVoiture.pinalise ? retourVoiture.amende : 0;
             retourVoiture.idContrat = Convert.ToInt32(Session["idContrat"]);
             if (ModelState.IsValid)
             {
                 var reser = db.reservations.Find(retourVoiture.idContrat);
-                if(reser==null) return RedirectToAction("Index");
+                if (reser == null) return RedirectToAction("Index");
                 reser.doesCarReturned = true;
                 db.reservations.AddOrUpdate(reser);
                 var voi = reser.voiture;
@@ -91,7 +88,7 @@ namespace projet_ASP.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(  RetourVoiture retourVoiture)
+        public ActionResult Edit(RetourVoiture retourVoiture)
         {
             if (ModelState.IsValid)
             {
@@ -113,7 +110,7 @@ namespace projet_ASP.Controllers
             if (retourVoiture == null)
             {
                 return HttpNotFound();
-            } 
+            }
             db.RetourVoitures.Remove(retourVoiture);
             db.SaveChanges();
             return RedirectToAction("Index");

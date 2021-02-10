@@ -1,38 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.AspNet.Identity;
+using projet_ASP.Models;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using projet_ASP.Models;
 
 namespace projet_ASP.Controllers
 {
     [Authorize]
     public class ReservationsController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext(); 
+        private ApplicationDbContext db = new ApplicationDbContext();
         // GET: Reservations
-       // [Authorize(Roles ="Locataire")]
+        // [Authorize(Roles ="Locataire")]
         public ActionResult Index()
         {
 
             string userid = User.Identity.GetUserId();
-            if (User.IsInRole("Locataire")) { 
-                return View(db.reservations.Include(r=>r.voiture)
-                                           .Where(r=>r.locataire.ApplicationUserID.Equals(userid)).OrderByDescending(r=>r.dateReservation)
-                                           .ToList());
-            }else// if (User.IsInRole("Proprietaire"))
-            { 
+            if (User.IsInRole("Locataire"))
+            {
                 return View(db.reservations.Include(r => r.voiture)
-                                           .Where(r => r.voiture.proprietaire.ApplicationUserID.Equals(userid) )
+                                           .Where(r => r.locataire.ApplicationUserID.Equals(userid)).OrderByDescending(r => r.dateReservation)
+                                           .ToList());
+            }
+            else// if (User.IsInRole("Proprietaire"))
+            {
+                return View(db.reservations.Include(r => r.voiture)
+                                           .Where(r => r.voiture.proprietaire.ApplicationUserID.Equals(userid))
                                            .ToList());
             }
 
-        } 
+        }
         // GET: Reservations/Details/5
         public ActionResult Details(int? id)
         {
@@ -46,7 +45,7 @@ namespace projet_ASP.Controllers
                 return HttpNotFound();
             }
             return View(reservation);
-        } 
+        }
         // GET: Reservations/Create
         public ActionResult Create()
         {

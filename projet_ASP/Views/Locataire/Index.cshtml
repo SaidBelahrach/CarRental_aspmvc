@@ -42,7 +42,7 @@
                                 <h6 class="mb-0">Nom </h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                <input type="text" id="nameInput" readonly value="@Model.ApplicationUser.nomComplet" class="form-control" />
+                                <input type="text" id="nameInput" readonly value="@Model.ApplicationUser.nomComplet" class="champs removeInputStyles"/>
                             </div>
                         </div>
                         <hr>
@@ -51,7 +51,7 @@
                                 <h6 class="mb-0">Email</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                <input type="text" id="emailInput" readonly value="@Model.ApplicationUser.Email" class="form-control" />
+                                <input type="text" id="emailInput" readonly value="@Model.ApplicationUser.Email"  class="champs removeInputStyles" />
                             </div>
                         </div>
                         <hr>
@@ -60,7 +60,7 @@
                                 <h6 class="mb-0">Téléphone</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                <input type="text" id="teleInput" readonly value=" @Model.ApplicationUser.PhoneNumber" class="form-control" />
+                                <input type="text" id="teleInput" readonly value=" @Model.ApplicationUser.PhoneNumber"  class="champs removeInputStyles" />
                             </div>
                         </div>
                         <hr>
@@ -69,7 +69,7 @@
                                 <h6 class="mb-0">Address</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                <input type="text" id="adressInput" value="@Model.ApplicationUser.adresse" readonly class="form-control" />
+                                <input type="text" id="adressInput" value="@Model.ApplicationUser.adresse" readonly  class="champs removeInputStyles" />
                             </div>
                         </div>
                         <hr>
@@ -100,6 +100,22 @@
 
 
 <style>
+    .removeInputStyles {
+        outline: none;
+        border: none;
+        padding-top: 5px;
+    }
+
+    removeInputStyles:focus {
+        outline: none;
+        border: none;
+    }
+
+    removeInputStyles:active {
+        outline: none;
+        border: none;
+    }
+
 
     body {
         margin-top: 20px;
@@ -207,6 +223,8 @@
         $("#teleInput").attr('readonly', false);
         $("#adressInput").attr('readonly', false);
         $("#btnSave").removeClass("d-none");
+        $(".champs").removeClass("removeInputStyles");
+        $(".champs").addClass("form-control");
         $("#btnModifer").attr("disabled", true);
 
     });
@@ -218,6 +236,8 @@
         $("#teleInput").attr('readonly', true);
         $("#adressInput").attr('readonly', true);
 
+        $(".champs").removeClass("form-control");
+        $(".champs").addClass("removeInputStyles");
 
         var profile = {
             nomComplet: $("#nameInput").val(),

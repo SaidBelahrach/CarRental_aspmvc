@@ -1,8 +1,7 @@
 namespace projet_ASP.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class updated_retourVoiture_model : DbMigration
     {
         public override void Up()
@@ -14,7 +13,7 @@ namespace projet_ASP.Migrations
             AddForeignKey("dbo.retoursVoitures", "idContrat", "dbo.Reservations", "idContrat", cascadeDelete: true);
             DropColumn("dbo.Reservations", "RetourVoiture_idRetour");
         }
-        
+
         public override void Down()
         {
             AddColumn("dbo.Reservations", "RetourVoiture_idRetour", c => c.Int());

@@ -36,6 +36,8 @@ namespace projet_ASP.Models
                 public string email { get; set; }
         */
         public ICollection<Voiture> Voitures { get; set; } //un proprietaire peut avoir plusieurs voitures
+        public ICollection<Reclamation> Reclamations { get; set; } //un proprietaire peut avoir plusieurs voitures
+
 
         public string ApplicationUserID { get; set; }
         [ForeignKey("ApplicationUserID")]

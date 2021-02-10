@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.AspNet.Identity;
+using projet_ASP.Models;
+using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using projet_ASP.Models;
-using System.Data.Entity;
-using Microsoft.AspNet.Identity;
 
 
 
@@ -16,10 +15,10 @@ namespace projet_ASP.Controllers
         // GET: Locataire
         public ActionResult Index(string id = "")
         {
-            String userId = id == "" ? User.Identity.GetUserId() : id; 
+            String userId = id == "" ? User.Identity.GetUserId() : id;
             ApplicationDbContext db = new ApplicationDbContext();
             var prop = db.Locataires.Include(e => e.reservations).Where(item => item.ApplicationUserID == userId).FirstOrDefault();
-           // int reservation = db.reservations.Where(item => item.idLocataire == prop.idLocataire).ToList().Count;
+            // int reservation = db.reservations.Where(item => item.idLocataire == prop.idLocataire).ToList().Count;
             //ViewData["nbReservation"] = reservation;
             if (prop == null) return RedirectToAction("Index", "Manage");
             return View(prop);

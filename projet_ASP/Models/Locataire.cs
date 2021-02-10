@@ -18,27 +18,9 @@ namespace projet_ASP.Models
         [Display(Name = "Numéro de permis")]
         public int Npermis { get; set; }
 
-        /* [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
-         [Display(Name = "Nom complet")]
-         public string nomComplet { get; set; }
- */
-
-        /*        [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
-                [Display(Name = "téléphone")]
-                public string tel { get; set; }*/
-
-        /*  [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
-          [Display(Name = "Adresse")]
-          public string adresse { get; set; }*/
-
-        /*        [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
-                [Display(Name = "Email")]
-                [EmailAddress]
-                public string email { get; set; }*/
 
         public ICollection<Reservation> reservations { get; set; }
-
-        //public virtual ICollection<Voiture> Voitures; 
+        public ICollection<Reclamation> Reclamations { get; set; } //un proprietaire peut avoir plusieurs voitures
 
 
 

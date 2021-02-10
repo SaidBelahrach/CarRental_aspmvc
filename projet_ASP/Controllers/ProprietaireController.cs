@@ -1,35 +1,34 @@
 ﻿using Microsoft.AspNet.Identity;
 using projet_ASP.Models;
 using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using System.Data.Entity;
-using System.Data.Entity.Migrations;
 
 namespace projet_ASP.Controllers
 {
     public class ProprietaireController : Controller
     {
         // GET: Propriétaire
-        public ActionResult Index(string id="")
+        public ActionResult Index(string id = "")
         {
-            String userId =id==""? User.Identity.GetUserId():id;
+            String userId = id == "" ? User.Identity.GetUserId() : id;
             ApplicationDbContext db = new ApplicationDbContext();
-            var prop = db.Proprietaires.Include(e=>e.Voitures).Where(item => item.ApplicationUserID == userId).FirstOrDefault();
-            int reservation = db.reservations.Where(item =>item.voiture.idProprietaire == prop.idProprietaire).ToList().Count;
+            var prop = db.Proprietaires.Include(e => e.Voitures).Where(item => item.ApplicationUserID == userId).FirstOrDefault();
+            int reservation = db.reservations.Where(item => item.voiture.idProprietaire == prop.idProprietaire).ToList().Count;
             ViewData["nbCars"] = prop.Voitures.Count;
             ViewData["nbReservation"] = reservation;
             if (prop == null) return RedirectToAction("Index", "Manage");
             return View(prop);
-        } 
+        }
 
         // GET: Propriétaire/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
-         
+
         public JsonResult updatePhoto()
         {
             HttpPostedFileBase file = Request.Files[0];

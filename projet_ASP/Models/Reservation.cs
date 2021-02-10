@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema; 
+using System.ComponentModel.DataAnnotations.Schema;
 namespace projet_ASP.Models
 {
     public class Reservation
@@ -35,7 +35,7 @@ namespace projet_ASP.Models
         [Display(Name = "Coût")]
         public Decimal cout { get; set; }
 
-     //   [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
+        //   [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
         [Display(Name = "Voiture retourné")]
         [DefaultValue(false)]
         public Boolean doesCarReturned { get; set; }
