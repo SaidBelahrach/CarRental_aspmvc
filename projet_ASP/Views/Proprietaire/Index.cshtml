@@ -248,6 +248,8 @@
         $(".champs").removeClass("removeInputStyles");
         $(".champs").addClass("form-control");
         $("#btnModifer").attr("disabled", true);
+        $("#btnModifer").css("opacity", 0);
+
 
     });
 
@@ -288,6 +290,7 @@
             }
         });
         $("#btnModifer").attr("disabled", false);
+        $("#btnModifer").css("opacity", 1);
         $("#btnSave").addClass("d-none");
     });
 

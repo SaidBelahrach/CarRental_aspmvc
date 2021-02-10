@@ -1,0 +1,71 @@
+﻿<button type="submit" class="btn btn-outline-primary ignore px-4 py-2 filter-btn" id="filter-btn" style="outline:none;">  <i class="fas ignore filter-btn fa-filter pr-2"></i>Filtrer </button>
+
+
+<div @*action="filter" method="post"*@ class="card border ignore py-2 px-4 filterbydate bg-light" id="filterbydate" style="min-height:260px;width:250px; margin:10px auto;position:absolute;top:35px;z-index:1444;display:none;">
+    Cout par jour (DH):<div style="display:flex;" class="ignore">
+        <input type="number" name="min" placeholder="min" class="form-control mr-3 ignore" style="width:135px;" />
+        <input type="number" name="max" placeholder="max" class="form-control ignore" style="max-width:135px;" />
+    </div>
+    Ville: <input type="text" name="Ville" class="form-control Ville ignore" style="font-size:11px; " />
+    Start: <input type="date" name="startdate" min="@DateTime.Now.ToString("yyyy-MM-dd")" id="startdate" class="form-control startdate ignore" style="font-size:11px; " />
+    End: <input type="date" name="enddate" min="@DateTime.Now.AddDays(1).ToString("yyyy-MM-dd")" id="enddate" onchange="datechanged(this)" class="form-control enddate ignore" style="font-size:11px; " />
+    <input type="submit" value="filter" id="filter" class="btn btn-outline-primary ignore py-1 px-4 mt-2 filter" style="outline:none;">
+</div>
+
+<style>
+    .form-outline .form-control ~ .form-label {
+        position: absolute;
+        top: 0;
+        left: .75rem;
+        padding-top: .37rem;
+        pointer-events: none;
+        -webkit-transform-origin: 0 0;
+        transform-origin: 0 0;
+        -webkit-transition: all .2s ease;
+        transition: all .2s ease-out;
+        color: rgba(0,0,0,.6);
+        margin-bottom: 0;
+    }
+
+    .filter-bar {
+        min-height: 43px;
+        margin: 10px auto;
+        min-width: 320px;
+        max-width: 730px;
+        padding: 5px;
+        position: relative;
+        display: flex;
+    }
+
+    #search-input {
+        width: 0px;
+        padding: 0px;
+        transition: width .35s;
+    }
+</style>
+
+
+<script>
+
+    const filterButton = document.getElementById('filter-btn');
+    const filtercontainer = document.getElementById('filterbydate');
+    const filter = document.getElementById('filter');
+    var showFilter = false;
+    filterButton.addEventListener('click', () => {
+        showFilter = !showFilter;
+        filtercontainer.style.display = showFilter ? "block" : "none";
+    });
+
+    $('body').on('click', function (e) {
+        if (!$(e.target).hasClass('ignore') ) {
+            filtercontainer.style.display = "none";
+            showFilter = false;
+
+        }
+
+    });
+
+  
+
+
+</script>

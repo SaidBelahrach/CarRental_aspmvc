@@ -2,3 +2,79 @@
     ViewBag.Title = "Home Page";
 }
 
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<button type="submit" class="btn btn-outline-primary ignore px-4 py-2 filter-btn" id="filter-btn" style="outline:none;">  <i class="fas ignore filter-btn fa-filter pr-2"></i>Filtrer </button>
+
+
+<img src="~/Content/profile_img.png"  class="btn btn-outline-primary ignore px-4 py-2 filter-btn" id="filter-btn" style="outline:none;"/>"
+
+<div class="card border ignore py-2 px-4 filterbydate bg-light" id="filterbydate" style="min-height:100px;width:250px; margin:10px auto;position:absolute;top:35px;z-index:1444;display:none;">
+
+
+</div>
+
+<style>
+    .form-outline .form-control ~ .form-label {
+        position: absolute;
+        top: 0;
+        left: .75rem;
+        padding-top: .37rem;
+        pointer-events: none;
+        -webkit-transform-origin: 0 0;
+        transform-origin: 0 0;
+        -webkit-transition: all .2s ease;
+        transition: all .2s ease-out;
+        color: rgba(0,0,0,.6);
+        margin-bottom: 0;
+    }
+
+    .filter-bar {
+        min-height: 43px;
+        margin: 10px auto;
+        min-width: 320px;
+        max-width: 730px;
+        padding: 5px;
+        position: relative;
+        display: flex;
+    }
+
+    #search-input {
+        width: 0px;
+        padding: 0px;
+        transition: width .35s;
+    }
+</style>
+
+
+<script>
+
+    const filterButton = document.getElementById('filter-btn');
+    const filtercontainer = document.getElementById('filterbydate');
+    const filter = document.getElementById('filter');
+    var showFilter = false;
+    filterButton.addEventListener('click', () => {
+        showFilter = !showFilter;
+        filtercontainer.style.display = showFilter ? "block" : "none";
+    });
+
+
+    $('body').on('click', function (e) {
+        if (!$(e.target).hasClass('ignore')) {
+            filtercontainer.style.display = "none";
+            showFilter = false;
+
+        }
+
+    });
+
+
+
+
+</script>
