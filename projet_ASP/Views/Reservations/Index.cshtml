@@ -64,14 +64,18 @@
                     </a>
                 </td>
             }
-                <td style="text-decoration:none;">
-                    @*  @Html.ActionLink(" ", "Edit", new { id = item.idContrat }, new { @class = "fas fa-edit text-primary pr-3" }) *@
-                    @Html.ActionLink(" ", "Delete", new { id = item.idContrat }, new { @class = "fas fa-trash text-danger pr-3" })
+        <td style="text-decoration:none;">
+            @*  @Html.ActionLink(" ", "Edit", new { id = item.idContrat }, new { @class = "fas fa-edit text-primary pr-3" }) *@
+            @Html.ActionLink(" ", "Delete", new { id = item.idContrat }, new {@title="Supprimer", @class = "fas fa-trash text-danger pr-3",@style="font-size:18px;" })
 
-                    @Html.ActionLink(" ", "Details", new { id = item.idContrat }, new { @class = "fas fa-info-circle text-warning" })
-                </td>
+            @Html.ActionLink(" ", "Details", new { id = item.idContrat }, new { @title = "Détails", @class = "fas fa-info-circle text-warning  pr-3", @style = "font-size:18px;" })
+            @if (User.IsInRole("Proprietaire"))
+            {
+                @Html.ActionLink(" ", "Create","RetourVoitures", new { idContrat = item.idContrat }, new { @title = "Valider retour de voiture", @class = "fas fa-check-circle text-success", @style = "font-size:18px;" })
+            }
+        </td>
 
-        </tr>
+            </tr>
         }
     </tbody>
 </table>

@@ -15,7 +15,7 @@
                 <div @*action="filter" method="post"*@ class="card border ignore py-2 px-4 filterbydate bg-light" id="filterbydate" style="min-height:260px;width:250px; margin:10px auto;position:absolute;top:35px;z-index:1444;display:none;">
                     Cout par jour (DH):<div style="display:flex;" class="ignore">
                         <input type="number" name="min" placeholder="min" class="form-control mr-3 ignore" style="width:135px;" />
-                        <input type="number" name="max" placeholder="max" class="form-control ignore" style="width:135px;" />
+                        <input type="number" name="max" placeholder="max" class="form-control ignore" style="max-width:135px;" />
                     </div>
                     Ville: <input type="text" name="Ville" class="form-control Ville ignore" style="font-size:11px; " />
                     Start: <input type="datetime-local" name="startdate" id="startdate" class="form-control startdate ignore" style="font-size:11px; " />
@@ -158,13 +158,13 @@
         
     }); 
 
-    $('#filterFormId').submit(function (e) {
-        if (!($('#enddate').val() == '' && $('#startdate').val() == '')) {
-            e.preventDefault();
-            alert("remplire les deux date !");
+@*    $('#filterFormId').submit(function (e) {
+        if (($('.enddate').val() != '' || $('.startdate').val() == '')) {
+           e.preventDefault();
+           alert("remplire les deux date !");
         }
     });
-
+*@
  
 </script>
 

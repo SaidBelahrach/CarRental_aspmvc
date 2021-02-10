@@ -80,21 +80,22 @@ namespace projet_ASP.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
-        [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "Nom complet est obligatoire", AllowEmptyStrings = false)]
         [Display(Name = "Nom complet")]
         public string nomComplet { get; set; }
 
 
-        [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "Adresse est obligatoire", AllowEmptyStrings = false)]
         [Display(Name = "Adresse")]
         public string adresse { get; set; }
 
-        [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "Type de profileest obligatoire", AllowEmptyStrings = false)]
         [Display(Name = "Type de profile")]
         public string profileType { get; set; }
 
-        [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "téléphone est obligatoire", AllowEmptyStrings = false)]
         [Display(Name = "téléphone")]
+        [Phone]
         public string tel { get; set; }
     }
 

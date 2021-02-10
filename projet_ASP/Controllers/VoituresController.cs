@@ -52,12 +52,9 @@ namespace projet_ASP.Controllers
             else
                 return true;
         }
-
-       
         [HttpPost]
         public ActionResult filter(FormCollection data)
         {
-        
             bool debutTest = false, finTest = false;
             if(data["startdate"]==null && data["enddate"] ==null) RedirectToAction("Index");
             DateTime debut = (data["startdate"]!=null&& data["startdate"]!="")? DateTime.Parse(data["startdate"]): DateTime.Now;
@@ -68,9 +65,9 @@ namespace projet_ASP.Controllers
             int min=0;//= data["min"] == null ? 0 : Convert.ToInt32(data["min"]);
             int max=20000;// = data["max"] == null ? 90000 : Convert.ToInt32(data["max"]);
             if (data["min"] != null && data["min"] != "" ) min = Convert.ToInt32(data["min"]);
-            if (data["max"] != null && data["max"] != "") max = Convert.ToInt32(data["max"]);
-            Console.WriteLine("min " + min + "max " + max);
-;            List<Voiture> voi=new List<Voiture>();
+            if (data["max"] != null && data["max"] != "")  max = Convert.ToInt32(data["max"]);
+        //    Console.WriteLine("min " + min + "max " + max);
+;           List<Voiture> voi=new List<Voiture>();
             List<Reservation> searchResv = new List<Reservation>();
             foreach (var r in db.reservations.ToList())
             {
@@ -90,24 +87,21 @@ namespace projet_ASP.Controllers
                     if (((Convert.ToInt32(v.coutParJour) <= max && Convert.ToInt32(v.coutParJour) >= min)) && v.proprietaire.ApplicationUser.adresse.ToLower().Contains(ville.ToLower()) && v.disponible)
                         voi.Add(v);
                 }
-
             }
             else
             {
                 foreach (var v in db.Voitures.ToList())
                 {
                     if (((Convert.ToInt32(v.coutParJour) <= max && Convert.ToInt32(v.coutParJour) >= min)) && !idVoituresNonDispo.Contains(v.idVoiture)
-                        && v.proprietaire.ApplicationUser.adresse.ToLower().Contains(ville.ToLower()) && v.disponible)
+                        && v.proprietaire.ApplicationUser.adresse.ToLower().Contains(ville.ToLower()) )
                         voi.Add(v);
                 }
             }
-
             /*  List<Voiture> voi  = db.Voitures
                                               .Where(v =>((Convert.ToInt32(v.coutParJour)<max && Convert.ToInt32(v.coutParJour)>min )&&v.proprietaire.ApplicationUser.adresse.Contains(ville) )&&
                                                           (v.disponible == true || v.reservations.Where(r=>r.dateDebut<=debut && r.dateFin>=fin).Count()>0 ) )
                                               .ToList<Voiture>();
             */
-         
             return View("Index",  voi );
         }
         //les voitures de propritaire actuel

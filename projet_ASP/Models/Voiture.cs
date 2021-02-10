@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -16,36 +17,37 @@ namespace projet_ASP.Models
         public int idVoiture { get; set; }
 
 
-        [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "matricule est obligatoire", AllowEmptyStrings = false)]
         [Display(Name = "Matricule")]
         public string matricule { get; set; }
 
-        [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "Marque est obligatoire", AllowEmptyStrings = false)]
         [Display(Name = "Marque")]
         public string marque { get; set; }
 
 
-        [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "Modèle est obligatoire", AllowEmptyStrings = false)]
         [Display(Name = "Modèle")]
         public string model { get; set; }
 
-        [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "Couleur est obligatoire", AllowEmptyStrings = false)]
         [Display(Name = "Couleur")]
         public string couleur { get; set; }
 
 
-        [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "Nombre de places est obligatoire", AllowEmptyStrings = false)]
         [Display(Name = "Nombre de places")]
         public int nbPlaces { get; set; }
 
         [Display(Name = "Type")]
         public Boolean automatique { get; set; }
 
-        [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "Cout par jour est obligatoire", AllowEmptyStrings = false)]
         [Display(Name = "Cout par jour")]
         public String coutParJour { get; set; }
 
         [Display(Name = "Disponibilité")]
+        [DefaultValue(true)]
         public Boolean disponible { get; set; }
 
         [Display(Name = "Image de voiture")]

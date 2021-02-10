@@ -173,6 +173,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProprietaireController.cs" />
     <Compile Include="Controllers\ReservationsController.cs" />
+    <Compile Include="Controllers\RetourVoituresController.cs" />
     <Compile Include="Controllers\VoituresController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -252,6 +253,22 @@
     <Compile Include="Migrations\202102062228210_reservations_fk_accessibility.cs" />
     <Compile Include="Migrations\202102062228210_reservations_fk_accessibility.Designer.cs">
       <DependentUpon>202102062228210_reservations_fk_accessibility.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202102092204239_modified_reservation_model.cs" />
+    <Compile Include="Migrations\202102092204239_modified_reservation_model.Designer.cs">
+      <DependentUpon>202102092204239_modified_reservation_model.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202102092317080_updated_retourVoiture_model.cs" />
+    <Compile Include="Migrations\202102092317080_updated_retourVoiture_model.Designer.cs">
+      <DependentUpon>202102092317080_updated_retourVoiture_model.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202102092322147_updated_retourVoiture_model2.cs" />
+    <Compile Include="Migrations\202102092322147_updated_retourVoiture_model2.Designer.cs">
+      <DependentUpon>202102092322147_updated_retourVoiture_model2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202102092343130_updated_retourVoiture_model3.cs" />
+    <Compile Include="Migrations\202102092343130_updated_retourVoiture_model3.Designer.cs">
+      <DependentUpon>202102092343130_updated_retourVoiture_model3.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -343,6 +360,11 @@
     <Content Include="Views\Reservations\Edit.cshtml" />
     <Content Include="Views\Reservations\Index.cshtml" />
     <Content Include="Views\Locataire\Index.cshtml" />
+    <Content Include="Views\RetourVoitures\Create.cshtml" />
+    <Content Include="Views\RetourVoitures\Delete.cshtml" />
+    <Content Include="Views\RetourVoitures\Details.cshtml" />
+    <Content Include="Views\RetourVoitures\Edit.cshtml" />
+    <Content Include="Views\RetourVoitures\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -417,6 +439,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202102062228210_reservations_fk_accessibility.resx">
       <DependentUpon>202102062228210_reservations_fk_accessibility.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102092204239_modified_reservation_model.resx">
+      <DependentUpon>202102092204239_modified_reservation_model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102092317080_updated_retourVoiture_model.resx">
+      <DependentUpon>202102092317080_updated_retourVoiture_model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102092322147_updated_retourVoiture_model2.resx">
+      <DependentUpon>202102092322147_updated_retourVoiture_model2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102092343130_updated_retourVoiture_model3.resx">
+      <DependentUpon>202102092343130_updated_retourVoiture_model3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

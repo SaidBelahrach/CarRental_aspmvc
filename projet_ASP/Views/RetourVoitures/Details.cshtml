@@ -1,0 +1,51 @@
+﻿@model projet_ASP.Models.RetourVoiture
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>RetourVoiture</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.dateRetour)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dateRetour)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.etat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.etat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pinalise)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pinalise)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.amende)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.amende)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idRetour }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

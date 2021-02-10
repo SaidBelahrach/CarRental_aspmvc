@@ -12,16 +12,16 @@ namespace projet_ASP.Models
     public class ApplicationUser : IdentityUser
     {
 
-        [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "Nom complet est obligatoire", AllowEmptyStrings = false)]
         [Display(Name = "Nom complet")]
         public string nomComplet { get; set; }
 
 
-        [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "Adresse est obligatoire", AllowEmptyStrings = false)]
         [Display(Name = "Adresse")]
         public string adresse { get; set; }
 
-        [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "Type de profile est obligatoire", AllowEmptyStrings = false)]
         [Display(Name = "Type de profile")]
         public string profileType { get; set; }
 

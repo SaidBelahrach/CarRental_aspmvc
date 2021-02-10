@@ -14,7 +14,7 @@ namespace projet_ASP.Models
         public int idLocataire { get; set; }
 
 
-        [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "Numéro de permisest obligatoire", AllowEmptyStrings = false)]
         [Display(Name = "Numéro de permis")]
         public int Npermis { get; set; }
 
