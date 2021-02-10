@@ -23,7 +23,7 @@ namespace projet_ASP.Controllers
             string userid = User.Identity.GetUserId();
             if (User.IsInRole("Locataire")) { 
                 return View(db.reservations.Include(r=>r.voiture)
-                                           .Where(r=>r.locataire.ApplicationUserID.Equals(userid))
+                                           .Where(r=>r.locataire.ApplicationUserID.Equals(userid)).OrderByDescending(r=>r.dateReservation)
                                            .ToList());
             }else// if (User.IsInRole("Proprietaire"))
             { 

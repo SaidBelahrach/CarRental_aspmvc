@@ -21,7 +21,7 @@ namespace projet_ASP.Controllers
         public ActionResult Index()
         {
             string userid = User.Identity.GetUserId();
-            List<Voiture> voitures = db.Voitures.Include(v => v.proprietaire).ToList(); 
+            List<Voiture> voitures = db.Voitures.Include(v => v.proprietaire).Include(r=>r.reservations).ToList(); 
             return View(voitures);
         }   
         [HttpPost]
@@ -69,9 +69,11 @@ namespace projet_ASP.Controllers
         //    Console.WriteLine("min " + min + "max " + max);
 ;           List<Voiture> voi=new List<Voiture>();
             List<Reservation> searchResv = new List<Reservation>();
-            foreach (var r in db.reservations.ToList())
+            foreach (var r in db.reservations.OrderByDescending(f=>f.dateDebut).ToList())
             {
-                if (r.dateDebut.Date >= debut.Date && r.dateFin.Date <= fin.Date) searchResv.Add(r); 
+               if ( DateTime.Compare(r.dateDebut, debut) <=0 && DateTime.Compare(r.dateFin, fin) >= 0 ) 
+                    searchResv.Add(r);continue;//intervall inclus dans un reserva 
+               //  if ( (r.dateDebut.Date <= debut.Date && r.dateFin.Date >= fin.Date)) searchResv.Add(r); 
             }
             List<int> idVoituresNonDispo = searchResv.Select(a => a.idVoiture).ToList();
       /*      foreach (var v in db.Voitures.ToList())
@@ -84,7 +86,7 @@ namespace projet_ASP.Controllers
             {
                 foreach (var v in db.Voitures.ToList())
                 {
-                    if (((Convert.ToInt32(v.coutParJour) <= max && Convert.ToInt32(v.coutParJour) >= min)) && v.proprietaire.ApplicationUser.adresse.ToLower().Contains(ville.ToLower()) && v.disponible)
+                    if (((Convert.ToInt32(v.coutParJour) <= max && Convert.ToInt32(v.coutParJour) >= min)) && v.proprietaire.ApplicationUser.adresse.ToLower().Contains(ville.ToLower()))
                         voi.Add(v);
                 }
             }

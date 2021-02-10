@@ -11,6 +11,7 @@ using projet_ASP.Models;
 
 namespace projet_ASP.Controllers
 {
+    [Authorize(Roles ="Proprietaire")]
     public class RetourVoituresController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

@@ -28,8 +28,7 @@ namespace projet_ASP.Models
         [DefaultValue(false)]
         public Boolean pinalise { get; set; }
 
-       // [Required(ErrorMessage = "Coût d'amende est obligatoire", AllowEmptyStrings = false)]
-        [Display(Name = "Coût d'amende")]
+        [Display(Name = "Amende")]
         [DefaultValue(0)]
         public Decimal amende { get; set; }
 

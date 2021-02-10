@@ -18,8 +18,8 @@
                         <input type="number" name="max" placeholder="max" class="form-control ignore" style="max-width:135px;" />
                     </div>
                     Ville: <input type="text" name="Ville" class="form-control Ville ignore" style="font-size:11px; " />
-                    Start: <input type="datetime-local" name="startdate" id="startdate" class="form-control startdate ignore" style="font-size:11px; " />
-                    End: <input type="datetime-local" name="enddate" id="enddate" class="form-control enddate ignore" style="font-size:11px; " />
+                    Start: <input type="date" name="startdate" min="@DateTime.Now.ToString("yyyy-MM-dd")" id="startdate" class="form-control startdate ignore" style="font-size:11px; " />
+                    End: <input type="date" name="enddate" min="@DateTime.Now.AddDays(1).ToString("yyyy-MM-dd")" id="enddate" onchange="datechanged(this)" class="form-control enddate ignore" style="font-size:11px; " />
                     <input type="submit" value="filter" id="filter" class="btn btn-outline-primary ignore py-1 px-4 mt-2 filter" style="outline:none;">
                 </div>
             }
@@ -44,7 +44,7 @@
             @* @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })*@
         </p>
     }
- 
+
     @foreach (var item in Model)
     {
 
@@ -102,13 +102,17 @@
         padding: 0px;
         transition: width .35s;
     }
+
+
+
 </style>
-  
-<script> 
+
+<script>
+
     const searchButton = document.getElementById('SearchBtn');
     const searchInput = document.getElementById('search-input');
     var disp_flag = false;
-    searchButton.addEventListener('mouseenter', () => { 
+    searchButton.addEventListener('mouseenter', () => {
         searchInput.style.width = "150px";
         searchInput.focus();
         //  disp_flag = !disp_flag;
@@ -119,7 +123,7 @@
             searchInput.style.width = "0px";
             searchInput.blur();
         }
-    }); 
+    });
 
     searchButton.addEventListener('click', () => {
         event.preventDefault();
@@ -128,81 +132,46 @@
         console.log(searchInput.value);
         if (searchInput.value.length>0)
         document.forms["searchform"].submit();
-        
+
     });
 
     const filterButton = document.getElementById('filter-btn');
     const filtercontainer = document.getElementById('filterbydate');
     const filter = document.getElementById('filter');
     var showFilter = false;
-    filterButton.addEventListener('click', () => { 
+    filterButton.addEventListener('click', () => {
       @*  searchInput.style.width = "0px";
         searchInput.blur();*@
         showFilter = !showFilter;
         filtercontainer.style.display = showFilter ? "block" : "none";
-    }); 
+    });
       @*  filter.addEventListener('click', () => {
             filtercontainer.style.display = "none";
             showFilter = !showFilter;
         }); *@
-    $('body').on('click', function (e) { 
+    $('body').on('click', function (e) {
         if (!$(e.target).hasClass('ignore') ) {
             filtercontainer.style.display = "none";
             showFilter = false;
-           
+
         }
    @*     if (!$(e.target).hasClass('search-input') && !$(e.target).hasClass('SearchBtn')) {
             searchInput.style.width = "0px";
             searchInput.blur();
         }*@
-        
-    }); 
 
-@*    $('#filterFormId').submit(function (e) {
-        if (($('.enddate').val() != '' || $('.startdate').val() == '')) {
+    });
+
+    $('#filterFormId').submit(function (e) {
+        if (($('.enddate').val() != "" && $('.startdate').val() == "") || ($('.enddate').val() == "" && $('.startdate').val() != "") ) {
            e.preventDefault();
-           alert("remplire les deux date !");
+            alert("remplire les deux date !");
+            return;
         }
     });
-*@
  
+
 </script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-    /*/  $("#search-input").change(function () {
-          //var formdata = new FormData();
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
 
-          //formdata.append(this.files[0].name, this.files[0]);
-          var xhr = new XMLHttpRequest();
-          xhr.open('GET', '../Voitures/searchCars?key=p', true);
-         xhr.send();
-          //var file = this.files[0];
-          xhr.onreadystatechange = function () {
-              if (xhr.readyState == 4 && xhr.status == 200) {
-                  console.log(xhr.response);
-              }
-          }
-
-
-      });*/
-</script>
-<script>
-    /* $(document).ready(function () {
-           $("#search-input").change(function () {
-               // var SearchBy = $("#SearchBy").val();
-               var SearchValue = $("#search-input").val();
-               // var SetData = $("#DataSearching");
-               // SetData.html("");
-               $.ajax({
-                   type: "post",
-                   url: "../Voitures/searchCars?key=" + SearchValue,
-                   contentType: "json",
-                   success: function (result) {
-                       console.log(result);
-
-                   }
-               });
-           });
-     });  */
-</script>
