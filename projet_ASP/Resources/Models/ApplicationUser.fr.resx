@@ -129,15 +129,6 @@
   <data name="ConfirmPasswordReq" xml:space="preserve">
     <value>les mots de passes entrés ne sont pas les même !</value>
   </data>
-  <data name="dateReservation" xml:space="preserve">
-    <value>Date de reservation</value>
-  </data>
-  <data name="dateReservationReq" xml:space="preserve">
-    <value>Date de reservation est obligatoire</value>
-  </data>
-  <data name="doesCarReturned" xml:space="preserve">
-    <value>Voiture retourné?</value>
-  </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
   </data>
@@ -168,16 +159,13 @@
   <data name="profileTypeReq" xml:space="preserve">
     <value>Type de profile est obligatoire</value>
   </data>
+  <data name="proprietaire" xml:space="preserve">
+    <value>Propriétaire</value>
+  </data>
   <data name="tel" xml:space="preserve">
     <value>Téléphone</value>
   </data>
   <data name="telReq" xml:space="preserve">
     <value>Téléphone est obligatoire</value>
-  </data>
-  <data name="typeDePaiement" xml:space="preserve">
-    <value>Type de paiement</value>
-  </data>
-  <data name="typeDePaiementReq" xml:space="preserve">
-    <value>Type de paiement est obligatoire</value>
   </data>
 </root>

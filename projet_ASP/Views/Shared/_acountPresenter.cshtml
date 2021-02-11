@@ -1,29 +1,30 @@
 ﻿@using Microsoft.AspNet.Identity
 @using projet_ASP.Models;
 
+
 <div class="wrapper" id="idwrapper">
     @{
         string id = User.Identity.GetUserId();
         ApplicationDbContext db = new ApplicationDbContext();
         var prop = db.Proprietaires.Where(item => item.ApplicationUserID == id).FirstOrDefault();
-        <img src="@(string.Format("data:image/png;base64,{0}", Convert.ToBase64String(prop.ApplicationUser.imageBytes)))" id="profileImg" class="profileImg rounded-circle" width="40" height="40" />
+        <img src="@(string.Format("data:image/png;base64,{0}", Convert.ToBase64String(prop.ApplicationUser.imageBytes)))" id="profileImg" class="profileImg rounded-circle" width="35" height="35" />
     }
 <div class="box-container bg-light d-none" id="box">
     @if (User.IsInRole("Locataire"))
     {
-        <p class="text-center"><a class="btn" href="../Locataire">Profile</a></p>
+        <p class="text-center"><a class="butn" href="../Locataire">Profile</a></p>
     }
     @if (User.IsInRole("Proprietaire"))
     {
-        <p class="text-center"><a class="btn" href="../Proprietaire">Profile</a></p>
+        <p class="text-center"><a class="butn" href="../Proprietaire">Profile</a></p>
     }
     <div class="breake-line"></div>
-    <p class="text-center"><a class="btn" href="../Manage">Paramétre compte</a></p>
+    <p class="text-center"><a class="butn" href="../Manage">Paramètres du compte</a></p>
     <div class="breake-line"></div>
     @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm"}))
     {
         @Html.AntiForgeryToken()
-        <p class="text-center"> <a href="javascript:document.getElementById('logoutForm').submit()" class="btn">Se déconnecter</a> </p>
+        <p class="text-center"> <a href="javascript:document.getElementById('logoutForm').submit()" class="butn lien">Se déconnecter</a> </p>
     }
 </div>
 </div>
@@ -42,9 +43,10 @@
         align-self: center;
     }
 
-    .box-container .btn {
+    .box-container .butn {
         padding: 0;
         margin: 0;
+        text-decoration:none;
     }
 
     .box-container {
@@ -60,11 +62,11 @@
         height: 1px;
         background-color: lightgray;
     }
-    a:visited{
-       color: black; 
+    .lien:visited {
+        color: black;
     }
-    .btn{
-        color : black;
+    .butn {
+        color: black;
     }
 </style>
 

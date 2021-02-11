@@ -121,7 +121,7 @@
     <value>Address</value>
   </data>
   <data name="adresseReq" xml:space="preserve">
-    <value>Address est obligatoire</value>
+    <value>Address is required</value>
   </data>
   <data name="ConfirmPassword" xml:space="preserve">
     <value>Confirm password</value>
@@ -129,26 +129,17 @@
   <data name="ConfirmPasswordReq" xml:space="preserve">
     <value>The password and confirmation password do not match.</value>
   </data>
-  <data name="dateReservation" xml:space="preserve">
-    <value>Date de reservation</value>
-  </data>
-  <data name="dateReservationReq" xml:space="preserve">
-    <value>Date de reservation est obligatoire</value>
-  </data>
-  <data name="doesCarReturned" xml:space="preserve">
-    <value>Voiture retourné?</value>
-  </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
   </data>
   <data name="EmailReq" xml:space="preserve">
-    <value>Email est obligatoire</value>
+    <value>Email is required</value>
   </data>
   <data name="imageBytes" xml:space="preserve">
-    <value>Image de Profile</value>
+    <value>Profil image</value>
   </data>
   <data name="locataire" xml:space="preserve">
-    <value>Locataire</value>
+    <value>Occupant</value>
   </data>
   <data name="nomComplet" xml:space="preserve">
     <value>Full Name</value>
@@ -168,16 +159,13 @@
   <data name="profileTypeReq" xml:space="preserve">
     <value>Profil type is required</value>
   </data>
+  <data name="proprietaire" xml:space="preserve">
+    <value>Owner</value>
+  </data>
   <data name="tel" xml:space="preserve">
-    <value>Téléphone</value>
+    <value>Phone</value>
   </data>
   <data name="telReq" xml:space="preserve">
-    <value>Téléphone est obligatoire</value>
-  </data>
-  <data name="typeDePaiement" xml:space="preserve">
-    <value>Type de paiement</value>
-  </data>
-  <data name="typeDePaiementReq" xml:space="preserve">
-    <value>Type de paiement est obligatoire</value>
+    <value>Phone is required</value>
   </data>
 </root>

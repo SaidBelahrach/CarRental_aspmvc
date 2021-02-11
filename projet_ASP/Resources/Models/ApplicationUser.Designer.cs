@@ -70,7 +70,7 @@ namespace projet_ASP.Resources.Models {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Address est obligatoire.
+        ///   Looks up a localized string similar to Address is required.
         /// </summary>
         public static string adresseReq {
             get {
@@ -97,33 +97,6 @@ namespace projet_ASP.Resources.Models {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Date de reservation.
-        /// </summary>
-        public static string dateReservation {
-            get {
-                return ResourceManager.GetString("dateReservation", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Date de reservation est obligatoire.
-        /// </summary>
-        public static string dateReservationReq {
-            get {
-                return ResourceManager.GetString("dateReservationReq", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Voiture retourné?.
-        /// </summary>
-        public static string doesCarReturned {
-            get {
-                return ResourceManager.GetString("doesCarReturned", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Email.
         /// </summary>
         public static string Email {
@@ -133,7 +106,7 @@ namespace projet_ASP.Resources.Models {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Email est obligatoire.
+        ///   Looks up a localized string similar to Email is required.
         /// </summary>
         public static string EmailReq {
             get {
@@ -142,7 +115,7 @@ namespace projet_ASP.Resources.Models {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Image de Profile.
+        ///   Looks up a localized string similar to Profil image.
         /// </summary>
         public static string imageBytes {
             get {
@@ -151,7 +124,7 @@ namespace projet_ASP.Resources.Models {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Locataire.
+        ///   Looks up a localized string similar to Occupant.
         /// </summary>
         public static string locataire {
             get {
@@ -214,7 +187,16 @@ namespace projet_ASP.Resources.Models {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Téléphone.
+        ///   Looks up a localized string similar to Owner.
+        /// </summary>
+        public static string proprietaire {
+            get {
+                return ResourceManager.GetString("proprietaire", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Phone.
         /// </summary>
         public static string tel {
             get {
@@ -223,29 +205,11 @@ namespace projet_ASP.Resources.Models {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Téléphone est obligatoire.
+        ///   Looks up a localized string similar to Phone is required.
         /// </summary>
         public static string telReq {
             get {
                 return ResourceManager.GetString("telReq", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Type de paiement.
-        /// </summary>
-        public static string typeDePaiement {
-            get {
-                return ResourceManager.GetString("typeDePaiement", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Type de paiement est obligatoire.
-        /// </summary>
-        public static string typeDePaiementReq {
-            get {
-                return ResourceManager.GetString("typeDePaiementReq", resourceCulture);
             }
         }
     }

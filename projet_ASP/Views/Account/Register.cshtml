@@ -36,8 +36,8 @@
         <div class="col-md-10">
             @Html.DropDownListFor(m => m.profileType, new SelectListItem[]
                {
-                new SelectListItem() { Text = "Locataire", Value = "Locataire" },
-                new SelectListItem() { Text = "Propriétaire", Value = "Proprietaire" }
+                new SelectListItem() { Text = projet_ASP.Resources.Models.ApplicationUser.locataire, Value = "Locataire" },
+                new SelectListItem() { Text = projet_ASP.Resources.Models.ApplicationUser.proprietaire, Value = "Proprietaire" }
                }
                , new { @class = "form-control" }
            )
