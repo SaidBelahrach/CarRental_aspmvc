@@ -12,20 +12,23 @@ namespace projet_ASP.Models
     public class ApplicationUser : IdentityUser
     {
 
-        [Required(ErrorMessage = "Nom complet est obligatoire", AllowEmptyStrings = false)]
-        [Display(Name = "Nom complet")]
+        [Required(ErrorMessageResourceType = typeof(Resources.Models.ApplicationUser),
+                  ErrorMessageResourceName = "nomCompletReq")]
+        [Display(Name = "nomComplet", ResourceType = typeof(Resources.Models.ApplicationUser))]
         public string nomComplet { get; set; }
 
 
-        [Required(ErrorMessage = "Adresse est obligatoire", AllowEmptyStrings = false)]
-        [Display(Name = "Adresse")]
+        [Required(ErrorMessageResourceType = typeof(Resources.Models.ApplicationUser),
+                 ErrorMessageResourceName = "adresseReq")]
+        [Display(Name = "adresse", ResourceType = typeof(Resources.Models.ApplicationUser))]
         public string adresse { get; set; }
 
-        [Required(ErrorMessage = "Type de profile est obligatoire", AllowEmptyStrings = false)]
-        [Display(Name = "Type de profile")]
+        [Required(ErrorMessageResourceType = typeof(Resources.Models.ApplicationUser),
+                  ErrorMessageResourceName = "profileTypeReq")]
+        [Display(Name = "profileType", ResourceType = typeof(Resources.Models.ApplicationUser))]
         public string profileType { get; set; }
 
-        [Display(Name = "Image de Profile")]
+        [Display(Name = "imageBytes", ResourceType = typeof(Resources.Models.ApplicationUser))]
         public byte[] imageBytes { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)

@@ -21,10 +21,15 @@ namespace projet_ASP
         {
             var cookie = HttpContext.Current.Request.Cookies["culture"];
             var name = cookie != null ? cookie.Value : null;
-            if (name == null) Thread.CurrentThread.CurrentUICulture = CultureInfo.CreateSpecificCulture("fr");
-
-          /*  System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(name.ToString());
-            System.Threading.Thread.CurrentThread.CurrentUICulture = System.Threading.Thread.CurrentThread.CurrentCulture;*/
+            if (name == null)
+            {
+                Thread.CurrentThread.CurrentUICulture = CultureInfo.CreateSpecificCulture("fr");
+            }
+            else
+            {
+                System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(name.ToString());
+                System.Threading.Thread.CurrentThread.CurrentUICulture = System.Threading.Thread.CurrentThread.CurrentCulture;
+            }
         }
     }
 }

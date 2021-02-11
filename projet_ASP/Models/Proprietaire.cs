@@ -14,8 +14,8 @@ namespace projet_ASP.Models
         [Display(Name = "ID propriétaire")]
         public int idProprietaire { get; set; }
 
-         
-        [Required(ErrorMessageResourceType = typeof(projet_ASP.Resources.Models.Proprietaire), ErrorMessageResourceName = "type",AllowEmptyStrings =false)]
+
+        [Required(ErrorMessageResourceType = typeof(projet_ASP.Resources.Models.Proprietaire), ErrorMessageResourceName = "type", AllowEmptyStrings = false)]
         [Display(Name = "type", ResourceType = typeof(projet_ASP.Resources.Models.Proprietaire))]
         public string type { get; set; } //agence ou particulier
         /*  [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]

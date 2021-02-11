@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title </title>
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
-    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-@*    <link href="https://fonts.googleapis.com/css?family=Coda|Open+Sans" rel="stylesheet">*@
+    @*    <link href="https://fonts.googleapis.com/css?family=Coda|Open+Sans" rel="stylesheet">*@
     <style>
-        .accountPresenter{
-            position: absolute; 
-            top :8px; 
-            right:10px;
+        .accountPresenter {
+            position: absolute;
+            top: 8px;
+            right: 10px;
         }
     </style>
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/smoothness/jquery-ui.css">
@@ -70,10 +70,10 @@
         <hr />
         <footer>
             @*  <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>*@
-            @*  <div class="nav navbar-nav" style="float:right; padding-top:15px;">
-                    <a style="color: gainsboro;" href="@Url.Action("SetLanguage", "Language", new { @name = "fr" })">Francais </a>  |
-                    <a style="color:gainsboro;" href="@Url.Action("SetLanguage", "Language", new { @name = "en" })">English</a>
-                </div>*@
+            @**@ <div class=" " style="width:100%;text-align:center; padding-top:15px;">
+                <a style="color: dimgray;" href="@Url.Action("SetLanguage", "Language", new { @name = "fr" })">Francais </a>  |
+                <a style="color:dimgray;" href="@Url.Action("SetLanguage", "Language", new { @name = "en" })">English</a>
+            </div>
         </footer>
     </div>
     @Scripts.Render("~/bundles/jquery")

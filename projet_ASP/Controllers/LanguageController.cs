@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Web;
 using System.Web.Mvc;
@@ -16,7 +14,10 @@ namespace projet_ASP.Controllers
             var cookie = new HttpCookie("culture", name);
             cookie.Expires = DateTime.Today.AddYears(1);
             Response.SetCookie(cookie);
-            return RedirectToAction("Index", "Voitures");
+            // return RedirectToAction("Index", "Voitures");
+
+            HttpContextBase httpContext = ControllerContext.HttpContext;
+            return base.Redirect(httpContext.Request.UrlReferrer.ToString());
         }
     }
 }
