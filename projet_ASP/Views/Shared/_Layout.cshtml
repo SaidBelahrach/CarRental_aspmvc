@@ -6,23 +6,37 @@
     <title>@ViewBag.Title </title>
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 @*    <link href="https://fonts.googleapis.com/css?family=Coda|Open+Sans" rel="stylesheet">*@
+    <style>
+        .accountPresenter{
+            position: absolute; 
+            top :8px; 
+            right:10px;
+        }
+    </style>
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/smoothness/jquery-ui.css">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
+
+
     <div class="navbar navbar-inverse navbar-fixed-top">
+        @if (User.IsInRole("Proprietaire") || User.IsInRole("Locataire"))
+        {
+            <div class="accountPresenter">
+                @Html.Partial("_acountPresenter")
+            </div>
+        }
         <div class="container">
             <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="  icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                  @Html.ActionLink(" CarRental", "Index", "Voitures", new { area = "" }, new { @class = "navbar-brand fas fa-car-side  text-white navbar-brand" })
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="  icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink(" CarRental", "Index", "Voitures", new { area = "" }, new { @class = "navbar-brand fas fa-car-side  text-white navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -46,7 +60,7 @@
                         @*   <li>@Html.ActionLink("Réclamations", "Index", "Reservations")</li>*@
                     }
                 </ul>
-               
+
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
@@ -56,15 +70,16 @@
         <hr />
         <footer>
             @*  <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>*@
-          @*  <div class="nav navbar-nav" style="float:right; padding-top:15px;">
-                <a style="color: gainsboro;" href="@Url.Action("SetLanguage", "Language", new { @name = "fr" })">Francais </a>  |
-                <a style="color:gainsboro;" href="@Url.Action("SetLanguage", "Language", new { @name = "en" })">English</a>
-            </div>*@
+            @*  <div class="nav navbar-nav" style="float:right; padding-top:15px;">
+                    <a style="color: gainsboro;" href="@Url.Action("SetLanguage", "Language", new { @name = "fr" })">Francais </a>  |
+                    <a style="color:gainsboro;" href="@Url.Action("SetLanguage", "Language", new { @name = "en" })">English</a>
+                </div>*@
         </footer>
     </div>
-  @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
 
     @RenderSection("scripts", required: false)
 </body>
+
 </html>

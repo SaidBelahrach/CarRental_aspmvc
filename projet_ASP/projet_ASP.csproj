@@ -428,6 +428,7 @@
     <Content Include="Views\RetourVoitures\Details.cshtml" />
     <Content Include="Views\RetourVoitures\Edit.cshtml" />
     <Content Include="Views\RetourVoitures\Index.cshtml" />
+    <Content Include="Views\Shared\_acountPresenter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
