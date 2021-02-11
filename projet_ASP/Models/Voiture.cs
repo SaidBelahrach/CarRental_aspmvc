@@ -17,40 +17,50 @@ namespace projet_ASP.Models
         public int idVoiture { get; set; }
 
 
-        [Required(ErrorMessage = "matricule est obligatoire", AllowEmptyStrings = false)]
-        [Display(Name = "Matricule")]
+      //  [Required(ErrorMessage = "matricule est obligatoire", AllowEmptyStrings = false)]
+       // [Display(Name = "Matricule")]
+
+        [Required(ErrorMessageResourceType = typeof(projet_ASP.Resources.Models.Voitures), ErrorMessageResourceName = "matriculeReq")]
+        [Display(Name = "matricule", ResourceType = typeof(projet_ASP.Resources.Models.Voitures))]
         public string matricule { get; set; }
 
-        [Required(ErrorMessage = "Marque est obligatoire", AllowEmptyStrings = false)]
-        [Display(Name = "Marque")]
+
+      // [Required(ErrorMessage = "Marque est obligatoire", AllowEmptyStrings = false)]
+        //[Display(Name = "Marque")]
+
+        [Required(ErrorMessageResourceType = typeof(projet_ASP.Resources.Models.Voitures), ErrorMessageResourceName = "marqueReq")]
+        [Display(Name = "marque", ResourceType = typeof(projet_ASP.Resources.Models.Voitures))]
         public string marque { get; set; }
 
 
-        [Required(ErrorMessage = "Modèle est obligatoire", AllowEmptyStrings = false)]
-        [Display(Name = "Modèle")]
+        //[Required(ErrorMessage = "Modèle est obligatoire", AllowEmptyStrings = false)]
+        //Display(Name = "Modèle")]
+
+        [Required(ErrorMessageResourceType = typeof(projet_ASP.Resources.Models.Voitures), ErrorMessageResourceName = "modelReq")]
+        [Display(Name = "model", ResourceType = typeof(projet_ASP.Resources.Models.Voitures))]
         public string model { get; set; }
 
-        [Required(ErrorMessage = "Couleur est obligatoire", AllowEmptyStrings = false)]
-        [Display(Name = "Couleur")]
+        [Required(ErrorMessageResourceType = typeof(projet_ASP.Resources.Models.Voitures), ErrorMessageResourceName = "couleurReq")]
+        [Display(Name = "couleur", ResourceType = typeof(projet_ASP.Resources.Models.Voitures))]
         public string couleur { get; set; }
 
 
-        [Required(ErrorMessage = "Nombre de places est obligatoire", AllowEmptyStrings = false)]
-        [Display(Name = "Nombre de places")]
+        [Required(ErrorMessageResourceType = typeof(projet_ASP.Resources.Models.Voitures), ErrorMessageResourceName = "nbPlacesReq")]
+        [Display(Name = "nbPlaces", ResourceType = typeof(projet_ASP.Resources.Models.Voitures))]
         public int nbPlaces { get; set; }
 
-        [Display(Name = "Type")]
+        [Display(Name = "automatique", ResourceType = typeof(projet_ASP.Resources.Models.Voitures))]
         public Boolean automatique { get; set; }
 
-        [Required(ErrorMessage = "Cout par jour est obligatoire", AllowEmptyStrings = false)]
-        [Display(Name = "Cout par jour")]
+        [Required(ErrorMessageResourceType = typeof(projet_ASP.Resources.Models.Voitures), ErrorMessageResourceName = "coutParJourReq")]
+        [Display(Name = "coutParJour", ResourceType = typeof(projet_ASP.Resources.Models.Voitures))]
         public String coutParJour { get; set; }
 
-        [Display(Name = "Disponibilité")]
+        [Display(Name = "disponible", ResourceType = typeof(projet_ASP.Resources.Models.Voitures))]
         [DefaultValue(true)]
         public Boolean disponible { get; set; }
 
-        [Display(Name = "Image de voiture")]
+        [Display(Name = "image", ResourceType = typeof(projet_ASP.Resources.Models.Voitures))]
         public byte[] image { get; set; } //https://www.aurigma.com/upload-suite/developers/aspnet-mvc/how-to-upload-files-in-aspnet-mvc
                                           //https://stackoverflow.com/questions/26347705/saving-images-to-database-with-asp-net-mvc-4-entity-framework
 

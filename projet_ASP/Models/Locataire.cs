@@ -13,9 +13,9 @@ namespace projet_ASP.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)] //auto increment
         public int idLocataire { get; set; }
 
-
-        [Required(ErrorMessage = "Numéro de permisest obligatoire", AllowEmptyStrings = false)]
-        [Display(Name = "Numéro de permis")]
+ 
+        [Required(ErrorMessageResourceType = typeof(projet_ASP.Resources.Models.Locataire), ErrorMessageResourceName = "NpermisRequired")]
+        [Display(Name = "Npermis", ResourceType = typeof(projet_ASP.Resources.Models.Locataire))]
         public int Npermis { get; set; }
 
 

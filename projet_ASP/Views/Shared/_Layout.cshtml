@@ -43,9 +43,10 @@
                         <li>@Html.ActionLink("Statistiques", "Index", "Proprietaire")</li>
                         <li>@Html.ActionLink("Proprietaires", "Index", "Proprietaire")</li>
                         <li>@Html.ActionLink("Locataires", "VoituresProprietaire", "Voitures")</li>
-                     @*   <li>@Html.ActionLink("Réclamations", "Index", "Reservations")</li>*@
+                        @*   <li>@Html.ActionLink("Réclamations", "Index", "Reservations")</li>*@
                     }
                 </ul>
+               
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
@@ -54,7 +55,11 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            @*  <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>*@
+          @*  <div class="nav navbar-nav" style="float:right; padding-top:15px;">
+                <a style="color: gainsboro;" href="@Url.Action("SetLanguage", "Language", new { @name = "fr" })">Francais </a>  |
+                <a style="color:gainsboro;" href="@Url.Action("SetLanguage", "Language", new { @name = "en" })">English</a>
+            </div>*@
         </footer>
     </div>
   @Scripts.Render("~/bundles/jquery")
