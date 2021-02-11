@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<projet_ASP.Models.Reservation>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Reservations";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -16,10 +16,10 @@
         @Html.DisplayNameFor(model => model.dateReservation)
     </th>
     <th>
-        @Html.DisplayName("Voiture")
+        @Html.DisplayName(projet_ASP.Resources.Models.Reservation.car)
     </th>
     <th>
-        @Html.DisplayNameFor(model => model.cout)
+        @Html.DisplayNameFor(model => model.cout) (DH)
     </th>
     <th>
         @Html.DisplayNameFor(model => model.dateDebut)
@@ -29,9 +29,9 @@
     </th>
     @if (User.IsInRole("Proprietaire"))
     {
-        <th>
-            Locataire
-        </th>
+    <th>
+        @Html.DisplayName(projet_ASP.Resources.Models.Reservation.locataire)
+    </th>
     } 
     <th>Action</th>
     </thead>

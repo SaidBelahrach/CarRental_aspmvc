@@ -7,36 +7,39 @@ namespace projet_ASP.Models
 {
     public class Reservation
     {
-        //[Column("ID")]      //ces 3 sont obligatoires
+        //[Column("ID")]    
         [Key]
         [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int idContrat { get; set; }
 
-        [Required(ErrorMessage = "Date de reservation est obligatoire", AllowEmptyStrings = false)]
-        [Display(Name = "Date de reservation")]
+        [Required(ErrorMessageResourceType = typeof(Resources.Models.Reservation), ErrorMessageResourceName = "dateReservationReq")]
+        [Display(Name = "dateReservation", ResourceType = typeof(Resources.Models.Reservation))]
         public DateTime dateReservation { get; set; }
 
-        [Required(ErrorMessage = "Date début est obligatoire", AllowEmptyStrings = false)]
-        [Display(Name = "Date début")]
+        [Required(ErrorMessageResourceType = typeof(Resources.Models.Reservation), ErrorMessageResourceName = "dateDebutReq")]
+        [Display(Name = "dateDebut", ResourceType = typeof(Resources.Models.Reservation))]
         public DateTime dateDebut { get; set; }
 
-        [Required(ErrorMessage = "Date Fins est obligatoire", AllowEmptyStrings = false)]
-        [Display(Name = "Date Fin")]
+        [Required(ErrorMessageResourceType = typeof(Resources.Models.Reservation), 
+                  ErrorMessageResourceName = "dateFinReq")]
+        [Display(Name = "dateFin", ResourceType = typeof(Resources.Models.Reservation))]
         public DateTime dateFin { get; set; }
 
         //+ dateCreation
 
-        [Required(ErrorMessage = "Type de paiement est obligatoire", AllowEmptyStrings = false)]
-        [Display(Name = "Type de paiement")]
+        [Required(ErrorMessageResourceType = typeof(Resources.Models.Reservation),
+                  ErrorMessageResourceName = "typeDePaiementReq")]
+        [Display(Name = "typeDePaiement", ResourceType = typeof(Resources.Models.Reservation))]
         public string typeDePaiement { get; set; }
 
-        [Required(ErrorMessage = "Coût est obligatoire", AllowEmptyStrings = false)]
-        [Display(Name = "Coût")]
+        [Required(ErrorMessageResourceType = typeof(Resources.Models.Reservation),
+                  ErrorMessageResourceName = "coutReq")]
+        [Display(Name = "cout", ResourceType = typeof(Resources.Models.Reservation))]
         public Decimal cout { get; set; }
 
         //   [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
-        [Display(Name = "Voiture retourné")]
+        [Display(Name = "doesCarReturned", ResourceType = typeof(Resources.Models.Reservation))]
         [DefaultValue(false)]
         public Boolean doesCarReturned { get; set; }
 

@@ -17,15 +17,15 @@ namespace projet_ASP.Models
         public int idVoiture { get; set; }
 
 
-      //  [Required(ErrorMessage = "matricule est obligatoire", AllowEmptyStrings = false)]
-       // [Display(Name = "Matricule")]
+        //  [Required(ErrorMessage = "matricule est obligatoire", AllowEmptyStrings = false)]
+        // [Display(Name = "Matricule")]
 
         [Required(ErrorMessageResourceType = typeof(projet_ASP.Resources.Models.Voitures), ErrorMessageResourceName = "matriculeReq")]
         [Display(Name = "matricule", ResourceType = typeof(projet_ASP.Resources.Models.Voitures))]
         public string matricule { get; set; }
 
 
-      // [Required(ErrorMessage = "Marque est obligatoire", AllowEmptyStrings = false)]
+        // [Required(ErrorMessage = "Marque est obligatoire", AllowEmptyStrings = false)]
         //[Display(Name = "Marque")]
 
         [Required(ErrorMessageResourceType = typeof(projet_ASP.Resources.Models.Voitures), ErrorMessageResourceName = "marqueReq")]

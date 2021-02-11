@@ -63,39 +63,48 @@ namespace projet_ASP.Models
     }
 
     public class RegisterViewModel
-    {
-        [Required]
-        [EmailAddress]
-        [Display(Name = "Email")]
+    { 
+        [EmailAddress] 
+        [Required(ErrorMessageResourceType = typeof(Resources.Models.ApplicationUser),
+                  ErrorMessageResourceName = "EmailReq")]
+        [Display(Name = "Email", ResourceType = typeof(Resources.Models.ApplicationUser))]
+
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessageResourceType = typeof(Resources.Models.ApplicationUser), ErrorMessageResourceName = "PasswordReq"/*, ErrorMessage = "The {0} must be at least {2} characters long."*/, MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Password", ResourceType = typeof(Resources.Models.ApplicationUser))]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "ConfirmPassword", ResourceType = typeof(Resources.Models.ApplicationUser))]
+        [Compare("Password", ErrorMessageResourceType = typeof(Resources.Models.ApplicationUser),
+                  ErrorMessageResourceName = "ConfirmPasswordReq")]
         public string ConfirmPassword { get; set; }
 
-        [Required(ErrorMessage = "Nom complet est obligatoire", AllowEmptyStrings = false)]
-        [Display(Name = "Nom complet")]
+        [Required(ErrorMessageResourceType = typeof(Resources.Models.ApplicationUser),
+                  ErrorMessageResourceName = "nomCompletReq")]
+        [Display(Name = "nomComplet", ResourceType = typeof(Resources.Models.ApplicationUser))]
         public string nomComplet { get; set; }
 
 
-        [Required(ErrorMessage = "Adresse est obligatoire", AllowEmptyStrings = false)]
-        [Display(Name = "Adresse")]
+        [Required(ErrorMessageResourceType = typeof(Resources.Models.ApplicationUser),
+                 ErrorMessageResourceName = "adresseReq")]
+        [Display(Name = "adresse", ResourceType = typeof(Resources.Models.ApplicationUser))]
         public string adresse { get; set; }
 
-        [Required(ErrorMessage = "Type de profileest obligatoire", AllowEmptyStrings = false)]
-        [Display(Name = "Type de profile")]
+        [Required(ErrorMessageResourceType = typeof(Resources.Models.ApplicationUser),
+                  ErrorMessageResourceName = "profileTypeReq")]
+        [Display(Name = "profileType", ResourceType = typeof(Resources.Models.ApplicationUser))]
         public string profileType { get; set; }
 
-        [Required(ErrorMessage = "téléphone est obligatoire", AllowEmptyStrings = false)]
-        [Display(Name = "téléphone")]
+         
         [Phone]
+        [Required(ErrorMessageResourceType = typeof(Resources.Models.ApplicationUser),
+                  ErrorMessageResourceName = "telReq")]
+        [Display(Name = "tel", ResourceType = typeof(Resources.Models.ApplicationUser))]
+
         public string tel { get; set; }
     }
 
