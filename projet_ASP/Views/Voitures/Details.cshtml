@@ -70,25 +70,25 @@ else
             </td>
 
             <td>
-                @(Model.automatique ? "Automatique" : "Manuelle")
-                </t>
+                @(Model.automatique ? projet_ASP.Resources.Models.Voitures.auto: projet_ASP.Resources.Models.Voitures.manual)
+                </td>
         </tr>
-        <tr>
+     @*   <tr>
             <td>
                 @Html.LabelFor(model => model.disponible, new { @class = " " }):
             </td>
 
             <td>
-                @(Model.disponible ? "Disponible" : "Réservé")
+                @(Model.disponible ? projet_ASP.Resources.Models.Voitures.carDisponible: projet_ASP.Resources.Models.Voitures.carRented)
             </td>
-        </tr>
+        </tr>*@
         <tr>
             <td class="  ">
                 @Html.LabelFor(model => model.coutParJour, new { @class = "control-label " }):
             </td>
 
             <td class="text-success  " style=" ">
-                @Html.DisplayFor(model => model.coutParJour)DH/jour
+                @Html.DisplayFor(model => model.coutParJour) @projet_ASP.Resources.Models.Voitures.perday
             </td>
         </tr>
     </table>
@@ -97,8 +97,8 @@ else
         max-width: 250px;
         display: block;
         align-items: center; ">
-        <div class="text-success border border-warning px-1 rounded " style="font-size:22px;max-width:120px;">
-            @Html.DisplayFor(model => model.coutParJour, new { @style = " ", @class = "text-white" })DH/jour
+        <div class="text-success border border-warning px-1 rounded " style="font-size:22px;max-width:130px;">
+            @Html.DisplayFor(model => model.coutParJour, new { @style = " ", @class = "text-white" }) @projet_ASP.Resources.Models.Voitures.perday
         </div>
         <img class="img-responsive" src="@(string.Format("data:image/png;base64,{0}", Convert.ToBase64String(Model.image)))" />
     </div>
@@ -109,11 +109,11 @@ else
         <form class=" filterbydate" onsubmit="myFunction()" name="filterbydate" id="filterbydate" style=" z-index:1444; ">
             <div class="d-flex mt-2">
                 @*@(Model.reservations.Count > 0 ? Model.reservations.OrderByDescending(d => d.dateFin).FirstOrDefault().dateFin.AddDays(2).ToString("yyyy-MM-dd") : DateTime.Now.ToString("yyyy-MM-dd"))"*@
-                @Html.Label("Date de debut: ", new { @style = "width:110px", @class = "text-left pt-2 pr-2" })
+                @Html.Label(projet_ASP.Resources.Models.Reservation.dateDebut, new { @style = "width:110px", @class = "text-left pt-2 pr-2" })
                 <input type="text" required name="startdate" class="form-control startdate datepicker py-0" style="font-size:11px;width:165px; " />
             </div>
             <div class="d-flex mt-2">
-                @Html.Label("Date de retour: ", new { @style = "width:110px", @class = "text-left pt-2 pr-2" })
+                @Html.Label(projet_ASP.Resources.Models.Reservation.dateFin, new { @style = "width:110px", @class = "text-left pt-2 pr-2" })
                 <input type="text"
                        required name="enddate" class="form-control enddate datepicker"
                        style="font-size:11px; width:165px;" />

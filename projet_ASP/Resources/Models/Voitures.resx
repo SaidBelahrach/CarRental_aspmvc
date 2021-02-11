@@ -117,8 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="auto" xml:space="preserve">
+    <value>Automatic</value>
+  </data>
   <data name="automatique" xml:space="preserve">
     <value>Type</value>
+  </data>
+  <data name="carDisponible" xml:space="preserve">
+    <value>Disponible</value>
+  </data>
+  <data name="carRented" xml:space="preserve">
+    <value>Rented</value>
   </data>
   <data name="couleur" xml:space="preserve">
     <value>Color</value>
@@ -137,6 +146,9 @@
   </data>
   <data name="image" xml:space="preserve">
     <value>Car image</value>
+  </data>
+  <data name="manual" xml:space="preserve">
+    <value>Manual</value>
   </data>
   <data name="marque" xml:space="preserve">
     <value>Mark</value>
@@ -161,5 +173,14 @@
   </data>
   <data name="nbPlacesReq" xml:space="preserve">
     <value>Number of seats is required</value>
+  </data>
+  <data name="perday" xml:space="preserve">
+    <value>DH/day</value>
+  </data>
+  <data name="reserver" xml:space="preserve">
+    <value>Book now</value>
+  </data>
+  <data name="seats" xml:space="preserve">
+    <value>Seats</value>
   </data>
 </root>

@@ -61,11 +61,38 @@ namespace projet_ASP.Resources.Models {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Automatic.
+        /// </summary>
+        public static string auto {
+            get {
+                return ResourceManager.GetString("auto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Type.
         /// </summary>
         public static string automatique {
             get {
                 return ResourceManager.GetString("automatique", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disponible.
+        /// </summary>
+        public static string carDisponible {
+            get {
+                return ResourceManager.GetString("carDisponible", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rented.
+        /// </summary>
+        public static string carRented {
+            get {
+                return ResourceManager.GetString("carRented", resourceCulture);
             }
         }
         
@@ -120,6 +147,15 @@ namespace projet_ASP.Resources.Models {
         public static string image {
             get {
                 return ResourceManager.GetString("image", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manual.
+        /// </summary>
+        public static string manual {
+            get {
+                return ResourceManager.GetString("manual", resourceCulture);
             }
         }
         
@@ -192,6 +228,33 @@ namespace projet_ASP.Resources.Models {
         public static string nbPlacesReq {
             get {
                 return ResourceManager.GetString("nbPlacesReq", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DH/day.
+        /// </summary>
+        public static string perday {
+            get {
+                return ResourceManager.GetString("perday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Book now.
+        /// </summary>
+        public static string reserver {
+            get {
+                return ResourceManager.GetString("reserver", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Seats.
+        /// </summary>
+        public static string seats {
+            get {
+                return ResourceManager.GetString("seats", resourceCulture);
             }
         }
     }
