@@ -14,9 +14,9 @@
         @Html.ActionLink("En", "SetLanguage", "Language", new { @name = "en" }, htmlAttributes: new { title = "English" })
     </li>
     <li>
-        @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+      @*  @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })*@
     </li>
-    <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+  @*  <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>*@
 </ul>
     }
 }
