@@ -4,7 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web.Mvc;
+using System.Web.Mvc; 
 
 namespace projet_ASP.Controllers
 {
@@ -32,10 +32,26 @@ namespace projet_ASP.Controllers
             }
             else   
             {
-                if(id=="") return RedirectToAction("Locataires","")
-                return View(db.reservations.Include(r => r.voiture)
-                                         .Where(r => r.voiture.proprietaire.ApplicationUserID.Equals(id))
-                                         .ToList());
+                var user = db.Users.Find(id).Roles.FirstOrDefault();
+                if(user==null) return RedirectToAction("Propietaires", "Administrateur");
+
+                string roleid = user.RoleId;
+                if (roleid == null) return RedirectToAction("Propietaires", "Administrateur");
+
+                if (roleid == "2")
+                { //propr
+                    return View(db.reservations.Include(r => r.voiture)
+                                          .Where(r => r.voiture.proprietaire.ApplicationUserID.Equals(id))
+                                          .ToList());
+                }
+                else
+                {
+                    if (id == "") return RedirectToAction("Locataires", "Administrateur");
+                    return View(db.reservations.Include(r => r.voiture)
+                                               .Where(r => r.locataire.ApplicationUserID.Equals(id)).OrderByDescending(r => r.dateReservation)
+                                               .ToList());
+                }
+               
 
             }
         }

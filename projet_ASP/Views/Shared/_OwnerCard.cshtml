@@ -36,6 +36,10 @@
                 <span class="fas fa-car icon  "></span>
                 <span>  @Model.Voitures.Count Voitures</span>
             </label>
+            <label class="datails-item">
+                <span class="fas fa-car icon  "></span>
+                <span> @Html.ActionLink("Allocations", "Index", "Reservations", new { id = Model.ApplicationUserID }, new { @class = "text-info" })</span>
+            </label>
 
         </div>
         <div class="card-description">
