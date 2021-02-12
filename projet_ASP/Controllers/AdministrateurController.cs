@@ -20,5 +20,25 @@ namespace projet_ASP.Controllers
 
             return View(prop);
         }
+
+
+        public ActionResult Locataires()
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            var loca = db.Locataires.Include(p => p.ApplicationUser).Include(t => t.reservations).ToList();
+
+            return View(loca);
+        }
+
+        public ActionResult Statistiques()
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            var users = db.Users.ToList();
+
+            return View(users);
+        }
     }
+
+
+
 }
