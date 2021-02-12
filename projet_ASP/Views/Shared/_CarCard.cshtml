@@ -15,7 +15,7 @@
         </div>
         <div class="general">
             <h3 class="mt-2">@Model.marque</h3>
-            <span class="prix-label text-success">@Model.coutParJour DH/jr</span>
+            <span class="prix-label text-success">@Model.coutParJour @projet_ASP.Resources.Models.Voitures.perday</span>
             <div class="card-icon-container " style="">
                 <label class="datails-item">
                     <span class="fas fa-map-marker icon  "></span>          @* https://fontawesome.com/v4.7.0  search here*@
@@ -29,11 +29,11 @@
                 </label>
                 <label class="datails-item">
                     <span class="fas fa-users  icon  "></span>
-                    <span>@Model.nbPlaces Places</span>
+                    <span>@Model.nbPlaces @projet_ASP.Resources.Models.Voitures.seats</span>
                 </label>
                 <label class="datails-item">
                     <span class="fas fa-car icon  "></span>
-                    <span>  @(Model.automatique? "Automatique":"Manuelle" )</span>
+                    <span>    @(Model.automatique ? projet_ASP.Resources.Models.Voitures.auto: projet_ASP.Resources.Models.Voitures.manual)</span>
                 </label>
 
             </div>
@@ -66,7 +66,7 @@
             @if (User.IsInRole("Locataire"))
             {
                 <div class="card-fotter">
-                    <button type="button" class=" button_custom  btn btn-primary px-4 py-1" onclick="window.location='@Url.Action("Details", "Voitures", new { id = Model.idVoiture })'">Réserver</button>
+                    <button type="button" class=" button_custom  btn btn-primary px-4 py-1" onclick="window.location='@Url.Action("Details", "Voitures", new { id = Model.idVoiture })'">@projet_ASP.Resources.Models.Voitures.reserver</button>
                 </div>
             }
             </div> 
@@ -151,7 +151,7 @@
 
                     .prix-label {
                     position: absolute;
-                    font-size: 2.5rem;
+                    font-size: 2.2rem;
                     top: 0px;
                     right: 8px;
 

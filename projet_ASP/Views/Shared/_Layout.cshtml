@@ -8,6 +8,10 @@
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     @*    <link href="https://fonts.googleapis.com/css?family=Coda|Open+Sans" rel="stylesheet">*@
+
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/smoothness/jquery-ui.css">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
     <style>
         .accountPresenter {
             position: absolute;
@@ -15,9 +19,6 @@
             right: 10px;
         }
     </style>
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/smoothness/jquery-ui.css">
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
 
@@ -40,15 +41,18 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Voitures")</li>
-                    @if (User.IsInRole("Locataire"))
+                    @if (!User.IsInRole("Admin"))
                     {
-                        <li>@Html.ActionLink("Locataire", "Index", "Locataire")</li>
+                        <li>@Html.ActionLink("Home", "Index", "Voitures")</li>
+                    }
+                @if (User.IsInRole("Locataire"))
+                    {
+                        @* <li>@Html.ActionLink("Locataire", "Index", "Locataire")</li>*@
                         <li>@Html.ActionLink("Reservations", "Index", "Reservations")</li>
                     }
                     @if (User.IsInRole("Proprietaire"))
                     {
-                        <li>@Html.ActionLink("Proprietaire", "Index", "Proprietaire")</li>
+                        @*    <li>@Html.ActionLink("Proprietaire", "Index", "Proprietaire")</li>*@
                         <li>@Html.ActionLink("Mes Voitures", "VoituresProprietaire", "Voitures")</li>
                         <li>@Html.ActionLink("Reservations", "Index", "Reservations")</li>
                     }
