@@ -34,7 +34,7 @@
             </label>
             <label class="datails-item">
                 <span class="fas fa-car icon  "></span>
-                <span>  @Model.reservations.Count reservations</span>
+                <span>@Html.ActionLink(@Model.reservations.Count+" reservations","Index","Reservations",new { id = Model.ApplicationUserID },new {@class="text-info" })  </span>
             </label>
 
         </div>

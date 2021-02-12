@@ -4,7 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web.Mvc;
+using System.Web.Mvc; 
 
 namespace projet_ASP.Controllers
 {
@@ -14,7 +14,7 @@ namespace projet_ASP.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
         // GET: Reservations
         // [Authorize(Roles ="Locataire")]
-        public ActionResult Index()
+        public ActionResult Index(string id="")
         {
 
             string userid = User.Identity.GetUserId();
@@ -24,13 +24,36 @@ namespace projet_ASP.Controllers
                                            .Where(r => r.locataire.ApplicationUserID.Equals(userid)).OrderByDescending(r => r.dateReservation)
                                            .ToList());
             }
-            else// if (User.IsInRole("Proprietaire"))
+            else if (User.IsInRole("Proprietaire"))
             {
                 return View(db.reservations.Include(r => r.voiture)
                                            .Where(r => r.voiture.proprietaire.ApplicationUserID.Equals(userid))
                                            .ToList());
             }
+            else   
+            {
+                var user = db.Users.Find(id).Roles.FirstOrDefault();
+                if(user==null) return RedirectToAction("Propietaires", "Administrateur");
 
+                string roleid = user.RoleId;
+                if (roleid == null) return RedirectToAction("Propietaires", "Administrateur");
+
+                if (roleid == "2")
+                { //propr
+                    return View(db.reservations.Include(r => r.voiture)
+                                          .Where(r => r.voiture.proprietaire.ApplicationUserID.Equals(id))
+                                          .ToList());
+                }
+                else
+                {
+                    if (id == "") return RedirectToAction("Locataires", "Administrateur");
+                    return View(db.reservations.Include(r => r.voiture)
+                                               .Where(r => r.locataire.ApplicationUserID.Equals(id)).OrderByDescending(r => r.dateReservation)
+                                               .ToList());
+                }
+               
+
+            }
         }
         // GET: Reservations/Details/5
         public ActionResult Details(int? id)
