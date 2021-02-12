@@ -430,11 +430,12 @@
     <Content Include="Views\RetourVoitures\Edit.cshtml" />
     <Content Include="Views\RetourVoitures\Index.cshtml" />
     <Content Include="Views\Shared\_acountPresenter.cshtml" />
+    <Content Include="Views\Shared\_OwnerCard.cshtml" />
+    <Content Include="Views\Administrateur\Propietaires.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Resources\Views\" />
-    <Folder Include="Views\Administrateur\" />
     <Folder Include="Views\Language\" />
   </ItemGroup>
   <ItemGroup>
