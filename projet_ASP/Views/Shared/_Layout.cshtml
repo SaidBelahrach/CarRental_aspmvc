@@ -58,8 +58,8 @@
                     }
                     @if (User.IsInRole("Admin"))//oujil
                     {
-                        <li>@Html.ActionLink("Statistiques", "Index", "Proprietaire")</li>
-                        <li>@Html.ActionLink("Proprietaires", "Index", "Proprietaire")</li>
+                        <li>@Html.ActionLink("Reclamations", "Index", "Administrateur")</li>
+                        <li>@Html.ActionLink("Proprietaires", "Propietaires", "Administrateur")</li>
                         <li>@Html.ActionLink("Locataires", "VoituresProprietaire", "Voitures")</li>
                         @*   <li>@Html.ActionLink("Réclamations", "Index", "Reservations")</li>*@
                     }

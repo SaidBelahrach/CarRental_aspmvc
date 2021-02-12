@@ -1,0 +1,272 @@
+﻿@model projet_ASP.Models.Proprietaire
+@using Microsoft.AspNet.Identity;
+@{
+
+    ViewBag.Title = "OwnerCard";
+}
+@*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">*@
+
+
+@*<link href="https://fonts.googleapis.com/icon?family=Material+Icons"*@
+<div class="card">
+    <div class="user-card ">
+        <div style="" class="card-img">
+            <img style="" class="img-responsive" src="@ViewData["ProfileImg"]" width="" height="100%" />
+        </div>
+    </div>
+    <div class="general">
+        <h3 class="mt-2">@Model.ApplicationUser.nomComplet</h3>
+        <span class="prix-label text-success">@Model.type</span>
+        <div class="card-icon-container " style="">
+            <label class="datails-item">
+                <span class="fas fa-map-marker icon  "></span>          @* https://fontawesome.com/icons?d=gallery&q=edit search here*@  @*gonna change after tests*@
+                <span>
+                    @Model.ApplicationUser.adresse
+                </span>
+            </label>
+            <label class="datails-item ">
+                <span class="fas fa-adjust icon  "></span>
+                <span>@Model.ApplicationUser.PhoneNumber</span>
+            </label>
+            <label class="datails-item">
+                <span class="fas fa-users  icon  "></span>
+                <span>@Model.ApplicationUser.Email </span>
+            </label>
+            <label class="datails-item">
+                <span class="fas fa-car icon  "></span>
+                <span>  @Model.Voitures.Count Voitures</span>
+            </label>
+
+        </div>
+        <div class="card-description">
+            <p>
+            </p>
+        </div>
+  
+    </div>
+</div>
+
+<style>
+
+        @*    * {
+                padding: 0;
+                margin: 0;
+            }*@
+
+                    @*    html, body {
+            font-family: Abel, Arial, Verdana, sans-serif;
+        }*@
+
+                    .card-icon-container {
+                    display:flex;
+                    justify-content:space-between;
+                    width:70%;
+                    flex-wrap:wrap;
+                    }
+                    .datails-item {
+                    font-size: 10px;
+                    color: dimgray;
+                    padding:3px;
+                    font-weight:normal;
+                    }
+
+                    .card  {
+                    min-width:320px;
+                    max-width: 730px;
+                    height: 150px;
+                    min-height: 150px;
+                    max-height: 220px;
+                    background-color: #fff;
+                    background: linear-gradient(#f8f8f8, #fff);
+                    box-shadow: 0 1px 4px 1px rgba(0,0,0,0.14);
+                    border-radius: 6px;
+                    overflow: hidden;
+                    position: relative;
+                    margin: 10px auto;
+                    }
+                    .proprietaire-profil {
+                    padding: 8px 0px;
+                    width: 150px;
+                    height: 40px;
+                    background-color: transparent;
+                    overflow: hidden;
+                    position: absolute;
+                    bottom: 1px;
+                    left: 2px;
+                    }
+                    .general {
+                    width: 75%;
+                    height: 100%;
+                    position: absolute;
+                    top: 0;
+                    right:0px;
+                    z-index: 1;
+                    box-sizing: border-box;
+                    padding-top: 0px;
+                    padding-left:5px;
+
+                    }
+
+                    .user-card {
+                    display: flex;
+                    align-content: center;
+                    align-items: center;
+                    width: 25%;
+                    height: 100%;
+                    background-color: lightgray;
+                    }
+
+                    .card-img {
+                    align-content: center;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    }
+
+                    .prix-label {
+                    position: absolute;
+                    font-size: 2.5rem;
+                    top: 0px;
+                    right: 8px;
+
+                    align-content: center;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    }
+
+                    .card-icon-container {
+                    display: flex;
+                    flex-direction: row;
+                    }
+
+                    .card-icon-container p {
+                    font-size: 1rem;
+                    }
+
+                    .button_custom {
+                    position: absolute;
+                    bottom: 5px;
+                    right: 5px;
+                    }
+
+                    .btn-delete {
+                        right: 100px;
+                    }
+            .button_custom:focus {
+                border: 0px;
+                outline: 0px;
+            }
+                    .card-description {
+                    font-size: 1.1rem;
+                    width: 80%;
+                    }
+
+                    .card-fotter {
+                    display: flex;
+                    }
+
+
+                    .card .additional {
+                    position: absolute;
+                    width: 150px;
+                    height: 100%;
+                    background: linear-gradient(#dE685E, #EE786E);
+                    transition: width 0.4s;
+                    overflow: hidden;
+                    z-index: 2;
+                    }
+
+
+                    .card.green .additional {
+                    background: linear-gradient(#92bCa6, #A2CCB6);
+                    }
+
+
+                    .card:hover .additional {
+                    width: 100%;
+                    border-radius: 0 5px 5px 0;
+                    }
+
+                    .card .additional .user-card {
+                    width: 150px;
+                    https: //localhost:44364/Content/car.png height: 100%;
+                    https: //localhost:44364/Content/car.png position: relative;
+                    float: left;
+                    }
+
+                    .card .additional .more-info {
+                    width: 300px;
+                    float: left;
+                    position: absolute;
+                    left: 150px;
+                    height: 100%;
+                    }
+
+                    https://localhost:44364/Content/car.png .card .additional .more-info h3 {
+                    https: //localhost:44364/Content/car.png color: #fff;
+                    margin-bottom: 0;
+                    }
+
+                    .card.green .additional .more-info h3 {
+                    color: #224C36;
+                    }
+
+                    .card .additional .coords {
+                    margin: 0 1rem;
+                    color: #fff;
+                    font-size: 1rem;
+                    }
+
+                    .card.green .additional .coords {
+                    color: #325C46;
+                    }
+
+                    .card .additional .coords span + span {
+                    float: right;
+                    }
+
+                    .card .additional .stats {
+                    font-size: 2rem;
+                    display: flex;
+                    position: absolute;
+                    bottom: 1rem;
+                    left: 1rem;
+                    right: 1rem;
+                    top: auto;
+                    color: #fff;
+                    }
+
+                    .card.green .additional .stats {
+                    color: #325C46;
+                    }
+
+                    .card .additional .stats > div {
+                    flex: 1;
+                    text-align: center;
+                    }
+
+                    .card .additional .stats i {
+                    display: block;
+                    }
+
+                    .card .additional .stats div.title {
+                    font-size: 0.75rem;
+                    font-weight: bold;
+                    text-transform: uppercase;
+                    }
+
+                    .card .additional .stats div.value {
+                    font-size: 1.5rem;
+                    font-weight: bold;
+                    line-height: 1.5rem;
+                    }
+
+                    .card .additional .stats div.value.infinity {
+                    font-size: 2.5rem;
+                    }
+
+
+</style>
+
+
