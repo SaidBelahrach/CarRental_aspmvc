@@ -54,6 +54,7 @@ namespace projet_ASP.Models
         public virtual DbSet<Locataire> Locataires { get; set; }
         public virtual DbSet<Reservation> reservations { get; set; }
         public virtual DbSet<RetourVoiture> RetourVoitures { get; set; }
+        public virtual DbSet<Reclamation> Reclamations { get; set; }
 
         public static ApplicationDbContext Create()
         {

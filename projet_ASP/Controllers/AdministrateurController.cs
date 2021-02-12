@@ -30,12 +30,12 @@ namespace projet_ASP.Controllers
             return View(loca);
         }
 
-        public ActionResult Statistiques()
+        public ActionResult Reclamations()
         {
             ApplicationDbContext db = new ApplicationDbContext();
-            var users = db.Users.ToList();
+            var reclamations = db.Reclamations.ToList();
 
-            return View(users);
+            return View(reclamations);
         }
     }
 

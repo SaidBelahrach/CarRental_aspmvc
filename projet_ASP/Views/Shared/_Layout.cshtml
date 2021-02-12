@@ -41,14 +41,11 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    @if (User.IsInRole("Admin"))
+                    @if (!User.IsInRole("Admin"))
                     {
-                        <li>@Html.ActionLink("Home", "Index", "Voitures")</li>         @*i'll put statistique in his home page*@
+                        <li>@Html.ActionLink("Home", "Index", "Voitures")</li>        
                     }
-                    else
-                    {
-                        <li>@Html.ActionLink("Home", "Index", "Voitures")</li>
-                    }
+                    
                     @if (User.IsInRole("Locataire"))
                     {
                         @* <li>@Html.ActionLink("Locataire", "Index", "Locataire")</li>*@
@@ -62,7 +59,7 @@
                     }
                     @if (User.IsInRole("Admin"))//oujil
                     {
-                        <li>@Html.ActionLink("Reclamations", "Index", "Administrateur")</li>
+                        <li>@Html.ActionLink("Reclamations", "Reclamations", "Administrateur")</li>
                         <li>@Html.ActionLink("Proprietaires", "Propietaires", "Administrateur")</li>
                         <li>@Html.ActionLink("Locataires", "Locataires", "Administrateur")</li>
                         @*   <li>@Html.ActionLink("Réclamations", "Index", "Reservations")</li>*@

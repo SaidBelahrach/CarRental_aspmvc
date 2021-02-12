@@ -1,0 +1,103 @@
+﻿@model IEnumerable<projet_ASP.Models.Reclamation>
+@using Microsoft.AspNet.Identity;
+
+
+@{
+    ViewBag.Title = "Reclamations";
+}
+<table class="table table-hover table-striped thead-dark">
+    <thead class="thead-dark">
+    <th>
+        Autheur
+    </th>
+    <th>
+        Description
+    </th>
+    <th>
+        Destinataire
+    </th>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @if (item.Createur == true)
+                {
+                    @Html.DisplayFor(modelItem => item.proprietaire.ApplicationUser.nomComplet) <p>(Proprietaire)</p>
+                }
+                else
+                {
+                    @Html.DisplayFor(modelItem => item.Locataire.ApplicationUser.nomComplet) <p>(Locataire)</p>
+                }
+            </td>
+            <td>
+
+                @Html.DisplayFor(modelItem => item.description)
+
+
+
+            </td>
+            <td>
+                @if (item.Createur == true)
+                {
+                    @Html.DisplayFor(modelItem => item.Locataire.ApplicationUser.nomComplet) <p>(Locataire)</p>
+                }
+                else
+                {
+                    @Html.DisplayFor(modelItem => item.proprietaire.ApplicationUser.nomComplet)<p>(Proprietaire)</p>
+                }
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+<style>
+
+    .table-hover .table-active:hover > td,
+    .table-hover .table-active:hover > th {
+        background-color: rgba(0, 0, 0, 0.075);
+    }
+
+    .table .thead-dark th {
+        color: #fff;
+        background-color: #212529;
+        border-color: #32383e;
+        font-family:Calibri;
+    }
+
+    .table .thead-light th {
+        color: #495057;
+        background-color: #e9ecef;
+        border-color: #dee2e6; 
+    }
+
+    .table-dark {
+        color: #fff;
+        background-color: #212529;
+    }
+
+        .table-dark th,
+        .table-dark td,
+        .table-dark thead th {
+            border-color: #32383e;
+        }
+
+        .table-dark.table-bordered {
+            border: 0;
+        }
+
+        .table-dark.table-striped tbody tr:nth-of-type(odd) {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .table-dark.table-hover tbody tr:hover {
+            background-color: rgba(255, 255, 255, 0.075);
+        }
+    td,th {
+        text-align: center;
+       text-decoration:none;
+    } 
+</style>
+
