@@ -13,7 +13,7 @@
                     @foreach (var item in Model)
                     {
                         byte[] byteData = item.ApplicationUser.imageBytes;
-
+                      
                         //Convert byte arry to base64string
                         string imreBase64Data = Convert.ToBase64String(byteData);
                         string imgDataURL = string.Format("data:image/png;base64,{0}", imreBase64Data); //https://www.c-sharpcorner.com/article/mvc-display-image-from-byte-array/
