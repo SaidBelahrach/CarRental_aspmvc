@@ -8,7 +8,6 @@
 
     <div class="container-fluid  bg-light filter-bar" style="  ">
         <div>
-
             <button type="submit" class="btn btn-outline-primary ignore px-4 py-2 filter-btn" id="filter-btn" style="outline:none;">  <i class="fas ignore filter-btn fa-filter pr-2"></i>Filtrer </button>
             @using (Html.BeginForm("filter", "Voitures", FormMethod.Post, new { name = "filter-form", @class = "ignore", @id = "filterFormId" }))
             {

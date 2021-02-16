@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<projet_ASP.Models.Reservation>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Reservations";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -16,10 +16,10 @@
         @Html.DisplayNameFor(model => model.dateReservation)
     </th>
     <th>
-        @Html.DisplayName("Voiture")
+        @Html.DisplayName(projet_ASP.Resources.Models.Reservation.car)
     </th>
     <th>
-        @Html.DisplayNameFor(model => model.cout)
+        @Html.DisplayNameFor(model => model.cout) (DH)
     </th>
     <th>
         @Html.DisplayNameFor(model => model.dateDebut)
@@ -27,61 +27,66 @@
     <th class="px-0">
         @Html.DisplayNameFor(model => model.dateFin)
     </th>
-    @if (User.IsInRole("Proprietaire"))
+    @if (User.IsInRole("Proprietaire") || User.IsInRole("Admin"))
     {
         <th>
-            Locataire
+            @Html.DisplayName(projet_ASP.Resources.Models.Reservation.locataire)
         </th>
-    } 
-    <th>Action</th>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.dateReservation)
-            </td>
-            <td>
-                <a href='/Voitures/Details?id=@item.idVoiture' class="text-primary" style="text-decoration:none;">
-                    @Html.DisplayFor(modelItem => item.voiture.marque)
-                </a>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.cout)
-            </td>
-            <td>
-                @item.dateDebut.ToShortDateString()
-            </td>
-            <td>
-                @item.dateFin.ToShortDateString()
-            </td>
-            @if (User.IsInRole("Proprietaire"))
+    }
+    @if (!User.IsInRole("Admin"))
+    {
+        <th>Action</th>
+    }
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
             {
-                <td>
-                    <a href='/Locataire/Index?id=@item.locataire.ApplicationUserID' class="text-primary" style="text-decoration:none;">
-                        @item.locataire.ApplicationUser.nomComplet
-                    </a>
-                </td>
-            }
-        <td style="text-decoration:none;">
-            @*  @Html.ActionLink(" ", "Edit", new { id = item.idContrat }, new { @class = "fas fa-edit text-primary pr-3" }) *@
-            @Html.ActionLink(" ", "Delete", new { id = item.idContrat }, new { @title = "Supprimer", @class = "fas fa-trash text-danger pr-3", @style = "font-size:18px;" })
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.dateReservation)
+                    </td>
+                    <td>
+                        <a href='/Voitures/Details?id=@item.idVoiture' class="text-primary" style="text-decoration:none;">
+                            @Html.DisplayFor(modelItem => item.voiture.marque)
+                        </a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.cout)
+                    </td>
+                    <td>
+                        @item.dateDebut.ToShortDateString()
+                    </td>
+                    <td>
+                        @item.dateFin.ToShortDateString()
+                    </td>
+                    @if (User.IsInRole("Proprietaire") || User.IsInRole("Admin"))
+                    {
+                        <td>
+                            <a href='/Locataire/Index?id=@item.locataire.ApplicationUserID' class="text-primary" style="text-decoration:none;">
+                                @item.locataire.ApplicationUser.nomComplet
+                            </a>
+                        </td>
+                    }
+                    @if (!User.IsInRole("Admin"))
+                    {
+                        <td style="text-decoration:none;">
+                            @*  @Html.ActionLink(" ", "Edit", new { id = item.idContrat }, new { @class = "fas fa-edit text-primary pr-3" }) *@
+                            @Html.ActionLink(" ", "Delete", new { id = item.idContrat }, new { @title = "Supprimer", @class = "fas fa-trash text-danger pr-3", @style = "font-size:18px;" })
 
-            @Html.ActionLink(" ", "Details", new { id = item.idContrat }, new { @title = "Détails", @class = "fas fa-info-circle text-warning  pr-3", @style = "font-size:18px;" })
-            @if (User.IsInRole("Proprietaire"))
-            {
-                if (!item.doesCarReturned)
-                {
-                    @Html.ActionLink(" ", "Create", "RetourVoitures", new { idContrat = item.idContrat }, new { @title = "Valider retour de voiture", @class = "fas fa-check-circle text-success", @style = "font-size:18px;" })
-                }
+                            @Html.ActionLink(" ", "Details", new { id = item.idContrat }, new { @title = "Détails", @class = "fas fa-info-circle text-warning  pr-3", @style = "font-size:18px;" })
+                            @if (User.IsInRole("Proprietaire"))
+                            {
+                                if (!item.doesCarReturned)
+                                {
+                                    @Html.ActionLink(" ", "Create", "RetourVoitures", new { idContrat = item.idContrat }, new { @title = "Valider retour de voiture", @class = "fas fa-check-circle text-success", @style = "font-size:18px;" })
+                                }
+                            }
+                        </td>
+                    }
+                </tr>
             }
-        </td>
-
-            </tr>
-        }
-    </tbody>
-</table>
+        </tbody>
+    </table>
 <style>
 
     .table-hover .table-active:hover > td,

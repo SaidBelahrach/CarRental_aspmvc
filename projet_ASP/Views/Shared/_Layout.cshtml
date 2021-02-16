@@ -5,19 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title </title>
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
-    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-@*    <link href="https://fonts.googleapis.com/css?family=Coda|Open+Sans" rel="stylesheet">*@
-    <style>
-        .accountPresenter{
-            position: absolute; 
-            top :8px; 
-            right:10px;
-        }
-    </style>
+    @*    <link href="https://fonts.googleapis.com/css?family=Coda|Open+Sans" rel="stylesheet">*@
+
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/smoothness/jquery-ui.css">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <style>
+        .accountPresenter {
+            position: absolute;
+            top: 8px;
+            right: 10px;
+        }
+    </style>
 </head>
 <body>
 
@@ -40,23 +41,27 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Voitures")</li>
+                    @if (!User.IsInRole("Admin"))
+                    {
+                        <li>@Html.ActionLink("Home", "Index", "Voitures")</li>        
+                    }
+                    
                     @if (User.IsInRole("Locataire"))
                     {
-                        <li>@Html.ActionLink("Locataire", "Index", "Locataire")</li>
+                        @* <li>@Html.ActionLink("Locataire", "Index", "Locataire")</li>*@
                         <li>@Html.ActionLink("Reservations", "Index", "Reservations")</li>
                     }
                     @if (User.IsInRole("Proprietaire"))
                     {
-                        <li>@Html.ActionLink("Proprietaire", "Index", "Proprietaire")</li>
+                        @*    <li>@Html.ActionLink("Proprietaire", "Index", "Proprietaire")</li>*@
                         <li>@Html.ActionLink("Mes Voitures", "VoituresProprietaire", "Voitures")</li>
                         <li>@Html.ActionLink("Reservations", "Index", "Reservations")</li>
                     }
                     @if (User.IsInRole("Admin"))//oujil
                     {
-                        <li>@Html.ActionLink("Statistiques", "Index", "Proprietaire")</li>
-                        <li>@Html.ActionLink("Proprietaires", "Index", "Proprietaire")</li>
-                        <li>@Html.ActionLink("Locataires", "VoituresProprietaire", "Voitures")</li>
+                        <li>@Html.ActionLink("Reclamations", "Reclamations", "Administrateur")</li>
+                        <li>@Html.ActionLink("Proprietaires", "Propietaires", "Administrateur")</li>
+                        <li>@Html.ActionLink("Locataires", "Locataires", "Administrateur")</li>
                         @*   <li>@Html.ActionLink("Réclamations", "Index", "Reservations")</li>*@
                     }
                 </ul>
@@ -70,10 +75,10 @@
         <hr />
         <footer>
             @*  <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>*@
-            @*  <div class="nav navbar-nav" style="float:right; padding-top:15px;">
-                    <a style="color: gainsboro;" href="@Url.Action("SetLanguage", "Language", new { @name = "fr" })">Francais </a>  |
-                    <a style="color:gainsboro;" href="@Url.Action("SetLanguage", "Language", new { @name = "en" })">English</a>
-                </div>*@
+            @**@ <div class=" " style="width:100%;text-align:center; padding-top:15px;">
+                <a style="color: dimgray;" href="@Url.Action("SetLanguage", "Language", new { @name = "fr" })">Francais </a>  |
+                <a style="color:dimgray;" href="@Url.Action("SetLanguage", "Language", new { @name = "en" })">English</a>
+            </div>
         </footer>
     </div>
     @Scripts.Render("~/bundles/jquery")

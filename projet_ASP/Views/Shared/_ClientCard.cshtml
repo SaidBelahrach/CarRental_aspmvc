@@ -1,75 +1,39 @@
-﻿@model projet_ASP.Models.Voiture
+﻿@model projet_ASP.Models.Locataire
 @using Microsoft.AspNet.Identity;
 @{
-    ViewBag.Title = "CarCard2";
+
+    ViewBag.Title = "ClientCard";
 }
 @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">*@
 
 
-@*<link href="https://fonts.googleapis.com/icon?family=Material+Icons"*@ 
-    <div class="card">
-        <div class="user-card ">
-            <div style="" class="card-img">
-                <img style="" class="img-responsive" src="@ViewData["img"]" width="" height="100%" />
-            </div>  
+@*<link href="https://fonts.googleapis.com/icon?family=Material+Icons"*@
+<div class="card">
+    <div class="user-card ">
+        <div style="" class="card-img">
+            <img style="" class="img-responsive" src="@ViewData["ProfileImg"]" width="" height="100%" />
         </div>
-        <div class="general">
-            <h3 class="mt-2">@Model.marque</h3>
-            <span class="prix-label text-success">@Model.coutParJour @projet_ASP.Resources.Models.Voitures.perday</span>
-            <div class="card-icon-container " style="">
-                <label class="datails-item">
-                    <span class="fas fa-map-marker icon  "></span>          @* https://fontawesome.com/v4.7.0  search here*@
-                    <span>
-                        @Model.proprietaire.ApplicationUser.adresse
-                    </span>
-                </label>
-                <label class="datails-item ">
-                    <span class="fas fa-adjust icon  "></span>
-                    <span>@Model.couleur</span>
-                </label>
-                <label class="datails-item">
-                    <span class="fas fa-users  icon  "></span>
-                    <span>@Model.nbPlaces @projet_ASP.Resources.Models.Voitures.seats</span>
-                </label>
-                <label class="datails-item">
-                    <span class="fas fa-car icon  "></span>
-                    <span>    @(Model.automatique ? projet_ASP.Resources.Models.Voitures.auto: projet_ASP.Resources.Models.Voitures.manual)</span>
-                </label>
+    </div>
+    <div class="general">
+        <h3 class="mt-2" ><a href="@Url.Action("Index", "Locataire", new { id = Model.ApplicationUserID })">@Model.ApplicationUser.nomComplet</a></h3>
+     
+        <div class="card-icon-container " style="">
+         <label class="datails-item">
+                <span class="fas fa-car icon  "></span>
+                <span>@Html.ActionLink(@Model.reservations.Count+" reservations","Index","Reservations",new { id = Model.ApplicationUserID },new {@class="text-info" })  </span>
+            </label>
+         <label class="datails-item">
+                <span class="fas fa-car icon  "></span>
+                <span>@Html.ActionLink("Ajouter a la liste noire","Index","Reservations",new { id = Model.ApplicationUserID },new {@class="text-info" })  </span>
+          </label><label class="datails-item">
+                <span class="fas fa-car icon  "></span>
+                <span>@Html.ActionLink("Ajouter au favoris","Index","Reservations",new { id = Model.ApplicationUserID },new {@class="text-info" })  </span>
+            </label>
 
-            </div>
-            <div class="card-description">
-                <p>
-                </p>
-            </div>
-            <hr style="width:100%;position:absolute;bottom:15px;left:0px;color:#f1f1f1;" />
-            @if (User.IsInRole("Proprietaire") && User.Identity.GetUserId().Equals(Model.proprietaire.ApplicationUserID))
-            {
-                <div class="card-fotter">
-                    <button type="button" class=" button_custom  btn btn-info px-4 py-1" onclick="window.location='@Url.Action("Edit", "Voitures", new { id = Model.idVoiture })'">Modifier</button>
-                </div>
-                <div class="card-fotter">
-                    <button type="button" class=" button_custom btn-delete btn btn-danger px-2 py-1" onclick="window.location='@Url.Action("Delete", "Voitures", new { id = Model.idVoiture })'">Supprimer</button>
-                </div>
-            }
-            else
-            {//   @Html.ActionLink("Edit", "Edit", new { id = Model.matricule }) |
-               @* <div class="card-fotter">
-                    <button type="button" class=" button_custom  btn btn-primary px-4 py-1" onclick="window.location='@Url.Action("Details", "Voitures", new { id = Model.idVoiture })'">Réserver</button>
-                </div>*@
-                <a href="@Url.Action("Index", "Proprietaire", new { id = Model.proprietaire.ApplicationUserID })" class="proprietaire-profil text-info" title="Proprietaire" style="text-decoration:none;">
-                    <img class=" img-circle" src="@ViewData["ProfileImg"]" width="30px" height="30px" @*onclick="@Url.Action("Index", "Manage")" *@ />
+        </div>
+  
 
-                    <span style="position: absolute; top: 8px; left: 33px;font-size:13px; ">  @Model.proprietaire.ApplicationUser.nomComplet </span>
-                    <span style=" font-size:8px;color:gray;position:absolute;top:27px;left:35px;z-index:1111;"> Particulier</span>
-                </a>
-            }
-            @if (User.IsInRole("Locataire"))
-            {
-                <div class="card-fotter">
-                    <button type="button" class=" button_custom  btn btn-primary px-4 py-1" onclick="window.location='@Url.Action("Details", "Voitures", new { id = Model.idVoiture })'">@projet_ASP.Resources.Models.Voitures.reserver</button>
-                </div>
-            }
-            </div> 
+    </div>
 </div>
 
 <style>
@@ -85,8 +49,8 @@
 
                     .card-icon-container {
                     display:flex;
-                    justify-content:space-between;
-                    width:70%;
+                    justify-content:space-around;
+  
                     flex-wrap:wrap;
                     }
                     .datails-item {
@@ -96,20 +60,19 @@
                     font-weight:normal;
                     }
 
-                    .card  {
-                    min-width:320px;
-                    max-width: 730px;
-                    height: 150px;
-                    min-height: 150px;
-                    max-height: 220px;
-                    background-color: #fff;
-                    background: linear-gradient(#f8f8f8, #fff);
-                    box-shadow: 0 1px 4px 1px rgba(0,0,0,0.14);
-                    border-radius: 6px;
-                    overflow: hidden;
-                    position: relative;
-                    margin: 10px auto;
-                    }
+    .card {
+        min-width: 320px;
+        max-width: 730px;
+        height: 70px;
+        min-height: 70px;
+        max-height: 70px;
+        background-color: white;
+        box-shadow: 0 1px 4px 1px rgba(0,0,0,0.14);
+        border-radius: 6px;
+        overflow: hidden;
+        position: relative;
+        margin: 10px auto;
+    }
                     .proprietaire-profil {
                     padding: 8px 0px;
                     width: 150px;
@@ -139,19 +102,24 @@
                     align-items: center;
                     width: 25%;
                     height: 100%;
-                    background-color: lightgray;
+                    background-color: white;
                     }
 
                     .card-img {
-                    align-content: center;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    }
 
+                     margin: 20% 20% 20% 20%;
+                     align-content: center;
+                     display: flex;
+                     justify-content: center;
+                     align-items: center;
+                      }
+
+                    .img-responsive {
+                      border-radius: 50%;
+                        }
                     .prix-label {
                     position: absolute;
-                    font-size: 2.2rem;
+                    font-size: 2.5rem;
                     top: 0px;
                     right: 8px;
 

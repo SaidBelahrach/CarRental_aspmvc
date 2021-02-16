@@ -117,70 +117,43 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="auto" xml:space="preserve">
-    <value>Automatic</value>
+  <data name="car" xml:space="preserve">
+    <value>Voiture</value>
   </data>
-  <data name="automatique" xml:space="preserve">
-    <value>Type</value>
+  <data name="cout" xml:space="preserve">
+    <value>Coût</value>
   </data>
-  <data name="carDisponible" xml:space="preserve">
-    <value>Disponible</value>
+  <data name="coutReq" xml:space="preserve">
+    <value>Coût est obligatoire</value>
   </data>
-  <data name="carRented" xml:space="preserve">
-    <value>Rented</value>
+  <data name="dateDebut" xml:space="preserve">
+    <value>Date début</value>
   </data>
-  <data name="couleur" xml:space="preserve">
-    <value>Color</value>
+  <data name="dateDebutReq" xml:space="preserve">
+    <value>Date début est obligatoire</value>
   </data>
-  <data name="couleurReq" xml:space="preserve">
-    <value>Color is required</value>
+  <data name="dateFin" xml:space="preserve">
+    <value>Date retour</value>
   </data>
-  <data name="coutParJour" xml:space="preserve">
-    <value>Cost per day</value>
+  <data name="dateFinReq" xml:space="preserve">
+    <value>Date retour est obligatoire</value>
   </data>
-  <data name="coutParJourReq" xml:space="preserve">
-    <value>Cost per dayis required</value>
+  <data name="dateReservation" xml:space="preserve">
+    <value>Date de reservation</value>
   </data>
-  <data name="disponible" xml:space="preserve">
-    <value>Disponibility</value>
+  <data name="dateReservationReq" xml:space="preserve">
+    <value>Date de reservation est obligatoire</value>
   </data>
-  <data name="image" xml:space="preserve">
-    <value>Car image</value>
+  <data name="doesCarReturned" xml:space="preserve">
+    <value>Voiture retourné?</value>
   </data>
-  <data name="manual" xml:space="preserve">
-    <value>Manual</value>
+  <data name="locataire" xml:space="preserve">
+    <value>Locataire</value>
   </data>
-  <data name="marque" xml:space="preserve">
-    <value>Mark</value>
+  <data name="typeDePaiement" xml:space="preserve">
+    <value>Type de paiement</value>
   </data>
-  <data name="marqueReq" xml:space="preserve">
-    <value>Mark is required</value>
-  </data>
-  <data name="matricule" xml:space="preserve">
-    <value>Registration number</value>
-  </data>
-  <data name="matriculeReq" xml:space="preserve">
-    <value>Registration number is required</value>
-  </data>
-  <data name="model" xml:space="preserve">
-    <value>Model</value>
-  </data>
-  <data name="modelReq" xml:space="preserve">
-    <value>Model is required</value>
-  </data>
-  <data name="nbPlaces" xml:space="preserve">
-    <value>Number of seats</value>
-  </data>
-  <data name="nbPlacesReq" xml:space="preserve">
-    <value>Number of seats is required</value>
-  </data>
-  <data name="perday" xml:space="preserve">
-    <value>DH/day</value>
-  </data>
-  <data name="reserver" xml:space="preserve">
-    <value>Book now</value>
-  </data>
-  <data name="seats" xml:space="preserve">
-    <value>Seats</value>
+  <data name="typeDePaiementReq" xml:space="preserve">
+    <value>Type de paiement est obligatoire</value>
   </data>
 </root>

@@ -117,70 +117,55 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="auto" xml:space="preserve">
-    <value>Automatic</value>
+  <data name="adresse" xml:space="preserve">
+    <value>Adresse</value>
   </data>
-  <data name="automatique" xml:space="preserve">
-    <value>Type</value>
+  <data name="adresseReq" xml:space="preserve">
+    <value>Adresse est obligatoire</value>
   </data>
-  <data name="carDisponible" xml:space="preserve">
-    <value>Disponible</value>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Confirmer mot de passe</value>
   </data>
-  <data name="carRented" xml:space="preserve">
-    <value>Rented</value>
+  <data name="ConfirmPasswordReq" xml:space="preserve">
+    <value>les mots de passes entrés ne sont pas les même !</value>
   </data>
-  <data name="couleur" xml:space="preserve">
-    <value>Color</value>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
   </data>
-  <data name="couleurReq" xml:space="preserve">
-    <value>Color is required</value>
+  <data name="EmailReq" xml:space="preserve">
+    <value>Email est obligatoire</value>
   </data>
-  <data name="coutParJour" xml:space="preserve">
-    <value>Cost per day</value>
+  <data name="imageBytes" xml:space="preserve">
+    <value>Image de Profile</value>
   </data>
-  <data name="coutParJourReq" xml:space="preserve">
-    <value>Cost per dayis required</value>
+  <data name="locataire" xml:space="preserve">
+    <value>Locataire</value>
   </data>
-  <data name="disponible" xml:space="preserve">
-    <value>Disponibility</value>
+  <data name="nomComplet" xml:space="preserve">
+    <value>Nom complet</value>
   </data>
-  <data name="image" xml:space="preserve">
-    <value>Car image</value>
+  <data name="nomCompletReq" xml:space="preserve">
+    <value>Nom complet est obligatoire</value>
   </data>
-  <data name="manual" xml:space="preserve">
-    <value>Manual</value>
+  <data name="Password" xml:space="preserve">
+    <value>Mot de passe</value>
   </data>
-  <data name="marque" xml:space="preserve">
-    <value>Mark</value>
+  <data name="PasswordReq" xml:space="preserve">
+    <value>Mot de passe doit contenir 6 caractères</value>
   </data>
-  <data name="marqueReq" xml:space="preserve">
-    <value>Mark is required</value>
+  <data name="profileType" xml:space="preserve">
+    <value>Type de profile</value>
   </data>
-  <data name="matricule" xml:space="preserve">
-    <value>Registration number</value>
+  <data name="profileTypeReq" xml:space="preserve">
+    <value>Type de profile est obligatoire</value>
   </data>
-  <data name="matriculeReq" xml:space="preserve">
-    <value>Registration number is required</value>
+  <data name="proprietaire" xml:space="preserve">
+    <value>Propriétaire</value>
   </data>
-  <data name="model" xml:space="preserve">
-    <value>Model</value>
+  <data name="tel" xml:space="preserve">
+    <value>Téléphone</value>
   </data>
-  <data name="modelReq" xml:space="preserve">
-    <value>Model is required</value>
-  </data>
-  <data name="nbPlaces" xml:space="preserve">
-    <value>Number of seats</value>
-  </data>
-  <data name="nbPlacesReq" xml:space="preserve">
-    <value>Number of seats is required</value>
-  </data>
-  <data name="perday" xml:space="preserve">
-    <value>DH/day</value>
-  </data>
-  <data name="reserver" xml:space="preserve">
-    <value>Book now</value>
-  </data>
-  <data name="seats" xml:space="preserve">
-    <value>Seats</value>
+  <data name="telReq" xml:space="preserve">
+    <value>Téléphone est obligatoire</value>
   </data>
 </root>
