@@ -16,10 +16,10 @@ namespace projet_ASP.Controllers
             String userId = id == "" ? User.Identity.GetUserId() : id;
             ApplicationDbContext db = new ApplicationDbContext();
             var prop = db.Proprietaires.Include(e => e.Voitures).Where(item => item.ApplicationUserID == userId).FirstOrDefault();
+            if (prop == null) return RedirectToAction("Index", "Manage");
             int reservation = db.reservations.Where(item => item.voiture.idProprietaire == prop.idProprietaire).ToList().Count;
             ViewData["nbCars"] = prop.Voitures.Count;
             ViewData["nbReservation"] = reservation;
-            if (prop == null) return RedirectToAction("Index", "Manage");
             return View(prop);
         }
 
