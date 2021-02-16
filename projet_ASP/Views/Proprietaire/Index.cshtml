@@ -20,7 +20,10 @@
                             @if (User.Identity.GetUserId() == Model.ApplicationUser.Id)
                             {
                                 <div class="col m-0 p-0">
-                                    <p class="text-center mb-0"> <label for="files" class="btn text-center" style="font-size:0.8rem;">Séléctionner Image</label></p>
+                                    <p class="text-center mb-0">
+                                        <label for="files" class="btn text-center" style="font-size:0.8rem;">Séléctionner Image</label>
+                                        <a for="submit" class="btn text-center" id="submit" style="font-size:0.8rem;">Supprimer</a>
+                                    </p>
                                     <p class="p-0 mb-0"><input accept="image/*" id="files" class="p-0" style="visibility:hidden;" type="file"></p>
                                 </div>
                             }
@@ -148,6 +151,8 @@
         border: none;
     }
 
+    
+
     body {
         margin-top: 20px;
         color: #1a202c;
@@ -213,6 +218,9 @@
         outline: 0;
         outline-color: white;
     }
+    #submit{
+        color :black;
+    }
 </style>
 
 
@@ -220,6 +228,12 @@
     @Scripts.Render("~/bundles/jqueryval")
 }
 <script>
+
+    var profileImage = document.getElementById('imgProfile');
+    var defaultImageSrc = new String(profileImage.src);
+    if (defaultImageSrc.includes("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA")) $("#submit").addClass("d-none");
+    else $("#submit").removeClass("d-none");
+
     $("#files").change(function () {
         if (this.files[0] != null) {
             var formdata = new FormData();
@@ -239,6 +253,18 @@
                 }
             }
 
+        }
+
+    });
+
+    $("#submit").click(function (e) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '../Proprietaire/deletePhoto');
+        xhr.send("Delete");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                location.reload();
+            }
         }
 
     });

@@ -39,7 +39,19 @@ namespace projet_ASP.Controllers
             file.InputStream.Read(prop.imageBytes, 0, file.ContentLength);
             db.SaveChanges();
             return Json("Uploaded " + Request.Files.Count + " files");
+        } 
+        public JsonResult deletePhoto()
+        {
+            string imgPath = Server.MapPath("~/Content/profile_img.png"); //img par defaut
+            String userId = User.Identity.GetUserId();
+            ApplicationDbContext db = new ApplicationDbContext();
+            var prop = db.Users.Where(item => item.Id == userId).FirstOrDefault();
+            prop.imageBytes = System.IO.File.ReadAllBytes(imgPath);
+            db.SaveChanges();
+            return Json("Supprimer image de profile");
         }
+
+
 
 
         public class ProfileUpdate
