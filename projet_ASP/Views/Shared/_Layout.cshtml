@@ -4,25 +4,16 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title </title>
-    @*<script src="~/Scripts/jquery-3.4.1.min.js"></script>*@
+    <script src="~/Scripts/jquery-3.5.1.js"></script> 
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     @*    <link href="https://fonts.googleapis.com/css?family=Coda|Open+Sans" rel="stylesheet">*@
-
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/smoothness/jquery-ui.css">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    <style>
-        .accountPresenter {
-            position: absolute;
-            top: 8px;
-            right: 10px;
-        }
-    </style>
+   
 </head>
 <body>
-
-
     <div class="navbar navbar-inverse navbar-fixed-top">
         @if (User.IsInRole("Proprietaire") || User.IsInRole("Locataire"))
         {
@@ -43,9 +34,10 @@
                 <ul class="nav navbar-nav">
                     @if (!User.IsInRole("Admin"))
                     {
-                        <li>@Html.ActionLink("Home", "Index", "Voitures")</li>        
+                        <li>@Html.ActionLink("Home", "Index", "Voitures")</li>
+
                     }
-                    
+
                     @if (User.IsInRole("Locataire"))
                     {
                         @* <li>@Html.ActionLink("Locataire", "Index", "Locataire")</li>*@
@@ -73,18 +65,25 @@
     <div class="container body-content" style="min-width: 320px; border-left: solid 1px #f1f1f1; border-right: solid 1px #f1f1f1;">
         @RenderBody()
         <hr />
-        <footer>
-            @*  <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>*@
+        <footer> 
             @**@ <div class=" " style="width:100%;text-align:center; padding-top:15px;">
                 <a style="color: dimgray;" href="@Url.Action("SetLanguage", "Language", new { @name = "fr" })">Francais </a>  |
                 <a style="color:dimgray;" href="@Url.Action("SetLanguage", "Language", new { @name = "en" })">English</a>
             </div>
         </footer>
     </div>
-    @Scripts.Render("~/bundles/jquery")
+    @* @Scripts.Render("~/bundles/jquery") *@
     @Scripts.Render("~/bundles/bootstrap")
 
     @RenderSection("scripts", required: false)
+
+    <style>
+        .accountPresenter {
+            position: absolute;
+            top: 8px;
+            right: 10px;
+        }
+    </style>
 </body>
 
 </html>

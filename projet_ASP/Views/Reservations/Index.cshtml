@@ -7,40 +7,42 @@
 
 <h2>Reservations</h2>
 @*
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>*@
-<table class="table table-hover table-striped thead-dark">
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
+<table class="table table-hover table-striped thead-dark" id="reservation-tab">
     <thead class="thead-dark">
-    <th>
-        @Html.DisplayNameFor(model => model.dateReservation)
-    </th>
-    <th>
-        @Html.DisplayName(projet_ASP.Resources.Models.Reservation.car)
-    </th>
-    <th>
-        @Html.DisplayNameFor(model => model.cout) (DH)
-    </th>
-    <th>
-        @Html.DisplayNameFor(model => model.dateDebut)
-    </th>
-    <th class="px-0">
-        @Html.DisplayNameFor(model => model.dateFin)
-    </th>
-    @if (User.IsInRole("Proprietaire") || User.IsInRole("Admin"))
-    {
-        <th>
-            @Html.DisplayName(projet_ASP.Resources.Models.Reservation.locataire)
-        </th>
-    }
-    @if (User.IsInRole("Proprietaire"))
-    {
-        <th>Action</th>
-    }
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.dateReservation)
+            </th>
+            <th>
+                @Html.DisplayName(projet_ASP.Resources.Models.Reservation.car)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cout) (DH)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dateDebut)
+            </th>
+            <th class="px-0">
+                @Html.DisplayNameFor(model => model.dateFin)
+            </th>
+            @if (User.IsInRole("Proprietaire") || User.IsInRole("Admin"))
             {
+                <th>
+                    @Html.DisplayName(projet_ASP.Resources.Models.Reservation.locataire)
+                </th>
+            }
+            @if (User.IsInRole("Proprietaire"))
+            {
+                <th>Action</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.dateReservation)
@@ -69,28 +71,64 @@
                 }
                 @if (User.IsInRole("Proprietaire"))
                 {
-            <td style="text-decoration:none;">
-                @* @Html.ActionLink(" ", "Delete", new { id = item.idContrat }, new { @title = "Supprimer", @class = "fas fa-trash text-danger pr-3", @style = "font-size:18px;" })
-        @Html.ActionLink(" ", "Details", new { id = item.idContrat }, new { @title = "Détails", @class = "fas fa-info-circle text-warning  pr-3", @style = "font-size:18px;" })
-                *@
+                    <td style="text-decoration:none;">
+                        @* @Html.ActionLink(" ", "Delete", new { id = item.idContrat }, new { @title = "Supprimer", @class = "fas fa-trash text-danger pr-3", @style = "font-size:18px;" })
+                            @Html.ActionLink(" ", "Details", new { id = item.idContrat }, new { @title = "Détails", @class = "fas fa-info-circle text-warning  pr-3", @style = "font-size:18px;" })
+                        *@
 
-                @if (!item.doesCarReturned)
-                {
-                    @Html.ActionLink(" ", "Create", "RetourVoitures", new { idContrat = item.idContrat }, new { @title = "Valider retour de voiture", @class = "fas fa-check-circle text-success", @style = "font-size:18px;" })
+                        @if (!item.doesCarReturned)
+                        {
+                            @Html.ActionLink(" ", "Create", "RetourVoitures", new { idContrat = item.idContrat }, new { @title = "Valider retour de voiture", @class = "fas fa-check-circle text-success", @style = "font-size:18px;" })
+
+                        }
+                        else
+                        {
+                            @Html.ActionLink(" ", "Index", "RetourVoitures", new { idContrat = item.idContrat }, new { @title = "Détails", @class = "fas fa-info-circle  text-info", @style = "font-size:18px;" })
+                        }
+
+                    </td>
 
                 }
-                else
-                {
-                    @Html.ActionLink(" ", "Index", "RetourVoitures", new { idContrat = item.idContrat }, new { @title = "Détails", @class = "fas fa-info-circle  text-info", @style = "font-size:18px;" })
-                }
 
-            </td>  
-                    }
-                  
-                </tr>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<link href="~/Content/my_dataTable.css" rel="stylesheet" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#reservation-tab').DataTable({
+            "language": {
+                "lengthMenu": "Afficher _MENU_ Lignes",
+                "zeroRecords": "pas de résultats",
+                "info": "Page _PAGE_ de _PAGES_",
+                "infoEmpty": "Pas de notes à afficher",
+                "infoFiltered": "(Filtré de _MAX_ totale)",
+
+
+                "sProcessing": "Chargement...",
+                "sEmptyTable": "Pas de notes à afficher",
+                "sSearch": "Chercher:",
+                "sUrl": "",
+                "sInfoThousands": ",",
+                "sLoadingRecords": "Chargement...",
+                "oPaginate": {
+                    "sFirst": "Premier",
+                    "sLast": "Dernier",
+                    "sNext": "Suivant",
+                    "sPrevious": "Précédent"
+                },
+                "oAria": {
+                    "SortAscending": ":Said",
+                    "SortDescending": ":Belahrach"
+                }
             }
-        </tbody>
-    </table>
+        });
+    });
+</script>
 <style>
 
     .table-hover .table-active:hover > td,
@@ -102,13 +140,13 @@
         color: #fff;
         background-color: #212529;
         border-color: #32383e;
-        font-family:Calibri;
+        font-family: Calibri;
     }
 
     .table .thead-light th {
         color: #495057;
         background-color: #e9ecef;
-        border-color: #dee2e6; 
+        border-color: #dee2e6;
     }
 
     .table-dark {
@@ -133,8 +171,9 @@
         .table-dark.table-hover tbody tr:hover {
             background-color: rgba(255, 255, 255, 0.075);
         }
-    td,th {
+
+    td, th {
         text-align: center;
-       text-decoration:none;
-    } 
+        text-decoration: none;
+    }
 </style>

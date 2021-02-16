@@ -4,7 +4,6 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<link href="~/Content/my_dataTable.css" rel="stylesheet" />
 <h2>Voitures retournés</h2>
 <hr />
 @*
@@ -12,53 +11,52 @@
         @Html.ActionLink("Create New", "Create")
     </p>*@
 <table class="table thead-dark " id="mytable">
-    <tr class="bg-dark text-white">
-        <th>
-            @Html.DisplayNameFor(model => model.dateRetour)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.etat)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.pinalise)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.amende)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+    <thead>
         <tr>
-            <td>
-                @item.dateRetour.ToShortDateString()
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.etat)
-            </td>
-            <td>
-                @(item.pinalise? "Oui":"non")
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.amende)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.idRetour }) |
-                @* @Html.ActionLink("Details", "Details", new { id=item.idRetour }) |*@
-                @Html.ActionLink("Delete", "Delete", new { id = item.idRetour })
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.dateRetour)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.etat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.pinalise)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.amende)
+            </th>
+            <th></th>
         </tr>
-    }
-
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.dateRetour.ToShortDateString()
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.etat)
+                </td>
+                <td>
+                    @(item.pinalise? "Oui":"non")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.amende)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.idRetour }) |
+                    @* @Html.ActionLink("Details", "Details", new { id=item.idRetour }) |*@
+                    @Html.ActionLink("Delete", "Delete", new { id = item.idRetour })
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
+<link href="~/Content/my_dataTable.css" rel="stylesheet" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css">
 <script>
-@*    $(document).ready(function () {
-        $('.notes-table').DataTable();
-
-    });*@
     $(document).ready(function () {
         $('#mytable').DataTable({
             "language": {
