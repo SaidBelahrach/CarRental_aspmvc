@@ -4,20 +4,21 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Index @Session["idContrat"] </h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
+<link href="~/Content/my_dataTable.css" rel="stylesheet" />
+<h2>Voitures retournés</h2>
+<hr />
+@*
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
+<table class="table thead-dark " id="mytable">
+    <tr class="bg-dark text-white">
         <th>
             @Html.DisplayNameFor(model => model.dateRetour)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.etat)
-        </th> 
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.pinalise)
         </th>
@@ -27,26 +28,64 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.dateRetour)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.etat)
-        </td>
-        <td>
-           @(item.pinalise? "Oui":"non")
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.amende)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.idRetour }) |
-            @Html.ActionLink("Details", "Details", new { id=item.idRetour }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.idRetour })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.dateRetour.ToShortDateString()
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.etat)
+            </td>
+            <td>
+                @(item.pinalise? "Oui":"non")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.amende)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.idRetour }) |
+                @* @Html.ActionLink("Details", "Details", new { id=item.idRetour }) |*@
+                @Html.ActionLink("Delete", "Delete", new { id = item.idRetour })
+            </td>
+        </tr>
+    }
 
 </table>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css">
+<script>
+@*    $(document).ready(function () {
+        $('.notes-table').DataTable();
+
+    });*@
+    $(document).ready(function () {
+        $('#mytable').DataTable({
+            "language": {
+                "lengthMenu": "Afficher _MENU_ Lignes",
+                "zeroRecords": "pas de résultats",
+                "info": "Page _PAGE_ de _PAGES_",
+                "infoEmpty": "Pas de notes à afficher",
+                "infoFiltered": "(Filtré de _MAX_ totale)",
+
+
+                "sProcessing": "Chargement...",
+                "sEmptyTable": "Pas de notes à afficher",
+                "sSearch": "Chercher:",
+                "sUrl": "",
+                "sInfoThousands": ",",
+                "sLoadingRecords": "Chargement...",
+                "oPaginate": {
+                    "sFirst": "Premier",
+                    "sLast": "Dernier",
+                    "sNext": "Suivant",
+                    "sPrevious": "Précédent"
+                },
+                "oAria": {
+                    "SortAscending": ":Said",
+                    "SortDescending": ":Belahrach"
+                }
+            }
+        });
+    });
+</script>
