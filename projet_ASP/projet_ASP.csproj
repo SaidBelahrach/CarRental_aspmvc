@@ -174,6 +174,7 @@
     <Compile Include="Controllers\LocataireController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProprietaireController.cs" />
+    <Compile Include="Controllers\ReclamationController.cs" />
     <Compile Include="Controllers\ReservationsController.cs" />
     <Compile Include="Controllers\RetourVoituresController.cs" />
     <Compile Include="Controllers\VoituresController.cs" />
@@ -310,6 +311,11 @@
     <Compile Include="Models\RetourVoiture.cs" />
     <Compile Include="Models\Voiture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Models\ApplicationUser.Designer.cs">
       <DependentUpon>ApplicationUser.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -450,6 +456,7 @@
     <Content Include="Views\Administrateur\Locataires.cshtml" />
     <Content Include="Views\Shared\_ClientCard.cshtml" />
     <Content Include="Views\Administrateur\Reclamations.cshtml" />
+    <Content Include="Views\Reclamation\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -561,6 +568,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202102151255165_addded_favoris_listNoire_table3.resx">
       <DependentUpon>202102151255165_addded_favoris_listNoire_table3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Models\ApplicationUser.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
