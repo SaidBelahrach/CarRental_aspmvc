@@ -450,6 +450,8 @@
     <Content Include="Views\Administrateur\Locataires.cshtml" />
     <Content Include="Views\Shared\_ClientCard.cshtml" />
     <Content Include="Views\Administrateur\Reclamations.cshtml" />
+    <Content Include="Views\Administrateur\ListeNoire.cshtml" />
+    <Content Include="Views\Administrateur\ListesDesFavoris.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

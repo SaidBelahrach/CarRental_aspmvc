@@ -13,7 +13,7 @@
                     @foreach (var item in Model)
                     {
                         byte[] byteData = item.ApplicationUser.imageBytes;
-                      
+
                         //Convert byte arry to base64string
                         string imreBase64Data = Convert.ToBase64String(byteData);
                         string imgDataURL = string.Format("data:image/png;base64,{0}", imreBase64Data); //https://www.c-sharpcorner.com/article/mvc-display-image-from-byte-array/
@@ -32,4 +32,46 @@
                 </div>
             </div>
         </div>*@
+
+
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script>
+
+            function Add_To_Black_List( id) {
+            var formData = new FormData();
+
+            console.log(id)
+            formData.append("id", id);
+
+            $.ajax({
+                type: "POST",
+                url: '../Administrateur/Locataires',
+                data: formData,
+                dataType: 'json',
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    if (response == 'reclamation updated') {
+                        alert("succes")
+                    }
+                  
+
+                },
+                //error: function(error) {
+                //    alert("error");
+                //}
+         @*   }).done(function () {
+                alert('success');
+            }.fail(function (xhr, status, errorThrown) {
+                alert('fail');
+            };*@
+            });
+        }
+
+
+
+</script>
