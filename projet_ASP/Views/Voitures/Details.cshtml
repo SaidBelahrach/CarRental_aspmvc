@@ -71,19 +71,19 @@ else
 
             <td>
                 @(Model.automatique ? projet_ASP.Resources.Models.Voitures.auto: projet_ASP.Resources.Models.Voitures.manual)
-                </td>
+            </td>
         </tr>
-     @*   <tr>
-            <td>
-                @Html.LabelFor(model => model.disponible, new { @class = " " }):
-            </td>
+        @*   <tr>
+                <td>
+                    @Html.LabelFor(model => model.disponible, new { @class = " " }):
+                </td>
 
-            <td>
-                @(Model.disponible ? projet_ASP.Resources.Models.Voitures.carDisponible: projet_ASP.Resources.Models.Voitures.carRented)
-            </td>
-        </tr>*@
-        <tr class="  ">
-            <td class=" pt-5 ">
+                <td>
+                    @(Model.disponible ? projet_ASP.Resources.Models.Voitures.carDisponible: projet_ASP.Resources.Models.Voitures.carRented)
+                </td>
+            </tr>*@
+        <tr class="">
+            <td class=" ">
                 @Html.LabelFor(model => model.coutParJour, new { @class = "control-label " }):
             </td>
 
@@ -105,33 +105,40 @@ else
 </div>
 @if (User.IsInRole("Locataire"))
 {
+
     <div class="  mb-4 p-2">
         <form class=" filterbydate" onsubmit="myFunction()" name="filterbydate" id="filterbydate" style=" z-index:1444; ">
             <div class="d-flex mt-2">
                 @*@(Model.reservations.Count > 0 ? Model.reservations.OrderByDescending(d => d.dateFin).FirstOrDefault().dateFin.AddDays(2).ToString("yyyy-MM-dd") : DateTime.Now.ToString("yyyy-MM-dd"))"*@
-                @Html.Label(projet_ASP.Resources.Models.Reservation.dateDebut, new { @style = "width:110px", @class = "text-left pt-2 pr-2" })
+                @Html.Label(projet_ASP.Resources.Models.Reservation.dateDebut + ":", new { @style = "width:130px", @class = "text-left " })
                 <input type="text" required name="startdate" class="form-control startdate datepicker py-0" style="font-size:11px;width:165px; " />
             </div>
             <div class="d-flex mt-2">
-                @Html.Label(projet_ASP.Resources.Models.Reservation.dateFin, new { @style = "width:110px", @class = "text-left pt-2 pr-2" })
+                @Html.Label(projet_ASP.Resources.Models.Reservation.dateFin+":", new { @style = "width:130px", @class = "text-left " })
                 <input type="text"
                        required name="enddate" class="form-control enddate datepicker"
                        style="font-size:11px; width:165px;" />
             </div>
+            <div class="d-none  mb-4 pt-4">
+                <div class="d-flex mt-2">
+                    @Html.Label(projet_ASP.Resources.Models.Reservation.totaldays + ":", new { @style = "width:125px", @class = "text-left  " })
+                    <p class="totalDays">0</p>
+                </div>
+                <div class="d-flex mt-2">
+                    @Html.Label(projet_ASP.Resources.Models.Reservation.totalCost + ":", new { @style = "width:125px", @class = "text-left   " })
+                    <p class="totalCost">0</p>
+                </div>
+            </div>
             <div class="form-actions no-color mt-4 align-content-center">
-                @Html.ActionLink("Cancel", "Index", null, new { @style = "width:100px;", @class = "btn btn-default p" })
-                <input type="submit" value="Reserver" class="btn btn-success " id="btn-reserver" style="width:100px;" />
+                @Html.ActionLink(projet_ASP.Resources.Models.Voitures.cancel, "Index", null, new { @style = "width:100px;", @class = "btn btn-default p" })
+                <input type="submit" value="@projet_ASP.Resources.Models.Voitures.reserver" class="btn btn-success " id="btn-reserver" style="width:100px;" />
             </div>
             @*https://css-tricks.com/prefilling-date-input/*@
         </form>
     </div>
 }
 
-@*@using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
 
-    }*@
 <div class="reserver-progress  ">
     <span class="fas fa-times  text-danger " style="position:absolute;top:10px;right:10px;font-size:20px;color:red;display:none;"
           onclick="closeProg() "></span>
@@ -191,7 +198,7 @@ else
         var fin = Number(Date.parse(enddate.value));
         var diff = fin - debut;
         if (diff < 0) {
-            event.preventDefault(); 
+            event.preventDefault();
             alert("Date incorrecte!")
             return;
         }
@@ -199,7 +206,7 @@ else
             var d = new Date(e);
             var d1 = new Date(startdate.value);
             var d2 = new Date(enddate.value);
-           
+
             if (d >= d1  && d  <= d2 ) {
                 event.preventDefault();
                 console.log(d1.toLocaleDateString() + " < " + d.toLocaleDateString()+" < " + d2.toLocaleDateString());
@@ -212,6 +219,7 @@ else
                 alert("Date incorrecte!")
                 return;
             }
+            $('.totalDays').text("555");
         }
         progress.style.display = "block";
         event.preventDefault();
@@ -266,8 +274,8 @@ else
 
 <script>
 
-   
-   
+
+
 </script>
 @foreach (var item in Model.reservations)
 {
@@ -279,7 +287,7 @@ else
             SelectedDates.push( new Date('@DateTime.Now.AddDays(i).ToString("MM/dd/yyyy")'));*@
         n = Number("@item.dateFin.Subtract(item.dateDebut).TotalDays");
         var result = new Date("@item.dateDebut.ToString("MM / dd / yyyy")");
-        
+
         SelectedDates[result] = new Date(result);//the first one
 
         for (var i = 0; i < n; i++)
@@ -319,5 +327,5 @@ else
 
         }
     });
-    
+
 </script>

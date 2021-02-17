@@ -14,20 +14,21 @@ namespace projet_ASP.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int idRetour { get; set; }
 
-        [Required(ErrorMessage = "Date de retour est obligatoire", AllowEmptyStrings = false)]
-        [Display(Name = "Date de retour")]
+
+        [Required(ErrorMessageResourceType = typeof(Resources.Models.RetourVoiture), ErrorMessageResourceName = "dateRetourReq")]
+        [Display(Name = "dateRetour", ResourceType = typeof(Resources.Models.RetourVoiture))]
         public DateTime dateRetour { get; set; }
 
         //[Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
-        [Display(Name = "Etat de voiture après retour")] //est il endomagé ou non
+        [Display(Name = "etat", ResourceType = typeof(Resources.Models.RetourVoiture))]
         public string etat { get; set; }
 
         //  [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
-        [Display(Name = "Pinalisé")]
+        [Display(Name = "pinalise", ResourceType = typeof(Resources.Models.RetourVoiture))]
         [DefaultValue(false)]
         public Boolean pinalise { get; set; }
 
-        [Display(Name = "Amende")]
+        [Display(Name = "amende", ResourceType = typeof(Resources.Models.RetourVoiture))]
         [DefaultValue(0)]
         public Decimal amende { get; set; }
 

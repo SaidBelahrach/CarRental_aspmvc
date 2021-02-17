@@ -160,6 +160,24 @@ namespace projet_ASP.Resources.Models {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Total cost.
+        /// </summary>
+        public static string totalCost {
+            get {
+                return ResourceManager.GetString("totalCost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total days.
+        /// </summary>
+        public static string totaldays {
+            get {
+                return ResourceManager.GetString("totaldays", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Paiement type.
         /// </summary>
         public static string typeDePaiement {

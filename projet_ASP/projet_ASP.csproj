@@ -325,6 +325,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Resources\Models\RetourVoiture.Designer.cs">
+      <DependentUpon>RetourVoiture.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Resources\Models\Reservation.Designer.cs">
       <DependentUpon>Reservation.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -332,6 +337,11 @@
     </Compile>
     <Compile Include="Resources\Models\ApplicationUser.fr.Designer.cs">
       <DependentUpon>ApplicationUser.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Models\RetourVoiture.fr.Designer.cs">
+      <DependentUpon>RetourVoiture.fr.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -369,6 +379,26 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Locataire.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Views\shared.Designer.cs">
+      <DependentUpon>shared.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Views\shared.fr.Designer.cs">
+      <DependentUpon>shared.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Views\dataTable.fr.Designer.cs">
+      <DependentUpon>dataTable.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Views\dataTable.Designer.cs">
+      <DependentUpon>dataTable.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -466,7 +496,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Resources\Views\" />
     <Folder Include="Views\Language\" />
   </ItemGroup>
   <ItemGroup>
@@ -590,6 +619,14 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ApplicationUser.fr.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Models\RetourVoiture.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>RetourVoiture.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Models\RetourVoiture.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>RetourVoiture.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Models\Reservation.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Reservation.Designer.cs</LastGenOutput>
@@ -621,6 +658,22 @@
     <EmbeddedResource Include="Resources\Models\Locataire.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Locataire.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\shared.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>shared.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\shared.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>shared.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\dataTable.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>dataTable.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Views\dataTable.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>dataTable.fr.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

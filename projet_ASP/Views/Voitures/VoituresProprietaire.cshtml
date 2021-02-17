@@ -1,15 +1,15 @@
 ﻿@model IEnumerable<projet_ASP.Models.Voiture>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = @projet_ASP.Resources.Models.Voitures.Mes_voitures;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Voitures</h2>
+<h2>@projet_ASP.Resources.Models.Voitures.Mes_voitures</h2>
 @if (User.IsInRole("Proprietaire"))
 {
     <p>
-        @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
+        @Html.ActionLink(projet_ASP.Resources.Models.Voitures.create, "Create", null, new { @class = "btn btn-primary" })
     </p>
 } 
 

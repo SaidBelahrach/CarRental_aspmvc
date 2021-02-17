@@ -1,12 +1,10 @@
 ﻿@model projet_ASP.Models.Voiture
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = @projet_ASP.Resources.Views.shared.Create;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Create</h2> 
-
+ 
 @using (Html.BeginForm("Create",
                         "Voitures",
                         FormMethod.Post,
@@ -15,7 +13,6 @@
     @Html.AntiForgeryToken()
     
 <div class="form-horizontal">
-    <h4>Voiture</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
@@ -64,8 +61,8 @@
             <div class="checkbox">
                 @* @Html.EditorFor(model => model.automatique)*@
 
-                @Html.RadioButton("automatique", "auto", true, new { @class = "text-danger" }) Auto
-                @Html.RadioButton("automatique", "Manual", new { @class = "text-danger" }) Manual
+                @Html.RadioButton("automatique", "auto", true, new { @class = "text-danger" }) @projet_ASP.Resources.Models.Voitures.auto
+                @Html.RadioButton("automatique", "Manual", new { @class = "text-danger" }) @projet_ASP.Resources.Models.Voitures.manual
 
                 @Html.ValidationMessageFor(model => model.automatique, "", new { @class = "text-danger" })
             </div>
@@ -92,14 +89,14 @@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
+            <input type="submit" value="@projet_ASP.Resources.Views.shared.Create" class="btn btn-default" />
         </div>
     </div>
 </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink(" ", "Index",null,new { @class = "fas fa-long-arrow-alt-left" })
 </div>
 
 @section Scripts {
