@@ -1,0 +1,198 @@
+﻿@using Microsoft.AspNet.Identity
+@using projet_ASP.Models;
+
+
+<div class="wrapper" id="idwrapper">
+    @{
+        string id = User.Identity.GetUserId();
+        ApplicationDbContext db = new ApplicationDbContext();
+        List<Notification> listNotif = db.Notifications.Where(item => (item.ApplicationUser.Id == id) && item.cliked == false).ToList();
+        var unviewedNotif = db.Notifications.Where(item => item.ApplicationUser.Id == id && item.vu == false).FirstOrDefault();
+    }
+
+    <span id="notifImg" class="profileImg2 rounded-circle text-white" width="20" height="20">
+        @if (unviewedNotif == null)
+        {<i class="fas fa-bell " style="color:yellow"></i>}
+        else
+        { <span id="notif-badge" class="rounded-circle"></span>
+            <i class="fas fa-bell " style="color:yellow"></i>
+        }
+    </span>
+
+
+
+    <div class="box-container2 bg-light d-none" id="boxNotif">
+
+        @foreach (var item in listNotif)
+        {
+            <div class="box-notif" id="box-notif-@item.idNotification">
+                <img src="~/Content/notif.png" class="notif-img rounded-circle" width="20" height="20" />
+                <i class="fas fa-times delteNotif" data-idNotif="@item.idNotification"></i>
+                <div class="content-notif">
+                    <h6 id="hint_text">@item.hint</h6>
+                    <small class="seeMore" id="seeMore-@item.idNotification" data-idNotif="@item.idNotification">Voir plus !</small>
+                </div>
+            </div>
+        }
+
+        <div class="box-notif" id="box-notif-1">
+            <img src="~/Content/notif.png" class="notif-img rounded-circle" width="20" height="20" />
+            <i class="fas fa-times delteNotif" data-idNotif="1"></i>
+            <div class="content-notif">
+                <h6 id="hint_text">sssss</h6>
+                <div class="seeMore" data-idNotif="1">Voir plus !</div>
+            </div>
+        </div>  <div class="box-notif" id="box-notif-2">
+            <img src="~/Content/notif.png" class="notif-img rounded-circle" width="20" height="20" />
+            <i class="fas fa-times delteNotif" data-idNotif="2"></i>
+            <div class="content-notif">
+                <h6 id="hint_text">sssss</h6>
+                <div class="seeMore" data-idNotif="2">Voir plus !</div>
+            </div>
+        </div>  <div class="box-notif" id="box-notif-3">
+            <img src="~/Content/notif.png" class="notif-img rounded-circle" width="20" height="20" />
+            <i class="fas fa-times delteNotif" data-idNotif="3"></i>
+            <div class="content-notif">
+                <h6 id="hint_text">sssss</h6>
+                <div class="seeMore" data-idNotif="3">Voir plus !</div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<style>
+
+
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        width: 150px;
+    }
+
+    .profileImg2 {
+        border-color: black;
+        cursor: pointer;
+        margin-bottom: 5px;
+        align-self: center;
+        position: relative;
+    }
+
+    #notif-badge {
+        background-color: red;
+        width: 5px;
+        height: 5px;
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+
+    .box-container2 .butn {
+        padding: 0;
+        margin: 0;
+        text-decoration: none;
+    }
+
+    .box-container2 {
+        width: 250px;
+        max-height: 200px;
+        background: linear-gradient(#f8f8f8, #fff);
+        box-shadow: 0 1px 4px 1px rgba(0,0,0,0.14);
+        border-radius: 5px;
+        overflow: scroll;
+        align-self: center;
+        padding: 0;
+    }
+
+    ::-webkit-scrollbar {
+        width: 1px;
+    }
+
+    .breake-line {
+        width: 100%;
+        height: 1px;
+        background-color: lightgray;
+    }
+
+    .box-notif {
+        background-color: #F8F8F8;
+        width: 100%;
+        height: 50px;
+        margin-top :2px;
+        position: relative;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        border-radius: 3px;
+        border-bottom: 1px outset lightgrey;
+        border-top: 1px outset lightgrey;
+    }
+
+    .notif-img {
+        margin: 0;
+        display: block;
+        position: absolute;
+        top: 50%;
+        transform: translate(0,-50%);
+    }
+
+    .content-notif {
+        width: 88%;
+        height: 100%;
+        margin-left: 25px;
+    }
+
+    .seeMore {
+        position: absolute;
+        bottom: 2px;
+        right: 2px;
+        cursor: pointer;
+    }
+
+    .delteNotif {
+        position: absolute;
+        top: 2px;
+        right: 2px;
+        cursor: pointer;
+    }
+
+
+    .butn {
+        color: black;
+    }
+</style>
+
+
+
+
+<script>
+   
+
+    $("#notifImg").click(function (e) {
+        $("#boxNotif").toggleClass("d-none");
+    });
+
+    $(".delteNotif").click(function (e) {
+        console.log("clikeed");
+        var id = $(this).attr("data-idNotif");
+        var idSelectedBox = "#box-notif-" + id;
+        $.ajax({
+            type: "POST",
+            url: "../../Home/RemoveNotif",
+            data: '{"id":"' + id + '"}',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                var stringdata = new String(data);
+                if (!stringdata.trim().length == 0) $(idSelectedBox).addClass("d-none");
+            },
+            error: function (data) {
+                alert("erreur");
+            }
+        });
+            
+
+    });
+
+
+
+</script>

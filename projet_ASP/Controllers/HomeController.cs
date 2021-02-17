@@ -1,5 +1,7 @@
 ﻿using projet_ASP.Models;
 using System.Web.Mvc;
+using System.Linq;
+using System;
 
 namespace projet_ASP.Controllers
 {
@@ -29,6 +31,27 @@ namespace projet_ASP.Controllers
             return RedirectToAction("Index", "Voitures");
         }
 
+
+        public JsonResult RemoveNotif(string id)
+        {
+            int notifId = Convert.ToInt32(id);
+            try
+            {
+                ApplicationDbContext db = new ApplicationDbContext();
+                var notif = db.Notifications.Where(n => n.idNotification == notifId).FirstOrDefault();
+                if(notif != null)
+                {
+                    db.Notifications.Remove(notif);
+                    db.SaveChanges();
+                }
+             
+            }
+            catch (Exception e)
+            {
+                return Json(e.Message);
+            }
+            return Json("Deleted"+id);
+        }
 
 
         public ActionResult About()
