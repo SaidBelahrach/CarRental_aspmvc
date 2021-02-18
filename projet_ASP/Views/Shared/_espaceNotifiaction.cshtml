@@ -1,0 +1,149 @@
+﻿@using Microsoft.AspNet.Identity
+@using projet_ASP.Models;
+
+
+
+<div class="button_wrapper">
+    <div class="btn-group" id="btn-group">
+        <a class="btn btn-primary" href="#" id="btnRecl">Réclamation</a>
+        <a class="btn btn-primary" href="#" id="btnPenal">Pénalité</a>
+       
+    </div>
+</div>
+
+
+<div id="table_reclamation">
+    <table class="table table-hover table-striped thead-dark" id="reservation-tab">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    Date Réclamation
+                </th>
+                <th>
+                    Contenu
+                </th> 
+                <th>
+                    Propriétaire
+                </th>
+                <th>
+                    révisé
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                string id = User.Identity.GetUserId();
+                ApplicationDbContext db = new ApplicationDbContext();
+                int idApplicationUser = 0;
+                var listReclamation = new List<Reclamation>();
+                if (User.IsInRole("locataire"))
+                {
+                    var loca = db.Locataires.Where(l => l.ApplicationUserID.Equals(id)).FirstOrDefault();
+                    if (loca != null) { idApplicationUser = loca.idLocataire; }
+                    listReclamation = db.Reclamations.Where(r => r.idLocataire == idApplicationUser && r.Createur == false).ToList();
+
+                }
+                else
+                {
+                    var prop = db.Proprietaires.Where(l => l.ApplicationUserID.Equals(id)).FirstOrDefault();
+                    if (prop != null) { idApplicationUser = prop.idProprietaire; }
+                    listReclamation = db.Reclamations.Where(r => r.idProprietaire == idApplicationUser && r.Createur == false).ToList();
+                }
+                foreach (var item in listReclamation)
+                {
+                        string idPropApplicationUser = db.Proprietaires.Where(p => p.idProprietaire == item.idProprietaire).FirstOrDefault().ApplicationUserID;
+                        var nameProp = db.Users.Where(pr => pr.Id == idPropApplicationUser).FirstOrDefault().nomComplet;
+
+                        <tr>
+                            <td>@item.dateCreation.ToString()</td>
+                            <td>@item.description</td>
+                            <td>
+                             <a href='@Url.Action("Index", "Proprietaire", new { id = idPropApplicationUser })' class="text-primary" style="text-decoration:none;color:black;">
+                                @nameProp
+                            </a>
+                            </td>
+                           
+                            @if (item.valide == false)
+                            {
+                                <td>Non Révisé</td>
+                            }
+                            else
+                            {
+                                <td> Révisé</td>
+                            }
+                        </tr>
+                }
+            }
+
+        </tbody>
+    </table>
+
+</div>
+
+
+<div id="table_penalite" class="d-none">
+    <table class="table table-hover table-striped thead-dark" id="reservation-tab">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    Penalité 
+                </th>
+                <th>
+                    Contenu
+                </th>
+                <th>
+                    révisé
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+
+
+
+
+<style>
+    #btnradio1, #btnradio2, #btnradio3 {
+        visibility: hidden;
+    }
+
+    .button_wrapper {
+        position: relative;
+    }
+
+    #btn-group {
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%)
+    }
+</style>
+
+
+<link href="~/Content/my_dataTable.css" rel="stylesheet" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
+<script>
+    $("#btnRecl").click(function (e) {
+        $("#table_reclamation").removeClass("d-none");
+        $("#table_penalite").addClass("d-none");
+    });
+
+    $("#btnPenal").click(function (e) {
+        $("#table_reclamation").addClass("d-none");
+        $("#table_penalite").removeClass("d-none");
+    });
+
+</script> 

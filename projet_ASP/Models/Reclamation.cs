@@ -19,7 +19,7 @@ namespace projet_ASP.Models
 
 
         [Required(ErrorMessage = "Description est obligatoire", AllowEmptyStrings = false)]
-        [Display(Name = "Description")]
+        [Display(Name = "Réclamer")]
         public string description { get; set; }
 
         

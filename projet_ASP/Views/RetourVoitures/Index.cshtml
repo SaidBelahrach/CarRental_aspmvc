@@ -4,49 +4,86 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Index @Session["idContrat"] </h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.dateRetour)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.etat)
-        </th> 
-        <th>
-            @Html.DisplayNameFor(model => model.pinalise)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.amende)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.dateRetour)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.etat)
-        </td>
-        <td>
-           @(item.pinalise? "Oui":"non")
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.amende)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.idRetour }) |
-            @Html.ActionLink("Details", "Details", new { id=item.idRetour }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.idRetour })
-        </td>
-    </tr>
-}
-
+<h2>Voitures retournés</h2>
+<hr />
+@*
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
+<table class="table thead-dark " id="mytable">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.dateRetour)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.etat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.pinalise)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.amende)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.dateRetour.ToShortDateString()
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.etat)
+                </td>
+                <td>
+                    @(item.pinalise? projet_ASP.Resources.Models.RetourVoiture.yes: projet_ASP.Resources.Models.RetourVoiture.no)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.amende)
+                </td>
+                <td>
+                    @Html.ActionLink(" ", "Edit", new { id = item.idRetour },new { @class = "fas fa-edit" }) 
+                    @* @Html.ActionLink("Details", "Details", new { id=item.idRetour }) |*@
+                @*    @Html.ActionLink("Delete", "Delete", new { id = item.idRetour })*@
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
+<link href="~/Content/my_dataTable.css" rel="stylesheet" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#mytable').DataTable({
+            "language": {
+                "lengthMenu": "@projet_ASP.Resources.Views.dataTable.lengthMenu",
+                "zeroRecords": "@projet_ASP.Resources.Views.dataTable.zeroRecords",
+                "info": "Page _PAGE_ de _PAGES_",
+                "infoEmpty": "@projet_ASP.Resources.Views.dataTable.infoEmpty",
+                "infoFiltered": "",
+
+
+                "sProcessing": "@projet_ASP.Resources.Views.dataTable.sProcessing",
+                "sEmptyTable": "@projet_ASP.Resources.Views.dataTable.sEmptyTable",
+                "sSearch": "@projet_ASP.Resources.Views.dataTable.sSearch",
+                "sUrl": "",
+                "sInfoThousands": ",",
+                "sLoadingRecords": "@projet_ASP.Resources.Views.dataTable.sProcessing",
+                "oPaginate": {
+                    "sFirst": "Premier",
+                    "sLast": "Dernier",
+                    "sNext": "@projet_ASP.Resources.Views.dataTable.sNext",
+                    "sPrevious": "@projet_ASP.Resources.Views.dataTable.sPrevious"
+                },
+                "oAria": {
+                    "SortAscending": ":Said",
+                    "SortDescending": ":Belahrach"
+                }
+            }
+        });
+    });
+</script>

@@ -3,24 +3,20 @@
 @{
     ViewBag.Title = "Locataires";
 }
-
 <div class="row gutters-sm">
     <div class="col-sm-12 mb-3">
         <div class="card1" style="overflow:auto;">
             <div class="card-body" style="min-height:100px;">
-                <div>
-
+                <div> 
                     @foreach (var item in Model)
                     {
                         byte[] byteData = item.ApplicationUser.imageBytes;
-
                         //Convert byte arry to base64string
                         string imreBase64Data = Convert.ToBase64String(byteData);
                         string imgDataURL = string.Format("data:image/png;base64,{0}", imreBase64Data); //https://www.c-sharpcorner.com/article/mvc-display-image-from-byte-array/
                         ViewData["ProfileImg"] = string.Format("data:image/png;base64,{0}", imreBase64Data);
                         @Html.Partial("_ClientCard", item);
-                    }
-
+                    } 
                 </div>
             </div>
         </div>
@@ -28,7 +24,6 @@
     @*<div class="col-sm-6 mb-3">
             <div class="card h-100">
                 <div class="card-body">
-
                 </div>
             </div>
         </div>*@

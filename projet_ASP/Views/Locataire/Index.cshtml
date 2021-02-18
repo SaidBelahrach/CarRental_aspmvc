@@ -17,19 +17,31 @@
                                 <img id="imgProfile" src="@(string.Format("data:image/png;base64,{0}", Convert.ToBase64String(Model.ApplicationUser.imageBytes)))" alt="Admin" class="d-block ml-auto mr-auto rounded-circle" width="150px">
                             </div>
                             <div class="col text-center"> <h4 id="mainName">@Model.ApplicationUser.nomComplet</h4></div>
-                            <div class="col m-0 p-0">
-                                <p class="text-center mb-0"> <label for="files" class="btn text-center" style="font-size:0.8rem;">Séléctionner Image</label></p>
-                                <p class="p-0 mb-0"><input accept="image/*" id="files" class="p-0" style="visibility:hidden;" type="file"></p>
-                            </div>
+                            @if (User.Identity.GetUserId() == Model.ApplicationUser.Id)
+                            {
+                                <div class="col m-0 p-0">
+                                    <p class="text-center mb-0">
+                                        <label for="files" class="btn text-center" style="font-size:0.8rem;">@projet_ASP.Resources.Views.shared.change_img</label>
+                                        <a for="submit" class="btn text-center" id="submit" style="font-size:0.8rem;">@projet_ASP.Resources.Models.Voitures.delete</a>
+                                    </p>
+                                    <p class="p-0 mb-0"><input accept="image/*" id="files" class="p-0" style="visibility:hidden;" type="file"></p>
+                                </div>
+                            }
                         </div>
                     </div>
                 </div>
                 <div class="card1 mt-3">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                            <h6 class="mb-0">-Nombre d'allocation :</h6>
+                            <h6 class="mb-0">-@projet_ASP.Resources.Views.shared.nbAlloca :</h6>
                         </li>
                     </ul>
+                    @if (User.IsInRole("Proprietaire"))
+                    {
+                        <a href="@Url.Action("Create", "Reclamation", new { id = Model.idLocataire })" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            Réclamation
+                        </a>
+                    }
                 </div>
             </div>
             <div class="col-md-8">
@@ -75,20 +87,10 @@
                         @if (User.Identity.GetUserId() == Model.ApplicationUserID)
                         {
                             <div class="row mr-auto" style="float:right;">
-                                <a class="btn btn-primary" id="btnModifer">Modifier</a>
-                                <a class="btn btn-primary d-none" id="btnSave">Enregistrer</a>
+                                <a class="btn btn-primary" id="btnModifer">@projet_ASP.Resources.Views.shared.edit</a>
+                                <a class="btn btn-primary d-none" id="btnSave">@projet_ASP.Resources.Views.shared.save</a>
                             </div>
                         }
-                    </div>
-                </div>
-                <div class="row gutters-sm">
-                    <div class="col-sm-12 mb-3">
-                        <div class="card1" style="overflow:auto;">
-                            <div class="card-body" style="min-height:100px;">
-                                <div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -180,13 +182,20 @@
         outline: 0;
         outline-color: white;
     }
+    #submit {
+        color: black;
+    }
 </style>
-
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
 <script>
+
+    var profileImage = document.getElementById('imgProfile');
+    var defaultImageSrc = new String(profileImage.src);
+    if (defaultImageSrc.includes("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA")) $("#submit").addClass("d-none");
+    else $("#submit").removeClass("d-none");
+
     $("#files").change(function () {
         if (this.files[0] != null) {
             var formdata = new FormData();
@@ -211,11 +220,22 @@
     });
 
 
+    $("#submit").click(function (e) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '../Locataire/deletePhoto');
+        xhr.send("Delete");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                location.reload();
+            }
+        }
+
+    });
+
+
 
 
     $("#btnModifer").click(function () {
-
-
         $("#nameInput").attr('readonly', false);
         $("#emailInput").attr('readonly', false);
         $("#teleInput").attr('readonly', false);
@@ -224,16 +244,15 @@
         $(".champs").removeClass("removeInputStyles");
         $(".champs").addClass("form-control");
         $("#btnModifer").attr("disabled", true);
-
+        $("#btnModifer").css("opacity", 0);
+        $("#btnModifer").css("cursor", "default");
     });
 
     $("#btnSave").click(function () {
-
         $("#nameInput").attr('readonly', true);
         $("#emailInput").attr('readonly', true);
         $("#teleInput").attr('readonly', true);
         $("#adressInput").attr('readonly', true);
-
         $(".champs").removeClass("form-control");
         $(".champs").addClass("removeInputStyles");
 
@@ -265,6 +284,8 @@
             }
         });
         $("#btnModifer").attr("disabled", false);
+        $("#btnModifer").css("opacity", 1);
+        $("#btnModifer").css("cursor", "pointer");
         $("#btnSave").addClass("d-none");
     });
 

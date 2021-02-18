@@ -79,6 +79,15 @@ namespace projet_ASP.Resources.Models {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string cancel {
+            get {
+                return ResourceManager.GetString("cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disponible.
         /// </summary>
         public static string carDisponible {
@@ -93,6 +102,15 @@ namespace projet_ASP.Resources.Models {
         public static string carRented {
             get {
                 return ResourceManager.GetString("carRented", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cars.
+        /// </summary>
+        public static string cars {
+            get {
+                return ResourceManager.GetString("cars", resourceCulture);
             }
         }
         
@@ -133,11 +151,47 @@ namespace projet_ASP.Resources.Models {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create New.
+        /// </summary>
+        public static string create {
+            get {
+                return ResourceManager.GetString("create", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        public static string delete {
+            get {
+                return ResourceManager.GetString("delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disponibility.
         /// </summary>
         public static string disponible {
             get {
                 return ResourceManager.GetString("disponible", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit.
+        /// </summary>
+        public static string edit {
+            get {
+                return ResourceManager.GetString("edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filter.
+        /// </summary>
+        public static string filter {
+            get {
+                return ResourceManager.GetString("filter", resourceCulture);
             }
         }
         
@@ -196,6 +250,15 @@ namespace projet_ASP.Resources.Models {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to My Cars.
+        /// </summary>
+        public static string Mes_voitures {
+            get {
+                return ResourceManager.GetString("Mes_voitures", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Model.
         /// </summary>
         public static string model {
@@ -232,6 +295,15 @@ namespace projet_ASP.Resources.Models {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Particular.
+        /// </summary>
+        public static string Particulier {
+            get {
+                return ResourceManager.GetString("Particulier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to DH/day.
         /// </summary>
         public static string perday {
@@ -250,11 +322,29 @@ namespace projet_ASP.Resources.Models {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Search anything.
+        /// </summary>
+        public static string search {
+            get {
+                return ResourceManager.GetString("search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Seats.
         /// </summary>
         public static string seats {
             get {
                 return ResourceManager.GetString("seats", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to City.
+        /// </summary>
+        public static string Ville {
+            get {
+                return ResourceManager.GetString("Ville", resourceCulture);
             }
         }
     }

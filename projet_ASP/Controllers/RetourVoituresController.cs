@@ -24,12 +24,12 @@ namespace projet_ASP.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index", "Reservations");
             }
-            RetourVoiture retourVoiture = db.RetourVoitures.Find(id);
+            RetourVoiture retourVoiture = db.RetourVoitures.Where(r=>r.idContrat==id).FirstOrDefault();
             if (retourVoiture == null)
             {
-                return HttpNotFound();
+                return RedirectToAction("Index", "Reservations");
             }
             return View(retourVoiture);
         }

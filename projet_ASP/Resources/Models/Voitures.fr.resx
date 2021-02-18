@@ -123,11 +123,17 @@
   <data name="automatique" xml:space="preserve">
     <value>Type</value>
   </data>
+  <data name="cancel" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
   <data name="carDisponible" xml:space="preserve">
     <value>Disponible</value>
   </data>
   <data name="carRented" xml:space="preserve">
     <value>Loué</value>
+  </data>
+  <data name="cars" xml:space="preserve">
+    <value>Voitures</value>
   </data>
   <data name="couleur" xml:space="preserve">
     <value>Couleur</value>
@@ -141,8 +147,20 @@
   <data name="coutParJourReq" xml:space="preserve">
     <value>Cout par jour est obligatoire</value>
   </data>
+  <data name="create" xml:space="preserve">
+    <value>Ajouter Voiture</value>
+  </data>
+  <data name="delete" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
   <data name="disponible" xml:space="preserve">
     <value>Disponibilité</value>
+  </data>
+  <data name="edit" xml:space="preserve">
+    <value>Modifier</value>
+  </data>
+  <data name="filter" xml:space="preserve">
+    <value>Filtrer</value>
   </data>
   <data name="image" xml:space="preserve">
     <value>Image de voiture</value>
@@ -162,6 +180,9 @@
   <data name="matriculeReq" xml:space="preserve">
     <value>matricule est obligatoire</value>
   </data>
+  <data name="Mes_voitures" xml:space="preserve">
+    <value>Mes Voitures</value>
+  </data>
   <data name="model" xml:space="preserve">
     <value>Modèle</value>
   </data>
@@ -174,13 +195,22 @@
   <data name="nbPlacesReq" xml:space="preserve">
     <value>Nombre de places est obligatoire</value>
   </data>
+  <data name="Particulier" xml:space="preserve">
+    <value>Particulier</value>
+  </data>
   <data name="perday" xml:space="preserve">
     <value>DH/jr</value>
   </data>
   <data name="reserver" xml:space="preserve">
     <value>Réserver</value>
   </data>
+  <data name="search" xml:space="preserve">
+    <value>Chercher</value>
+  </data>
   <data name="seats" xml:space="preserve">
     <value>Places</value>
+  </data>
+  <data name="Ville" xml:space="preserve">
+    <value>Ville</value>
   </data>
 </root>
