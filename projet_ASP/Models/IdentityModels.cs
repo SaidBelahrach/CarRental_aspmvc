@@ -69,7 +69,6 @@ namespace projet_ASP.Models
         public virtual DbSet<Admin> Admins { get; set; }
         public virtual DbSet<Notification> Notifications { get; set; }
 
-        public virtual DbSet<Notification> Notifications { get; set; }
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
