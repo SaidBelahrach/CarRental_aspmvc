@@ -89,7 +89,7 @@ namespace projet_ASP.Controllers
         public ActionResult ListeNoire()
         {
             ApplicationDbContext db = new ApplicationDbContext();
-            string currentUserId = User.Identity.GetUserId();
+            db.Users.Where(item => item.ListeNoire != null);
 
             return View();
         }

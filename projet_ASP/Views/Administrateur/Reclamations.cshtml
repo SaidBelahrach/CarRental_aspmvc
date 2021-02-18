@@ -61,12 +61,15 @@
                 <td>
                     @if (item.valide)
                     {
-                        <p   id="valide">
+                        <p id="valide">
                             Validé
                         </p> }
                     else
                     {
-                        <button class="ValiderBtn" id="Validate_@item.idReclamation"  data-id="@item.idReclamation" onclick='Validate_Click("@item.idReclamation")' > Valider </button>
+                        <p style="display:none"   id="valide_@item.idReclamation">
+                            Validé
+                        </p>
+                        <button class="ValiderBtn" id="Validate_@item.idReclamation" data-id="@item.idReclamation" onclick='Validate_Click("@item.idReclamation")'> Valider </button>
                     }
                 </td>
             </tr>
@@ -144,8 +147,10 @@
                     if (response == 'reclamation updated') {
                         alert("succes")
                     }
+                    $('#valide_' + id).show();
                     $('#Validate_' + id).attr("disabled", true);
-                    $('#Validate_' + id).text("validé");
+                    $('#Validate_' + id).hide();
+                
 
                 },
                 //error: function(error) {
