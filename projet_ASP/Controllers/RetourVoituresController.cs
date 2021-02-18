@@ -26,7 +26,7 @@ namespace projet_ASP.Controllers
             {
                 return RedirectToAction("Index", "Reservations");
             }
-            RetourVoiture retourVoiture = db.RetourVoitures.Where(r=>r.idContrat==id).FirstOrDefault();
+            RetourVoiture retourVoiture = db.RetourVoitures.Where(r => r.idContrat == id).FirstOrDefault();
             if (retourVoiture == null)
             {
                 return RedirectToAction("Index", "Reservations");
@@ -53,14 +53,30 @@ namespace projet_ASP.Controllers
             retourVoiture.idContrat = Convert.ToInt32(Session["idContrat"]);
             if (ModelState.IsValid)
             {
+           
                 var reser = db.reservations.Find(retourVoiture.idContrat);
                 if (reser == null) return RedirectToAction("Index");
+                var applicationUserIdLocatire = db.Locataires.Where(l => l.idLocataire == reser.idLocataire).FirstOrDefault().ApplicationUserID;
                 reser.doesCarReturned = true;
                 db.reservations.AddOrUpdate(reser);
                 var voi = reser.voiture;
                 voi.disponible = true;
                 db.Voitures.AddOrUpdate(voi);
                 db.RetourVoitures.Add(retourVoiture);
+                //--For notificaion if he has a penalty
+                if (retourVoiture.pinalise == true)
+                {
+                    Notification notification = new Notification()
+                    {
+                        type = "p",
+                        hint = "Vous avez une amende de " + retourVoiture.amende,
+                        idOroginalNotification = retourVoiture.idRetour,
+                        ApplicationUserID = applicationUserIdLocatire,
+                        vu = false,
+                        cliked = false,
+                    };
+                    db.Notifications.Add(notification);
+                }
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

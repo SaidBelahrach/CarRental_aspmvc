@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using System.Linq;
 using System;
 
+
 namespace projet_ASP.Controllers
 {
     public class HomeController : Controller
@@ -31,7 +32,6 @@ namespace projet_ASP.Controllers
             return RedirectToAction("Index", "Voitures");
         }
 
-
         public JsonResult RemoveNotif(string id)
         {
             int notifId = Convert.ToInt32(id);
@@ -39,18 +39,18 @@ namespace projet_ASP.Controllers
             {
                 ApplicationDbContext db = new ApplicationDbContext();
                 var notif = db.Notifications.Where(n => n.idNotification == notifId).FirstOrDefault();
-                if(notif != null)
+                if (notif != null)
                 {
                     db.Notifications.Remove(notif);
                     db.SaveChanges();
                 }
-             
+
             }
             catch (Exception e)
             {
                 return Json(e.Message);
             }
-            return Json("Deleted"+id);
+            return Json("Deleted" + id);
         }
 
 

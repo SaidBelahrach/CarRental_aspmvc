@@ -22,23 +22,20 @@
         .notificationPresenter {
             position: absolute;
             top: 15px;
-            right: 130px;
+            right: 55px;
         }
-
-
-       
     </style>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         @if (User.IsInRole("Proprietaire") || User.IsInRole("Locataire"))
         {
-        <div class="accountPresenter">
-            @Html.Partial("_acountPresenter")
-        </div> 
-        <div class="notificationPresenter">
-            @Html.Partial("_notificationPresenter")
-        </div>
+            <div class="accountPresenter">
+                @Html.Partial("_acountPresenter")
+            </div>
+            <div class="notificationPresenter">
+                @Html.Partial("_notificationPresenter")
+            </div>
         }
         <div class="container">
             <div class="navbar-header">
@@ -49,7 +46,7 @@
                 </button>
                 @Html.ActionLink(" CarRental", "Index", "Voitures", new { area = "" }, new { @class = "navbar-brand fas fa-car-side  text-white navbar-brand" })
             </div>
-            <div class="navbar-collapse collapse">
+            <div class="navbar-collapse collapse ">
                 <ul class="nav navbar-nav">
                     @if (!User.IsInRole("Admin"))
                     {
@@ -58,16 +55,11 @@
                     @if (User.IsInRole("Locataire"))
                     {
                         <li>@Html.ActionLink("Reservations", "Index", "Reservations")</li>
-
-
                     }
                     @if (User.IsInRole("Proprietaire"))
                     {
                         <li>@Html.ActionLink(@projet_ASP.Resources.Models.Voitures.Mes_voitures, "VoituresProprietaire", "Voitures")</li>
                         <li>@Html.ActionLink("Reservations", "Index", "Reservations")</li>
-                        <li>@Html.ActionLink("Mon Espace", "Index", "Reservations")</li>
-
-
                     }
                     @if (User.IsInRole("Admin"))//oujil
                     {
@@ -79,16 +71,15 @@
                         
                     }
                 </ul>
+
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
     <div class="container body-content" style="min-width: 320px; border-left: solid 1px #f1f1f1; border-right: solid 1px #f1f1f1;">
-    <br />
-        <br />
         @RenderBody()
         <hr />
-        <footer> 
+        <footer>
             @**@ <div class=" " style="width:100%;text-align:center; padding-top:15px;">
                 <a style="color: dimgray;" href="@Url.Action("SetLanguage", "Language", new { @name = "fr" })">Francais </a>  |
                 <a style="color:dimgray;" href="@Url.Action("SetLanguage", "Language", new { @name = "en" })">English</a>
@@ -98,12 +89,7 @@
     @* @Scripts.Render("~/bundles/jquery") *@
     @Scripts.Render("~/bundles/bootstrap")
 
-
     @RenderSection("scripts", required: false)
-
-    <script>
- 
-    </script>
 
 </body>
 

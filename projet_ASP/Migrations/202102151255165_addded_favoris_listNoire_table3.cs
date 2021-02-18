@@ -1,8 +1,7 @@
 namespace projet_ASP.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class addded_favoris_listNoire_table3 : DbMigration
     {
         public override void Up()
@@ -12,7 +11,7 @@ namespace projet_ASP.Migrations
             RenameIndex(table: "dbo.AspNetUsers", name: "IX_Favoris_idFavoris", newName: "IX_idFavoris");
             RenameIndex(table: "dbo.AspNetUsers", name: "IX_ListeNoire_idListeNoire", newName: "IX_idListeNoire");
         }
-        
+
         public override void Down()
         {
             RenameIndex(table: "dbo.AspNetUsers", name: "IX_idListeNoire", newName: "IX_ListeNoire_idListeNoire");

@@ -7,7 +7,7 @@
     <div class="btn-group" id="btn-group">
         <a class="btn btn-primary" href="#" id="btnRecl">Réclamation</a>
         <a class="btn btn-primary" href="#" id="btnPenal">Pénalité</a>
-       
+
     </div>
 </div>
 
@@ -21,10 +21,20 @@
                 </th>
                 <th>
                     Contenu
-                </th> 
-                <th>
-                    Propriétaire
                 </th>
+                
+                    @if (User.IsInRole("Locataire"))
+                    {
+                        <th>
+                            Propriétaire
+                        </th>
+
+                    }
+                    else
+                    {
+                        <th>Locataire</th>
+                    }
+               
                 <th>
                     révisé
                 </th>
@@ -37,7 +47,7 @@
                 ApplicationDbContext db = new ApplicationDbContext();
                 int idApplicationUser = 0;
                 var listReclamation = new List<Reclamation>();
-                if (User.IsInRole("locataire"))
+                if (User.IsInRole("Locataire"))
                 {
                     var loca = db.Locataires.Where(l => l.ApplicationUserID.Equals(id)).FirstOrDefault();
                     if (loca != null) { idApplicationUser = loca.idLocataire; }
@@ -52,18 +62,32 @@
                 }
                 foreach (var item in listReclamation)
                 {
-                        string idPropApplicationUser = db.Proprietaires.Where(p => p.idProprietaire == item.idProprietaire).FirstOrDefault().ApplicationUserID;
-                        var nameProp = db.Users.Where(pr => pr.Id == idPropApplicationUser).FirstOrDefault().nomComplet;
-
+                    string idPropApplicationUser = "";
+                    var name = "";
                         <tr>
                             <td>@item.dateCreation.ToString()</td>
                             <td>@item.description</td>
-                            <td>
-                             <a href='@Url.Action("Index", "Proprietaire", new { id = idPropApplicationUser })' class="text-primary" style="text-decoration:none;color:black;">
-                                @nameProp
-                            </a>
-                            </td>
-                           
+                            @if (User.IsInRole("Locataire"))
+                            {
+                                idPropApplicationUser = db.Proprietaires.Where(p => p.idProprietaire == item.idProprietaire).FirstOrDefault().ApplicationUserID;
+                                name = db.Users.Where(pr => pr.Id == idPropApplicationUser).FirstOrDefault().nomComplet;
+                                <td>
+                                    <a href='@Url.Action("Index", "Proprietaire", new { id = idPropApplicationUser })' class="text-primary" style="text-decoration:none;color:black;">
+                                        @name
+                                    </a>
+                                </td>
+                            }
+                            else
+                            {
+                                idPropApplicationUser = db.Locataires.Where(p => p.idLocataire == item.idProprietaire).FirstOrDefault().ApplicationUserID;
+                                name = db.Users.Where(pr => pr.Id == idPropApplicationUser).FirstOrDefault().nomComplet;
+                                <td>
+                                    <a href='/Locataire/Index?id=@idPropApplicationUser' class="text-primary" style="text-decoration:none;">
+                                        @name
+                                    </a>
+                                </td>
+                            }
+
                             @if (item.valide == false)
                             {
                                 <td>Non Révisé</td>
@@ -87,13 +111,13 @@
         <thead class="thead-dark">
             <tr>
                 <th>
-                    Penalité 
+                    Penalité Sur
                 </th>
                 <th>
-                    Contenu
+                    Description
                 </th>
                 <th>
-                    révisé
+                    amonde
                 </th>
 
             </tr>

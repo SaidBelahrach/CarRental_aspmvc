@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 
 namespace projet_ASP.Models
 {
@@ -21,9 +18,9 @@ namespace projet_ASP.Models
 
         public ICollection<ApplicationUser> users { get; set; }
 
-    /*    public int idAdmin { get; set; }
-        [ForeignKey("idAdmin")]
-        public virtual Admin Admin { get; set; }*/
-         
+        /*    public int idAdmin { get; set; }
+            [ForeignKey("idAdmin")]
+            public virtual Admin Admin { get; set; }*/
+
     }
 }

@@ -1,12 +1,9 @@
 ﻿using projet_ASP.Models;
-using System;
-using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
-using Microsoft.AspNet.Identity;
 
 namespace projet_ASP.Controllers
 {
@@ -30,16 +27,16 @@ namespace projet_ASP.Controllers
                   idAdmin = 1,
 
               };*/
-     /*       var user = loca.FirstOrDefault().ApplicationUser;
-            user.idListeNoire = 2;
-            db.Users.AddOrUpdate(user);
+            /*       var user = loca.FirstOrDefault().ApplicationUser;
+                   user.idListeNoire = 2;
+                   db.Users.AddOrUpdate(user);
 
-            Admin ad = new Admin()
-            {
-                ApplicationUserID = "4d4e6da5-ac33-44cc-a686-c0c0ef67983c",
-            };
-            db.Admins.Add(ad);
-            db.SaveChanges();*/
+                   Admin ad = new Admin()
+                   {
+                       ApplicationUserID = "4d4e6da5-ac33-44cc-a686-c0c0ef67983c",
+                   };
+                   db.Admins.Add(ad);
+                   db.SaveChanges();*/
             return View(loca);
         }
 
