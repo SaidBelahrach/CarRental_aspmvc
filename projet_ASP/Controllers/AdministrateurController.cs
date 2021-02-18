@@ -2,7 +2,8 @@
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
-
+using System.Data.Entity;
+using System.Data.Entity.Migrations;
 
 namespace projet_ASP.Controllers
 {
@@ -39,13 +40,66 @@ namespace projet_ASP.Controllers
             return View(loca);
         }
 
+        [HttpPost]
+        public ActionResult Locataires(string id)
+        {
+            String ID =id;
+            
+            ApplicationDbContext db = new ApplicationDbContext();
+            var user = db.Users.Where(item => item.Id == ID).FirstOrDefault();
+            if(user.ListeNoire != null)
+            {
+               
+            }
+
+
+
+                db.SaveChanges();
+            return Json("ListeNoire updated");
+        }
+
+
         public ActionResult Reclamations()
         {
             ApplicationDbContext db = new ApplicationDbContext();
             var reclamations = db.Reclamations.ToList();
 
             return View(reclamations);
+        } 
+        
+        
+        [HttpPost]
+        public ActionResult Reclamations(string id)
+        {
+           int reclmationID =Convert.ToInt32( id);
+
+            ApplicationDbContext db = new ApplicationDbContext();
+            var rec = db.Reclamations.Where(item => item.idReclamation == reclmationID).FirstOrDefault();
+            rec.valide = true;
+         
+         
+         
+            db.SaveChanges();
+            return Json("reclamation updated");
         }
+
+        public ActionResult ListeNoire()
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            db.Users.Where(item => item.ListeNoire != null);
+
+            return View();
+        }
+
+        public ActionResult ListesDesFavoris()
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            string currentUserId = User.Identity.GetUserId();
+            var users_ListesFavoris = db.Users.Where(item => item.Favoris.admin.ApplicationUserID == currentUserId);
+
+            return View(users_ListesFavoris);
+        }
+
     }
 
 

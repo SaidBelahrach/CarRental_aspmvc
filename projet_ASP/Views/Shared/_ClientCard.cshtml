@@ -15,23 +15,23 @@
         </div>
     </div>
     <div class="general">
-        <h3 class="mt-2" ><a href="@Url.Action("Index", "Locataire", new { id = Model.ApplicationUserID })">@Model.ApplicationUser.nomComplet</a></h3>
-     
+        <h3 class="mt-2"><a href="@Url.Action("Index", "Locataire", new { id = Model.ApplicationUserID })">@Model.ApplicationUser.nomComplet</a></h3>
+
         <div class="card-icon-container " style="">
-         <label class="datails-item">
+            <label class="datails-item">
                 <span class="fas fa-car icon  "></span>
-                <span>@Html.ActionLink(@Model.reservations.Count+" reservations","Index","Reservations",new { id = Model.ApplicationUserID },new {@class="text-info" })  </span>
+                <span>@Html.ActionLink(@Model.reservations.Count + " reservations", "Index", "Reservations", new { id = Model.ApplicationUserID }, new { @class = "text-info" })  </span>
             </label>
-         <label class="datails-item">
+            <label class="datails-item">
                 <span class="fas fa-car icon  "></span>
-                <span>@Html.ActionLink("Ajouter a la liste noire","Index","Reservations",new { id = Model.ApplicationUserID },new {@class="text-info" })  </span>
-          </label><label class="datails-item">
+                <span><a id="AddToBlckLst" onclick="Add_To_Black_List(@Model.ApplicationUserID)">Ajouter a la liste noire</a> </span>
+            </label><label class="datails-item">
                 <span class="fas fa-car icon  "></span>
-                <span>@Html.ActionLink("Ajouter au favoris","Index","Reservations",new { id = Model.ApplicationUserID },new {@class="text-info" })  </span>
+                <span>@Html.ActionLink("Ajouter au favoris", "Index", "Reservations", new { id = Model.ApplicationUserID }, new { @class = "text-info" })  </span>
             </label>
 
         </div>
-  
+
 
     </div>
 </div>
@@ -50,7 +50,7 @@
                     .card-icon-container {
                     display:flex;
                     justify-content:space-around;
-  
+
                     flex-wrap:wrap;
                     }
                     .datails-item {
@@ -264,3 +264,43 @@
 </style>
 
 
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script>
+
+    function Add_To_Black_List ( ) {
+            var formData = new FormData();
+
+            console.log(id)
+            formData.append("id", id);
+
+            $.ajax({
+                type: "POST",
+                url: '',
+                data: formData,
+                dataType: 'json',
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    if (response == 'reclamation updated') {
+                        alert("succes")
+                    }
+               
+                    $('#AddToBlckLst').text("Retirer de la liste noire");
+
+                },
+                //error: function(error) {
+                //    alert("error");
+                //}
+         @*   }).done(function () {
+                alert('success');
+            }.fail(function (xhr, status, errorThrown) {
+                alert('fail');
+            };*@
+            });
+        }
+
+
+
+</script>
