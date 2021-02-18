@@ -22,7 +22,7 @@
         .notificationPresenter {
             position: absolute;
             top: 15px;
-            right: 55px;
+            right: 100px;
         }
     </style>
 </head>
@@ -55,18 +55,22 @@
                     @if (User.IsInRole("Locataire"))
                     {
                         <li>@Html.ActionLink("Reservations", "Index", "Reservations")</li>
+                        <li>@Html.ActionLink("Mon Espace", "EspaceNotif", "Home")</li>
                     }
                     @if (User.IsInRole("Proprietaire"))
                     {
                         <li>@Html.ActionLink(@projet_ASP.Resources.Models.Voitures.Mes_voitures, "VoituresProprietaire", "Voitures")</li>
                         <li>@Html.ActionLink("Reservations", "Index", "Reservations")</li>
+                        <li>@Html.ActionLink("Reclamation", "EspaceNotif", "Home")</li>
                     }
                     @if (User.IsInRole("Admin"))//oujil
                     {
                         <li>@Html.ActionLink("Reclamations", "Reclamations", "Administrateur")</li>
                         <li>@Html.ActionLink("Proprietaires", "Propietaires", "Administrateur")</li>
                         <li>@Html.ActionLink("Locataires", "Locataires", "Administrateur")</li>
-                        @*   <li>@Html.ActionLink("Réclamations", "Index", "Reservations")</li>*@
+                        <li>@Html.ActionLink("Liste noire", "ListeNoire", "Administrateur")</li>
+                        <li>@Html.ActionLink("Liste des favoris", "ListesDesFavoris", "Administrateur")</li>
+                        
                     }
                 </ul>
 
@@ -89,6 +93,7 @@
 
     @RenderSection("scripts", required: false)
 
+    
 </body>
 
 </html>

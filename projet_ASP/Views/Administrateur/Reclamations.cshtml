@@ -16,40 +16,63 @@
     <th>
         Destinataire
     </th>
+    <th>
+        Date de Creation
+    </th>
+    <th>
+        Validation
+    </th>
     </thead>
 
     <tbody>
         @foreach (var item in Model)
         {
-        <tr>
-            <td>
-                @if (item.Createur == true)
-                {
-                    @Html.DisplayFor(modelItem => item.proprietaire.ApplicationUser.nomComplet) <p>(Proprietaire)</p>
-                }
-                else
-                {
-                    @Html.DisplayFor(modelItem => item.Locataire.ApplicationUser.nomComplet) <p>(Locataire)</p>
-                }
-            </td>
-            <td>
+            <tr>
+                <td>
+                    @if (item.Createur == true)
+                    {
+                        @Html.DisplayFor(modelItem => item.proprietaire.ApplicationUser.nomComplet) <p>(Proprietaire)</p>
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => item.Locataire.ApplicationUser.nomComplet) <p>(Locataire)</p>
+                    }
+                </td>
+                <td>
 
-                @Html.DisplayFor(modelItem => item.description)
+                    @Html.DisplayFor(modelItem => item.description)
 
 
 
-            </td>
-            <td>
-                @if (item.Createur == true)
-                {
-                    @Html.DisplayFor(modelItem => item.Locataire.ApplicationUser.nomComplet) <p>(Locataire)</p>
-                }
-                else
-                {
-                    @Html.DisplayFor(modelItem => item.proprietaire.ApplicationUser.nomComplet)<p>(Proprietaire)</p>
-                }
-            </td>
-        </tr>
+                </td>
+                <td>
+                    @if (item.Createur == true)
+                    {
+                        @Html.DisplayFor(modelItem => item.Locataire.ApplicationUser.nomComplet) <p>(Locataire)</p>
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => item.proprietaire.ApplicationUser.nomComplet)<p>(Proprietaire)</p>
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dateCreation)
+                </td>
+                <td>
+                    @if (item.valide)
+                    {
+                        <p id="valide">
+                            Validé
+                        </p> }
+                    else
+                    {
+                        <p style="display:none"   id="valide_@item.idReclamation">
+                            Validé
+                        </p>
+                        <button class="ValiderBtn" id="Validate_@item.idReclamation" data-id="@item.idReclamation" onclick='Validate_Click("@item.idReclamation")'> Valider </button>
+                    }
+                </td>
+            </tr>
         }
     </tbody>
 </table>
@@ -64,13 +87,13 @@
         color: #fff;
         background-color: #212529;
         border-color: #32383e;
-        font-family:Calibri;
+        font-family: Calibri;
     }
 
     .table .thead-light th {
         color: #495057;
         background-color: #e9ecef;
-        border-color: #dee2e6; 
+        border-color: #dee2e6;
     }
 
     .table-dark {
@@ -95,9 +118,56 @@
         .table-dark.table-hover tbody tr:hover {
             background-color: rgba(255, 255, 255, 0.075);
         }
-    td,th {
+
+    td, th {
         text-align: center;
-       text-decoration:none;
-    } 
+        text-decoration: none;
+    }
 </style>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script>
+
+            function Validate_Click ( id) {
+            var formData = new FormData();
+       
+            console.log(id)
+            formData.append("id", id);
+            
+            $.ajax({
+                type: "POST",
+                url: '../Administrateur/Reclamations',
+                data: formData,
+                dataType: 'json',
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    if (response == 'reclamation updated') {
+                        alert("succes")
+                    }
+                    $('#valide_' + id).show(200);
+                    $('#Validate_' + id).attr("disabled", true);
+                    $('#Validate_' + id).hide(200);
+                
+
+                },
+                //error: function(error) {
+                //    alert("error");
+                //}
+         @*   }).done(function () {
+                alert('success');
+            }.fail(function (xhr, status, errorThrown) {
+                alert('fail');
+            };*@
+            });
+        }
+    
+    
+    
+</script>
+
+
+
 

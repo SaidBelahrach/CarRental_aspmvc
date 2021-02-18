@@ -53,6 +53,11 @@ namespace projet_ASP.Controllers
             return Json("Deleted" + id);
         }
 
+        public ActionResult EspaceNotif()
+        {
+
+            return View();
+        }
 
         public ActionResult About()
         {
