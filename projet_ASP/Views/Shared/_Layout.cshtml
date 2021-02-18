@@ -63,7 +63,7 @@
                     }
                     @if (User.IsInRole("Proprietaire"))
                     {
-                        <li>@Html.ActionLink("Mes Voitures", "VoituresProprietaire", "Voitures")</li>
+                        <li>@Html.ActionLink(@projet_ASP.Resources.Models.Voitures.Mes_voitures, "VoituresProprietaire", "Voitures")</li>
                         <li>@Html.ActionLink("Reservations", "Index", "Reservations")</li>
                         <li>@Html.ActionLink("Mon Espace", "Index", "Reservations")</li>
 

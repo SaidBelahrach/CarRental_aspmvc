@@ -45,10 +45,10 @@
             @if (User.IsInRole("Proprietaire") && User.Identity.GetUserId().Equals(Model.proprietaire.ApplicationUserID))
             {
                 <div class="card-fotter">
-                    <button type="button" class=" button_custom  btn btn-info px-4 py-1" onclick="window.location='@Url.Action("Edit", "Voitures", new { id = Model.idVoiture })'">Modifier</button>
+                    <button type="button" class=" button_custom  btn btn-info px-4 py-1" onclick="window.location='@Url.Action("Edit", "Voitures", new { id = Model.idVoiture })'">@projet_ASP.Resources.Models.Voitures.edit</button>
                 </div>
                 <div class="card-fotter">
-                    <button type="button" class=" button_custom btn-delete btn btn-danger px-2 py-1" onclick="window.location='@Url.Action("Delete", "Voitures", new { id = Model.idVoiture })'">Supprimer</button>
+                    <button type="button" class=" button_custom btn-delete btn btn-danger px-2 py-1" onclick="window.location='@Url.Action("Delete", "Voitures", new { id = Model.idVoiture })'">@projet_ASP.Resources.Models.Voitures.delete</button>
                 </div>
             }
             else
@@ -60,7 +60,7 @@
                     <img class=" img-circle" src="@ViewData["ProfileImg"]" width="30px" height="30px" @*onclick="@Url.Action("Index", "Manage")" *@ />
 
                     <span style="position: absolute; top: 8px; left: 33px;font-size:13px; ">  @Model.proprietaire.ApplicationUser.nomComplet </span>
-                    <span style=" font-size:8px;color:gray;position:absolute;top:27px;left:35px;z-index:1111;"> Particulier</span>
+                    <span style=" font-size:8px;color:gray;position:absolute;top:27px;left:35px;z-index:1111;"> @projet_ASP.Resources.Models.Voitures.Particulier</span>
                 </a>
             }
             @if (User.IsInRole("Locataire"))

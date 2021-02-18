@@ -117,49 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="car" xml:space="preserve">
-    <value>Car</value>
+  <data name="infoEmpty" xml:space="preserve">
+    <value>No records to display</value>
   </data>
-  <data name="cout" xml:space="preserve">
-    <value>Cost</value>
+  <data name="lengthMenu" xml:space="preserve">
+    <value>Display _MENU_ Lines</value>
   </data>
-  <data name="coutReq" xml:space="preserve">
-    <value>Cost is required</value>
+  <data name="sEmptyTable" xml:space="preserve">
+    <value>No records to display</value>
   </data>
-  <data name="dateDebut" xml:space="preserve">
-    <value>Start date</value>
+  <data name="sNext" xml:space="preserve">
+    <value>Next</value>
   </data>
-  <data name="dateDebutReq" xml:space="preserve">
-    <value>Start date is required</value>
+  <data name="sPrevious" xml:space="preserve">
+    <value>Previous</value>
   </data>
-  <data name="dateFin" xml:space="preserve">
-    <value>End date</value>
+  <data name="sProcessing" xml:space="preserve">
+    <value>Loading...</value>
   </data>
-  <data name="dateFinReq" xml:space="preserve">
-    <value>End date is required</value>
+  <data name="sSearch" xml:space="preserve">
+    <value>Search:</value>
   </data>
-  <data name="dateReservation" xml:space="preserve">
-    <value>Booking date</value>
-  </data>
-  <data name="dateReservationReq" xml:space="preserve">
-    <value>Booking date is required</value>
-  </data>
-  <data name="doesCarReturned" xml:space="preserve">
-    <value>Car Returned?</value>
-  </data>
-  <data name="locataire" xml:space="preserve">
-    <value>Occupant</value>
-  </data>
-  <data name="totalCost" xml:space="preserve">
-    <value>Total cost</value>
-  </data>
-  <data name="totaldays" xml:space="preserve">
-    <value>Total days</value>
-  </data>
-  <data name="typeDePaiement" xml:space="preserve">
-    <value>Paiement type</value>
-  </data>
-  <data name="typeDePaiementReq" xml:space="preserve">
-    <value>Paiement type is required</value>
+  <data name="zeroRecords" xml:space="preserve">
+    <value>No records</value>
   </data>
 </root>

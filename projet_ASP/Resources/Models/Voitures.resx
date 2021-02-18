@@ -123,11 +123,17 @@
   <data name="automatique" xml:space="preserve">
     <value>Type</value>
   </data>
+  <data name="cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
   <data name="carDisponible" xml:space="preserve">
     <value>Disponible</value>
   </data>
   <data name="carRented" xml:space="preserve">
     <value>Rented</value>
+  </data>
+  <data name="cars" xml:space="preserve">
+    <value>Cars</value>
   </data>
   <data name="couleur" xml:space="preserve">
     <value>Color</value>
@@ -141,8 +147,20 @@
   <data name="coutParJourReq" xml:space="preserve">
     <value>Cost per dayis required</value>
   </data>
+  <data name="create" xml:space="preserve">
+    <value>Create New</value>
+  </data>
+  <data name="delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
   <data name="disponible" xml:space="preserve">
     <value>Disponibility</value>
+  </data>
+  <data name="edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="filter" xml:space="preserve">
+    <value>Filter</value>
   </data>
   <data name="image" xml:space="preserve">
     <value>Car image</value>
@@ -162,6 +180,9 @@
   <data name="matriculeReq" xml:space="preserve">
     <value>Registration number is required</value>
   </data>
+  <data name="Mes_voitures" xml:space="preserve">
+    <value>My Cars</value>
+  </data>
   <data name="model" xml:space="preserve">
     <value>Model</value>
   </data>
@@ -174,13 +195,22 @@
   <data name="nbPlacesReq" xml:space="preserve">
     <value>Number of seats is required</value>
   </data>
+  <data name="Particulier" xml:space="preserve">
+    <value>Particular</value>
+  </data>
   <data name="perday" xml:space="preserve">
     <value>DH/day</value>
   </data>
   <data name="reserver" xml:space="preserve">
     <value>Book now</value>
   </data>
+  <data name="search" xml:space="preserve">
+    <value>Search anything</value>
+  </data>
   <data name="seats" xml:space="preserve">
     <value>Seats</value>
+  </data>
+  <data name="Ville" xml:space="preserve">
+    <value>City</value>
   </data>
 </root>

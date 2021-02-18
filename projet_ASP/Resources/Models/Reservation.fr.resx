@@ -150,6 +150,12 @@
   <data name="locataire" xml:space="preserve">
     <value>Locataire</value>
   </data>
+  <data name="totalCost" xml:space="preserve">
+    <value>Coût total</value>
+  </data>
+  <data name="totaldays" xml:space="preserve">
+    <value>nombre des jours</value>
+  </data>
   <data name="typeDePaiement" xml:space="preserve">
     <value>Type de paiement</value>
   </data>

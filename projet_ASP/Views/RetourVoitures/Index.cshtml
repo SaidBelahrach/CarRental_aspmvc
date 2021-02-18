@@ -39,15 +39,15 @@
                     @Html.DisplayFor(modelItem => item.etat)
                 </td>
                 <td>
-                    @(item.pinalise? "Oui":"non")
+                    @(item.pinalise? projet_ASP.Resources.Models.RetourVoiture.yes: projet_ASP.Resources.Models.RetourVoiture.no)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.amende)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.idRetour }) |
+                    @Html.ActionLink(" ", "Edit", new { id = item.idRetour },new { @class = "fas fa-edit" }) 
                     @* @Html.ActionLink("Details", "Details", new { id=item.idRetour }) |*@
-                    @Html.ActionLink("Delete", "Delete", new { id = item.idRetour })
+                @*    @Html.ActionLink("Delete", "Delete", new { id = item.idRetour })*@
                 </td>
             </tr>
         }
@@ -60,24 +60,24 @@
     $(document).ready(function () {
         $('#mytable').DataTable({
             "language": {
-                "lengthMenu": "Afficher _MENU_ Lignes",
-                "zeroRecords": "pas de résultats",
+                "lengthMenu": "@projet_ASP.Resources.Views.dataTable.lengthMenu",
+                "zeroRecords": "@projet_ASP.Resources.Views.dataTable.zeroRecords",
                 "info": "Page _PAGE_ de _PAGES_",
-                "infoEmpty": "Pas de notes à afficher",
-                "infoFiltered": "(Filtré de _MAX_ totale)",
+                "infoEmpty": "@projet_ASP.Resources.Views.dataTable.infoEmpty",
+                "infoFiltered": "",
 
 
-                "sProcessing": "Chargement...",
-                "sEmptyTable": "Pas de notes à afficher",
-                "sSearch": "Chercher:",
+                "sProcessing": "@projet_ASP.Resources.Views.dataTable.sProcessing",
+                "sEmptyTable": "@projet_ASP.Resources.Views.dataTable.sEmptyTable",
+                "sSearch": "@projet_ASP.Resources.Views.dataTable.sSearch",
                 "sUrl": "",
                 "sInfoThousands": ",",
-                "sLoadingRecords": "Chargement...",
+                "sLoadingRecords": "@projet_ASP.Resources.Views.dataTable.sProcessing",
                 "oPaginate": {
                     "sFirst": "Premier",
                     "sLast": "Dernier",
-                    "sNext": "Suivant",
-                    "sPrevious": "Précédent"
+                    "sNext": "@projet_ASP.Resources.Views.dataTable.sNext",
+                    "sPrevious": "@projet_ASP.Resources.Views.dataTable.sPrevious"
                 },
                 "oAria": {
                     "SortAscending": ":Said",
