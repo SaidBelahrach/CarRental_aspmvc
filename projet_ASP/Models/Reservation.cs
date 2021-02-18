@@ -21,7 +21,7 @@ namespace projet_ASP.Models
         [Display(Name = "dateDebut", ResourceType = typeof(Resources.Models.Reservation))]
         public DateTime dateDebut { get; set; }
 
-        [Required(ErrorMessageResourceType = typeof(Resources.Models.Reservation), 
+        [Required(ErrorMessageResourceType = typeof(Resources.Models.Reservation),
                   ErrorMessageResourceName = "dateFinReq")]
         [Display(Name = "dateFin", ResourceType = typeof(Resources.Models.Reservation))]
         public DateTime dateFin { get; set; }

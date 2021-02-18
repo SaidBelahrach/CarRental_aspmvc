@@ -26,7 +26,7 @@ namespace projet_ASP.Controllers
             {
                 return RedirectToAction("Index", "Reservations");
             }
-            RetourVoiture retourVoiture = db.RetourVoitures.Where(r=>r.idContrat==id).FirstOrDefault();
+            RetourVoiture retourVoiture = db.RetourVoitures.Where(r => r.idContrat == id).FirstOrDefault();
             if (retourVoiture == null)
             {
                 return RedirectToAction("Index", "Reservations");

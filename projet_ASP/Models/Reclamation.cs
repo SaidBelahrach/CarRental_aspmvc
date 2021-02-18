@@ -22,15 +22,15 @@ namespace projet_ASP.Models
         [Display(Name = "Réclamer")]
         public string description { get; set; }
 
-        
+
         [Required(ErrorMessage = "Date Création est obligatoire", AllowEmptyStrings = false)]
         [Display(Name = "Date Création")]
         public string dateCreation { get; set; }
 
-       // [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
+        // [Required(ErrorMessage = "Ce champs est obligatoire", AllowEmptyStrings = false)]
         [Display(Name = "Reclamation Validé")]
         public Boolean valide { get; set; } //true : proprie  ,false:locataire
-         
+
         public int idProprietaire { get; set; }
         [ForeignKey("idProprietaire")]
         public virtual Proprietaire proprietaire { get; set; }

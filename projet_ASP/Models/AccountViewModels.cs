@@ -63,8 +63,8 @@ namespace projet_ASP.Models
     }
 
     public class RegisterViewModel
-    { 
-        [EmailAddress] 
+    {
+        [EmailAddress]
         [Required(ErrorMessageResourceType = typeof(Resources.Models.ApplicationUser),
                   ErrorMessageResourceName = "EmailReq")]
         [Display(Name = "Email", ResourceType = typeof(Resources.Models.ApplicationUser))]
@@ -99,7 +99,7 @@ namespace projet_ASP.Models
         [Display(Name = "profileType", ResourceType = typeof(Resources.Models.ApplicationUser))]
         public string profileType { get; set; }
 
-         
+
         [Phone]
         [Required(ErrorMessageResourceType = typeof(Resources.Models.ApplicationUser),
                   ErrorMessageResourceName = "telReq")]

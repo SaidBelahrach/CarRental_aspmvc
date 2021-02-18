@@ -1,8 +1,7 @@
 namespace projet_ASP.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class listNoire_shared_btwn_admins : DbMigration
     {
         public override void Up()
@@ -14,7 +13,7 @@ namespace projet_ASP.Migrations
             CreateIndex("dbo.ListeNoires", "Admin_idAdmin");
             AddForeignKey("dbo.ListeNoires", "Admin_idAdmin", "dbo.Admins", "idAdmin");
         }
-        
+
         public override void Down()
         {
             DropForeignKey("dbo.ListeNoires", "Admin_idAdmin", "dbo.Admins");

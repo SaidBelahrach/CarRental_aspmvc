@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Microsoft.AspNet.Identity;
+﻿using Microsoft.AspNet.Identity;
 using projet_ASP.Models;
+using System;
 using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Migrations;
-using System.Net;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace projet_ASP.Controllers
@@ -54,39 +49,39 @@ namespace projet_ASP.Controllers
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
-            
-               bool createur = false;
 
-               if(collection["idSender"]==null || collection["idReceveir"]==null) return RedirectToAction("Index", "Proprietaire");
-                int idLoc, idProp,returnId; 
-                if (User.IsInRole("Locataire"))
-                {
-                    createur = false;
-                    idLoc = Convert.ToInt32(collection["idSender"].Trim());
-                    idProp = Convert.ToInt32(collection["idReceveir"].Trim());
-                    returnId = idProp;
+            bool createur = false;
 
-                }
+            if (collection["idSender"] == null || collection["idReceveir"] == null) return RedirectToAction("Index", "Proprietaire");
+            int idLoc, idProp, returnId;
+            if (User.IsInRole("Locataire"))
+            {
+                createur = false;
+                idLoc = Convert.ToInt32(collection["idSender"].Trim());
+                idProp = Convert.ToInt32(collection["idReceveir"].Trim());
+                returnId = idProp;
+
+            }
             else
-                {
-                    createur = true;
-                    idProp = Convert.ToInt32(collection["idSender"]);
-                    idLoc = Convert.ToInt32(collection["idReceveir"]);
-                    returnId = idLoc;
+            {
+                createur = true;
+                idProp = Convert.ToInt32(collection["idSender"]);
+                idLoc = Convert.ToInt32(collection["idReceveir"]);
+                returnId = idLoc;
             }
 
-                Reclamation reclamation = new Reclamation()
-                {
-                    dateCreation = DateTime.Now.ToString(),
-                    Createur = createur,
-                    description = collection["description"].Trim(),
-                    valide = false, 
-                    idLocataire = idLoc,
-                    idProprietaire = idProp
-                };
-                db.Reclamations.Add(reclamation);
-                db.SaveChanges();
-                return RedirectToAction("Index", "Voitures");
+            Reclamation reclamation = new Reclamation()
+            {
+                dateCreation = DateTime.Now.ToString(),
+                Createur = createur,
+                description = collection["description"].Trim(),
+                valide = false,
+                idLocataire = idLoc,
+                idProprietaire = idProp
+            };
+            db.Reclamations.Add(reclamation);
+            db.SaveChanges();
+            return RedirectToAction("Index", "Voitures");
         }
 
         // GET: Reclamation/Edit/5
