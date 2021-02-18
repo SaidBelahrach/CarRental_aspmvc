@@ -52,7 +52,7 @@ namespace projet_ASP.Controllers
             var user = db.Users.Where(item => item.Id == ID).FirstOrDefault();
             if(user.ListeNoire != null)
             {
-               3
+               
             }
 
 
@@ -90,9 +90,8 @@ namespace projet_ASP.Controllers
         {
             ApplicationDbContext db = new ApplicationDbContext();
             string currentUserId = User.Identity.GetUserId();
-            var users_ListesNoire = db.Users.Where(item => item.ListeNoire.Admin.ApplicationUserID ==currentUserId );
 
-            return View(users_ListesNoire);
+            return View();
         }
 
         public ActionResult ListesDesFavoris()
