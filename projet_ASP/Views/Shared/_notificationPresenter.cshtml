@@ -15,7 +15,7 @@
         {<i class="fas fa-bell " style="color:white;" ></i>}
         else
         { <span id="notif-badge" class="rounded-circle"></span>
-            <i class="fas fa-bell " style="color:yellow"></i>
+            <i class="fas fa-bell " ></i>
         }
     </span>
 
@@ -172,6 +172,8 @@
 
     $("#notifImg").click(function (e) {
         $("#boxNotif").toggleClass("d-none");
+        $("#box").addClass("d-none");
+
     });
 
     $(".delteNotif").click(function (e) {

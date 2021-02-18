@@ -61,7 +61,7 @@
                 {
                     var prop = db.Proprietaires.Where(l => l.ApplicationUserID.Equals(id)).FirstOrDefault();
                     if (prop != null) { idApplicationUser = prop.idProprietaire; }
-                    listReclamation = db.Reclamations.Where(r => r.idProprietaire == idApplicationUser && r.Createur == false).ToList();
+                    listReclamation = db.Reclamations.Where(r => r.idProprietaire == idApplicationUser && r.Createur == true).ToList();
                 }
                 listReclamation.Reverse();
                 foreach (var item in listReclamation)
