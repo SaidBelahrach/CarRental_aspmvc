@@ -55,11 +55,13 @@
                     @if (User.IsInRole("Locataire"))
                     {
                         <li>@Html.ActionLink("Reservations", "Index", "Reservations")</li>
+                        <li>@Html.ActionLink("Mon Espace", "EspaceNotif", "Home")</li>
                     }
                     @if (User.IsInRole("Proprietaire"))
                     {
                         <li>@Html.ActionLink(@projet_ASP.Resources.Models.Voitures.Mes_voitures, "VoituresProprietaire", "Voitures")</li>
                         <li>@Html.ActionLink("Reservations", "Index", "Reservations")</li>
+                        <li>@Html.ActionLink("Reclamation", "EspaceNotif", "Home")</li>
                     }
                     @if (User.IsInRole("Admin"))//oujil
                     {

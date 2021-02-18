@@ -80,7 +80,6 @@ namespace projet_ASP.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
             return View(retourVoiture);
         }
 
