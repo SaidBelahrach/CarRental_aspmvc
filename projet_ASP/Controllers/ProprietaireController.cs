@@ -52,8 +52,6 @@ namespace projet_ASP.Controllers
         }
 
 
-
-
         public class ProfileUpdate
         {
             public string nomComplet { get; set; }

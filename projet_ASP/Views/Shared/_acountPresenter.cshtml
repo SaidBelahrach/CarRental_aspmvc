@@ -2,6 +2,7 @@
 @using projet_ASP.Models;
 
 
+
 <div class="wrapper" id="idwrapper">
     @{
         string id = User.Identity.GetUserId();
@@ -12,7 +13,7 @@
 <div class="box-container bg-light d-none" id="box">
     @if (User.IsInRole("Locataire"))
     {
-        <p class="text-left pl-2 pt-2"><i class="fas fa-user  " style="width:19px;"></i><a class="butn" href=".../../Locataire">Profile</a></p>
+        <p class="text-left pl-2 pt-2"><i class="fas fa-user  " style="width:19px;"></i><a class="butn" href="../../Locataire">Profile</a></p>
     }
     @if (User.IsInRole("Proprietaire"))
     {

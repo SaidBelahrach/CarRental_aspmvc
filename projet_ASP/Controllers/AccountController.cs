@@ -7,6 +7,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System;
+using System.Data.Entity;
 
 namespace projet_ASP.Controllers
 {
@@ -16,8 +18,21 @@ namespace projet_ASP.Controllers
     public class AccountController : Controller
     {
 
+
+
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+
+
+        public JsonResult RemoveNotif(string id)
+        {
+            int notifId = Convert.ToInt32(id);
+            ApplicationDbContext db = new ApplicationDbContext();
+            var notif = db.Notifications.Where(n => n.idNotification == notifId).FirstOrDefault();
+            db.Notifications.Remove(notif);
+            db.SaveChanges();
+            return Json("");
+        }
         public AccountController()
         {
         }
