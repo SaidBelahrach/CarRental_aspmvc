@@ -2,7 +2,8 @@
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
-using System.Data.Entity;
+using System;
+using Microsoft.AspNet.Identity;
 using System.Data.Entity.Migrations;
 
 namespace projet_ASP.Controllers

@@ -83,7 +83,7 @@
                         }
                         else
                         {
-                            idPropApplicationUser = db.Locataires.Where(p => p.idLocataire == item.idProprietaire).FirstOrDefault().ApplicationUserID;
+                            idPropApplicationUser = db.Locataires.Where(p => p.idLocataire == item.idLocataire).FirstOrDefault().ApplicationUserID;
                             name = db.Users.Where(pr => pr.Id == idPropApplicationUser).FirstOrDefault().nomComplet;
                             <td>
                                 <a href='/Locataire/Index?id=@idPropApplicationUser' class="text-primary" style="text-decoration:none;">
