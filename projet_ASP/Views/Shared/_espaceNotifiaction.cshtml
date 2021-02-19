@@ -41,7 +41,6 @@
                 <th>
                     révisé
                 </th>
-
             </tr>
         </thead>
         <tbody>
@@ -55,7 +54,6 @@
                     var loca = db.Locataires.Where(l => l.ApplicationUserID.Equals(id)).FirstOrDefault();
                     if (loca != null) { idApplicationUser = loca.idLocataire; }
                     listReclamation = db.Reclamations.Where(r => r.idLocataire == idApplicationUser && r.Createur == false).ToList();
-
                 }
                 else
                 {
