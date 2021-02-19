@@ -6,6 +6,7 @@ using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System;
 using Microsoft.AspNet.Identity;
+using System.Collections.Generic;
 
 namespace projet_ASP.Controllers
 {
@@ -45,18 +46,40 @@ namespace projet_ASP.Controllers
         [HttpPost]
         public ActionResult Locataires(string id)
         {
-            string ID =id;
-            
+
+
             ApplicationDbContext db = new ApplicationDbContext();
-            var user = db.Users.Where(item => item.Id == ID).FirstOrDefault();
-            if(user.ListeNoire != null)
+            string currentUserid = User.Identity.GetUserId();
+            
+           var user = db.Users.Where(item => item.Id == id).FirstOrDefault();
+            var admine = db.Admins.Where(item => item.ApplicationUserID == currentUserid).FirstOrDefault();
+            var ls = db.ListeNoires.Where(item => item.description == "Cheated").FirstOrDefault();
+
+     
+            if(ls == null)
             {
-               
+                ls = new ListeNoire()
+                {
+                    description = "Cheated"
+                };
+                db.ListeNoires.Add(ls);
             }
+        
+            if ( user.idListeNoire == null)
+           {
+
+            user.idListeNoire = ls.idListeNoire;
+             db.Users.AddOrUpdate(user);
+           }
+           else
+           {
+                user.idListeNoire = null; 
+           }
 
 
 
-                db.SaveChanges();
+            db.SaveChanges();
+            var count = ls.users.Count();
             return Json("ListeNoire updated");
         }
 
@@ -66,7 +89,8 @@ namespace projet_ASP.Controllers
             ApplicationDbContext db = new ApplicationDbContext();
             var reclamations = db.Reclamations.ToList();
 
-            return View(reclamations);
+            // return View(reclamations);
+            return Content(""+db.ListeNoires.Find(3).users.Count());
         } 
         
         
@@ -97,10 +121,18 @@ namespace projet_ASP.Controllers
         {
             ApplicationDbContext db = new ApplicationDbContext();
             string currentUserId = User.Identity.GetUserId();
-            var users_ListesFavoris = db.Users.Where(item => item.Favoris.admin.ApplicationUserID == currentUserId);
 
-            return View(users_ListesFavoris);
+            return View();
         }
+
+/*        public ActionResult ListeNoire()
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            var ls = db.ListeNoires.ToList();
+
+            return View();
+
+        }*/
 
     }
 

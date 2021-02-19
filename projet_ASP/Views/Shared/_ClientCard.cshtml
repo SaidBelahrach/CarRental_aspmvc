@@ -24,10 +24,10 @@
             </label>
             <label class="datails-item">
                 <span class="fas fa-car icon  "></span>
-                <span><a id="AddToBlckLst" onclick="Add_To_Black_List(@Model.ApplicationUserID)">Ajouter a la liste noire</a> </span>
+                <span> <a id="AddToBlckLst"   onclick='Add_To_Black_List("@Model.ApplicationUserID")'>Ajouter a la liste noire</a> </span>
             </label><label class="datails-item">
                 <span class="fas fa-car icon  "></span>
-                <span>@Html.ActionLink("Ajouter au favoris", "Index", "Reservations", new { id = Model.ApplicationUserID }, new { @class = "text-info" })  </span>
+             <a></a>   <span>@Html.ActionLink("Ajouter au favoris", "Index", "Reservations", new { id = Model.ApplicationUserID }, new { @class = "text-info" })  </span>
             </label>
 
         </div>
@@ -263,44 +263,3 @@
 
 </style>
 
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
-<script>
-
-    function Add_To_Black_List ( ) {
-            var formData = new FormData();
-
-            console.log(id)
-            formData.append("id", id);
-
-            $.ajax({
-                type: "POST",
-                url: '',
-                data: formData,
-                dataType: 'json',
-                contentType: false,
-                processData: false,
-                success: function (response) {
-                    if (response == 'reclamation updated') {
-                        alert("succes")
-                    }
-               
-                    $('#AddToBlckLst').text("Retirer de la liste noire");
-
-                },
-                //error: function(error) {
-                //    alert("error");
-                //}
-         @*   }).done(function () {
-                alert('success');
-            }.fail(function (xhr, status, errorThrown) {
-                alert('fail');
-            };*@
-            });
-        }
-
-
-
-</script>

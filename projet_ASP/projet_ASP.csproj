@@ -305,6 +305,10 @@
     <Compile Include="Migrations\202102181433337_notification_modal.Designer.cs">
       <DependentUpon>202102181433337_notification_modal.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202102191622106_Updated_Favoris.cs" />
+    <Compile Include="Migrations\202102191622106_Updated_Favoris.Designer.cs">
+      <DependentUpon>202102191622106_Updated_Favoris.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Admin.cs" />
@@ -618,6 +622,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202102181433337_notification_modal.resx">
       <DependentUpon>202102181433337_notification_modal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102191622106_Updated_Favoris.resx">
+      <DependentUpon>202102191622106_Updated_Favoris.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
