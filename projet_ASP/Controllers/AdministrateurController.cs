@@ -5,6 +5,8 @@ using System.Web.Mvc;
 using System;
 using Microsoft.AspNet.Identity;
 using System.Data.Entity.Migrations;
+using System;
+using Microsoft.AspNet.Identity;
 
 namespace projet_ASP.Controllers
 {
@@ -44,7 +46,7 @@ namespace projet_ASP.Controllers
         [HttpPost]
         public ActionResult Locataires(string id)
         {
-            String ID =id;
+            string ID =id;
             
             ApplicationDbContext db = new ApplicationDbContext();
             var user = db.Users.Where(item => item.Id == ID).FirstOrDefault();
