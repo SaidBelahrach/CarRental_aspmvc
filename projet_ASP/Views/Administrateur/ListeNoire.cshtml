@@ -1,44 +1,107 @@
 ﻿@model IEnumerable<projet_ASP.Models.ApplicationUser>
-@using Microsoft.AspNet.Identity;
+
 @{
-    ViewBag.Title = "ListesNoire";
+    ViewBag.Title = "ListeNoire";
 }
 
-<div class="row gutters-sm">
-    <div class="col-sm-12 mb-3">
-        <div class="card1" style="overflow:auto;">
-            <div class="card-body" style="min-height:100px;">
-                <div>
+<h2>ListeNoire</h2>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.profileType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            Description
+        </th>
 
-                    @foreach (var item in Model)//every appUser has one proprietaire profile that s way i called the first one
-                    {
+        <th>
+           Admin with the order
+        </th>
 
-                        byte[] byteData = item.imageBytes;
 
-                        //Convert byte arry to base64string
-                        string imreBase64Data = Convert.ToBase64String(byteData);
-                        string imgDataURL = string.Format("data:image/png;base64,{0}", imreBase64Data); //https://www.c-sharpcorner.com/article/mvc-display-image-from-byte-array/
-                        ViewData["ProfileImg"] = string.Format("data:image/png;base64,{0}", imreBase64Data);
 
-                        if (item.profileType == "Locataire")
-                        {
-                        @Html.Partial("_ClientCard", item);
-                        }
-                       else
-                        {
-                        @Html.Partial("_OwnerCard", item);
-                        }
-                    }
 
-                </div>
-            </div>
-        </div>
-    </div>
-    @*<div class="col-sm-6 mb-3">
-            <div class="card h-100">
-                <div class="card-body">
+    </tr>
 
-                </div>
-            </div>
-        </div>*@
-</div>
+    @foreach (var item in Model)
+    {
+        <tr id="Element_@item.Id" o>
+            @if(item.profileType=="Locataire")
+            { 
+            <th>
+                <a href="@Url.Action("Index", "Locataire", new { id = item.Id })">@item.nomComplet</a>
+            </th>
+            }
+            @if(item.profileType=="Proprietaire")
+            { 
+            <th>
+                <a href="@Url.Action("Index", "Proprietaire", new { id = item.Id })">@item.nomComplet</a>
+            </th>
+            }
+            <th>
+                @Html.DisplayFor(modelItem => item.profileType)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.Email)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.ListeNoire.description)
+            </th>
+
+            <th>
+               @Html.DisplayFor(modelItem => item.ListeNoire.Admin.ApplicationUser.UserName)
+            </th>
+
+            <td>
+                <a onclick='Retrive_From_BlackList("@item.Id")'>Retirer de la liste noire</a>
+            </td>
+        </tr>
+    }
+
+</table>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script>
+
+    function Retrive_From_BlackList ( id) {
+            var formData = new FormData();
+
+            console.log(id)
+            formData.append("id", id);
+
+            $.ajax({
+                type: "POST",
+                url: '../Administrateur/ListeNoire',
+                data: formData,
+                dataType: 'json',
+                contentType: false,
+                processData: false,
+                success: function (response) {
+
+                    $('#Element_' + id).hide(200);
+                   
+
+
+                },
+                //error: function(error) {
+                //    alert("error");
+                //}
+         @*   }).done(function () {
+                alert('success');
+            }.fail(function (xhr, status, errorThrown) {
+                alert('fail');
+            };*@
+            });
+        }
+
+
+
+</script>

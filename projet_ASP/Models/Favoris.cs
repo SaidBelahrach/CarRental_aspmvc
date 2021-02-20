@@ -12,6 +12,7 @@ namespace projet_ASP.Models
         public int idFavoris { get; set; }
 
 
+
         public ICollection<ApplicationUser> users { get; set; }
         public int idAdmin { get; set; }
         [ForeignKey("idAdmin")]

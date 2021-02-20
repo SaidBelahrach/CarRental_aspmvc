@@ -18,9 +18,9 @@ namespace projet_ASP.Models
 
         public ICollection<ApplicationUser> users { get; set; }
 
-        /*    public int idAdmin { get; set; }
+            public int idAdmin { get; set; }
             [ForeignKey("idAdmin")]
-            public virtual Admin Admin { get; set; }*/
+            public virtual Admin Admin { get; set; }
 
     }
 }

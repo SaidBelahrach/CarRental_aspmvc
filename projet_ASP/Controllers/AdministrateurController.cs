@@ -16,30 +16,60 @@ namespace projet_ASP.Controllers
         public ActionResult Propietaires()
         {
             ApplicationDbContext db = new ApplicationDbContext();
-            var prop = db.Proprietaires.Include(p => p.ApplicationUser).Include(t => t.Voitures).ToList();
+            var prop = db.Proprietaires.Where(p => p.ApplicationUser.idListeNoire == null).Include(p => p.ApplicationUser).Include(t => t.Voitures).ToList();
 
             return View(prop);
         }
+
+
+        [HttpPost]
+        public ActionResult Propietaires(string id)
+        {
+
+
+            ApplicationDbContext db = new ApplicationDbContext();
+            string currentUserid = User.Identity.GetUserId();
+
+            var user = db.Users.Where(item => item.Id == id).FirstOrDefault();
+            var admine = db.Admins.Where(item => item.ApplicationUserID == currentUserid).FirstOrDefault();
+            var ls = db.ListeNoires.Where(item => item.description == "Cheated" && item.idAdmin == admine.idAdmin).FirstOrDefault();
+           
+
+            if (ls == null)
+            {
+                ls = new ListeNoire()
+                {
+                    description = "Cheated",
+                    idAdmin = admine.idAdmin
+                };
+                db.ListeNoires.Add(ls);
+            }
+
+            if (user.idListeNoire == null)
+            {
+
+                user.idListeNoire = ls.idListeNoire;
+                db.Users.AddOrUpdate(user);
+            }
+            else
+            {
+                user.idListeNoire = null;
+                db.Users.AddOrUpdate(user);
+            }
+
+
+
+            db.SaveChanges();
+
+            return Json("ListeNoire updated");
+        }
+
+
         public ActionResult Locataires()
         {
             ApplicationDbContext db = new ApplicationDbContext();
-            var loca = db.Locataires.Include(p => p.ApplicationUser).Include(t => t.reservations).ToList();
-            /*   ListeNoire ls = new ListeNoire()
-              {
-                  description = "dezk",
-                  idAdmin = 1,
-
-              };*/
-            /*       var user = loca.FirstOrDefault().ApplicationUser;
-                   user.idListeNoire = 2;
-                   db.Users.AddOrUpdate(user);
-
-                   Admin ad = new Admin()
-                   {
-                       ApplicationUserID = "4d4e6da5-ac33-44cc-a686-c0c0ef67983c",
-                   };
-                   db.Admins.Add(ad);
-                   db.SaveChanges();*/
+            var loca = db.Locataires.Where(p => p.ApplicationUser.idListeNoire == null).Include(p => p.ApplicationUser).Include(t => t.reservations).ToList();
+          
             return View(loca);
         }
 
@@ -52,15 +82,16 @@ namespace projet_ASP.Controllers
             string currentUserid = User.Identity.GetUserId();
             
            var user = db.Users.Where(item => item.Id == id).FirstOrDefault();
-            var admine = db.Admins.Where(item => item.ApplicationUserID == currentUserid).FirstOrDefault();
-            var ls = db.ListeNoires.Where(item => item.description == "Cheated").FirstOrDefault();
+           var admine = db.Admins.Where(item => item.ApplicationUserID == currentUserid).FirstOrDefault();
+            var ls = db.ListeNoires.Where(  item => item.description == "Cheated" && item.idAdmin==admine.idAdmin).FirstOrDefault();
 
      
             if(ls == null)
             {
                 ls = new ListeNoire()
                 {
-                    description = "Cheated"
+                    description = "Cheated",
+                    idAdmin = admine.idAdmin
                 };
                 db.ListeNoires.Add(ls);
             }
@@ -73,24 +104,82 @@ namespace projet_ASP.Controllers
            }
            else
            {
-                user.idListeNoire = null; 
-           }
+                user.idListeNoire = null;
+                db.Users.AddOrUpdate(user);
+            }
 
 
 
             db.SaveChanges();
-            var count = ls.users.Count();
+           
             return Json("ListeNoire updated");
         }
 
 
+        public ActionResult AjoutALaLiteNoire(string id)
+        {
+
+            ApplicationDbContext db = new ApplicationDbContext();
+            var user = db.Users.Find(id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            return View(user);
+          
+        }
+        [HttpPost]
+        public ActionResult AjoutALaLiteNoire(String id,String Desc)
+        {
+
+            if(Desc=="")
+            {
+                Desc = "Unjustifié";
+            }
+            ApplicationDbContext db = new ApplicationDbContext();
+            string currentUserid = User.Identity.GetUserId();
+            
+            var user = db.Users.Where(item => item.Id == id).FirstOrDefault();
+            var admine = db.Admins.Where(item => item.ApplicationUserID == currentUserid).FirstOrDefault();
+            var ls = db.ListeNoires.Where(item => item.description == Desc && item.idAdmin == admine.idAdmin).FirstOrDefault();
+
+
+            if (ls == null)
+            {
+                ls = new ListeNoire()
+                {
+                    description = Desc,
+                    idAdmin = admine.idAdmin
+                };
+                db.ListeNoires.Add(ls);
+            }
+
+            if (user.idListeNoire == null)
+            {
+
+                user.idListeNoire = ls.idListeNoire;
+                db.Users.AddOrUpdate(user);
+            }
+            else
+            {
+                user.idListeNoire = null;
+                db.Users.AddOrUpdate(user);
+            }
+
+
+
+            db.SaveChanges();
+
+            return RedirectToAction("ListeNoire", "Administrateur");
+
+        }
         public ActionResult Reclamations()
         {
             ApplicationDbContext db = new ApplicationDbContext();
             var reclamations = db.Reclamations.ToList();
 
-            // return View(reclamations);
-            return Content(""+db.ListeNoires.Find(3).users.Count());
+             return View(reclamations);
+       
         } 
         
         
@@ -112,18 +201,31 @@ namespace projet_ASP.Controllers
         public ActionResult ListeNoire()
         {
             ApplicationDbContext db = new ApplicationDbContext();
-            db.Users.Where(item => item.ListeNoire != null);
+          var Blacklist  =  db.Users.Where(item => item.idListeNoire != null).Include(item => item.ListeNoire).ToList();
 
-            return View();
+            return View(Blacklist);
+        } 
+        
+        
+        [HttpPost]
+        public ActionResult ListeNoire(String id)
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+          var user  =  db.Users.Find(id);
+            user.idListeNoire = null;
+            db.SaveChanges();
+            return Json("ListeNoire Updated");
         }
 
-        public ActionResult ListesDesFavoris()
+     /*   public ActionResult ListesDesFavoris()
         {
             ApplicationDbContext db = new ApplicationDbContext();
             string currentUserId = User.Identity.GetUserId();
+            var admine = db.Admins.Where(item => item.ApplicationUserID == currentUserId).FirstOrDefault();
+            var ListDesfavories = db.Favoris.Where(item => item.idAdmin == admine.idAdmin).FirstOrDefault().users.ToList();
 
-            return View();
-        }
+            return View(ListDesfavories);
+        }*/
 
 /*        public ActionResult ListeNoire()
         {
