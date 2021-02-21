@@ -8,7 +8,7 @@
 
 
 @*<link href="https://fonts.googleapis.com/icon?family=Material+Icons"*@
-<div class="card"  id="Locataire_@Model.ApplicationUserID">
+<div class="card" ">
     <div class="user-card ">
         <div style="" class="card-img">
             <img style="" class="img-responsive" src="@ViewData["ProfileImg"]" width="" height="100%" />
@@ -23,12 +23,13 @@
                 <span>@Html.ActionLink(@Model.reservations.Count + " reservations", "Index", "Reservations", new { id = Model.ApplicationUserID }, new { @class = "text-info" })  </span>
             </label>
             <label class="datails-item">
-                <span class="fas fa-car icon  "></span>
+                <span class="fas fa-user-slash icon  "></span>
                 <span> @Html.ActionLink("Ajouter a la liste noire", "AjoutALaLiteNoire", new { id = Model.ApplicationUserID }, new { @class = "text-info" }) </span>
             </label>
             <label class="datails-item">
-                <span class="fas fa-car icon  "></span>
-                <span> <a class="text-info" id="Favorites_@Model.ApplicationUserID"  onclick='Add_To_Favorites("@Model.ApplicationUserID")'>Ajouter Aux favoris</a>  </span>
+                <span class="fas fa-bookmark">  </span>
+                
+                <span> <a class="text-info" id="Favorites_@Model.ApplicationUserID" onclick='Add_To_Favorites("@Model.ApplicationUserID")'>Ajouter Aux favoris</a>  </span>
             </label>
 
         </div>

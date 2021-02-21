@@ -7,7 +7,7 @@
     <div class="col-sm-12 mb-3">
         <div class="card1" style="overflow:auto;">
             <div class="card-body" style="min-height:100px;">
-                <div> 
+                <div>
                     @foreach (var item in Model)
                     {
                         byte[] byteData = item.ApplicationUser.imageBytes;
@@ -16,7 +16,7 @@
                         string imgDataURL = string.Format("data:image/png;base64,{0}", imreBase64Data); //https://www.c-sharpcorner.com/article/mvc-display-image-from-byte-array/
                         ViewData["ProfileImg"] = string.Format("data:image/png;base64,{0}", imreBase64Data);
                         @Html.Partial("_ClientCard", item);
-                    } 
+                    }
                 </div>
             </div>
         </div>
@@ -31,3 +31,41 @@
 
 </div>
 
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script>
+
+            function Add_To_Favorites(id) {
+            var formData = new FormData();
+
+            console.log(id)
+            formData.append("id", id);
+
+            $.ajax({
+                type: "POST",
+                url: '../Administrateur/Locataires',
+                data: formData,
+                dataType: 'json',
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    if (response == 'Deja favoris') {
+                        alert("deja ajouté ou favoris");
+                    }
+                },
+                //error: function(error) {
+                //    alert("error");
+                //}
+         @*   }).done(function () {
+                alert('success');
+            }.fail(function (xhr, status, errorThrown) {
+                alert('fail');
+            };*@
+            });
+        }
+
+
+
+</script>

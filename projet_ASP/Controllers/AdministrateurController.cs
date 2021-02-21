@@ -30,38 +30,24 @@ namespace projet_ASP.Controllers
             ApplicationDbContext db = new ApplicationDbContext();
             string currentUserid = User.Identity.GetUserId();
 
-            var user = db.Users.Where(item => item.Id == id).FirstOrDefault();
+            var user = db.Users.Where(item => item.Id == id ).FirstOrDefault();
+      
             var admine = db.Admins.Where(item => item.ApplicationUserID == currentUserid).FirstOrDefault();
-            var ls = db.ListeNoires.Where(item => item.description == "Cheated" && item.idAdmin == admine.idAdmin).FirstOrDefault();
-           
-
-            if (ls == null)
+            Favoris Newfavori = new Favoris { idAdmin = admine.idAdmin, ApplicationUserID = id };
+            var favori = db.Favoris.Where(item => item.idAdmin == admine.idAdmin && item.ApplicationUserID == id).FirstOrDefault();
+            if (favori == null)
             {
-                ls = new ListeNoire()
-                {
-                    description = "Cheated",
-                    idAdmin = admine.idAdmin
-                };
-                db.ListeNoires.Add(ls);
-            }
-
-            if (user.idListeNoire == null)
-            {
-
-                user.idListeNoire = ls.idListeNoire;
-                db.Users.AddOrUpdate(user);
+                db.Favoris.AddOrUpdate(Newfavori);
             }
             else
             {
-                user.idListeNoire = null;
-                db.Users.AddOrUpdate(user);
+                return Json("Deja favoris");
             }
-
-
-
             db.SaveChanges();
 
-            return Json("ListeNoire updated");
+
+            return Json("Favoris updated");
+
         }
 
 
@@ -69,7 +55,7 @@ namespace projet_ASP.Controllers
         {
             ApplicationDbContext db = new ApplicationDbContext();
             var loca = db.Locataires.Where(p => p.ApplicationUser.idListeNoire == null).Include(p => p.ApplicationUser).Include(t => t.reservations).ToList();
-          
+
             return View(loca);
         }
 
@@ -80,39 +66,23 @@ namespace projet_ASP.Controllers
 
             ApplicationDbContext db = new ApplicationDbContext();
             string currentUserid = User.Identity.GetUserId();
-            
-           var user = db.Users.Where(item => item.Id == id).FirstOrDefault();
-           var admine = db.Admins.Where(item => item.ApplicationUserID == currentUserid).FirstOrDefault();
-            var ls = db.ListeNoires.Where(  item => item.description == "Cheated" && item.idAdmin==admine.idAdmin).FirstOrDefault();
 
-     
-            if(ls == null)
+            var user = db.Users.Where(item => item.Id == id).FirstOrDefault();
+            var admine = db.Admins.Where(item => item.ApplicationUserID == currentUserid).FirstOrDefault();
+            Favoris Newfavori = new Favoris { idAdmin = admine.idAdmin, ApplicationUserID = id };
+            var favori = db.Favoris.Where(item => item.idAdmin == admine.idAdmin && item.ApplicationUserID == id).FirstOrDefault();
+            if(favori==null )
+            { 
+            db.Favoris.AddOrUpdate(Newfavori);
+            }
+            else
             {
-                ls = new ListeNoire()
-                {
-                    description = "Cheated",
-                    idAdmin = admine.idAdmin
-                };
-                db.ListeNoires.Add(ls);
+                return Json("Deja favoris");
             }
-        
-            if ( user.idListeNoire == null)
-           {
-
-            user.idListeNoire = ls.idListeNoire;
-             db.Users.AddOrUpdate(user);
-           }
-           else
-           {
-                user.idListeNoire = null;
-                db.Users.AddOrUpdate(user);
-            }
-
-
-
             db.SaveChanges();
-           
-            return Json("ListeNoire updated");
+
+
+            return Json("Favoris updated");
         }
 
 
@@ -126,19 +96,19 @@ namespace projet_ASP.Controllers
                 return HttpNotFound();
             }
             return View(user);
-          
+
         }
         [HttpPost]
-        public ActionResult AjoutALaLiteNoire(String id,String Desc)
+        public ActionResult AjoutALaLiteNoire(String id, String Desc)
         {
 
-            if(Desc=="")
+            if (Desc == "")
             {
                 Desc = "Unjustifié";
             }
             ApplicationDbContext db = new ApplicationDbContext();
             string currentUserid = User.Identity.GetUserId();
-            
+
             var user = db.Users.Where(item => item.Id == id).FirstOrDefault();
             var admine = db.Admins.Where(item => item.ApplicationUserID == currentUserid).FirstOrDefault();
             var ls = db.ListeNoires.Where(item => item.description == Desc && item.idAdmin == admine.idAdmin).FirstOrDefault();
@@ -178,22 +148,22 @@ namespace projet_ASP.Controllers
             ApplicationDbContext db = new ApplicationDbContext();
             var reclamations = db.Reclamations.ToList();
 
-             return View(reclamations);
-       
-        } 
-        
-        
+            return View(reclamations);
+
+        }
+
+
         [HttpPost]
         public ActionResult Reclamations(string id)
         {
-           int reclmationID =Convert.ToInt32( id);
+            int reclmationID = Convert.ToInt32(id);
 
             ApplicationDbContext db = new ApplicationDbContext();
             var rec = db.Reclamations.Where(item => item.idReclamation == reclmationID).FirstOrDefault();
             rec.valide = true;
-         
-         
-         
+
+
+
             db.SaveChanges();
             return Json("reclamation updated");
         }
@@ -201,43 +171,50 @@ namespace projet_ASP.Controllers
         public ActionResult ListeNoire()
         {
             ApplicationDbContext db = new ApplicationDbContext();
-          var Blacklist  =  db.Users.Where(item => item.idListeNoire != null).Include(item => item.ListeNoire).ToList();
+            var Blacklist = db.Users.Where(item => item.idListeNoire != null).Include(item => item.ListeNoire).ToList();
 
             return View(Blacklist);
-        } 
-        
-        
+        }
+
+
         [HttpPost]
         public ActionResult ListeNoire(String id)
         {
             ApplicationDbContext db = new ApplicationDbContext();
-          var user  =  db.Users.Find(id);
+            var user = db.Users.Find(id);
             user.idListeNoire = null;
             db.SaveChanges();
             return Json("ListeNoire Updated");
         }
 
-     /*   public ActionResult ListesDesFavoris()
+        public ActionResult ListesDesFavoris()
         {
             ApplicationDbContext db = new ApplicationDbContext();
             string currentUserId = User.Identity.GetUserId();
             var admine = db.Admins.Where(item => item.ApplicationUserID == currentUserId).FirstOrDefault();
-            var ListDesfavories = db.Favoris.Where(item => item.idAdmin == admine.idAdmin).FirstOrDefault().users.ToList();
+            var ListDesfavories = db.Favoris.Where(item => item.idAdmin == admine.idAdmin).ToList();
+            List<ApplicationUser> users = new List<ApplicationUser>();
+            foreach (var item in ListDesfavories)
+            {
+                users.Add(item.ApplicationUser);
+            }
 
-            return View(ListDesfavories);
-        }*/
+            return View(users);
+        }
 
-/*        public ActionResult ListeNoire()
+        [HttpPost]
+        public ActionResult ListesDesFavoris(String id)
         {
             ApplicationDbContext db = new ApplicationDbContext();
-            var ls = db.ListeNoires.ToList();
+            var user = db.Users.Find(id);
+            string currentUserId = User.Identity.GetUserId();
+            var admine = db.Admins.Where(item => item.ApplicationUserID == currentUserId).FirstOrDefault();
+            var favori=db.Favoris.Where(item => item.idAdmin == admine.idAdmin && item.ApplicationUserID == id).FirstOrDefault();
+            db.Favoris.Remove(favori);
+            db.SaveChanges();
+            return Json("Favoris Updated");
+        }
 
-            return View();
-
-        }*/
 
     }
-
-
-
 }
