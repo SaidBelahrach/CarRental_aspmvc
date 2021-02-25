@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity;
 using projet_ASP.Models;
 using System;
 using System.Data.Entity;
