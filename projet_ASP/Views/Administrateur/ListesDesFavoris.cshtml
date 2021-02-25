@@ -1,47 +1,142 @@
 ﻿@model IEnumerable<projet_ASP.Models.ApplicationUser>
-@using Microsoft.AspNet.Identity;
+
 @{
-    ViewBag.Title = "ListesNoire";
+    ViewBag.Title = "ListeDesFavoris";
 }
 
-<div class="row gutters-sm">
-    <div class="col-sm-12 mb-3">
-        <div class="card1" style="overflow:auto;">
-            <div class="card-body" style="min-height:100px;">
-                <div>
+<h2>ListeNoire</h2>
+<table class="table table-hover table-striped thead-dark">
+    <thead class="thead-dark">
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.profileType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
 
-                    @foreach (var item in Model)//every appUser has one proprietaire profile that s way i called the first one
-                    {
-
-                        byte[] byteData = item.imageBytes;
-
-                        //Convert byte arry to base64string
-                        string imreBase64Data = Convert.ToBase64String(byteData);
-                        string imgDataURL = string.Format("data:image/png;base64,{0}", imreBase64Data); //https://www.c-sharpcorner.com/article/mvc-display-image-from-byte-array/
-                        ViewData["ProfileImg"] = string.Format("data:image/png;base64,{0}", imreBase64Data);
+        <th>
+            Action
+        </th>
 
 
 
+    </thead>
 
-                        if (item.profileType == "Locataire")
-                        {
-                            @Html.Partial("_ClientCard", item);
-                        }
-                        else
-                        {
-                            @Html.Partial("_OwnerCard", item);
-                        }
-                    }
+    @foreach (var item in Model)
+    {
+        <tr id="Element_@item.Id" o>
+            @if (item.profileType == "Locataire")
+            {
+                <td>
+                    <a href="@Url.Action("Index", "Locataire", new { id = item.Id })">@item.nomComplet</a>
+                </td>
+            }
+            @if (item.profileType == "Proprietaire")
+            {
+                <td>
+                    <a href="@Url.Action("Index", "Proprietaire", new { id = item.Id })">@item.nomComplet</a>
+                </td>
+            }
+            <td>
+                @Html.DisplayFor(modelItem => item.profileType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
 
-                </div>
-            </div>
-        </div>
-    </div>
-    @*<div class="col-sm-6 mb-3">
-            <div class="card h-100">
-                <div class="card-body">
+            <td>
+                <a onclick='Retrive_From_BlackList("@item.Id")'>Retirer de la liste noire</a>
+            </td>
+        </tr>
+    }
 
-                </div>
-            </div>
-        </div>*@
-</div>
+</table>
+<style>
+    .table-hover .table-active:hover > td,
+    .table-hover .table-active:hover > th {
+        background-color: rgba(0, 0, 0, 0.075);
+    }
+
+    .table .thead-dark th {
+        color: #fff;
+        background-color: #212529;
+        border-color: #32383e;
+        font-family: Calibri;
+    }
+
+    .table .thead-light th {
+        color: #495057;
+        background-color: #e9ecef;
+        border-color: #dee2e6;
+    }
+
+    .table-dark {
+        color: #fff;
+        background-color: #212529;
+    }
+
+        .table-dark th,
+        .table-dark td,
+        .table-dark thead th {
+            border-color: #32383e;
+        }
+
+        .table-dark.table-bordered {
+            border: 0;
+        }
+
+        .table-dark.table-striped tbody tr:nth-of-type(odd) {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .table-dark.table-hover tbody tr:hover {
+            background-color: rgba(255, 255, 255, 0.075);
+        }
+
+    td, th {
+        text-align: center;
+        text-decoration: none;
+    }
+</style>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script>
+
+    function Retrive_From_BlackList ( id) {
+            var formData = new FormData();
+
+            console.log(id)
+            formData.append("id", id);
+
+            $.ajax({
+                type: "POST",
+                url: '../Administrateur/ListesDesFavoris',
+                data: formData,
+                dataType: 'json',
+                contentType: false,
+                processData: false,
+                success: function (response) {
+
+                   $('#Element_' + id).hide();
+
+
+
+                },
+                //error: function(error) {
+                //    alert("error");
+                //}
+         @*   }).done(function () {
+                alert('success');
+            }.fail(function (xhr, status, errorThrown) {
+                alert('fail');
+            };*@
+            });
+        }
+
+
+
+</script>

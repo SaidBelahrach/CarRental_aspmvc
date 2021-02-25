@@ -305,6 +305,18 @@
     <Compile Include="Migrations\202102181433337_notification_modal.Designer.cs">
       <DependentUpon>202102181433337_notification_modal.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202102191622106_Updated_Favoris.cs" />
+    <Compile Include="Migrations\202102191622106_Updated_Favoris.Designer.cs">
+      <DependentUpon>202102191622106_Updated_Favoris.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202102201327585_Adding-Admin-Back.cs" />
+    <Compile Include="Migrations\202102201327585_Adding-Admin-Back.Designer.cs">
+      <DependentUpon>202102201327585_Adding-Admin-Back.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202102202055546_Favoris_update.cs" />
+    <Compile Include="Migrations\202102202055546_Favoris_update.Designer.cs">
+      <DependentUpon>202102202055546_Favoris_update.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Admin.cs" />
@@ -408,6 +420,11 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\aspnet-projet_ASP-20210129032301.mdf" />
+    <Content Include="App_Data\aspnet-projet_ASP-20210129032301_log.ldf">
+      <DependentUpon>aspnet-projet_ASP-20210129032301.mdf</DependentUpon>
+    </Content>
+    <Content Include="App_Data\clipdealer_A29948313_preview.jpg" />
     <Content Include="Content\blocked.svg" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -503,9 +520,11 @@
     <Content Include="Views\Shared\_notificationPresenter.cshtml" />
     <Content Include="Views\Home\EspaceNotif.cshtml" />
     <Content Include="Views\Shared\_user_blocked.cshtml" />
+    <Content Include="Views\Administrateur\ListeNoire.cshtml" />
+    <Content Include="Views\Administrateur\AjoutALaLiteNoire.cshtml" />
+    <Content Include="Views\Administrateur\ListesDesFavoris.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Views\Language\" />
   </ItemGroup>
   <ItemGroup>
@@ -619,6 +638,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202102181433337_notification_modal.resx">
       <DependentUpon>202102181433337_notification_modal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102191622106_Updated_Favoris.resx">
+      <DependentUpon>202102191622106_Updated_Favoris.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102201327585_Adding-Admin-Back.resx">
+      <DependentUpon>202102201327585_Adding-Admin-Back.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102202055546_Favoris_update.resx">
+      <DependentUpon>202102202055546_Favoris_update.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

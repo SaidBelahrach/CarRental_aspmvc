@@ -6,6 +6,7 @@ using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System;
 using Microsoft.AspNet.Identity;
+using System.Collections.Generic;
 
 namespace projet_ASP.Controllers
 {
@@ -15,72 +16,154 @@ namespace projet_ASP.Controllers
         public ActionResult Propietaires()
         {
             ApplicationDbContext db = new ApplicationDbContext();
-            var prop = db.Proprietaires.Include(p => p.ApplicationUser).Include(t => t.Voitures).ToList();
+            var prop = db.Proprietaires.Where(p => p.ApplicationUser.idListeNoire == null).Include(p => p.ApplicationUser).Include(t => t.Voitures).ToList();
 
             return View(prop);
         }
+
+
+        [HttpPost]
+        public ActionResult Propietaires(string id)
+        {
+
+
+            ApplicationDbContext db = new ApplicationDbContext();
+            string currentUserid = User.Identity.GetUserId();
+
+            var user = db.Users.Where(item => item.Id == id ).FirstOrDefault();
+      
+            var admine = db.Admins.Where(item => item.ApplicationUserID == currentUserid).FirstOrDefault();
+            Favoris Newfavori = new Favoris { idAdmin = admine.idAdmin, ApplicationUserID = id };
+            var favori = db.Favoris.Where(item => item.idAdmin == admine.idAdmin && item.ApplicationUserID == id).FirstOrDefault();
+            if (favori == null)
+            {
+                db.Favoris.AddOrUpdate(Newfavori);
+            }
+            else
+            {
+                return Json("Deja favoris");
+            }
+            db.SaveChanges();
+
+
+            return Json("Favoris updated");
+
+        }
+
+
         public ActionResult Locataires()
         {
             ApplicationDbContext db = new ApplicationDbContext();
-            var loca = db.Locataires.Include(p => p.ApplicationUser).Include(t => t.reservations).ToList();
-            /*   ListeNoire ls = new ListeNoire()
-              {
-                  description = "dezk",
-                  idAdmin = 1,
+            var loca = db.Locataires.Where(p => p.ApplicationUser.idListeNoire == null).Include(p => p.ApplicationUser).Include(t => t.reservations).ToList();
 
-              };*/
-            /*       var user = loca.FirstOrDefault().ApplicationUser;
-                   user.idListeNoire = 2;
-                   db.Users.AddOrUpdate(user);
-
-                   Admin ad = new Admin()
-                   {
-                       ApplicationUserID = "4d4e6da5-ac33-44cc-a686-c0c0ef67983c",
-                   };
-                   db.Admins.Add(ad);
-                   db.SaveChanges();*/
             return View(loca);
         }
 
         [HttpPost]
         public ActionResult Locataires(string id)
         {
-            string ID =id;
-            
+
+
             ApplicationDbContext db = new ApplicationDbContext();
-            var user = db.Users.Where(item => item.Id == ID).FirstOrDefault();
-            if(user.ListeNoire != null)
+            string currentUserid = User.Identity.GetUserId();
+
+            var user = db.Users.Where(item => item.Id == id).FirstOrDefault();
+            var admine = db.Admins.Where(item => item.ApplicationUserID == currentUserid).FirstOrDefault();
+            Favoris Newfavori = new Favoris { idAdmin = admine.idAdmin, ApplicationUserID = id };
+            var favori = db.Favoris.Where(item => item.idAdmin == admine.idAdmin && item.ApplicationUserID == id).FirstOrDefault();
+            if(favori==null )
+            { 
+            db.Favoris.AddOrUpdate(Newfavori);
+            }
+            else
             {
-               
+                return Json("Deja favoris");
+            }
+            db.SaveChanges();
+
+
+            return Json("Favoris updated");
+        }
+
+
+        public ActionResult AjoutALaLiteNoire(string id)
+        {
+
+            ApplicationDbContext db = new ApplicationDbContext();
+            var user = db.Users.Find(id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            return View(user);
+
+        }
+        [HttpPost]
+        public ActionResult AjoutALaLiteNoire(String id, String Desc)
+        {
+
+            if (Desc == "")
+            {
+                Desc = "Unjustifié";
+            }
+            ApplicationDbContext db = new ApplicationDbContext();
+            string currentUserid = User.Identity.GetUserId();
+
+            var user = db.Users.Where(item => item.Id == id).FirstOrDefault();
+            var admine = db.Admins.Where(item => item.ApplicationUserID == currentUserid).FirstOrDefault();
+            var ls = db.ListeNoires.Where(item => item.description == Desc && item.idAdmin == admine.idAdmin).FirstOrDefault();
+
+
+            if (ls == null)
+            {
+                ls = new ListeNoire()
+                {
+                    description = Desc,
+                    idAdmin = admine.idAdmin
+                };
+                db.ListeNoires.Add(ls);
+            }
+
+            if (user.idListeNoire == null)
+            {
+
+                user.idListeNoire = ls.idListeNoire;
+                db.Users.AddOrUpdate(user);
+            }
+            else
+            {
+                user.idListeNoire = null;
+                db.Users.AddOrUpdate(user);
             }
 
 
 
-                db.SaveChanges();
-            return Json("ListeNoire updated");
+            db.SaveChanges();
+
+            return RedirectToAction("ListeNoire", "Administrateur");
+
         }
-
-
         public ActionResult Reclamations()
         {
             ApplicationDbContext db = new ApplicationDbContext();
             var reclamations = db.Reclamations.ToList();
 
             return View(reclamations);
-        } 
-        
-        
+
+        }
+
+
         [HttpPost]
         public ActionResult Reclamations(string id)
         {
-           int reclmationID =Convert.ToInt32( id);
+            int reclmationID = Convert.ToInt32(id);
 
             ApplicationDbContext db = new ApplicationDbContext();
             var rec = db.Reclamations.Where(item => item.idReclamation == reclmationID).FirstOrDefault();
             rec.valide = true;
-         
-         
-         
+
+
+
             db.SaveChanges();
             return Json("reclamation updated");
         }
@@ -88,22 +171,50 @@ namespace projet_ASP.Controllers
         public ActionResult ListeNoire()
         {
             ApplicationDbContext db = new ApplicationDbContext();
-            db.Users.Where(item => item.ListeNoire != null);
+            var Blacklist = db.Users.Where(item => item.idListeNoire != null).Include(item => item.ListeNoire).ToList();
 
-            return View();
+            return View(Blacklist);
+        }
+
+
+        [HttpPost]
+        public ActionResult ListeNoire(String id)
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            var user = db.Users.Find(id);
+            user.idListeNoire = null;
+            db.SaveChanges();
+            return Json("ListeNoire Updated");
         }
 
         public ActionResult ListesDesFavoris()
         {
             ApplicationDbContext db = new ApplicationDbContext();
             string currentUserId = User.Identity.GetUserId();
-            var users_ListesFavoris = db.Users.Where(item => item.Favoris.admin.ApplicationUserID == currentUserId);
+            var admine = db.Admins.Where(item => item.ApplicationUserID == currentUserId).FirstOrDefault();
+            var ListDesfavories = db.Favoris.Where(item => item.idAdmin == admine.idAdmin).ToList();
+            List<ApplicationUser> users = new List<ApplicationUser>();
+            foreach (var item in ListDesfavories)
+            {
+                users.Add(item.ApplicationUser);
+            }
 
-            return View(users_ListesFavoris);
+            return View(users);
         }
 
+        [HttpPost]
+        public ActionResult ListesDesFavoris(String id)
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            var user = db.Users.Find(id);
+            string currentUserId = User.Identity.GetUserId();
+            var admine = db.Admins.Where(item => item.ApplicationUserID == currentUserId).FirstOrDefault();
+            var favori=db.Favoris.Where(item => item.idAdmin == admine.idAdmin && item.ApplicationUserID == id).FirstOrDefault();
+            db.Favoris.Remove(favori);
+            db.SaveChanges();
+            return Json("Favoris Updated");
+        }
+
+
     }
-
-
-
 }

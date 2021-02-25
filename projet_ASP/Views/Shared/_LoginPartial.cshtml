@@ -7,16 +7,19 @@
         @Html.AntiForgeryToken()
 
 <ul class="nav navbar-nav navbar-right">
-@*    <li>
-        @Html.ActionLink("Fr", "SetLanguage", "Language", new { @class = "px-0", @name = "fr" }, htmlAttributes: new { title = "Français" })
-    </li>
+    @if (User.IsInRole("Admin"))
+           {
+   @* <li>
+            @Html.ActionLink("Fr", "SetLanguage", "Language", new { @class = "px-0", @name = "fr" }, htmlAttributes: new { title = "Français" })
+        </li>
     <li>
         @Html.ActionLink("En", "SetLanguage", "Language", new { @class = "px-0", @name = "en" }, htmlAttributes: new { title = "English" })
     </li>*@
-    <li>
-      @*  @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })*@
-    </li>
-  @*  <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>*@
+   @* <li>
+         @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+    </li>*@
+      <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        }
 </ul>
     }
 }

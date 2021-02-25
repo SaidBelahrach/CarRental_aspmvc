@@ -38,3 +38,46 @@
             </div>
         </div>*@
 </div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script>
+
+            function Add_To_Favorites(id) {
+            var formData = new FormData();
+
+            console.log(id)
+            formData.append("id", id);
+
+            $.ajax({
+                type: "POST",
+                url: '../Administrateur/Propietaires',
+                data: formData,
+                dataType: 'json',
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                },
+                //error: function(error) {
+                //    alert("error");
+                //}
+         @*   }).done(function () {
+                alert('success');
+            }.fail(function (xhr, status, errorThrown) {
+                alert('fail');
+            };*@
+            });
+        }
+
+
+
+</script>
+
+
+
+
+
+
+

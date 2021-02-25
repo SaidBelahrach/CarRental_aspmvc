@@ -19,6 +19,10 @@ namespace projet_ASP.Controllers
         // GET: Voitures
         public ActionResult Index()
         {
+            if(User.IsInRole("Admin"))
+            {
+                return RedirectToAction("Reclamations", "Administrateur");
+            }
             string userid = User.Identity.GetUserId();
             List<Voiture> voitures = db.Voitures.Include(v => v.proprietaire).Include(r => r.reservations).ToList();
             return View(voitures);

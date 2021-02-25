@@ -4,43 +4,39 @@
 
     ViewBag.Title = "OwnerCard";
 }
-@*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">*@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
-@*<link href="https://fonts.googleapis.com/icon?family=Material+Icons"*@
-<div class="card">
-    <div class="user-card ">
-        <div style="" class="card-img">
-            <img style="" class="img-responsive" src="@ViewData["ProfileImg"]" width="" height="100%" />
-        </div>
-    </div>
-    <div class="general">
-        <h3 class="mt-2" ><a href="@Url.Action("Index", "Proprietaire", new { id = Model.ApplicationUserID })">@Model.ApplicationUser.nomComplet</a></h3>
-   
-        <div class="card-icon-container " style="">
-           
-            <label class="datails-item">
-                <span class="fas fa-car icon  "></span>
-                <span> @Html.ActionLink("Allocations", "Index", "Reservations", new { id = Model.ApplicationUserID }, new { @class = "text-info" })</span>
-            </label>
-              <label class="datails-item">
-                <span class="fas fa-car icon  "></span>
-                <span> @Html.ActionLink("Ajouter a la liste noire", "Index", "Reservations", new { id = Model.ApplicationUserID }, new { @class = "text-info" })</span>
-            </label>
-              <label class="datails-item">
-                <span class="fas fa-car icon  "></span>
-                <span> @Html.ActionLink("Ajouter au favoris", "Index", "Reservations", new { id = Model.ApplicationUserID }, new { @class = "text-info" })</span>
-            </label>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" />
 
-        </div>
-        <div class="card-description">
-            <p>
-            </p>
-        </div>
-  
+<div class="card"  >
+<div class="user-card ">
+    <div style="" class="card-img">
+        <img style="" class="img-responsive" src="@ViewData["ProfileImg"]" width="" height="100%" />
     </div>
 </div>
+<div class="general">
+    <h3 class="mt-2"><a href="@Url.Action("Index", "Proprietaire", new { id = Model.ApplicationUserID })">@Model.ApplicationUser.nomComplet</a></h3>
 
+    <div class="card-icon-container " style="">
+        <label class="datails-item">
+            <span class="fas fa-car icon  "></span>
+            <span>@Html.ActionLink("Allocations", "Index", "Reservations", new { id = Model.ApplicationUserID }, new { @class = "text-info" })  </span>
+        </label>
+        <label class="datails-item">
+            <span class="fas fa-user-slash icon   "></span>
+            <span> @Html.ActionLink("Ajouter a la liste noire", "AjoutALaLiteNoire", new { id = Model.ApplicationUserID }, new { @class = "text-info" }) </span>
+        </label>
+        <label class="datails-item">
+            <span class="fas fa-bookmark  "></span>
+            <span> <a class="text-info" id="Favorites_@Model.ApplicationUserID" onclick='Add_To_Favorites("@Model.ApplicationUserID")'>Ajouter Aux favoris</a>  </span>
+        </label>
+
+    </div>
+
+
+</div>
+</div>
 <style>
 
     @* * {
@@ -67,14 +63,16 @@
         color: dimgray;
         padding: 3px;
         font-weight: normal;
+
     }
+
 
     .card {
         min-width: 320px;
         max-width: 730px;
-        height: 70px;
+        height: 100px;
         min-height: 70px;
-        max-height: 70px;
+        max-height: 100px;
         background-color: white;
         box-shadow: 0 1px 4px 1px rgba(0,0,0,0.14);
         border-radius: 6px;
@@ -269,6 +267,10 @@
 
         .card .additional .stats div.value.infinity {
             font-size: 2.5rem;
+        }
+
+        .input_text{
+            width :  inherit;
         }
 </style>
 
