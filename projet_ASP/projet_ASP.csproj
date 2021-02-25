@@ -428,6 +428,9 @@
     <Content Include="Content\blocked.svg" />
     <Content Include="Content\Images\Login\avatar.svg" />
     <Content Include="Content\Images\Login\bg.svg" />
+    <Content Include="Content\Images\Login\City driver-pana.svg" />
+    <Content Include="Content\Images\Login\log_img.svg" />
+    <Content Include="Content\Images\Login\wave blue.png" />
     <Content Include="Content\Images\Login\wave.png" />
     <Content Include="Content\loginStyle.css" />
     <Content Include="Content\bootstrap-theme.css" />
