@@ -130,7 +130,7 @@ else
                 </div>
             </div>
             <div class="form-actions no-color mt-4 align-content-center">
-                @Html.ActionLink(projet_ASP.Resources.Models.Voitures.cancel, "Index", null, new { @style = "width:1000px;", @class = "btn btn-default p" })
+                @Html.ActionLink(projet_ASP.Resources.Models.Voitures.cancel, "Index", null, new { @style = "width:100px;", @class = "btn btn-default p" })
                 <input type="submit" value="@projet_ASP.Resources.Models.Voitures.reserver" class="btn btn-success " id="btn-reserver" style="width:100px;" />
             </div>
             @*https://css-tricks.com/prefilling-date-input/*@
@@ -140,7 +140,7 @@ else
 
 
 <div class="reserver-progress  ">
-    <span class="fas fa-times  text-danger " style="position:absolute;top:10px;right:10px;font-size:20px;color:red;display:none;"
+    <span class="fas fa-times  text-danger " style="position:absolute;top:10px;right:10px;font-size:20px;color:red;display:none;cursor:pointer;"
           onclick="closeProg() "></span>
     <div style="width:100%;margin:80px auto;">
 
@@ -239,6 +239,7 @@ else
                             loadingIcon.style.display = "none";
                             doneIcon.style.display = "inline";
                             verificamsg.innerHTML = "Succes!";
+                            $('.fa-times').show();
                         } else {
                             faildeIcon.style.display = "inline";
                             verificamsg.innerHTML = "Echoué!";
