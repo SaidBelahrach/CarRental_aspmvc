@@ -47,6 +47,7 @@ namespace projet_ASP.Controllers
         {
             get
             {
+
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
             private set

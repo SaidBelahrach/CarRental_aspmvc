@@ -17,7 +17,6 @@ namespace projet_ASP.Controllers
         {
             ApplicationDbContext db = new ApplicationDbContext();
             var prop = db.Proprietaires.Include(p => p.ApplicationUser).Include(t => t.Voitures).ToList();
-
             return View(prop);
         }
         public ActionResult Locataires()
@@ -54,13 +53,9 @@ namespace projet_ASP.Controllers
             {
                
             }
-
-
-
-                db.SaveChanges();
+            db.SaveChanges();
             return Json("ListeNoire updated");
         }
-
 
         public ActionResult Reclamations()
         {
@@ -79,9 +74,26 @@ namespace projet_ASP.Controllers
             ApplicationDbContext db = new ApplicationDbContext();
             var rec = db.Reclamations.Where(item => item.idReclamation == reclmationID).FirstOrDefault();
             rec.valide = true;
-         
-         
-         
+            string nomReclamer = "";
+            string idAppUser = "";
+            if (rec.Createur == true)
+            {
+                idAppUser = db.Locataires.Where(l => l.idLocataire == rec.idLocataire).FirstOrDefault().ApplicationUserID;
+                nomReclamer = db.Users.Where(u => u.Id == idAppUser).FirstOrDefault().nomComplet;
+            }else
+            {
+                idAppUser = db.Proprietaires.Where(l => l.idProprietaire == rec.idProprietaire).FirstOrDefault().ApplicationUserID;
+                nomReclamer = db.Users.Where(u => u.Id == idAppUser).FirstOrDefault().nomComplet;
+            }
+                Notification notification = new Notification()
+                {
+                    type = "r",
+                    hint ="Votre réclamtion sur "+nomReclamer+" est valider" ,
+                    ApplicationUserID = idAppUser,
+                    vu = false,
+                    cliked = false,
+                };
+                db.Notifications.Add(notification);
             db.SaveChanges();
             return Json("reclamation updated");
         }

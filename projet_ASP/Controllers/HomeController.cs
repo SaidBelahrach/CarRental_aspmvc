@@ -2,6 +2,8 @@
 using System.Web.Mvc;
 using System.Linq;
 using System;
+using Microsoft.AspNet.Identity;
+
 
 
 namespace projet_ASP.Controllers
@@ -53,6 +55,15 @@ namespace projet_ASP.Controllers
             return Json("Deleted" + id);
         }
 
+        public JsonResult unviewedAllNotif()
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            string id = User.Identity.GetUserId();
+            var notifs = db.Notifications.Where(n => n.ApplicationUserID == id).ToList();
+            notifs.ForEach(n => n.vu = true);
+            db.SaveChanges();
+            return Json("");
+        }
         public ActionResult EspaceNotif()
         {
 

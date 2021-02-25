@@ -20,7 +20,6 @@
     </span>
 
 
-
     <div class="box-container2 bg-white d-none" id="boxNotif">
 
         @foreach (var item in listNotif)
@@ -30,33 +29,10 @@
             <i class="fas fa-times delteNotif" data-idNotif="@item.idNotification"></i>
             <div class="content-notif">
                 <h6 id="hint_text">@item.hint</h6>
-                <small class="seeMore" id="seeMore-@item.idNotification" data-idNotif="@item.idNotification">Voir plus !</small>
+                <a href="../../Home/EspaceNotif"><small class="seeMore" id="seeMore-@item.idNotification" data-idNotif="@item.idNotification">Voir plus !</small></a>
             </div>
         </div>
         }
-
-    <div class="box-notif" id="box-notif-1">
-        <p class="notif-img fas fa-bell" width="20" height="20"></p>
-        <i class="fas fa-times delteNotif" data-idNotif="1"></i>
-        <div class="content-notif">
-            <h6 id="hint_text">sssss</h6>
-            <div class="seeMore text-info" data-idNotif="1">Voir plus !</div>
-        </div>
-    </div>  <div class="box-notif" id="box-notif-2">
-    <p class="notif-img fas fa-bell" width="20" height="20"></p>   <p class="notif-img fas fa-bell" width="20" height="20"></p>
-    <i class="fas fa-times delteNotif" data-idNotif="2"></i>
-    <div class="content-notif">
-        <h6 id="hint_text">sssss</h6>
-        <div class="seeMore text-info" data-idNotif="2">Voir plus !</div>
-    </div>
-</div>  <div class="box-notif" id="box-notif-3">
-    <p class="notif-img fas fa-bell" width="20" height="20"></p>
-    <i class="fas fa-times delteNotif" data-idNotif="3"></i>
-    <div class="content-notif">
-        <h6 id="hint_text">sssss</h6>
-        <div class="seeMore text-info" data-idNotif="3">Voir plus !</div>
-    </div>
-</div>
 
     </div>
 </div>
@@ -169,15 +145,43 @@
 
 <script>
 
-
     $("#notifImg").click(function (e) {
         $("#boxNotif").toggleClass("d-none");
         $("#box").addClass("d-none");
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '../../Home/unviewedAllNotif');
+        xhr.send("unviewedNotif");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                $("#notif-badge").addClass("d-none");
+            }
+        }
 
     });
 
     $(".delteNotif").click(function (e) {
-        console.log("clikeed");
+        var id = $(this).attr("data-idNotif");
+        var idSelectedBox = "#box-notif-" + id;
+        $.ajax({
+            type: "POST",
+            url: "../../Home/RemoveNotif",
+            data: '{"id":"' + id + '"}',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                var stringdata = new String(data);
+                if (!stringdata.trim().length == 0) $(idSelectedBox).addClass("d-none");
+            },
+            error: function (data) {
+                alert("erreur");
+            }
+        });
+
+
+    });
+
+
+    $(".seeMore").click(function (e) {
         var id = $(this).attr("data-idNotif");
         var idSelectedBox = "#box-notif-" + id;
         $.ajax({
