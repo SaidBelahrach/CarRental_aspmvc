@@ -4,17 +4,42 @@ using System;
 using System.Data;
 using System.Linq;
 using System.Web.Mvc;
+using Microsoft.Owin.Security;
+using System.Web;
 
 namespace projet_ASP.Controllers
 {
     public class ReclamationController : Controller
     {
+        private IAuthenticationManager AuthenticationManager
+        {
+            get
+            {
+                return HttpContext.GetOwinContext().Authentication;
+            }
+        }
 
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Reclamation
         public ActionResult Index()
         {
+            try
+            {
+                ApplicationDbContext db = new ApplicationDbContext();
+                string id = User.Identity.GetUserId();
+                var user = db.Users.Where(n => n.Id == id).FirstOrDefault();
+                if (user.idListeNoire != null)
+                {
+                    AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+                    var listenoir = db.ListeNoires.Where(l => l.idListeNoire == user.idListeNoire).FirstOrDefault();
+                    ViewData["msg"] = listenoir.description;
+                    return RedirectToAction("BlokcedUser", "Account");
+
+
+                }
+            }
+            catch (Exception) { }
             return View();
         }
 

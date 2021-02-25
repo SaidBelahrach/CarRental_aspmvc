@@ -527,6 +527,8 @@
     <Content Include="Views\Administrateur\ListeNoire.cshtml" />
     <Content Include="Views\Administrateur\AjoutALaLiteNoire.cshtml" />
     <Content Include="Views\Administrateur\ListesDesFavoris.cshtml" />
+    <Content Include="Views\Home\BlockedUser.cshtml" />
+    <Content Include="Views\Account\BlokcedUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Language\" />

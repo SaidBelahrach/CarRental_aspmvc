@@ -9,24 +9,55 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.Owin.Security;
+
+
 
 namespace projet_ASP.Controllers
 {
 
     public class VoituresController : Controller
     {
+        private IAuthenticationManager AuthenticationManager
+        {
+            get
+            {
+                return HttpContext.GetOwinContext().Authentication;
+            }
+        }
+
         private ApplicationDbContext db = new ApplicationDbContext();
         // GET: Voitures
         public ActionResult Index()
         {
+           
             if(User.IsInRole("Admin"))
             {
                 return RedirectToAction("Reclamations", "Administrateur");
             }
-            string userid = User.Identity.GetUserId();
+            try
+            {
+                ApplicationDbContext db = new ApplicationDbContext();
+                string id = User.Identity.GetUserId();
+                var user = db.Users.Where(n => n.Id == id).FirstOrDefault();
+                if (user.idListeNoire != null)
+                {
+                    AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+                    var listenoir = db.ListeNoires.Where(l => l.idListeNoire == user.idListeNoire).FirstOrDefault();
+                    ViewData["msg"] = listenoir.description;
+                    return RedirectToAction("BlokcedUser", "Account");
+
+
+                }
+            }
+            catch (Exception) { }
             List<Voiture> voitures = db.Voitures.Include(v => v.proprietaire).Include(r => r.reservations).ToList();
             return View(voitures);
         }
+
+     
+
+
         [HttpPost]
         public ActionResult Index(string key)
         {
