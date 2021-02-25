@@ -57,19 +57,26 @@
         <div class="img">
             <img src="~/Content/Images/Login/bg.svg" />
         </div>
+
         <div class="login-content">
+          
             <form action="login" class="form" method="post">
                 @Html.AntiForgeryToken()
                 <img src="~/Content/Images/Login/avatar.svg" />
                 <h2 class="title">Welcome</h2>
+
+                <div>
+                    @Html.ValidationSummary("", new { @class = "text-danger summary alert-danger rounded" })
+                </div>
                 <div class="input-div one">
                     <div class="i">
                         <i class="fas fa-user"></i>
                     </div>
                     <div class="div">
                         <h5>Username</h5>
-                        <input type="text" name="Email" class="input">
-                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                        <input type="text" name="Email" class="input">@*
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })*@
+
                     </div>
                 </div>
                 <div class="input-div pass">
@@ -78,13 +85,15 @@
                     </div>
                     <div class="div">
                         <h5>Password</h5>
-                        <input type="password" name="Password" class="input">
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                        <input type="password" name="Password" class="input">@*
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })*@
 
                     </div>
                 </div>
-                @Html.CheckBoxFor(m => m.RememberMe)
-                @Html.LabelFor(m => m.RememberMe)
+                <div style="width:100%;">
+                    @Html.CheckBoxFor(m => m.RememberMe)
+                    @Html.LabelFor(m => m.RememberMe)
+                </div>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
                         <input type="submit" value="Log in" class="btn-login" />
@@ -118,3 +127,29 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+
+
+<style>
+    element.style {
+        min-width: 320px;
+        border:none;
+        /* border-left: solid 1px #f1f1f1; */
+        /* border-right: solid 1px #f1f1f1; */
+    }
+    .container {
+        border: none;
+       width:100%;
+        margin:10px 0px; 
+    @*    background: red;*@
+    }
+    .row {
+        margin: 10px auto;
+        width:100%;
+    }
+    .validation-summary-errors ul{
+        text-align:center;
+        list-style: none;
+    }
+</style>
+ 
