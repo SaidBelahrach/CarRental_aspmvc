@@ -187,8 +187,13 @@ namespace projet_ASP.Controllers
             return Json("reclamation updated");
         }
 
-      
+        public ActionResult ListeNoire()
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            var Blacklist = db.Users.Where(item => item.idListeNoire != null).Include(item => item.ListeNoire).ToList();
 
+            return View(Blacklist);
+        }
 
         [HttpPost]
         public ActionResult ListeNoire(String id)
