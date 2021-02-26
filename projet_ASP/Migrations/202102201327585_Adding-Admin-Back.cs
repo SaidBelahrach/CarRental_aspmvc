@@ -1,8 +1,7 @@
 namespace projet_ASP.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class AddingAdminBack : DbMigration
     {
         public override void Up()
@@ -14,7 +13,7 @@ namespace projet_ASP.Migrations
             CreateIndex("dbo.ListeNoires", "idAdmin");
             AddForeignKey("dbo.ListeNoires", "idAdmin", "dbo.Admins", "idAdmin", cascadeDelete: true);
         }
-        
+
         public override void Down()
         {
             DropForeignKey("dbo.ListeNoires", "idAdmin", "dbo.Admins");

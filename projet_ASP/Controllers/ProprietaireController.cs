@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNet.Identity;
+using Microsoft.Owin.Security;
 using projet_ASP.Models;
 using System;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Microsoft.Owin.Security;
 
 
 namespace projet_ASP.Controllers
@@ -29,15 +29,19 @@ namespace projet_ASP.Controllers
                 ApplicationDbContext db2 = new ApplicationDbContext();
                 string id2 = User.Identity.GetUserId();
                 var user = db2.Users.Where(n => n.Id == id2).FirstOrDefault();
-                if (user.idListeNoire != null)
+                if (user != null)
                 {
-                    AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-                    var listenoir = db2.ListeNoires.Where(l => l.idListeNoire == user.idListeNoire).FirstOrDefault();
-                    ViewData["msg"] = listenoir.description;
-                    return RedirectToAction("BlokcedUser", "Account");
+                    if (user.idListeNoire != null)
+                    {
+                        AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+                        var listenoir = db2.ListeNoires.Where(l => l.idListeNoire == user.idListeNoire).FirstOrDefault();
+                        ViewData["msg"] = listenoir.description;
+                        return RedirectToAction("BlokcedUser", "Account");
 
 
+                    }
                 }
+          
             }
             catch (Exception) { }
             String userId = id == "" ? User.Identity.GetUserId() : id;

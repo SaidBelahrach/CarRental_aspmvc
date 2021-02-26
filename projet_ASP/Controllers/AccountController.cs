@@ -3,12 +3,11 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using projet_ASP.Models;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using System;
-using System.Data.Entity;
 
 namespace projet_ASP.Controllers
 {
@@ -76,7 +75,7 @@ namespace projet_ASP.Controllers
             ViewBag.ReturnUrl = returnUrl;
 
             return View();
-           // return Content("pass all");
+            // return Content("pass all");
         }
 
 
@@ -101,33 +100,37 @@ namespace projet_ASP.Controllers
             {
                 ApplicationDbContext db = new ApplicationDbContext();
                 var user = db.Users.Where(n => n.UserName == model.Email).FirstOrDefault();
-                if (user.idListeNoire != null)
+                if (user != null)
                 {
-                    var listenoir = db.ListeNoires.Where(l => l.idListeNoire == user.idListeNoire).FirstOrDefault();
-                    ViewData["msg"] = listenoir.description;
-                    return View("BlokcedUser");
+                    if (user.idListeNoire != null)
+                    {
+                        var listenoir = db.ListeNoires.Where(l => l.idListeNoire == user.idListeNoire).FirstOrDefault();
+                        ViewData["msg"] = listenoir.description;
+                        return View("BlokcedUser");
+                    }
                 }
+             
             }
             catch (Exception) { }
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-             switch (result)
-             {
-                 case SignInStatus.Success:
-        
+            switch (result)
+            {
+                case SignInStatus.Success:
+
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
-                     return View("Lockout");
-                 case SignInStatus.RequiresVerification:
-                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                 case SignInStatus.Failure:
-                 default:
-                     ModelState.AddModelError("", "Invalid login attempt.");
-                     return View(model);
-             }
-            
+                    return View("Lockout");
+                case SignInStatus.RequiresVerification:
+                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                case SignInStatus.Failure:
+                default:
+                    ModelState.AddModelError("", "Invalid login attempt.");
+                    return View(model);
+            }
+
         }
 
         //

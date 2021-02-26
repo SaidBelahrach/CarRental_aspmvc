@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNet.Identity;
+using Microsoft.Owin.Security;
 using projet_ASP.Models;
+using System;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web.Mvc;
-using Microsoft.Owin.Security;
 using System.Web;
-using System;
+using System.Web.Mvc;
 
 namespace projet_ASP.Controllers
 {
@@ -40,7 +40,7 @@ namespace projet_ASP.Controllers
 
                 }
             }
-            catch (Exception ) { }
+            catch (Exception) { }
 
             string userid = User.Identity.GetUserId();
             if (User.IsInRole("Locataire"))

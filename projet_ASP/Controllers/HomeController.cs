@@ -1,10 +1,10 @@
-﻿using projet_ASP.Models;
-using System.Web.Mvc;
-using System.Linq;
-using System;
-using Microsoft.AspNet.Identity;
+﻿using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
+using projet_ASP.Models;
+using System;
+using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 
 
@@ -38,6 +38,8 @@ namespace projet_ASP.Controllers
               {
                   return Content("already");
               }*/
+
+
             return RedirectToAction("Index", "Voitures");
         }
 

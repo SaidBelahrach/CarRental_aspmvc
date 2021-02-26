@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
+using Microsoft.Owin.Security;
 using projet_ASP.Models;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,6 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Microsoft.Owin.Security;
 
 
 
@@ -28,10 +28,10 @@ namespace projet_ASP.Controllers
 
         private ApplicationDbContext db = new ApplicationDbContext();
         // GET: Voitures
-        public ActionResult Index(int page=1)
+        public ActionResult Index(int page = 1)
         {
-           
-            if(User.IsInRole("Admin"))
+
+            if (User.IsInRole("Admin"))
             {
                 return RedirectToAction("Reclamations", "Administrateur");
             }
@@ -50,21 +50,21 @@ namespace projet_ASP.Controllers
                         return RedirectToAction("BlokcedUser", "Account");
                     }
                 }
-             
+
             }
             catch (Exception) { }
-          //  List<Voiture> voitures = db.Voitures.Include(v => v.proprietaire).Include(r => r.reservations).ToList();
+            //  List<Voiture> voitures = db.Voitures.Include(v => v.proprietaire).Include(r => r.reservations).ToList();
             string userid = User.Identity.GetUserId();
-            List<Voiture> voitures = db.Voitures.Include(v => v.proprietaire).Include(r => r.reservations).OrderBy(v => v.idVoiture).Skip((page-1)*5).Take(5).ToList();
-            int nbpages = (int)Math.Floor(Convert.ToDouble( db.Voitures.ToList().Count() / 5) );
-            List<int> pges =new List<int>();
+            List<Voiture> voitures = db.Voitures.Include(v => v.proprietaire).Include(r => r.reservations).OrderBy(v => v.idVoiture).Skip((page - 1) * 5).Take(5).ToList();
+            int nbpages = (int)Math.Floor(Convert.ToDouble(db.Voitures.ToList().Count() / 5));
+            List<int> pges = new List<int>();
             pges.Add(++nbpages);
             Session["current_page"] = page;
             ViewBag.nb = pges;
             return View(voitures);
         }
 
-     
+
 
 
         [HttpPost]

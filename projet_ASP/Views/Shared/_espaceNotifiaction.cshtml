@@ -1,6 +1,10 @@
 ﻿@using Microsoft.AspNet.Identity
 @using projet_ASP.Models;
 
+<link href="~/Content/my_dataTable.css" rel="stylesheet" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
+
 
 @if (User.IsInRole("Locataire"))
 {
@@ -10,14 +14,17 @@
             <a class="btn btn-primary" href="#" id="btnPenal">Pénalité</a>
         </div>
     </div>
-    <br /><br /><br /><br />
+    <br />
+    <br />
+    <br />
+    <br />
 }
 
 
-<div id="table_reclamation">
+<div id="table_reclamation" class=" ">
     <br /><br />
-    <table class="table table-hover table-striped thead-dark" id="reservation-tab">
-        <thead class="thead-dark">
+    <table class="tab table table-hover table-striped thead-dark" id="reservation-tab">
+        <thead class="bg-primary">
             <tr>
                 <th>
                     Date Réclamation
@@ -108,9 +115,9 @@
 </div>
 
 
-<div id="table_penalite" class="d-none">
-    <table class="table table-hover table-striped thead-dark" id="reservation-tab">
-        <thead class="thead-dark">
+<div id="table_penalite" class=" "   style="display:none">
+    <table class="tab table table-hover table-striped thead-dark" id="reservation-tab" >
+        <thead class="bg-primary">
             <tr>
                 <th>
                     Penalité sur la voiture
@@ -128,14 +135,14 @@
             @{
 
                 var penaliteList = db.RetourVoitures.Where(r => r.pinalise == true && r.Reservation.idLocataire == idApplicationUser).ToList();
-                penaliteList.Reverse(); 
+                penaliteList.Reverse();
                 foreach (var item in penaliteList)
                 {
                     <tr>
-                            @{
-                        var voiture = db.Voitures.Where(v => v.idVoiture == item.Reservation.idVoiture).FirstOrDefault();
-                                   <td>@voiture.marque--@voiture.matricule</td>
-                            }
+                        @{
+                            var voiture = db.Voitures.Where(v => v.idVoiture == item.Reservation.idVoiture).FirstOrDefault();
+                            <td>@voiture.marque--@voiture.matricule</td>
+                        }
 
                         <td>@item.etat</td>
                         <td>@item.amende Dh</td>
@@ -161,7 +168,7 @@
 
     .button_wrapper {
         position: relative;
-        margin-top:5%;
+        margin-top: 5%;
     }
 
     #btn-group {
@@ -180,13 +187,47 @@
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
 <script>
     $("#btnRecl").click(function (e) {
-        $("#table_reclamation").removeClass("d-none");
-        $("#table_penalite").addClass("d-none");
+@*        $("#table_reclamation").removeClass("d-none");
+        $("#table_penalite").addClass("d-none");*@
+        $("#table_reclamation").fadeIn(200);
+        $("#table_penalite").hide(200);
     });
 
     $("#btnPenal").click(function (e) {
-        $("#table_reclamation").addClass("d-none");
-        $("#table_penalite").removeClass("d-none");
+        $("#table_reclamation").hide(200);
+        $("#table_penalite").fadeIn(200);
     });
 
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('.tab').DataTable({
+            "language": {
+                  "lengthMenu": "@projet_ASP.Resources.Views.dataTable.lengthMenu",
+                "zeroRecords": "@projet_ASP.Resources.Views.dataTable.zeroRecords",
+                "info": "Page _PAGE_ de _PAGES_",
+                "infoEmpty": "@projet_ASP.Resources.Views.dataTable.infoEmpty",
+                "infoFiltered": "",
+
+
+                "sProcessing": "@projet_ASP.Resources.Views.dataTable.sProcessing",
+                "sEmptyTable": "@projet_ASP.Resources.Views.dataTable.sEmptyTable",
+                "sSearch": "@projet_ASP.Resources.Views.dataTable.sSearch",
+                "sUrl": "",
+                "sInfoThousands": ",",
+                "sLoadingRecords": "@projet_ASP.Resources.Views.dataTable.sProcessing",
+                "oPaginate": {
+                    "sFirst": "Premier",
+                    "sLast": "Dernier",
+                    "sNext": "@projet_ASP.Resources.Views.dataTable.sNext",
+                    "sPrevious": "@projet_ASP.Resources.Views.dataTable.sPrevious"
+                },
+                "oAria": {
+                    "SortAscending": ":Said",
+                    "SortDescending": ":Belahrach"
+                }
+            }
+        });
+    });
 </script> 
