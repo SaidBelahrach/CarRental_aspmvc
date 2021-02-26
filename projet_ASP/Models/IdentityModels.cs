@@ -32,10 +32,10 @@ namespace projet_ASP.Models
         [Display(Name = "imageBytes", ResourceType = typeof(Resources.Models.ApplicationUser))]
         public byte[] imageBytes { get; set; }
 
-       /* public int? idFavoris { get; set; }
-        [ForeignKey("idFavoris")]
-        public virtual Favoris Favoris { get; set; }
-*/
+        /* public int? idFavoris { get; set; }
+         [ForeignKey("idFavoris")]
+         public virtual Favoris Favoris { get; set; }
+ */
         public int? idListeNoire { get; set; }
         [ForeignKey("idListeNoire")]
         public virtual ListeNoire ListeNoire { get; set; }
@@ -67,7 +67,7 @@ namespace projet_ASP.Models
         public virtual DbSet<ListeNoire> ListeNoires { get; set; }
         public virtual DbSet<Favoris> Favoris { get; set; }
         public virtual DbSet<Admin> Admins { get; set; }
-        public virtual DbSet<Notification> Notifications { get; set; } 
+        public virtual DbSet<Notification> Notifications { get; set; }
 
         public static ApplicationDbContext Create()
         {

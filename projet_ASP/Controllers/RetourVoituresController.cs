@@ -53,7 +53,7 @@ namespace projet_ASP.Controllers
             retourVoiture.idContrat = Convert.ToInt32(Session["idContrat"]);
             if (ModelState.IsValid)
             {
-           
+
                 var reser = db.reservations.Find(retourVoiture.idContrat);
                 if (reser == null) return RedirectToAction("Index");
                 var applicationUserIdLocatire = db.Locataires.Where(l => l.idLocataire == reser.idLocataire).FirstOrDefault().ApplicationUserID;
@@ -69,7 +69,7 @@ namespace projet_ASP.Controllers
                     Notification notification = new Notification()
                     {
                         type = "p",
-                        hint = "Vous avez une amende de " + retourVoiture.amende +"dh",
+                        hint = "Vous avez une amende de " + retourVoiture.amende + "dh",
                         idOroginalNotification = retourVoiture.idRetour,
                         ApplicationUserID = applicationUserIdLocatire,
                         vu = false,

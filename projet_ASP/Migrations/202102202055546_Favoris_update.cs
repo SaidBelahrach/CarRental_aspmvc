@@ -1,8 +1,7 @@
 namespace projet_ASP.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class Favoris_update : DbMigration
     {
         public override void Up()
@@ -11,7 +10,7 @@ namespace projet_ASP.Migrations
             CreateIndex("dbo.Favoris", "ApplicationUserID");
             AddForeignKey("dbo.Favoris", "ApplicationUserID", "dbo.AspNetUsers", "Id");
         }
-        
+
         public override void Down()
         {
             DropForeignKey("dbo.Favoris", "ApplicationUserID", "dbo.AspNetUsers");

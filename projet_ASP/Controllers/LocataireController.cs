@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNet.Identity;
+using Microsoft.Owin.Security;
 using projet_ASP.Models;
 using System;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Microsoft.Owin.Security;
 
 
 
@@ -38,7 +38,8 @@ namespace projet_ASP.Controllers
 
 
                 }
-            }catch (Exception) { }
+            }
+            catch (Exception) { }
             String userId = id == "" ? User.Identity.GetUserId() : id;
             ApplicationDbContext db = new ApplicationDbContext();
             var prop = db.Locataires.Include(e => e.reservations).Where(item => item.ApplicationUserID == userId).FirstOrDefault();

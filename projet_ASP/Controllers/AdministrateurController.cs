@@ -1,14 +1,11 @@
-﻿using projet_ASP.Models;
+﻿using Microsoft.AspNet.Identity;
+using projet_ASP.Models;
+using System;
+using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web.Mvc;
-using System;
-using Microsoft.AspNet.Identity;
-using System.Data.Entity.Migrations;
-using System;
-using Microsoft.AspNet.Identity;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace projet_ASP.Controllers
 {
@@ -32,8 +29,8 @@ namespace projet_ASP.Controllers
             ApplicationDbContext db = new ApplicationDbContext();
             string currentUserid = User.Identity.GetUserId();
 
-            var user = db.Users.Where(item => item.Id == id ).FirstOrDefault();
-      
+            var user = db.Users.Where(item => item.Id == id).FirstOrDefault();
+
             var admine = db.Admins.Where(item => item.ApplicationUserID == currentUserid).FirstOrDefault();
             Favoris Newfavori = new Favoris { idAdmin = admine.idAdmin, ApplicationUserID = id };
             var favori = db.Favoris.Where(item => item.idAdmin == admine.idAdmin && item.ApplicationUserID == id).FirstOrDefault();
@@ -92,9 +89,9 @@ namespace projet_ASP.Controllers
             var admine = db.Admins.Where(item => item.ApplicationUserID == currentUserid).FirstOrDefault();
             Favoris Newfavori = new Favoris { idAdmin = admine.idAdmin, ApplicationUserID = id };
             var favori = db.Favoris.Where(item => item.idAdmin == admine.idAdmin && item.ApplicationUserID == id).FirstOrDefault();
-            if(favori==null )
-            { 
-            db.Favoris.AddOrUpdate(Newfavori);
+            if (favori == null)
+            {
+                db.Favoris.AddOrUpdate(Newfavori);
             }
             else
             {
@@ -105,29 +102,29 @@ namespace projet_ASP.Controllers
 
             return Json("Favoris updated");
         }
-       
+
         [HttpPost]
         public ActionResult SearchLoc(String key)
         {
             List<Locataire> locataires;
             ApplicationDbContext db = new ApplicationDbContext();
             string userid = User.Identity.GetUserId();
-            if(String.IsNullOrEmpty(key))
+            if (String.IsNullOrEmpty(key))
             {
-             locataires = db.Locataires.Include(v => v.reservations).ToList();
+                locataires = db.Locataires.Include(v => v.reservations).ToList();
             }
             else
-            { 
-            key = key.Trim();
-            if (key.Length == 0) return View(db.Locataires.ToList());
-            locataires = db.Locataires.Where(v => v.ApplicationUser.nomComplet.ToLower().Contains(key.ToLower())).Include(v => v.reservations).ToList();
+            {
+                key = key.Trim();
+                if (key.Length == 0) return View(db.Locataires.ToList());
+                locataires = db.Locataires.Where(v => v.ApplicationUser.nomComplet.ToLower().Contains(key.ToLower())).Include(v => v.reservations).ToList();
             }
 
 
             return View("Locataires", locataires);
         }
 
-            public ActionResult AjoutALaLiteNoire(string id)
+        public ActionResult AjoutALaLiteNoire(string id)
         {
 
             ApplicationDbContext db = new ApplicationDbContext();
@@ -208,20 +205,21 @@ namespace projet_ASP.Controllers
             {
                 idAppUser = db.Locataires.Where(l => l.idLocataire == rec.idLocataire).FirstOrDefault().ApplicationUserID;
                 nomReclamer = db.Users.Where(u => u.Id == idAppUser).FirstOrDefault().nomComplet;
-            }else
+            }
+            else
             {
                 idAppUser = db.Proprietaires.Where(l => l.idProprietaire == rec.idProprietaire).FirstOrDefault().ApplicationUserID;
                 nomReclamer = db.Users.Where(u => u.Id == idAppUser).FirstOrDefault().nomComplet;
             }
-                Notification notification = new Notification()
-                {
-                    type = "r",
-                    hint ="Votre réclamtion sur "+nomReclamer+" est valider" ,
-                    ApplicationUserID = idAppUser,
-                    vu = false,
-                    cliked = false,
-                };
-                db.Notifications.Add(notification);
+            Notification notification = new Notification()
+            {
+                type = "r",
+                hint = "Votre réclamtion sur " + nomReclamer + " est valider",
+                ApplicationUserID = idAppUser,
+                vu = false,
+                cliked = false,
+            };
+            db.Notifications.Add(notification);
             db.SaveChanges();
             return Json("reclamation updated");
         }
@@ -266,7 +264,7 @@ namespace projet_ASP.Controllers
             var user = db.Users.Find(id);
             string currentUserId = User.Identity.GetUserId();
             var admine = db.Admins.Where(item => item.ApplicationUserID == currentUserId).FirstOrDefault();
-            var favori=db.Favoris.Where(item => item.idAdmin == admine.idAdmin && item.ApplicationUserID == id).FirstOrDefault();
+            var favori = db.Favoris.Where(item => item.idAdmin == admine.idAdmin && item.ApplicationUserID == id).FirstOrDefault();
             db.Favoris.Remove(favori);
             db.SaveChanges();
             return Json("Favoris Updated");
