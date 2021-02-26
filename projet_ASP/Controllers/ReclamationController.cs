@@ -94,7 +94,6 @@ namespace projet_ASP.Controllers
                 idLoc = Convert.ToInt32(collection["idReceveir"]);
                 returnId = idLoc;
             }
-
             Reclamation reclamation = new Reclamation()
             {
                 dateCreation = DateTime.Now.ToString(),
@@ -108,13 +107,11 @@ namespace projet_ASP.Controllers
             db.SaveChanges();
             return RedirectToAction("Index", "Voitures");
         }
-
         // GET: Reclamation/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
-
         // POST: Reclamation/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
