@@ -3,7 +3,7 @@
     ViewBag.Title = "Register";
 }
 
-<@*h2>@ViewBag.Title.</h2>*@
+ 
 
 <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
 <link href="~/Content/loginStyle.css" rel="stylesheet" height="100%" />
@@ -45,7 +45,7 @@
         outline: none;
         border: none;
         background: #28acbf;
-        font-size: 1.2rem;
+       @* font-size: 1.2rem;*@
         color: #fff;
         font-family: 'Poppins', sans-serif;
         text-transform: uppercase;
@@ -82,10 +82,21 @@
              border :1px solid #28acbf;
          }
 
+        .fas {
+            -moz-osx-font-smoothing: grayscale;
+            -webkit-font-smoothing: antialiased;
+            display: flex;
+            font-size:18px;
+            padding-top:12px;
+        }
+        .lbl{
+           @* font-size:14px;
+            font-weight:normal;*@
+        }
 </style>
 
 <div class="row">
-    <img src="~/Content/Images/Login/wave blue.png" class="wave " />
+    <img src="~/Content/Images/Login/wave blue.png" class="wave " /> 
     <div class="container-login">
         <div class="img">
         </div>
@@ -99,31 +110,31 @@
 @Html.ValidationSummary("", new { @class = "text-danger summary alert-danger rounded" })
                 </div>
                 <div class="input-div one">
-                    <div class="i">
+                    <div class="i fas fa-id-card  ">
                     </div>
                     <div class="div">
-                        <h5> @Html.LabelFor(m => m.nomComplet, new { @class = "" })</h5>
-                        <input type="text" name="nomComplet" class="input">
+                        <h5 class="lbl"> @Html.LabelFor(m => m.nomComplet, new { @class = "" })</h5>
+                        <input type="text" name="nomComplet" class="input pt-4">
                         </div>
                         </div>
                         <div class="input-div one">
-                        <div class="i">
+                        <div class="i fas fa-map-marker-alt">
                         </div>
                         <div class="div">
-                        <h5>  @Html.LabelFor(m => m.adresse, new { @class = "" })</h5>
-                        <input type="text" name="adresse" class="input">
+                        <h5 class="lbl">  @Html.LabelFor(m => m.adresse, new { @class = "" })</h5>
+                        <input type="text" name="adresse" class="input pt-4">
                         </div>
                         </div>
                         <div class="input-div one">
-                        <div class="i">
+                        <div class="i fas fa-phone-square-alt">
                         </div>
                         <div class="div">
-                        <h5> @Html.LabelFor(m => m.tel, new { @class = "" })</h5>
-                        <input type="text" name="tel" class="input">
+                        <h5 class="lbl"> @Html.LabelFor(m => m.tel, new { @class = "" })</h5>
+                        <input type="text" name="tel" class="input pt-4">
                         </div>
                         </div>
                         <div class="input-div one">
-                        <div class="i">
+                        <div class="i fas fa-user-tie pt-0" >
                         </div>
                         <div class="div">
                         @Html.DropDownListFor(m => m.profileType, new SelectListItem[]
@@ -131,38 +142,38 @@
                        new SelectListItem() { Text = projet_ASP.Resources.Models.ApplicationUser.locataire, Value = "Locataire" },
                        new SelectListItem() { Text = projet_ASP.Resources.Models.ApplicationUser.proprietaire, Value = "Proprietaire" }
                       }
-                      , new { @class = "form-control input-select" }
+                      , new { @class = "form-select pt-2 input-select" }
                   )
 
                         </div>
                         </div>
                         <div class="input-div one">
-                        <div class="i">
+                        <div class="i fas fa-envelope">
                         </div>
                         <div class="div">
-                        <h5>@Html.LabelFor(m => m.Email, new { @class = "" })</h5>
-                        <input type="text" name="Email" class="input">
+                        <h5 class="lbl">@Html.LabelFor(m => m.Email, new { @class = "" })</h5>
+                        <input type="text" name="Email" class="input pt-4">
                         </div>
                         </div>
                         <div class="input-div pass">
-                        <div class="i">
+                        <div class="i fas fa-lock">
                         </div>
                         <div class="div">
-                        <h5>@Html.LabelFor(m => m.Password, new { @class = "" })</h5>
-                        <input type="Password" name="Password" class="input">
+                        <h5 class="lbl">@Html.LabelFor(m => m.Password, new { @class = "" })</h5>
+                        <input type="Password" name="Password" class="input pt-4">
                         </div>
                         </div>
                         <div class="input-div pass">
-                        <div class="i">
+                        <div class="i fas fa-lock">
                         </div>
                         <div class="div">
-                        <h5> @Html.LabelFor(m => m.ConfirmPassword, new { @class = "" })</h5>
-                        <input type="Password" name="ConfirmPassword" class="input">
+                        <h5 class="lbl"> @Html.LabelFor(m => m.ConfirmPassword, new { @class = "" })</h5>
+                        <input type="Password" name="ConfirmPassword" class="input pt-4">
                         </div>
                         </div>
                         <div class=" ">
                         <div class=" ">
-                        <input type="submit" value="Register" class="btn-login btn-primary" />
+                        <input type="submit" value="Register" class="btn-login btn-primary mt-2" />
                         </div>
                         </div>
                         </form>

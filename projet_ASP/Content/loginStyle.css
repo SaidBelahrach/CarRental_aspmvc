@@ -66,7 +66,7 @@ body {
     position: relative;
     display: grid;
     grid-template-columns: 7% 93%;
-    margin: 25px 0;
+    margin: 15px 0;
     padding: 5px 0;
     border-bottom: 2px solid #d9d9d9;
 }
@@ -97,9 +97,12 @@ body {
         top: 50%;
         transform: translateY(-50%);
         color: #999;
-        font-size: 18px;
+        font-size: 14px;
+        font-weight: normal;
         transition: .3s;
     }
+
+   
 
 .input-div:before, .input-div:after {
     content: '';
@@ -142,7 +145,7 @@ body {
     outline: none;
     background: none;
     padding: 0.5rem 0.7rem;
-    font-size: 1.2rem;
+   /* font-size: 1.2rem;*/
     color: #555;
     font-family: 'poppins', sans-serif;
 }
