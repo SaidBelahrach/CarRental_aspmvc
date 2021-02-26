@@ -7,6 +7,7 @@ using System.Data.Entity.Migrations;
 using System;
 using Microsoft.AspNet.Identity;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace projet_ASP.Controllers
 {
@@ -16,7 +17,7 @@ namespace projet_ASP.Controllers
         public ActionResult Propietaires()
         {
             ApplicationDbContext db = new ApplicationDbContext();
-            var prop = db.Proprietaires.Where(p => p.ApplicationUser.idListeNoire == null).Include(p => p.ApplicationUser).Include(t => t.Voitures).ToList();
+            var prop = db.Proprietaires.Include(p => p.ApplicationUser).Include(t => t.Voitures).ToList();
 
             return View(prop);
         }
@@ -54,7 +55,7 @@ namespace projet_ASP.Controllers
         public ActionResult Locataires()
         {
             ApplicationDbContext db = new ApplicationDbContext();
-            var loca = db.Locataires.Where(p => p.ApplicationUser.idListeNoire == null).Include(p => p.ApplicationUser).Include(t => t.reservations).ToList();
+            var loca = db.Locataires.Include(p => p.ApplicationUser).Include(t => t.reservations).ToList();
 
             return View(loca);
         }
@@ -168,13 +169,7 @@ namespace projet_ASP.Controllers
             return Json("reclamation updated");
         }
 
-        public ActionResult ListeNoire()
-        {
-            ApplicationDbContext db = new ApplicationDbContext();
-            var Blacklist = db.Users.Where(item => item.idListeNoire != null).Include(item => item.ListeNoire).ToList();
-
-            return View(Blacklist);
-        }
+      
 
 
         [HttpPost]
