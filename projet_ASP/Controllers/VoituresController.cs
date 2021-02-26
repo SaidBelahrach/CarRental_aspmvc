@@ -40,18 +40,20 @@ namespace projet_ASP.Controllers
                 ApplicationDbContext db = new ApplicationDbContext();
                 string id = User.Identity.GetUserId();
                 var user = db.Users.Where(n => n.Id == id).FirstOrDefault();
-                if (user.idListeNoire != null)
+                if (user != null)
                 {
-                    AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-                    var listenoir = db.ListeNoires.Where(l => l.idListeNoire == user.idListeNoire).FirstOrDefault();
-                    ViewData["msg"] = listenoir.description;
-                    return RedirectToAction("BlokcedUser", "Account");
-
-
+                    if (user.idListeNoire != null)
+                    {
+                        AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+                        var listenoir = db.ListeNoires.Where(l => l.idListeNoire == user.idListeNoire).FirstOrDefault();
+                        ViewData["msg"] = listenoir.description;
+                        return RedirectToAction("BlokcedUser", "Account");
+                    }
                 }
+             
             }
             catch (Exception) { }
-            List<Voiture> voitures = db.Voitures.Include(v => v.proprietaire).Include(r => r.reservations).ToList();
+          //  List<Voiture> voitures = db.Voitures.Include(v => v.proprietaire).Include(r => r.reservations).ToList();
             string userid = User.Identity.GetUserId();
             List<Voiture> voitures = db.Voitures.Include(v => v.proprietaire).Include(r => r.reservations).OrderBy(v => v.idVoiture).Skip((page-1)*5).Take(5).ToList();
             int nbpages = (int)Math.Floor(Convert.ToDouble( db.Voitures.ToList().Count() / 5) );
