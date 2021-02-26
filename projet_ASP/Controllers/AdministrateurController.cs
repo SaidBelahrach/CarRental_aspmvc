@@ -181,7 +181,7 @@ namespace projet_ASP.Controllers
                     vu = false,
                     cliked = false,
                 };
-                db.Notifications.Add(notification);
+            db.Notifications.Add(notification);
             db.SaveChanges();
             return Json("reclamation updated");
         }

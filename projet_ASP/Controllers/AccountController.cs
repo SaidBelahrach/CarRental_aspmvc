@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System;
-using Microsoft.AspNet.Identity;
 using System.Data.Entity;
 
 namespace projet_ASP.Controllers

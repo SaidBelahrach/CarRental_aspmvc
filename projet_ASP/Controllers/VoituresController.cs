@@ -51,7 +51,7 @@ namespace projet_ASP.Controllers
                 }
             }
             catch (Exception) { }
-            List<Voiture> voitures = db.Voitures.Include(v => v.proprietaire).Include(r => r.reservations).ToList();
+           // List<Voiture> voitures = db.Voitures.Include(v => v.proprietaire).Include(r => r.reservations).ToList();
             string userid = User.Identity.GetUserId();
             List<Voiture> voitures = db.Voitures.Include(v => v.proprietaire).Include(r => r.reservations).OrderBy(v => v.idVoiture).Skip((page-1)*5).Take(5).ToList();
             int nbpages = (int)Math.Floor(Convert.ToDouble( db.Voitures.ToList().Count() / 5) );
