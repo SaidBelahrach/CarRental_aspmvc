@@ -425,6 +425,14 @@
       <DependentUpon>aspnet-projet_ASP-20210129032301.mdf</DependentUpon>
     </Content>
     <Content Include="App_Data\clipdealer_A29948313_preview.jpg" />
+    <Content Include="Content\blocked.svg" />
+    <Content Include="Content\Images\Login\avatar.svg" />
+    <Content Include="Content\Images\Login\bg.svg" />
+    <Content Include="Content\Images\Login\City driver-pana.svg" />
+    <Content Include="Content\Images\Login\log_img.svg" />
+    <Content Include="Content\Images\Login\wave blue.png" />
+    <Content Include="Content\Images\Login\wave.png" />
+    <Content Include="Content\loginStyle.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -518,9 +526,12 @@
     <Content Include="Views\Shared\_espaceNotifiaction.cshtml" />
     <Content Include="Views\Shared\_notificationPresenter.cshtml" />
     <Content Include="Views\Home\EspaceNotif.cshtml" />
+    <Content Include="Views\Shared\_user_blocked.cshtml" />
     <Content Include="Views\Administrateur\ListeNoire.cshtml" />
     <Content Include="Views\Administrateur\AjoutALaLiteNoire.cshtml" />
     <Content Include="Views\Administrateur\ListesDesFavoris.cshtml" />
+    <Content Include="Views\Home\BlockedUser.cshtml" />
+    <Content Include="Views\Account\BlokcedUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Language\" />

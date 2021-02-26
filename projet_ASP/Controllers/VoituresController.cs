@@ -9,24 +9,62 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.Owin.Security;
+
+
 
 namespace projet_ASP.Controllers
 {
 
     public class VoituresController : Controller
     {
+        private IAuthenticationManager AuthenticationManager
+        {
+            get
+            {
+                return HttpContext.GetOwinContext().Authentication;
+            }
+        }
+
         private ApplicationDbContext db = new ApplicationDbContext();
         // GET: Voitures
-        public ActionResult Index()
+        public ActionResult Index(int page=1)
         {
+           
             if(User.IsInRole("Admin"))
             {
                 return RedirectToAction("Reclamations", "Administrateur");
             }
-            string userid = User.Identity.GetUserId();
+            try
+            {
+                ApplicationDbContext db = new ApplicationDbContext();
+                string id = User.Identity.GetUserId();
+                var user = db.Users.Where(n => n.Id == id).FirstOrDefault();
+                if (user.idListeNoire != null)
+                {
+                    AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+                    var listenoir = db.ListeNoires.Where(l => l.idListeNoire == user.idListeNoire).FirstOrDefault();
+                    ViewData["msg"] = listenoir.description;
+                    return RedirectToAction("BlokcedUser", "Account");
+
+
+                }
+            }
+            catch (Exception) { }
             List<Voiture> voitures = db.Voitures.Include(v => v.proprietaire).Include(r => r.reservations).ToList();
+            string userid = User.Identity.GetUserId();
+            List<Voiture> voitures = db.Voitures.Include(v => v.proprietaire).Include(r => r.reservations).OrderBy(v => v.idVoiture).Skip((page-1)*5).Take(5).ToList();
+            int nbpages = (int)Math.Floor(Convert.ToDouble( db.Voitures.ToList().Count() / 5) );
+            List<int> pges =new List<int>();
+            pges.Add(++nbpages);
+            Session["current_page"] = page;
+            ViewBag.nb = pges;
             return View(voitures);
         }
+
+     
+
+
         [HttpPost]
         public ActionResult Index(string key)
         {
@@ -42,6 +80,10 @@ namespace projet_ASP.Controllers
                                                           v.proprietaire.ApplicationUser.PhoneNumber.ToLower().Contains(key.ToLower())
                                                        )
                                                 .ToList();
+            List<int> pges = new List<int>();//ToString pagina errors while serching
+            pges.Add(1);
+            Session["current_page"] = 1;
+            ViewBag.nb = pges;
             return View(voitures);
         }
 
@@ -107,6 +149,10 @@ namespace projet_ASP.Controllers
                                                           (v.disponible == true || v.reservations.Where(r=>r.dateDebut<=debut && r.dateFin>=fin).Count()>0 ) )
                                               .ToList<Voiture>();
             */
+            List<int> pges = new List<int>();//ToString pagina errors while filtering
+            pges.Add(1);
+            Session["current_page"] = 1;
+            ViewBag.nb = pges;
             return View("Index", voi);
         }
         //les voitures de propritaire actuel

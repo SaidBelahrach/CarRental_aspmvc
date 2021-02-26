@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.Owin.Security;
 
 
 
@@ -12,9 +13,32 @@ namespace projet_ASP.Controllers
 {
     public class LocataireController : Controller
     {
+        private IAuthenticationManager AuthenticationManager
+        {
+            get
+            {
+                return HttpContext.GetOwinContext().Authentication;
+            }
+        }
         // GET: Locataire
         public ActionResult Index(string id = "")
         {
+
+            try
+            {
+                ApplicationDbContext db2 = new ApplicationDbContext();
+                string id2 = User.Identity.GetUserId();
+                var user = db2.Users.Where(n => n.Id == id2).FirstOrDefault();
+                if (user.idListeNoire != null)
+                {
+                    AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+                    var listenoir = db2.ListeNoires.Where(l => l.idListeNoire == user.idListeNoire).FirstOrDefault();
+                    ViewData["msg"] = listenoir.description;
+                    return RedirectToAction("BlokcedUser", "Account");
+
+
+                }
+            }catch (Exception) { }
             String userId = id == "" ? User.Identity.GetUserId() : id;
             ApplicationDbContext db = new ApplicationDbContext();
             var prop = db.Locataires.Include(e => e.reservations).Where(item => item.ApplicationUserID == userId).FirstOrDefault();

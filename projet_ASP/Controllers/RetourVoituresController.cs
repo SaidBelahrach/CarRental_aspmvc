@@ -69,7 +69,7 @@ namespace projet_ASP.Controllers
                     Notification notification = new Notification()
                     {
                         type = "p",
-                        hint = "Vous avez une amende de " + retourVoiture.amende,
+                        hint = "Vous avez une amende de " + retourVoiture.amende +"dh",
                         idOroginalNotification = retourVoiture.idRetour,
                         ApplicationUserID = applicationUserIdLocatire,
                         vu = false,

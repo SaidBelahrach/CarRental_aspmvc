@@ -4,60 +4,148 @@
     ViewBag.Title = "Log in";
 }
 @*//https://codepen.io/FlorinPop17/pen/vPKWjd*@
-<h2>@ViewBag.Title.</h2>
-<div class="row">
-    <div class="col-md-8">
-        <section id="loginForm">
-            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-            {
-                @Html.AntiForgeryToken()
-                <h4>Use a local account to log in.</h4>
-                <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
+<link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+<link href="~/Content/loginStyle.css" rel="stylesheet" />
+<script src="https://kit.fontawesome.com/a81368914c.js"></script>
 
-                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+<div class="row">
+    <img src="~/Content/Images/Login/wave blue.png" class="wave " />
+    <div class="container-login">
+        <div class="img"> 
+            <img src="~/Content/Images/Login/City driver-pana.svg" />
+        </div>
+
+        <div class="login-content">
+           
+            <form action="login" class="form ml-4 " method="post">
+                @Html.AntiForgeryToken()
+                <img src="~/Content/Images/Login/log_img.svg" />
+                <h2 class="title">Login</h2>
+
+                <div>
+                    @Html.ValidationSummary("", new { @class = "text-danger summary alert-danger rounded" })
+                </div>
+                <div class="input-div one">
+                    <div class="i">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="div">
+                        <h5>Username</h5>
+                        <input type="text" name="Email" class="input">@*
+                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })*@
+
                     </div>
                 </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                <div class="input-div pass">
+                    <div class="i">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <div class="div">
+                        <h5>Password</h5>
+                        <input type="password" name="Password" class="input">@*
+                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })*@
+
                     </div>
                 </div>
+                @Html.CheckBoxFor(m => m.RememberMe)
+                @Html.LabelFor(m => m.RememberMe)
+                @Html.ActionLink("Register as a new user", "Register")
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <div class="checkbox">
-                            @Html.CheckBoxFor(m => m.RememberMe)
-                            @Html.LabelFor(m => m.RememberMe)
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Log in" class="btn btn-default" />
+                        <input type="submit" value="Log in" class="btn-login" />
                     </div>
                 </div>
                 <p>
-                    @Html.ActionLink("Register as a new user", "Register")
                 </p>
-                @* Enable this once you have account confirmation enabled for password reset functionality
-                    <p>
-                        @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                    </p>*@
-            }
-        </section>
+            </form>
+        </div>
     </div>
-   @* <div class="col-md-4">
-        <section id="socialLoginForm">
-            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-        </section>
-    </div>*@
+
 </div>
+<script>
+    const inputs = document.querySelectorAll(".input");
+
+    function addcl() {
+        let parent = this.parentNode.parentNode;
+        parent.classList.add("focus");
+    }
+
+    function remcl() {
+        let parent = this.parentNode.parentNode;
+        if (this.value == "") {
+            parent.classList.remove("focus");
+        }
+    }
+    inputs.forEach(input => {
+        input.addEventListener("focus", addcl);
+        input.addEventListener("blur", remcl);
+    });
+
+</script>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+
+
+<style>
+    element.style {
+        min-width: 320px;
+        border:none;
+        /* border-left: solid 1px #f1f1f1; */
+        /* border-right: solid 1px #f1f1f1; */
+    } 
+    .container {
+        width: 100%;
+        @*    background: red;*@
+    }
+    body-content{
+        background:red;
+    }
+    .row {
+        margin: 10px auto;
+        width: 100%;
+    }
+    .validation-summary-errors ul{
+        text-align:center;
+        list-style: none;
+    }
+    .btn-div{
+        padding-left:0px;
+        padding-right:0px;
+        margin:0px auto;
+        width:100%;
+    }
+    .btn-logi {
+        width: 100%;
+        height: 50px;
+        border-radius: 25px;
+        outline: none;
+        border: none;
+        @* background-image: linear-gradient(to right, #32be8f, #38d39f, #32be8f);*@
+        background: #28acbf;
+        font-size: 1.2rem;
+        color: #fff;
+        font-family: 'Poppins', sans-serif;
+        text-transform: uppercase;
+        width: 100%;
+        cursor: pointer;
+        transition: .5s;
+    }
+    .login-content img { 
+        height: 200px;
+    }
+
+    .login-content {
+        align-items: start;
+        margin-top: 20px;
+    }
+    .img {
+        
+        margin-top:50px;
+        align-items: start;
+    }
+ 
+
+</style>
+ 

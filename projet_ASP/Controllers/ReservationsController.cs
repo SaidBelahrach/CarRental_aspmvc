@@ -5,17 +5,42 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using Microsoft.Owin.Security;
+using System.Web;
+using System;
 
 namespace projet_ASP.Controllers
 {
     [Authorize]
     public class ReservationsController : Controller
     {
+        private IAuthenticationManager AuthenticationManager
+        {
+            get
+            {
+                return HttpContext.GetOwinContext().Authentication;
+            }
+        }
         private ApplicationDbContext db = new ApplicationDbContext();
         // GET: Reservations
         // [Authorize(Roles ="Locataire")]
         public ActionResult Index(string id = "")
         {
+            try
+            {
+                string id2 = User.Identity.GetUserId();
+                var user = db.Users.Where(n => n.Id == id2).FirstOrDefault();
+                if (user.idListeNoire != null)
+                {
+                    AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+                    var listenoir = db.ListeNoires.Where(l => l.idListeNoire == user.idListeNoire).FirstOrDefault();
+                    ViewData["msg"] = listenoir.description;
+                    return RedirectToAction("BlokcedUser", "Account");
+
+
+                }
+            }
+            catch (Exception ) { }
 
             string userid = User.Identity.GetUserId();
             if (User.IsInRole("Locataire"))

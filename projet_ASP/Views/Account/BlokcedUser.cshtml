@@ -1,0 +1,12 @@
+﻿@{ 
+}
+<div class="container" style="text-align: center;">
+    <img src="~/Content/blocked.svg" class="img-responsive" style="width:350px;margin:5px auto;" />
+    <h3 class="msg alert">
+        Oops! votre compte a été bloqué.
+    </h3>
+    <p class="">@ViewData["msg"]...</p>
+   @* <button class="btn btn-primary px-5">Retour</button>*@
+    @Html.ActionLink("Retour", "Login", "Account", null, new { @class = "btn btn-primary px-5" })
+</div> 
+
