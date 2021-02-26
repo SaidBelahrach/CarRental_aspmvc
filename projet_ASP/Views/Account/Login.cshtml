@@ -5,11 +5,11 @@
 }
 @*//https://codepen.io/FlorinPop17/pen/vPKWjd*@
 <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
-<link href="~/Content/loginStyle.css" rel="stylesheet" />
+<link href="~/Content/loginStyle.css" rel="stylesheet" height="100%"/>
 <script src="https://kit.fontawesome.com/a81368914c.js"></script>
 
 <div class="row">
-    <img src="~/Content/Images/Login/wave blue.png" class="wave " />
+    <img src="~/Content/Images/Login/wave blue.png" class="wave " /> 
     <div class="container-login">
         <div class="img"> 
             <img src="~/Content/Images/Login/City driver-pana.svg" />
@@ -47,16 +47,19 @@
 
                     </div>
                 </div>
-                @Html.CheckBoxFor(m => m.RememberMe)
-                @Html.LabelFor(m => m.RememberMe)
-                @Html.ActionLink("Register as a new user", "Register")
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Log in" class="btn-login" />
+                <div class="my-3" style="text-align:left;">
+                    @Html.CheckBoxFor(m => m.RememberMe)
+                    @Html.LabelFor(m => m.RememberMe)
+                </div>
+                <div class=" ">
+                    <div class=" ">
+                        <input type="submit" value="Log in" class="btn-login btn-primary" />
                     </div>
                 </div>
-                <p>
-                </p>
+                <div class=" mt-4 pt-4">
+                    Don't have account? @Html.ActionLink(" Register", "Register")
+                </div>
+               
             </form>
         </div>
     </div>
@@ -84,11 +87,9 @@
 </script>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-}
-
-
-
+} 
 <style>
+   
     element.style {
         min-width: 320px;
         border:none;
@@ -97,14 +98,14 @@
     } 
     .container {
         width: 100%;
+
         @*    background: red;*@
     }
-    body-content{
-        background:red;
-    }
+ 
     .row {
         margin: 10px auto;
         width: 100%;
+        min-height:600px;
     }
     .validation-summary-errors ul{
         text-align:center;
@@ -116,13 +117,12 @@
         margin:0px auto;
         width:100%;
     }
-    .btn-logi {
+    .btn-login {
         width: 100%;
         height: 50px;
         border-radius: 25px;
         outline: none;
         border: none;
-        @* background-image: linear-gradient(to right, #32be8f, #38d39f, #32be8f);*@
         background: #28acbf;
         font-size: 1.2rem;
         color: #fff;
@@ -141,11 +141,12 @@
         margin-top: 20px;
     }
     .img {
-        
         margin-top:50px;
         align-items: start;
     }
- 
+    .footer-hr{
+        display:none;
+    }
 
 </style>
  

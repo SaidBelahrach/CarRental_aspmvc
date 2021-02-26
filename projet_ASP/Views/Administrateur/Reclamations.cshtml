@@ -6,27 +6,34 @@
     ViewBag.Title = "Reclamations";
 }
 
-<h1>Listes des Reclamations</h1>
-<table class="table table-hover table-striped thead-dark">
-    <thead class="thead-dark">
-    <th>
-        Autheur
-    </th>
-    <th>
-        Description
-    </th>
-    <th>
-        Destinataire
-    </th>
-    <th>
-        Date de Creation
-    </th>
-    <th>
-        Validation
-    </th>
-    </thead>
+<link href="~/Content/my_dataTable.css" rel="stylesheet" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
 
-    <tbody>
+<h1>Listes des Reclamations</h1>
+
+
+<table class="tab table table-hover table-striped thead-dark">
+    <thead class="bg-primary">
+        <tr>
+            <th>
+                Autheur
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                Destinataire
+            </th>
+            <th>
+                Date de Creation
+            </th>
+            <th>
+                Validation
+            </th>
+        </tr>
+    </thead>
+    <tbody id="DataSearching">
         @foreach (var item in Model)
         {
             <tr>
@@ -68,7 +75,7 @@
                         </p> }
                     else
                     {
-                        <p style="display:none"   id="valide_@item.idReclamation">
+                        <p style="display:none" id="valide_@item.idReclamation">
                             Validé
                         </p>
                         <button class="ValiderBtn" id="Validate_@item.idReclamation" data-id="@item.idReclamation" onclick='Validate_Click("@item.idReclamation")'> Valider </button>
@@ -78,6 +85,7 @@
         }
     </tbody>
 </table>
+
 <style>
 
     .table-hover .table-active:hover > td,
@@ -136,10 +144,10 @@
 
             function Validate_Click ( id) {
             var formData = new FormData();
-       
+
             console.log(id)
             formData.append("id", id);
-            
+
             $.ajax({
                 type: "POST",
                 url: '../Administrateur/Reclamations',
@@ -148,11 +156,11 @@
                 contentType: false,
                 processData: false,
                 success: function (response) {
-                   
+
                     $('#valide_' + id).show(200);
                     $('#Validate_' + id).attr("disabled", true);
                     $('#Validate_' + id).hide(200);
-                
+
 
                 },
                 //error: function(error) {
@@ -165,11 +173,40 @@
             };*@
             });
         }
-    
-    
-    
+
+
 </script>
 
+<script>
+    $(document).ready(function () {
+        $('.tab').DataTable({
+            "language": {
+                  "lengthMenu": "@projet_ASP.Resources.Views.dataTable.lengthMenu",
+                "zeroRecords": "@projet_ASP.Resources.Views.dataTable.zeroRecords",
+                "info": "Page _PAGE_ de _PAGES_",
+                "infoEmpty": "@projet_ASP.Resources.Views.dataTable.infoEmpty",
+                "infoFiltered": "",
 
+
+                "sProcessing": "@projet_ASP.Resources.Views.dataTable.sProcessing",
+                "sEmptyTable": "@projet_ASP.Resources.Views.dataTable.sEmptyTable",
+                "sSearch": "@projet_ASP.Resources.Views.dataTable.sSearch",
+                "sUrl": "",
+                "sInfoThousands": ",",
+                "sLoadingRecords": "@projet_ASP.Resources.Views.dataTable.sProcessing",
+                "oPaginate": {
+                    "sFirst": "Premier",
+                    "sLast": "Dernier",
+                    "sNext": "@projet_ASP.Resources.Views.dataTable.sNext",
+                    "sPrevious": "@projet_ASP.Resources.Views.dataTable.sPrevious"
+                },
+                "oAria": {
+                    "SortAscending": ":Said",
+                    "SortDescending": ":Belahrach"
+                }
+            }
+        });
+    });
+</script>
 
 

@@ -4,55 +4,58 @@
     ViewBag.Title = "ListeDesFavoris";
 }
 
-<h2>ListeNoire</h2>
-<table class="table table-hover table-striped thead-dark">
-    <thead class="thead-dark">
-        <th>
-            @Html.DisplayNameFor(model => model.UserName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.profileType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
+<link href="~/Content/my_dataTable.css" rel="stylesheet" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
 
-        <th>
-            Action
-        </th>
+<h2>Liste Favoris</h2>
+<table class="tab table table-hover table-striped thead-dark">
+    <thead class="bg-primary">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.profileType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
 
-
-
-    </thead>
-
-    @foreach (var item in Model)
-    {
-        <tr id="Element_@item.Id" o>
-            @if (item.profileType == "Locataire")
-            {
-                <td>
-                    <a href="@Url.Action("Index", "Locataire", new { id = item.Id })">@item.nomComplet</a>
-                </td>
-            }
-            @if (item.profileType == "Proprietaire")
-            {
-                <td>
-                    <a href="@Url.Action("Index", "Proprietaire", new { id = item.Id })">@item.nomComplet</a>
-                </td>
-            }
-            <td>
-                @Html.DisplayFor(modelItem => item.profileType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-
-            <td>
-                <a onclick='Retrive_From_BlackList("@item.Id")'>Retirer de la liste noire</a>
-            </td>
+            <th>
+                Action
+            </th>
         </tr>
-    }
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr id="Element_@item.Id" o>
+                @if (item.profileType == "Locataire")
+                {
+                    <td>
+                        <a href="@Url.Action("Index", "Locataire", new { id = item.Id })">@item.nomComplet</a>
+                    </td>
+                }
+                @if (item.profileType == "Proprietaire")
+                {
+                    <td>
+                        <a href="@Url.Action("Index", "Proprietaire", new { id = item.Id })">@item.nomComplet</a>
+                    </td>
+                }
+                <td>
+                    @Html.DisplayFor(modelItem => item.profileType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
 
+                <td>
+                    <a style="cursor:pointer" onclick='Retrive_From_BlackList("@item.Id")'>Retirer de la liste noire</a>
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
 <style>
     .table-hover .table-active:hover > td,
@@ -140,3 +143,35 @@
 
 
 </script>
+
+<script>
+    $(document).ready(function () {
+        $('.tab').DataTable({
+            "language": {
+                  "lengthMenu": "@projet_ASP.Resources.Views.dataTable.lengthMenu",
+                "zeroRecords": "@projet_ASP.Resources.Views.dataTable.zeroRecords",
+                "info": "Page _PAGE_ de _PAGES_",
+                "infoEmpty": "@projet_ASP.Resources.Views.dataTable.infoEmpty",
+                "infoFiltered": "",
+
+
+                "sProcessing": "@projet_ASP.Resources.Views.dataTable.sProcessing",
+                "sEmptyTable": "@projet_ASP.Resources.Views.dataTable.sEmptyTable",
+                "sSearch": "@projet_ASP.Resources.Views.dataTable.sSearch",
+                "sUrl": "",
+                "sInfoThousands": ",",
+                "sLoadingRecords": "@projet_ASP.Resources.Views.dataTable.sProcessing",
+                "oPaginate": {
+                    "sFirst": "Premier",
+                    "sLast": "Dernier",
+                    "sNext": "@projet_ASP.Resources.Views.dataTable.sNext",
+                    "sPrevious": "@projet_ASP.Resources.Views.dataTable.sPrevious"
+                },
+                "oAria": {
+                    "SortAscending": ":Said",
+                    "SortDescending": ":Belahrach"
+                }
+            }
+        });
+    });
+</script> 

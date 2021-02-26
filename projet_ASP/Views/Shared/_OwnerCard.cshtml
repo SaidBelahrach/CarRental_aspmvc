@@ -8,49 +8,66 @@
 
 
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+@if (Model.ApplicationUser.idListeNoire==null)
+{
+<div class="card">
+    <div class="user-card ">
+        <div style="" class="card-img">
+            <img style="" class="img-responsive" src="@ViewData["ProfileImg"]" />
+        </div>
+    </div>
+    <div class="general">
+        <h3 class="mt-2"><a href="@Url.Action("Index", "Proprietaire", new { id = Model.ApplicationUserID })">@Model.ApplicationUser.nomComplet</a></h3>
 
-<div class="card"  >
-<div class="user-card ">
-    <div style="" class="card-img">
-        <img style="" class="img-responsive" src="@ViewData["ProfileImg"]" width="" height="100%" />
+        <div class="card-icon-container " style="">
+            <label class="datails-item">
+                <span class="fas fa-car icon  "></span>
+                <span>@Html.ActionLink("Allocations", "Index", "Reservations", new { id = Model.ApplicationUserID }, new { @class = "text-info" })  </span>
+            </label>
+            <label class="datails-item">
+                <span class="fas fa-user-slash icon   "></span>
+                <span> @Html.ActionLink("Ajouter a la liste noire", "AjoutALaLiteNoire", new { id = Model.ApplicationUserID }, new { @class = "text-info" }) </span>
+            </label>
+            <label class="datails-item">
+                <span class="fas fa-bookmark  "></span>
+                <span> <a style="cursor:pointer" class="text-info" id="Favorites_@Model.ApplicationUserID" onclick='Add_To_Favorites("@Model.ApplicationUserID")'>Ajouter Aux favoris</a>  </span>
+            </label>
+
+        </div>
+
+
     </div>
 </div>
-<div class="general">
-    <h3 class="mt-2"><a href="@Url.Action("Index", "Proprietaire", new { id = Model.ApplicationUserID })">@Model.ApplicationUser.nomComplet</a></h3>
+}
+else
+{
+    <div class="card" style="background-color:orangered">
+        <div class="user-card " style="background-color:orangered">
+            <div style="" class="card-img">
+                <img style="" class="img-responsive" src="@ViewData["ProfileImg"]" />
+            </div>
+        </div>
+        <div class="general">
+            <h3 class="mt-2"><a href="@Url.Action("Index", "Proprietaire", new { id = Model.ApplicationUserID })" style="color:white">@Model.ApplicationUser.nomComplet</a></h3>
 
-    <div class="card-icon-container " style="">
-        <label class="datails-item">
-            <span class="fas fa-car icon  "></span>
-            <span>@Html.ActionLink("Allocations", "Index", "Reservations", new { id = Model.ApplicationUserID }, new { @class = "text-info" })  </span>
-        </label>
-        <label class="datails-item">
-            <span class="fas fa-user-slash icon   "></span>
-            <span> @Html.ActionLink("Ajouter a la liste noire", "AjoutALaLiteNoire", new { id = Model.ApplicationUserID }, new { @class = "text-info" }) </span>
-        </label>
-        <label class="datails-item">
-            <span class="fas fa-bookmark  "></span>
-            <span> <a class="text-info" id="Favorites_@Model.ApplicationUserID" onclick='Add_To_Favorites("@Model.ApplicationUserID")'>Ajouter Aux favoris</a>  </span>
-        </label>
+            <div class="card-icon-container " style="">
+                <label class="datails-item">
+                    <span class="fas fa-car icon  " style="color:white"></span>
+                    <span>@Html.ActionLink("Allocations", "Index", "Reservations", new { id = Model.ApplicationUserID }, new { style = "color:white" })  </span>
+                </label>
+                <label class="datails-item">
+                    <span class="fas fa-user-slash icon " style="color:white"></span>
+                    <span> @Html.ActionLink("Retirer de la liste noire", "ListeNoire", new { }, new { style = "color:white" }) </span>
+                </label>
 
+
+            </div>
+
+
+        </div>
     </div>
-
-
-</div>
-</div>
+}
 <style>
-
-    @* * {
-        padding: 0;
-        margin: 0;
-    }
-
-    *@
-
-    @* html, body {
-        font-family: Abel, Arial, Verdana, sans-serif;
-    }
-
-    *@
 
     .card-icon-container {
         display: flex;
@@ -63,17 +80,15 @@
         color: dimgray;
         padding: 3px;
         font-weight: normal;
-
     }
-
 
     .card {
         min-width: 320px;
         max-width: 730px;
-        height: 100px;
-        min-height: 70px;
-        max-height: 100px;
-        background-color: white;
+        height: 70px;
+        @* min-height: 70px;
+        max-height: 70px;
+        *@ background-color: white;
         box-shadow: 0 1px 4px 1px rgba(0,0,0,0.14);
         border-radius: 6px;
         overflow: hidden;
@@ -109,22 +124,19 @@
         align-content: center;
         align-items: center;
         width: 25%;
-        height: 100%;
+        height: 70px;
         background-color: white;
+        padding: 3px;
     }
 
     .card-img {
-        margin: 20% 20% 20% 20%;
-        align-content: center;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        height: 68px;
+        width: 68px;
     }
 
     .img-responsive {
         border-radius: 50%;
     }
-
     .prix-label {
         position: absolute;
         font-size: 2.5rem;

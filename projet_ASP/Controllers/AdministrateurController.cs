@@ -8,6 +8,7 @@ using System.Data.Entity.Migrations;
 using System;
 using Microsoft.AspNet.Identity;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace projet_ASP.Controllers
 {
@@ -17,7 +18,7 @@ namespace projet_ASP.Controllers
         public ActionResult Propietaires()
         {
             ApplicationDbContext db = new ApplicationDbContext();
-            var prop = db.Proprietaires.Where(p => p.ApplicationUser.idListeNoire == null).Include(p => p.ApplicationUser).Include(t => t.Voitures).ToList();
+            var prop = db.Proprietaires.Include(p => p.ApplicationUser).Include(t => t.Voitures).ToList();
 
             return View(prop);
         }
@@ -51,11 +52,30 @@ namespace projet_ASP.Controllers
 
         }
 
+        [HttpPost]
+        public ActionResult SearchProp(String key)
+        {
+            List<Proprietaire> proprietaires;
+            ApplicationDbContext db = new ApplicationDbContext();
+            if (String.IsNullOrEmpty(key))
+            {
+                proprietaires = db.Proprietaires.ToList();
+            }
+            else
+            {
+                key = key.Trim();
+                if (key.Length == 0) return View(db.Locataires.ToList());
+                proprietaires = db.Proprietaires.Where(v => v.ApplicationUser.nomComplet.ToLower().Contains(key.ToLower())).ToList();
+            }
+
+
+            return View("Propietaires", proprietaires);
+        }
 
         public ActionResult Locataires()
         {
             ApplicationDbContext db = new ApplicationDbContext();
-            var loca = db.Locataires.Where(p => p.ApplicationUser.idListeNoire == null).Include(p => p.ApplicationUser).Include(t => t.reservations).ToList();
+            var loca = db.Locataires.Include(p => p.ApplicationUser).Include(t => t.reservations).ToList();
 
             return View(loca);
         }
@@ -85,9 +105,29 @@ namespace projet_ASP.Controllers
 
             return Json("Favoris updated");
         }
+       
+        [HttpPost]
+        public ActionResult SearchLoc(String key)
+        {
+            List<Locataire> locataires;
+            ApplicationDbContext db = new ApplicationDbContext();
+            string userid = User.Identity.GetUserId();
+            if(String.IsNullOrEmpty(key))
+            {
+             locataires = db.Locataires.Include(v => v.reservations).ToList();
+            }
+            else
+            { 
+            key = key.Trim();
+            if (key.Length == 0) return View(db.Locataires.ToList());
+            locataires = db.Locataires.Where(v => v.ApplicationUser.nomComplet.ToLower().Contains(key.ToLower())).Include(v => v.reservations).ToList();
+            }
 
 
-        public ActionResult AjoutALaLiteNoire(string id)
+            return View("Locataires", locataires);
+        }
+
+            public ActionResult AjoutALaLiteNoire(string id)
         {
 
             ApplicationDbContext db = new ApplicationDbContext();
@@ -193,7 +233,6 @@ namespace projet_ASP.Controllers
 
             return View(Blacklist);
         }
-
 
         [HttpPost]
         public ActionResult ListeNoire(String id)
