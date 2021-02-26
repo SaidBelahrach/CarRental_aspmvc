@@ -52,6 +52,25 @@ namespace projet_ASP.Controllers
 
         }
 
+        [HttpPost]
+        public ActionResult SearchProp(String key)
+        {
+            List<Proprietaire> proprietaires;
+            ApplicationDbContext db = new ApplicationDbContext();
+            if (String.IsNullOrEmpty(key))
+            {
+                proprietaires = db.Proprietaires.ToList();
+            }
+            else
+            {
+                key = key.Trim();
+                if (key.Length == 0) return View(db.Locataires.ToList());
+                proprietaires = db.Proprietaires.Where(v => v.ApplicationUser.nomComplet.ToLower().Contains(key.ToLower())).ToList();
+            }
+
+
+            return View("Propietaires", proprietaires);
+        }
 
         public ActionResult Locataires()
         {
@@ -86,9 +105,29 @@ namespace projet_ASP.Controllers
 
             return Json("Favoris updated");
         }
+       
+        [HttpPost]
+        public ActionResult SearchLoc(String key)
+        {
+            List<Locataire> locataires;
+            ApplicationDbContext db = new ApplicationDbContext();
+            string userid = User.Identity.GetUserId();
+            if(String.IsNullOrEmpty(key))
+            {
+             locataires = db.Locataires.Include(v => v.reservations).ToList();
+            }
+            else
+            { 
+            key = key.Trim();
+            if (key.Length == 0) return View(db.Locataires.ToList());
+            locataires = db.Locataires.Where(v => v.ApplicationUser.nomComplet.ToLower().Contains(key.ToLower())).Include(v => v.reservations).ToList();
+            }
 
 
-        public ActionResult AjoutALaLiteNoire(string id)
+            return View("Locataires", locataires);
+        }
+
+            public ActionResult AjoutALaLiteNoire(string id)
         {
 
             ApplicationDbContext db = new ApplicationDbContext();
@@ -187,7 +226,14 @@ namespace projet_ASP.Controllers
             return Json("reclamation updated");
         }
 
-      
+
+        public ActionResult ListeNoire()
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            var Blacklist = db.Users.Where(item => item.idListeNoire != null).Include(item => item.ListeNoire).ToList();
+
+            return View(Blacklist);
+        }
 
 
         [HttpPost]
