@@ -199,6 +199,7 @@ namespace projet_ASP.Controllers
             }
             DateTime date_debut = DateTime.Parse(debut);
             DateTime date_fin = DateTime.Parse(fin);
+            Proprietaire prop = db.Proprietaires.Where(p => p.idProprietaire == voiture.idProprietaire).FirstOrDefault();
             Reservation reservation = new Reservation()
             {
                 cout = Convert.ToInt32(voiture.coutParJour) * Convert.ToInt32(date_fin.Subtract(date_debut).TotalDays),//*nbjours
@@ -210,6 +211,15 @@ namespace projet_ASP.Controllers
                 dateFin = date_fin,
             };
             db.reservations.Add(reservation);
+            Notification notification = new Notification()
+            {
+                type = "resrv",
+                hint = "Réservation du votre voiture "+voiture.matricule+" pour "+(date_fin-date_debut).TotalDays+"jour",
+                ApplicationUserID = prop.ApplicationUserID,
+                vu = false,
+                cliked = false,
+            };
+            db.Notifications.Add(notification);
             voiture.disponible = false;
             db.Voitures.AddOrUpdate(voiture);
             db.SaveChanges();
