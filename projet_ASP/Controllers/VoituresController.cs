@@ -9,20 +9,49 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.Owin.Security;
+
+
 
 namespace projet_ASP.Controllers
 {
 
     public class VoituresController : Controller
     {
+        private IAuthenticationManager AuthenticationManager
+        {
+            get
+            {
+                return HttpContext.GetOwinContext().Authentication;
+            }
+        }
+
         private ApplicationDbContext db = new ApplicationDbContext();
         // GET: Voitures
         public ActionResult Index(int page=1)
         {
+           
             if(User.IsInRole("Admin"))
             {
                 return RedirectToAction("Reclamations", "Administrateur");
             }
+            try
+            {
+                ApplicationDbContext db = new ApplicationDbContext();
+                string id = User.Identity.GetUserId();
+                var user = db.Users.Where(n => n.Id == id).FirstOrDefault();
+                if (user.idListeNoire != null)
+                {
+                    AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+                    var listenoir = db.ListeNoires.Where(l => l.idListeNoire == user.idListeNoire).FirstOrDefault();
+                    ViewData["msg"] = listenoir.description;
+                    return RedirectToAction("BlokcedUser", "Account");
+
+
+                }
+            }
+            catch (Exception) { }
+            List<Voiture> voitures = db.Voitures.Include(v => v.proprietaire).Include(r => r.reservations).ToList();
             string userid = User.Identity.GetUserId();
             List<Voiture> voitures = db.Voitures.Include(v => v.proprietaire).Include(r => r.reservations).OrderBy(v => v.idVoiture).Skip((page-1)*5).Take(5).ToList();
             int nbpages = (int)Math.Floor(Convert.ToDouble( db.Voitures.ToList().Count() / 5) );
@@ -32,6 +61,10 @@ namespace projet_ASP.Controllers
             ViewBag.nb = pges;
             return View(voitures);
         }
+
+     
+
+
         [HttpPost]
         public ActionResult Index(string key)
         {

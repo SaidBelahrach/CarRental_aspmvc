@@ -3,6 +3,8 @@ using System.Web.Mvc;
 using System.Linq;
 using System;
 using Microsoft.AspNet.Identity;
+using Microsoft.Owin.Security;
+using System.Web;
 
 
 
@@ -10,9 +12,15 @@ namespace projet_ASP.Controllers
 {
     public class HomeController : Controller
     {
+        private IAuthenticationManager AuthenticationManager
+        {
+            get
+            {
+                return HttpContext.GetOwinContext().Authentication;
+            }
+        }
         public ActionResult Index()
         {
-
 
             /* ApplicationDbContext db = new ApplicationDbContext();
          ApplicationSignInManager _signInManager;
@@ -31,6 +39,7 @@ namespace projet_ASP.Controllers
                   return Content("already");
               }*/
 
+     
             return RedirectToAction("Index", "Voitures");
         }
 
@@ -66,6 +75,23 @@ namespace projet_ASP.Controllers
         }
         public ActionResult EspaceNotif()
         {
+            try
+            {
+                ApplicationDbContext db = new ApplicationDbContext();
+                string id2 = User.Identity.GetUserId();
+                var user = db.Users.Where(n => n.Id == id2).FirstOrDefault();
+                if (user.idListeNoire != null)
+                {
+                    AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+                    var listenoir = db.ListeNoires.Where(l => l.idListeNoire == user.idListeNoire).FirstOrDefault();
+                    ViewData["msg"] = listenoir.description;
+                    return RedirectToAction("BlokcedUser", "Account");
+
+
+                }
+            }
+            catch (Exception) { }
+
 
             return View();
         }
