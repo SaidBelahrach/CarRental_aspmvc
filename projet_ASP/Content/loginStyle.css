@@ -42,6 +42,10 @@ body {
     width: 500px;
 }
 
+
+
+
+
 .form {
     width: 360px;
 }
@@ -55,6 +59,7 @@ body {
     color: #333;
     text-transform: uppercase;
     font-size: 2.9rem;
+    
 }
 
 .login-content .input-div {
@@ -71,7 +76,7 @@ body {
     }
 
 .i {
-    color: #d9d9d9;
+    color: #28acbf;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -102,7 +107,7 @@ body {
     bottom: -2px;
     width: 0%;
     height: 2px;
-    background-color: #38d39f;
+    background-color: #28acbf;
     transition: .4s;
 }
 
@@ -124,7 +129,7 @@ body {
 }
 
 .input-div.focus > .i > i {
-    color: #38d39f;
+    color: #28acbf;
 }
 
 .input-div > div > input {
@@ -155,9 +160,9 @@ body {
     transition: .3s;
 }
 
-    a:hover {
-        color: #38d39f;
-    }
+a:hover {
+    color: #28acbf;
+}
  
 
     .btn-login:hover {

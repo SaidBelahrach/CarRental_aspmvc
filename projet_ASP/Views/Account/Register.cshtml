@@ -3,72 +3,196 @@
     ViewBag.Title = "Register";
 }
 
-<h2>@ViewBag.Title.</h2>
+<@*h2>@ViewBag.Title.</h2>*@
 
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-    @Html.AntiForgeryToken()
-    <h4>Create a new account.</h4>
-  @*  <span class="badge badge-pill badge-warning ">11</span>*@
-    <hr />
-    @Html.ValidationSummary("", new { @class = "text-danger alert-danger rounded" })
-    <div class="form-group">
-        @Html.LabelFor(m => m.nomComplet, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.nomComplet, "", new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.adresse, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.adresse, "", new { @class = "form-control" })
-        </div>
-    </div>
-    
-    <div class="form-group">
-        @Html.LabelFor(m => m.tel, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.tel, "", new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.profileType , new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(m => m.profileType, new SelectListItem[]
-               {
-                new SelectListItem() { Text = projet_ASP.Resources.Models.ApplicationUser.locataire, Value = "Locataire" },
-                new SelectListItem() { Text = projet_ASP.Resources.Models.ApplicationUser.proprietaire, Value = "Proprietaire" }
-               }
-               , new { @class = "form-control" }
-           )
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-        </div>
-    </div>
+<link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+<link href="~/Content/loginStyle.css" rel="stylesheet" height="100%" />
+<script src="https://kit.fontawesome.com/a81368914c.js"></script>
 
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Register" />
-        </div>
-    </div>
-}
+    <style>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+    element.style {
+        min-width: 320px;
+        border:none;
+        /* border-left: solid 1px #f1f1f1; */
+        /* border-right: solid 1px #f1f1f1; */
+    }
+    .container {
+        width: 100%;
+
+@*    background: red;*@
+    }
+
+    .row {
+        margin: 10px auto;
+        width: 100%;
+        min-height:600px;
+    }
+    .validation-summary-errors ul{
+        text-align:center;
+        list-style: none;
+    }
+    .btn-div{
+        padding-left:0px;
+        padding-right:0px;
+        margin:0px auto;
+        width:100%;
+    }
+    .btn-login {
+        width: 100%;
+        height: 50px;
+        border-radius: 25px;
+        outline: none;
+        border: none;
+        background: #28acbf;
+        font-size: 1.2rem;
+        color: #fff;
+        font-family: 'Poppins', sans-serif;
+        text-transform: uppercase;
+        width: 100%;
+        cursor: pointer;
+        transition: .5s;
+    }
+    .login-content img {
+        height: 200px;
+    }
+
+    .login-content {
+        align-items: start;
+        margin-top: 20px;
+    }
+    .img {
+        margin-top:50px;
+        align-items: start;
+    }
+    .footer-hr{
+        display:none;
+    }
+        .input-select {
+            outline-color: #28acbf;
+            border: none;
+            background-color: transparent;
+            color: gray;
+            font-size: 1.6rem;
+            text-decoration :none;
+            height: 100%;
+            width: 400px;
+        }
+        .input-select:focus{
+             border :1px solid #28acbf;
+         }
+
+</style>
+
+<div class="row">
+    <img src="~/Content/Images/Login/wave blue.png" class="wave " />
+    <div class="container-login">
+        <div class="img">
+        </div>
+
+        <div class="login-content">
+            <form action="Register" class="form ml-4 " method="post">
+@Html.AntiForgeryToken()
+                <h2 class="title">Register</h2>
+
+                <div>
+@Html.ValidationSummary("", new { @class = "text-danger summary alert-danger rounded" })
+                </div>
+                <div class="input-div one">
+                    <div class="i">
+                    </div>
+                    <div class="div">
+                        <h5> @Html.LabelFor(m => m.nomComplet, new { @class = "" })</h5>
+                        <input type="text" name="nomComplet" class="input">
+                        </div>
+                        </div>
+                        <div class="input-div one">
+                        <div class="i">
+                        </div>
+                        <div class="div">
+                        <h5>  @Html.LabelFor(m => m.adresse, new { @class = "" })</h5>
+                        <input type="text" name="adresse" class="input">
+                        </div>
+                        </div>
+                        <div class="input-div one">
+                        <div class="i">
+                        </div>
+                        <div class="div">
+                        <h5> @Html.LabelFor(m => m.tel, new { @class = "" })</h5>
+                        <input type="text" name="tel" class="input">
+                        </div>
+                        </div>
+                        <div class="input-div one">
+                        <div class="i">
+                        </div>
+                        <div class="div">
+                        @Html.DropDownListFor(m => m.profileType, new SelectListItem[]
+                      {
+                       new SelectListItem() { Text = projet_ASP.Resources.Models.ApplicationUser.locataire, Value = "Locataire" },
+                       new SelectListItem() { Text = projet_ASP.Resources.Models.ApplicationUser.proprietaire, Value = "Proprietaire" }
+                      }
+                      , new { @class = "form-control input-select" }
+                  )
+
+                        </div>
+                        </div>
+                        <div class="input-div one">
+                        <div class="i">
+                        </div>
+                        <div class="div">
+                        <h5>@Html.LabelFor(m => m.Email, new { @class = "" })</h5>
+                        <input type="text" name="Email" class="input">
+                        </div>
+                        </div>
+                        <div class="input-div pass">
+                        <div class="i">
+                        </div>
+                        <div class="div">
+                        <h5>@Html.LabelFor(m => m.Password, new { @class = "" })</h5>
+                        <input type="Password" name="Password" class="input">
+                        </div>
+                        </div>
+                        <div class="input-div pass">
+                        <div class="i">
+                        </div>
+                        <div class="div">
+                        <h5> @Html.LabelFor(m => m.ConfirmPassword, new { @class = "" })</h5>
+                        <input type="Password" name="ConfirmPassword" class="input">
+                        </div>
+                        </div>
+                        <div class=" ">
+                        <div class=" ">
+                        <input type="submit" value="Register" class="btn-login btn-primary" />
+                        </div>
+                        </div>
+                        </form>
+                        </div>
+                        </div>
+
+                        </div>
+                        <script>
+                        const inputs = document.querySelectorAll(".input");
+
+                        function addcl() {
+                        let parent = this.parentNode.parentNode;
+                        parent.classList.add("focus");
+                        }
+
+                        function remcl() {
+                        let parent = this.parentNode.parentNode;
+                        if (this.value == "") {
+                        parent.classList.remove("focus");
+                        }
+                        }
+                        inputs.forEach(input => {
+                        input.addEventListener("focus", addcl);
+                        input.addEventListener("blur", remcl);
+                        });
+
+                        </script>
+
+
+
+                        @section Scripts {
+                            @Scripts.Render("~/bundles/jqueryval")
+                        }
