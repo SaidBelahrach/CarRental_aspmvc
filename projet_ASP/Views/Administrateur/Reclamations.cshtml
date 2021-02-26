@@ -7,139 +7,153 @@
 }
 
 <h1>Listes des Reclamations</h1>
-<table class="table table-hover table-striped thead-dark">
-    <thead class="thead-dark">
-    <th>
-        Autheur
-    </th>
-    <th>
-        Description
-    </th>
-    <th>
-        Destinataire
-    </th>
-    <th>
-        Date de Creation
-    </th>
-    <th>
-        Validation
-    </th>
-    </thead>
+<form action="../Administrateur/Reclamation" method="get" "name="searchform">
+    
+    <div class="form-outline d-flex my-3" >
+        <input id="search-input" required type="search" placeholder="Search here" name="key" id="form1 key" style="width:500px;" class="form-control" />
+        @* <label class="form-label" for="form1">Search</label>*@
 
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @if (item.Createur == true)
-                    {
-                        @Html.DisplayFor(modelItem => item.proprietaire.ApplicationUser.nomComplet) <p>(Proprietaire)</p>
-                    }
-                    else
-                    {
-                        @Html.DisplayFor(modelItem => item.Locataire.ApplicationUser.nomComplet) <p>(Locataire)</p>
-                    }
-                </td>
-                <td>
+        <button type="submit" id="SearchBtn" class="btn btn-primary ml-1 SearchBtn" style="outline:none;">
+            <i class="fas fa-search"></i>
+        </button>
+    </div>
+    
+  </form>
 
-                    @Html.DisplayFor(modelItem => item.description)
+    <table class="table table-hover table-striped thead-dark">
+        <thead class="thead-dark">
+        <th>
+            Autheur
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            Destinataire
+        </th>
+        <th>
+            Date de Creation
+        </th>
+        <th>
+            Validation
+        </th>
+        </thead>
+
+        <tbody id="DataSearching">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @if (item.Createur == true)
+                        {
+                            @Html.DisplayFor(modelItem => item.proprietaire.ApplicationUser.nomComplet) <p>(Proprietaire)</p>
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(modelItem => item.Locataire.ApplicationUser.nomComplet) <p>(Locataire)</p>
+                        }
+                    </td>
+                    <td>
+
+                        @Html.DisplayFor(modelItem => item.description)
 
 
 
-                </td>
-                <td>
-                    @if (item.Createur == true)
-                    {
-                        @Html.DisplayFor(modelItem => item.Locataire.ApplicationUser.nomComplet) <p>(Locataire)</p>
-                    }
-                    else
-                    {
-                        @Html.DisplayFor(modelItem => item.proprietaire.ApplicationUser.nomComplet)<p>(Proprietaire)</p>
-                    }
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.dateCreation)
-                </td>
-                <td>
-                    @if (item.valide)
-                    {
-                        <p id="valide">
-                            Validé
-                        </p> }
-                    else
-                    {
-                        <p style="display:none"   id="valide_@item.idReclamation">
-                            Validé
-                        </p>
-                        <button class="ValiderBtn" id="Validate_@item.idReclamation" data-id="@item.idReclamation" onclick='Validate_Click("@item.idReclamation")'> Valider </button>
-                    }
-                </td>
-            </tr>
+                    </td>
+                    <td>
+                        @if (item.Createur == true)
+                        {
+                            @Html.DisplayFor(modelItem => item.Locataire.ApplicationUser.nomComplet) <p>(Locataire)</p>
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(modelItem => item.proprietaire.ApplicationUser.nomComplet)<p>(Proprietaire)</p>
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.dateCreation)
+                    </td>
+                    <td>
+                        @if (item.valide)
+                        {
+                            <p id="valide">
+                                Validé
+                            </p> }
+                        else
+                        {
+                            <p style="display:none" id="valide_@item.idReclamation">
+                                Validé
+                            </p>
+                            <button class="ValiderBtn" id="Validate_@item.idReclamation" data-id="@item.idReclamation" onclick='Validate_Click("@item.idReclamation")'> Valider </button>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <style>
+
+        .table-hover .table-active:hover > td,
+        .table-hover .table-active:hover > th {
+            background-color: rgba(0, 0, 0, 0.075);
         }
-    </tbody>
-</table>
-<style>
 
-    .table-hover .table-active:hover > td,
-    .table-hover .table-active:hover > th {
-        background-color: rgba(0, 0, 0, 0.075);
-    }
-
-    .table .thead-dark th {
-        color: #fff;
-        background-color: #212529;
-        border-color: #32383e;
-        font-family: Calibri;
-    }
-
-    .table .thead-light th {
-        color: #495057;
-        background-color: #e9ecef;
-        border-color: #dee2e6;
-    }
-
-    .table-dark {
-        color: #fff;
-        background-color: #212529;
-    }
-
-        .table-dark th,
-        .table-dark td,
-        .table-dark thead th {
+        .table .thead-dark th {
+            color: #fff;
+            background-color: #212529;
             border-color: #32383e;
+            font-family: Calibri;
         }
 
-        .table-dark.table-bordered {
-            border: 0;
+        .table .thead-light th {
+            color: #495057;
+            background-color: #e9ecef;
+            border-color: #dee2e6;
         }
 
-        .table-dark.table-striped tbody tr:nth-of-type(odd) {
-            background-color: rgba(255, 255, 255, 0.05);
+        .table-dark {
+            color: #fff;
+            background-color: #212529;
         }
 
-        .table-dark.table-hover tbody tr:hover {
-            background-color: rgba(255, 255, 255, 0.075);
-        }
+            .table-dark th,
+            .table-dark td,
+            .table-dark thead th {
+                border-color: #32383e;
+            }
 
-    td, th {
-        text-align: center;
-        text-decoration: none;
+            .table-dark.table-bordered {
+                border: 0;
+            }
+
+            .table-dark.table-striped tbody tr:nth-of-type(odd) {
+                background-color: rgba(255, 255, 255, 0.05);
+            }
+
+            .table-dark.table-hover tbody tr:hover {
+                background-color: rgba(255, 255, 255, 0.075);
+            }
+
+        td, th {
+            text-align: center;
+            text-decoration: none;
+        }
+    </style>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
     }
-</style>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
 
 
-<script>
+    <script>
 
             function Validate_Click ( id) {
             var formData = new FormData();
-       
+
             console.log(id)
             formData.append("id", id);
-            
+
             $.ajax({
                 type: "POST",
                 url: '../Administrateur/Reclamations',
@@ -148,11 +162,11 @@
                 contentType: false,
                 processData: false,
                 success: function (response) {
-                   
+
                     $('#valide_' + id).show(200);
                     $('#Validate_' + id).attr("disabled", true);
                     $('#Validate_' + id).hide(200);
-                
+
 
                 },
                 //error: function(error) {
@@ -165,10 +179,9 @@
             };*@
             });
         }
-    
-    
-    
-</script>
+
+
+    </script>
 
 
 
