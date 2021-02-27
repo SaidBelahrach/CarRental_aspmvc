@@ -53,7 +53,7 @@
                     @if (User.IsInRole("Locataire"))
                     {
                         <li>@Html.ActionLink("Reservations", "Index", "Reservations")</li>
-                        <li>@Html.ActionLink("Mon Espace", "EspaceNotif", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "EspaceNotif", "Home")</li>
                     }
                     @if (User.IsInRole("Proprietaire"))
                     {

@@ -33,7 +33,7 @@ else
         @Html.ActionLink("En","SetLanguage", "Language", new {@class = "px-0", @name = "en" }, htmlAttributes: new { title = "English" })
     </li>*@
 
-    <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-    <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    <li>@Html.ActionLink(@projet_ASP.Resources.Models.ApplicationUser.register, "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+    <li>@Html.ActionLink(@projet_ASP.Resources.Models.ApplicationUser.login, "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
 </ul>
 }

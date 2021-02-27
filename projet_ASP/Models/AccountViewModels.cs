@@ -58,7 +58,8 @@ namespace projet_ASP.Models
         [Display(Name = "Password")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+     //   [Display(Name = "Remember me?")]
+        [Display(Name = "rememberMe", ResourceType = typeof(Resources.Models.ApplicationUser))]
         public bool RememberMe { get; set; }
     }
 

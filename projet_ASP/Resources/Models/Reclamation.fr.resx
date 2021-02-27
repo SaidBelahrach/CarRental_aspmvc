@@ -117,67 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="adresse" xml:space="preserve">
-    <value>Adresse</value>
+  <data name="contenu" xml:space="preserve">
+    <value>Contenu</value>
   </data>
-  <data name="adresseReq" xml:space="preserve">
-    <value>Adresse est obligatoire</value>
+  <data name="dateCreation" xml:space="preserve">
+    <value>Date Création</value>
   </data>
-  <data name="ConfirmPassword" xml:space="preserve">
-    <value>Confirmer mot de passe</value>
+  <data name="description" xml:space="preserve">
+    <value>Description</value>
   </data>
-  <data name="ConfirmPasswordReq" xml:space="preserve">
-    <value>les mots de passes entrés ne sont pas les même !</value>
+  <data name="lbl" xml:space="preserve">
+    <value>Réclamation</value>
   </data>
-  <data name="Email" xml:space="preserve">
-    <value>Email</value>
+  <data name="nontraiter" xml:space="preserve">
+    <value>Non traitée</value>
   </data>
-  <data name="EmailReq" xml:space="preserve">
-    <value>Email est obligatoire</value>
+  <data name="reqdateCreation" xml:space="preserve">
+    <value>Date de création est obligatoire</value>
   </data>
-  <data name="imageBytes" xml:space="preserve">
-    <value>Image de Profile</value>
+  <data name="reqDescription" xml:space="preserve">
+    <value>Description est obligatoire</value>
   </data>
-  <data name="locataire" xml:space="preserve">
-    <value>Locataire</value>
-  </data>
-  <data name="login" xml:space="preserve">
-    <value>Se Connecter</value>
-  </data>
-  <data name="nomComplet" xml:space="preserve">
-    <value>Nom complet</value>
-  </data>
-  <data name="nomCompletReq" xml:space="preserve">
-    <value>Nom complet est obligatoire</value>
-  </data>
-  <data name="no_acc" xml:space="preserve">
-    <value>Vous n'avez pas de compte?</value>
-  </data>
-  <data name="Password" xml:space="preserve">
-    <value>Mot de passe</value>
-  </data>
-  <data name="PasswordReq" xml:space="preserve">
-    <value>Mot de passe doit contenir 6 caractères</value>
-  </data>
-  <data name="profileType" xml:space="preserve">
-    <value>Type de profile</value>
-  </data>
-  <data name="profileTypeReq" xml:space="preserve">
-    <value>Type de profile est obligatoire</value>
-  </data>
-  <data name="proprietaire" xml:space="preserve">
-    <value>Propriétaire</value>
-  </data>
-  <data name="register" xml:space="preserve">
-    <value>S'inscrire</value>
-  </data>
-  <data name="rememberMe" xml:space="preserve">
-    <value>Souviens moi?</value>
-  </data>
-  <data name="tel" xml:space="preserve">
-    <value>Téléphone</value>
-  </data>
-  <data name="telReq" xml:space="preserve">
-    <value>Téléphone est obligatoire</value>
+  <data name="traiter" xml:space="preserve">
+    <value>Traitée</value>
   </data>
 </root>

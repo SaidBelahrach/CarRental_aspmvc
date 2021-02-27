@@ -133,6 +133,24 @@ namespace projet_ASP.Resources.Models {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to LOGIN.
+        /// </summary>
+        public static string login {
+            get {
+                return ResourceManager.GetString("login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Don&apos;t have account?.
+        /// </summary>
+        public static string no_acc {
+            get {
+                return ResourceManager.GetString("no_acc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Full Name.
         /// </summary>
         public static string nomComplet {
@@ -192,6 +210,24 @@ namespace projet_ASP.Resources.Models {
         public static string proprietaire {
             get {
                 return ResourceManager.GetString("proprietaire", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to REGISTER.
+        /// </summary>
+        public static string register {
+            get {
+                return ResourceManager.GetString("register", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remember me?.
+        /// </summary>
+        public static string rememberMe {
+            get {
+                return ResourceManager.GetString("rememberMe", resourceCulture);
             }
         }
         

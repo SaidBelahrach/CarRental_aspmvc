@@ -104,7 +104,7 @@
         <div class="login-content">
             <form action="Register" class="form ml-4 " method="post">
 @Html.AntiForgeryToken()
-                <h2 class="title">Register</h2>
+                <h2 class="title">@projet_ASP.Resources.Models.ApplicationUser.register</h2>
 
                 <div>
 @Html.ValidationSummary("", new { @class = "text-danger summary alert-danger rounded" })
@@ -173,7 +173,7 @@
                         </div>
                         <div class=" ">
                         <div class=" ">
-                        <input type="submit" value="Register" class="btn-login btn-primary mt-2" />
+                        <input type="submit" value="@projet_ASP.Resources.Models.ApplicationUser.register" class="btn-login btn-primary mt-2" />
                         </div>
                         </div>
                         </form>

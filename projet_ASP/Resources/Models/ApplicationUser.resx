@@ -141,11 +141,17 @@
   <data name="locataire" xml:space="preserve">
     <value>Occupant</value>
   </data>
+  <data name="login" xml:space="preserve">
+    <value>LOGIN</value>
+  </data>
   <data name="nomComplet" xml:space="preserve">
     <value>Full Name</value>
   </data>
   <data name="nomCompletReq" xml:space="preserve">
     <value>Full Name est obligatoire</value>
+  </data>
+  <data name="no_acc" xml:space="preserve">
+    <value>Don't have account?</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>
@@ -161,6 +167,12 @@
   </data>
   <data name="proprietaire" xml:space="preserve">
     <value>Owner</value>
+  </data>
+  <data name="register" xml:space="preserve">
+    <value>REGISTER</value>
+  </data>
+  <data name="rememberMe" xml:space="preserve">
+    <value>Remember me?</value>
   </data>
   <data name="tel" xml:space="preserve">
     <value>Phone</value>

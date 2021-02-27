@@ -10,8 +10,8 @@
 {
     <div class="button_wrapper">
         <div class="btn-group" id="btn-group">
-            <a class="btn btn-primary" href="#" id="btnRecl">Réclamation</a>
-            <a class="btn btn-primary" href="#" id="btnPenal">Pénalité</a>
+            <a class="btn btn-primary" href="#" id="btnRecl">@projet_ASP.Resources.Models.Reclamation.lbl</a>
+            <a class="btn btn-primary" href="#" id="btnPenal">Penalisations</a>
         </div>
     </div>
     <br />
@@ -27,27 +27,27 @@
         <thead class="bg-primary">
             <tr>
                 <th>
-                    Date Réclamation
+                    @Html.DisplayName(@projet_ASP.Resources.Models.Reclamation.dateCreation)
                 </th>
                 <th>
-                    Contenu
+                    @Html.DisplayName(@projet_ASP.Resources.Models.Reclamation.contenu)
                 </th>
 
                 @if (User.IsInRole("Locataire"))
                 {
-                    <th>
-                        Propriétaire
-                    </th>
+            <th>
+                @Html.DisplayName(@projet_ASP.Resources.Models.ApplicationUser.proprietaire)
+            </th>
 
                 }
                 else
                 {
-                    <th>Locataire</th>
+            <th>  @Html.DisplayName(@projet_ASP.Resources.Models.ApplicationUser.locataire)</th>
                 }
 
-                <th>
-                    révisé
-                </th>
+            <th>
+                @Html.DisplayName(@projet_ASP.Resources.Models.Reclamation.traiter)
+            </th>
             </tr>
         </thead>
         <tbody>
@@ -99,11 +99,11 @@
 
                         @if (item.valide == false)
                         {
-                            <td>Non Révisé</td>
+                             <td>@Html.DisplayName(@projet_ASP.Resources.Models.Reclamation.nontraiter)</td>
                         }
                         else
                         {
-                            <td> Révisé</td>
+                             <td> @Html.DisplayName(@projet_ASP.Resources.Models.Reclamation.traiter)</td>
                         }
                     </tr>
                 }
@@ -120,13 +120,15 @@
         <thead class="bg-primary">
             <tr>
                 <th>
-                    Penalité sur la voiture
+                    @Html.DisplayName(@projet_ASP.Resources.Models.Reservation.car)
+                   
                 </th>
                 <th>
-                    Description
+                    @Html.DisplayName(@projet_ASP.Resources.Models.RetourVoiture.details)
+                   
                 </th>
                 <th>
-                    amonde
+                    @Html.DisplayName(@projet_ASP.Resources.Models.RetourVoiture.amende )
                 </th>
 
             </tr>
@@ -141,7 +143,13 @@
                     <tr>
                         @{
                             var voiture = db.Voitures.Where(v => v.idVoiture == item.Reservation.idVoiture).FirstOrDefault();
-                            <td>@voiture.marque--@voiture.matricule</td>
+                                                <td>
+                                                @*    @voiture.marque--@voiture.matricule*@
+
+                                                    <a href='/Voitures/Details?id=@voiture.idVoiture' class="text-primary" style="text-decoration:none;">
+                                                        @Html.DisplayFor(modelItem => voiture.marque)
+                                                    </a>
+                                                </td>
                         }
 
                         <td>@item.etat</td>

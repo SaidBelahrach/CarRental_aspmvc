@@ -342,6 +342,16 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Resources\Models\Reclamation.Designer.cs">
+      <DependentUpon>Reclamation.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Models\Reclamation.fr.Designer.cs">
+      <DependentUpon>Reclamation.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Resources\Models\RetourVoiture.Designer.cs">
       <DependentUpon>RetourVoiture.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -668,6 +678,14 @@
     <EmbeddedResource Include="Resources\Models\ApplicationUser.fr.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ApplicationUser.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Models\Reclamation.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Reclamation.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Models\Reclamation.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Reclamation.fr.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Models\RetourVoiture.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
