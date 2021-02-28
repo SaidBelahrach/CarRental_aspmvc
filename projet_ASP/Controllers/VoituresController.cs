@@ -214,7 +214,7 @@ namespace projet_ASP.Controllers
             Notification notification = new Notification()
             {
                 type = "resrv",
-                hint = "Réservation du votre voiture "+voiture.matricule+" pour "+(date_fin-date_debut).TotalDays+"jour",
+                hint = "Réservation du votre voiture " + voiture.matricule + " pour " + (date_fin - date_debut).TotalDays + "jour",
                 ApplicationUserID = prop.ApplicationUserID,
                 vu = false,
                 cliked = false,

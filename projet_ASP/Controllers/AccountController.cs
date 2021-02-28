@@ -109,7 +109,7 @@ namespace projet_ASP.Controllers
                         return View("BlokcedUser");
                     }
                 }
-             
+
             }
             catch (Exception) { }
 
