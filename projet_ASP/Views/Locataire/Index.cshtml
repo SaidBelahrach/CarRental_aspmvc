@@ -17,8 +17,8 @@
                                 <img id="imgProfile" src="@(string.Format("data:image/png;base64,{0}", Convert.ToBase64String(Model.ApplicationUser.imageBytes)))" alt="Admin" class="d-block ml-auto mr-auto rounded-circle" width="150px">
                             </div>
                             <div class="col text-center"> <h4 id="mainName">@Model.ApplicationUser.nomComplet</h4></div>
-                            @if (User.Identity.GetUserId() == Model.ApplicationUser.Id)
-                            {
+                         @*   @if (User.Identity.GetUserId() == Model.ApplicationUser.Id)
+                            {*@
                                 <div class="col m-0 p-0">
                                     <p class="text-center mb-0">
                                         <label for="files" class="btn text-center" style="font-size:0.8rem;">@projet_ASP.Resources.Views.shared.change_img</label>
@@ -26,7 +26,7 @@
                                     </p>
                                     <p class="p-0 mb-0"><input accept="image/*" id="files" class="p-0" style="visibility:hidden;" type="file"></p>
                                 </div>
-                            }
+                     @*       }*@
                         </div>
                     </div>
                 </div>

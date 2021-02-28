@@ -3,10 +3,10 @@
 @{
     ViewBag.Title = "Propietaires";
 }
-@using (Html.BeginForm("SearchProp", "Administrateur", FormMethod.Post, new { name = "filter-form", @class = "ignore", @id = "filterFormId" }))
+@using (Html.BeginForm("SearchProp", "Administrateur", FormMethod.Post, new { name = "filter-form",@style= "justify-content:center;", @class ="", @id = "filterFormId" }))
 {
 
-    <div class="form-outline d-flex my-3">
+    <div class="form-outline d-flex my-3" style= "justify-content:center;" >
         <input id="search-input" type="search" placeholder="Search here" name="key" id="form1 key" style="width:500px;" class="form-control" />
         @* <label class="form-label" for="form1">Search</label>*@
 
@@ -21,7 +21,6 @@
         <div class="card1" style="overflow:auto;">
             <div class="card-body" style="min-height:100px;">
                 <div>
-
                     @foreach (var item in Model)//every appUser has one proprietaire profile that s way i called the first one
                     {
                         byte[] byteData = item.ApplicationUser.imageBytes;

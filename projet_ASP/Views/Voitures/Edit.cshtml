@@ -4,7 +4,7 @@
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2>Edit</h2>
+<h2>@projet_ASP.Resources.Views.shared.edit @projet_ASP.Resources.Models.Reservation.car </h2>
 @using (Html.BeginForm("Edit",
                         "Voitures",
                         FormMethod.Post,
@@ -12,8 +12,7 @@
 {
     @Html.AntiForgeryToken()
     
-<div class="form-horizontal"  >
-    <h4>Voiture</h4>
+<div class="form-horizontal"  > 
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.idVoiture)

@@ -442,6 +442,9 @@
     <Content Include="Content\Images\Login\log_img.svg" />
     <Content Include="Content\Images\Login\wave blue.png" />
     <Content Include="Content\Images\Login\wave.png" />
+    <Content Include="Content\img_avatar2.png" />
+    <Content Include="Content\img_avatar5.png" />
+    <Content Include="Content\img_avatar6.png" />
     <Content Include="Content\loginStyle.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />

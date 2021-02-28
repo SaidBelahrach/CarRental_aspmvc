@@ -170,7 +170,7 @@ namespace projet_ASP.Controllers
         }
 
         // GET: Voitures/Details/5
-        // [Authorize(Roles = "Locataire")]
+        [Authorize(Roles = "Locataire")]
         public ActionResult Details(string id)
         {
             if (id == null)

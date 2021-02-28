@@ -93,11 +93,11 @@ else
         </tr>
     </table>
 
-    <div style="
-        max-width: 250px;
+    <div class="img img-thumbnail" style="        max-width: 250px;
         display: block;
-        align-items: center; ">
-        <div class="text-success border border-warning px-1 rounded " style="font-size:22px;max-width:130px;">
+        align-items: center; 
+    ">
+        <div class="text-success border  px-1 rounded" style="font-size:22px;max-width:130px;box-shadow:1px 1px 10px rgba(76, 255, 0,0.302);">
             @Html.DisplayFor(model => model.coutParJour, new { @style = " ", @class = "text-white" }) @projet_ASP.Resources.Models.Voitures.perday
         </div>
         <img class="img-responsive" src="@(string.Format("data:image/png;base64,{0}", Convert.ToBase64String(Model.image)))" />

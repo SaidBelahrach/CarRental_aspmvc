@@ -5,6 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<link href="~/Content/my_dataTable.css" rel="stylesheet" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
+
 <h2>Reservations</h2>
 @*
     <p>
@@ -84,17 +88,14 @@
                         else
                         {
                             @Html.ActionLink(" ", "Details", "RetourVoitures", new { id = item.idContrat }, new { @title = "Détails", @class = "fas fa-info-circle  text-info", @style = "font-size:18px;" })
-                        } 
-                    </td> 
-                } 
+                        }
+                    </td>
+
+                }
             </tr>
         }
     </tbody>
 </table>
-
-<link href="~/Content/my_dataTable.css" rel="stylesheet" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
 
 
 
