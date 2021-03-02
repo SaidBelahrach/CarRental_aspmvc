@@ -34,7 +34,7 @@ namespace projet_ASP.Controllers
             if (User.IsInRole("Admin"))
             {
                 return RedirectToAction("Reclamations", "Administrateur");
-            }
+            } 
             try
             {
                 ApplicationDbContext db = new ApplicationDbContext();

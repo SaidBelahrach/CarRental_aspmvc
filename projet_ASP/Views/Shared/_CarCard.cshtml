@@ -62,17 +62,20 @@
                     <span style="position: absolute; top: 8px; left: 33px;font-size:13px; ">  @Model.proprietaire.ApplicationUser.nomComplet </span>
                     <span style=" font-size:8px;color:gray;position:absolute;top:27px;left:35px;z-index:1111;"> @projet_ASP.Resources.Models.Voitures.Particulier</span>
                 </a>
-                <div class="card-fotter">
-                    <button type="button" class=" button_custom  btn btn-primary px-4 py-1" onclick="window.location='@Url.Action("Details", "Voitures", new { id = Model.idVoiture })'">@projet_ASP.Resources.Models.Voitures.reserver</button>
-                </div>
-            }
-         @*   @if (User.IsInRole("Locataire"))
+                    if (!User.IsInRole("Proprietaire") )
+                    {
+                    <div class="card-fotter">
+                        <button type="button" class=" button_custom  btn btn-primary px-4 py-1" onclick="window.location='@Url.Action("Details", "Voitures", new { id = Model.idVoiture })'">@projet_ASP.Resources.Models.Voitures.reserver</button>
+                    </div>
+                    }
+                }
+                @*   @if (User.IsInRole("Locataire"))
             {
                 <div class="card-fotter">
                     <button type="button" class=" button_custom  btn btn-primary px-4 py-1" onclick="window.location='@Url.Action("Details", "Voitures", new { id = Model.idVoiture })'">@projet_ASP.Resources.Models.Voitures.reserver</button>
                 </div>
             }*@
-        </div> 
+            </div> 
 </div>
 
 <style>
